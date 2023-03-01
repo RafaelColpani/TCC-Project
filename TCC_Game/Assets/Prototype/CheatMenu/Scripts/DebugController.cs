@@ -89,12 +89,27 @@ public class DebugController : MonoBehaviour
         float boxWidth = (Screen.width / 2) - 200f;
         Color bgColor = new Color(0, 0, 0, 0);
 
+        GUI.skin.textField.fontSize = 25;
+        GUI.skin.label.fontSize = 25;
         if (showHelp)
         {
-            GUI.Box(new Rect(xPos, yPos - 100, boxWidth, 400), "");
+            GUI.Box(new Rect(xPos, yPos - 400, boxWidth, 400), "");
+
+            Vector2 scroll = Vector2.zero;
+            Rect viewport = new Rect(xPos, yPos - 400, boxWidth - 30, 400);
+            scroll = GUI.BeginScrollView(new Rect(0, yPos - 385, boxWidth, 365), scroll, viewport);
+
+            float labelYPos = -385;
+            foreach (DebugCommandBase command in commandList)
+            {
+                string label = $"{command.CommandFormat} - {command.CommandDescription}";
+                Rect labelRect = new Rect(xPos + 30, viewport.y + labelYPos, viewport.width - 30, 365);
+                GUI.Label(labelRect, label);
+                labelYPos -= 30;
+            }
+            GUI.EndScrollView();
         }
 
-        GUI.skin.textField.fontSize = 25;
         GUI.Box(new Rect(xPos, yPos, boxWidth, 60), "");
         GUI.backgroundColor = bgColor;
         debugInput = GUI.TextField(new Rect(xPos + 10f, yPos + 10, boxWidth - 20f, 40f), debugInput);
