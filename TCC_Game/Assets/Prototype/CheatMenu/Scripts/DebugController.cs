@@ -11,6 +11,7 @@ public class DebugController : MonoBehaviour
     #region VARS
     private static List<object> commandList;
 
+    private Vector2 scroll = Vector2.zero;
     private bool showConsole;
     private bool showHelp;
     private string debugInput;
@@ -21,7 +22,7 @@ public class DebugController : MonoBehaviour
     {
         commandList = new List<object>();
 
-        AddCommand("help", "Mostra todos os comandos disponíveis para debug", "help", () => { showHelp = true; });
+        AddCommand("help", "Mostra todos os comandos disponï¿½veis para debug", "help", () => { showHelp = true; });
     }
 
     private void Update()
@@ -90,22 +91,28 @@ public class DebugController : MonoBehaviour
         Color bgColor = new Color(0, 0, 0, 0);
 
         GUI.skin.textField.fontSize = 25;
-        GUI.skin.label.fontSize = 25;
         if (showHelp)
         {
             GUI.Box(new Rect(xPos, yPos - 400, boxWidth, 400), "");
 
-            Vector2 scroll = Vector2.zero;
+            
             Rect viewport = new Rect(xPos, yPos - 400, boxWidth - 30, 400);
-            scroll = GUI.BeginScrollView(new Rect(0, yPos - 385, boxWidth, 365), scroll, viewport);
 
-            float labelYPos = -385;
+            this.scroll = GUI.BeginScrollView(new Rect(0, yPos - 385, boxWidth, 365), scroll, viewport);
+            float labelYPos = 0;
             foreach (DebugCommandBase command in commandList)
             {
-                string label = $"{command.CommandFormat} - {command.CommandDescription}";
+                string label = $"{command.CommandFormat} -> {command.CommandDescription}";
                 Rect labelRect = new Rect(xPos + 30, viewport.y + labelYPos, viewport.width - 30, 365);
-                GUI.Label(labelRect, label);
-                labelYPos -= 30;
+
+                GUIStyle labelStyle = GUIStyle.none;
+                labelStyle.fontSize = 25;
+                labelStyle.wordWrap = true;
+
+                GUI.Label(labelRect, label, labelStyle);
+                var lineCount = (int)Math.Ceiling(labelStyle.CalcHeight(new GUIContent(label), viewport.width - 30) / labelStyle.lineHeight);
+                const int lineBreak = 30;
+                labelYPos += (lineBreak * lineCount) + lineBreak;
             }
             GUI.EndScrollView();
         }
