@@ -22,6 +22,7 @@ public class lineWind : MonoBehaviour
     //[HeaderPlus(" ", "Joins", (int)HeaderPlusColor.green)]
     [SerializeField] int length;
     [Tooltip(" É o segmento das vertices ")] [SerializeField] Vector3[] joinPoints; 
+    Vector3 windJoin;
     [Tooltip(" // ")] [SerializeField] Vector3[] joinPointV; 
     [Space(10)]
 
@@ -41,6 +42,7 @@ public class lineWind : MonoBehaviour
        lineRender.positionCount = length;
        joinPoints = new Vector3[length];
        joinPointV = new Vector3[length];
+
     } 
 
     private void Update() 
@@ -56,14 +58,18 @@ public class lineWind : MonoBehaviour
         joinPoints[0] = targetDir.position;
 
         for(int i = 1; i < joinPoints.Length; i++){
+            //Render line
             joinPoints[i] = Vector3.SmoothDamp(joinPoints[i], joinPoints[i - 1] + targetDir.up * 1.0f * targetDist, ref joinPointV[i], SmoothSpeed);
             
-            // wind
-            
+            // wind 
+            //joinPoints[i] = Vector3.SmoothDamp(joinPoints[i], joinPoints[i - 1] + targetDir.up * 1.0f * targetDist, ref _position, SmoothSpeed);
+            //joinPoints[i] = Vector3.Lerp(joinPoints[i], targetDir.up,  _intensity );
+
+            joinPoints[i] = Vector3.SmoothDamp(joinPoints[i], joinPoints[i - 1] + targetDir.up * 1.0f * targetDist, ref _position, _intensity );
         }
         
         lineRender.SetPositions(joinPoints);
-
+       
 
     }
 }
