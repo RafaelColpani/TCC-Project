@@ -40,7 +40,7 @@ public class playerController : MonoBehaviour
         //Vector3 targetPos = target.transform.position;
         
         Vector3 targetPos = Input.mousePosition;
-        //targetPos.z = mouseSpeed;
+        targetPos.z = mouseSpeed;
         
         target.transform.position = Camera.main.ScreenToWorldPoint(targetPos);
     }
