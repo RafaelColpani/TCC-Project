@@ -57,8 +57,11 @@ public class drop : MonoBehaviour
         transform.localScale = size;
     }
 
-    public void launch() {
+    public void launch(Vector2 distDamage) {
+        Vector2 forceNormal = Vector2.up;
+
         float angle = Random.Range(-0.5f, 0.5f);
+
         rb.AddForce(new Vector2(angle, 1 - Mathf.Abs(angle)) * launchForce, ForceMode2D.Impulse);
     }
     #endregion

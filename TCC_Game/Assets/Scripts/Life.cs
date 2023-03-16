@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Life : MonoBehaviour
 {
+    #region calibration
     [Header("Stats")]
     [SerializeField] int maxLife;
     [SerializeField] int life;
@@ -12,9 +13,15 @@ public class Life : MonoBehaviour
     [SerializeField] int magDefense;
 
     [Header("Drop")]
+    bool hasDrop = true;
     [SerializeField] GameObject[] dropItem;
     [Range(0, 100)]
     [SerializeField] float[] dropRate;
+    #endregion
+
+    #region variables
+        
+    #endregion
 
     private void Awake()
     {
@@ -25,7 +32,7 @@ public class Life : MonoBehaviour
     private void Update()
     {
         if (life <= 0)
-            death();
+            Death();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -52,14 +59,21 @@ public class Life : MonoBehaviour
         life -= lifeLoss;
     }
 
-    private void death()
+    private void Death()
     {
+        if (hasDrop) Drop();
+        Destroy(this.gameObject);
+    }
+
+    private void Drop() {
         GameObject chosenDrop = null;
         float lootDrop = Random.Range(0f, 100f);
         float auxRate = 100;
 
-        for (int i = 0; i < dropItem.Length; i++) {
-            if (lootDrop <= dropRate[i] && auxRate >= dropRate[i]) {
+        for (int i = 0; i < dropItem.Length; i++)
+        {
+            if (lootDrop <= dropRate[i] && auxRate >= dropRate[i])
+            {
                 auxRate = dropRate[i];
                 chosenDrop = dropItem[i];
 
@@ -70,8 +84,7 @@ public class Life : MonoBehaviour
         if (chosenDrop != null)
         {
             GameObject loot = Instantiate(chosenDrop, this.transform.position, Quaternion.identity);
-            loot.GetComponent<drop>().launch(); 
+            loot.GetComponent<drop>().launch();
         }
-        Destroy(this.gameObject);
     }
 }
