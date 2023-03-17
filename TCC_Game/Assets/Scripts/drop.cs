@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using KevinCastejon.MoreAttributes;
 
 public class drop : MonoBehaviour
 {
     #region calibration
-    [Header("Initial Launching")]
+    [HeaderPlus(" ", "INITIAL LAUNCHING", (int)HeaderPlusColor.cyan)]
     [Tooltip("force to launch to the air when spawning")]
     [SerializeField] float launchForce = 1;
     [Tooltip("curve of scaling when it pops up")]
@@ -58,11 +59,12 @@ public class drop : MonoBehaviour
     }
 
     public void launch(Vector2 distDamage) {
-        Vector2 forceNormal = Vector2.up;
+        float distSize = Mathf.Abs(distDamage.x) + Mathf.Abs(distDamage.y);
+        Vector2 angle = new Vector2(distDamage.x / distSize * 1.5f, distDamage.y / distSize * 1.5f);
 
-        float angle = Random.Range(-0.5f, 0.5f);
+        angle += Vector2.up;
 
-        rb.AddForce(new Vector2(angle, 1 - Mathf.Abs(angle)) * launchForce, ForceMode2D.Impulse);
+        rb.AddForce(angle.normalized * launchForce, ForceMode2D.Impulse);
     }
     #endregion
 }

@@ -1,26 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using Random = UnityEngine.Random;
+using KevinCastejon.MoreAttributes;
 
 public class Life : MonoBehaviour
 {
     #region calibration
-    [Header("Stats")]
+    [HeaderPlus(" ", "STATS", (int)HeaderPlusColor.cyan)]
     [SerializeField] int maxLife;
     [SerializeField] int life;
 
     [SerializeField] int phyDefense;
     [SerializeField] int magDefense;
 
-    [Header("Drop")]
-    bool hasDrop = true;
+    [HeaderPlus(" ", "DEATH", (int)HeaderPlusColor.magenta)]
+    [SerializeField] ParticleSystem deathParticles;
+
+    [HeaderPlus(" ", "DROP", (int)HeaderPlusColor.green)]
+    [SerializeField] bool hasDrop = true;
     [SerializeField] GameObject[] dropItem;
-    [Range(0, 100)]
     [SerializeField] float[] dropRate;
     #endregion
 
     #region variables
-        
+    Vector2 damageOrigin;
     #endregion
 
     private void Awake()
@@ -41,6 +46,11 @@ public class Life : MonoBehaviour
         {
             damage dmgScript = collision.gameObject.GetComponent<damage>();
             loseLife(dmgScript.dmg, dmgScript.dmgType);
+
+            if (life <= 0)
+            {
+                damageOrigin = this.transform.position - collision.gameObject.transform.position;
+            }
         }
     }
 
@@ -62,12 +72,52 @@ public class Life : MonoBehaviour
     private void Death()
     {
         if (hasDrop) Drop();
+        else DropInventory();
+
+        DeathParticles();
         Destroy(this.gameObject);
+    }
+
+    private void DeathParticles()
+    {
+        float distSize = Mathf.Abs(damageOrigin.x) + Mathf.Abs(damageOrigin.y);
+        Vector2 angle = new Vector2(damageOrigin.x / distSize * 1.5f, damageOrigin.y / distSize * 1.5f);
+
+        angle += Vector2.up;
+
+        float targetAngle = Vector2.SignedAngle(Vector2.up, angle);
+
+        ParticleSystem deathPrt = Instantiate(deathParticles, this.transform.position, Quaternion.Euler(180,90,0));
+        ParticleSystem.ShapeModule prtShape = deathPrt.shape;
+        prtShape.rotation = new Vector3(deathPrt.shape.rotation.x - targetAngle, 0, 0);
     }
 
     private void Drop() {
         GameObject chosenDrop = null;
         float lootDrop = Random.Range(0f, 100f);
+
+        float[] ordenedDropRates = new float[dropRate.Length];
+        Array.Copy(dropRate, ordenedDropRates, dropRate.Length);
+        Array.Sort(ordenedDropRates);
+
+        for (int i = 0; i < 3; i++)
+            print(ordenedDropRates[i]);
+
+        for (int i = 0; i < dropRate.Length; i++)
+        {
+            for (int j = i + 1; j < ordenedDropRates.Length; j++)
+            {
+                if (dropRate[i] == ordenedDropRates[j])
+                {
+                    for (int h = j - 1; h >= 0; h--)
+                    {
+                        dropRate[i] += ordenedDropRates[h];
+                    }
+                    break;
+                }
+            }
+        }
+
         float auxRate = 100;
 
         for (int i = 0; i < dropItem.Length; i++)
@@ -76,15 +126,21 @@ public class Life : MonoBehaviour
             {
                 auxRate = dropRate[i];
                 chosenDrop = dropItem[i];
-
-                print(dropItem[i].name);
             }
         }
 
         if (chosenDrop != null)
         {
             GameObject loot = Instantiate(chosenDrop, this.transform.position, Quaternion.identity);
-            loot.GetComponent<drop>().launch();
+            loot.GetComponent<drop>().launch(damageOrigin);
+        }
+    }
+
+    private void DropInventory() {
+        for (int i = 0; i < dropItem.Length; i++)
+        {
+            GameObject loot = Instantiate(dropItem[i], this.transform.position, Quaternion.identity);
+            loot.GetComponent<drop>().launch(damageOrigin);
         }
     }
 }
