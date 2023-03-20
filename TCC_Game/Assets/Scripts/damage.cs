@@ -14,21 +14,6 @@ public class damage : MonoBehaviour
 
     private void Awake()
     {
-        if (isPlayer)
-        {
-            switch (dmgType) 
-            { 
-                case DmgType.MAG:
-                    dmg += (int)PlayerPrefs.GetFloat("_magAtk");
-                    break;
-                case DmgType.PHY:
-                    dmg += (int)PlayerPrefs.GetFloat("_physAtk");
-                    break;
-                default:
-                    break;
-            }
-        }
-
         rb = this.GetComponent<Rigidbody2D>();
 
         rb.velocity = Vector3.zero;
