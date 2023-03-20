@@ -120,8 +120,6 @@ public class Life : MonoBehaviour
 
         List<float> ordenedDropRates = new List<float>(dropRate);
         ordenedDropRates.Sort();
-        //Array.Copy(dropRate, ordenedDropRates, dropRate.Count);
-        //Array.Sort(ordenedDropRates);
 
         for (int i = 0; i < 3; i++)
             print(ordenedDropRates[i]);
