@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using Random = UnityEngine.Random;
+//using System;
+//using Random = UnityEngine.Random;
 using KevinCastejon.MoreAttributes;
 
 public class Life : MonoBehaviour
@@ -20,8 +20,8 @@ public class Life : MonoBehaviour
 
     [HeaderPlus(" ", "DROP", (int)HeaderPlusColor.green)]
     [SerializeField] bool hasDrop = true;
-    [SerializeField] GameObject[] dropItem;
-    [SerializeField] float[] dropRate;
+    [SerializeField] List<GameObject> dropItem;
+    [SerializeField] List<float> dropRate;
     #endregion
 
     #region variables
@@ -32,6 +32,13 @@ public class Life : MonoBehaviour
     {
         if(maxLife > 0) life = maxLife;
 
+        List<float> ordenedDropRates = new List<float>(dropRate);
+        ordenedDropRates.Sort();
+        //Array.Copy(dropRate, ordenedDropRates, dropRate.Count);
+        //Array.Sort(ordenedDropRates);
+
+        for (int i = 0; i < 3; i++)
+            print(ordenedDropRates[i]);
     }
 
     private void Update()
@@ -40,6 +47,7 @@ public class Life : MonoBehaviour
             Death();
     }
 
+    #region damage
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "damage")
@@ -68,7 +76,8 @@ public class Life : MonoBehaviour
 
         life -= lifeLoss;
     }
-
+    #endregion
+    #region death
     private void Death()
     {
         if (hasDrop) Drop();
@@ -91,21 +100,29 @@ public class Life : MonoBehaviour
         ParticleSystem.ShapeModule prtShape = deathPrt.shape;
         prtShape.rotation = new Vector3(deathPrt.shape.rotation.x - targetAngle, 0, 0);
     }
+    #endregion
+    #region drop
+    public void AddDrop(GameObject newItem) 
+    {
+        dropItem.Add(newItem);
+        dropRate.Add(0);
+    }
 
     private void Drop() {
         GameObject chosenDrop = null;
         float lootDrop = Random.Range(0f, 100f);
 
-        float[] ordenedDropRates = new float[dropRate.Length];
-        Array.Copy(dropRate, ordenedDropRates, dropRate.Length);
-        Array.Sort(ordenedDropRates);
+        List<float> ordenedDropRates = new List<float>(dropRate);
+        ordenedDropRates.Sort();
+        //Array.Copy(dropRate, ordenedDropRates, dropRate.Count);
+        //Array.Sort(ordenedDropRates);
 
         for (int i = 0; i < 3; i++)
             print(ordenedDropRates[i]);
 
-        for (int i = 0; i < dropRate.Length; i++)
+        for (int i = 0; i < dropRate.Count; i++)
         {
-            for (int j = i + 1; j < ordenedDropRates.Length; j++)
+            for (int j = i + 1; j < ordenedDropRates.Count; j++)
             {
                 if (dropRate[i] == ordenedDropRates[j])
                 {
@@ -120,7 +137,7 @@ public class Life : MonoBehaviour
 
         float auxRate = 100;
 
-        for (int i = 0; i < dropItem.Length; i++)
+        for (int i = 0; i < dropItem.Count; i++)
         {
             if (lootDrop <= dropRate[i] && auxRate >= dropRate[i])
             {
@@ -137,10 +154,11 @@ public class Life : MonoBehaviour
     }
 
     private void DropInventory() {
-        for (int i = 0; i < dropItem.Length; i++)
+        for (int i = 0; i < dropItem.Count; i++)
         {
             GameObject loot = Instantiate(dropItem[i], this.transform.position, Quaternion.identity);
             loot.GetComponent<drop>().launch(damageOrigin);
         }
     }
+    #endregion
 }
