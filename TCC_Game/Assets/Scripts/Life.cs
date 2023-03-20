@@ -108,6 +108,12 @@ public class Life : MonoBehaviour
         dropRate.Add(0);
     }
 
+    public void RemoveDrop(GameObject removedItem) 
+    {
+        dropRate.RemoveAt(dropItem.IndexOf(removedItem));
+        dropItem.Remove(removedItem);
+    }
+
     private void Drop() {
         GameObject chosenDrop = null;
         float lootDrop = Random.Range(0f, 100f);
