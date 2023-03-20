@@ -83,7 +83,7 @@ public class Life : MonoBehaviour
         if (hasDrop) Drop();
         else DropInventory();
 
-        DeathParticles();
+        //DeathParticles();
         Destroy(this.gameObject);
     }
 
