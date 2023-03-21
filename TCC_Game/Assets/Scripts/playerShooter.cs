@@ -17,7 +17,7 @@ public class playerShooter : MonoBehaviour
         }
         if (magBullet != null)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(1))
                 Shoot(magBullet);
         }
     }

@@ -25,10 +25,12 @@ public class damage : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(this.gameObject);
+        //if(isPlayer && collision.gameObject.tag.Equals("creature"))
+            Destroy(this.gameObject);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(this.gameObject);   
+        //if (isPlayer && collision.gameObject.tag.Equals("creature"))
+            Destroy(this.gameObject);   
     }
 }
