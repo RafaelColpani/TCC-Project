@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [System.Serializable]
 public class ObjectTargets
@@ -59,6 +60,8 @@ public class SpiderProcedural : MonoBehaviour
     [SerializeField] private float legStepSpeed;
     [SerializeField] private float legArcHeight;
     [SerializeField] private float legArcSpeed;
+    [SerializeField] private float bodyPositionOffset;
+    [SerializeField] private Transform body;
 
     private bool evenIsWalking = false;
     private bool oddIsWalking = false;
@@ -78,6 +81,8 @@ public class SpiderProcedural : MonoBehaviour
     {
         TargetsGroundHeight();
         MoveLegs();
+        CalculateBodyPosition();
+        CalculateBodyRotation();
     }
 
     private void TargetsGroundHeight()
@@ -155,5 +160,54 @@ public class SpiderProcedural : MonoBehaviour
                     this.oddIsWalking = false;
             }
         }
+    }
+
+    private void CalculateBodyPosition()
+    {
+        Vector3 meanPosition = GetMeanLegsPosition();
+
+        body.position = new Vector3(body.position.x, meanPosition.y * bodyPositionOffset, body.position.z);
+    }
+
+    private Vector3 GetMeanLegsPosition()
+    {
+        float x = 0f, y = 0f, z = 0f;
+        int numberOfPositions = targets.Count;
+
+        foreach (ObjectTargets target in targets)
+        {
+            x += target.worldTarget.position.x;
+            y += target.worldTarget.position.y;
+            z += target.worldTarget.position.z;
+        }
+
+        return new Vector3(x / numberOfPositions, y / numberOfPositions, z / numberOfPositions);
+    }
+
+    private void CalculateBodyRotation()
+    {
+        Vector3 meanDirection = GetMeanLegsDirection();
+        float angle = Mathf.Atan2(meanDirection.y, meanDirection.x) * Mathf.Rad2Deg;
+        body.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    private Vector3 GetMeanLegsDirection()
+    {
+        Vector3 centerPoint = GetMeanLegsPosition();
+        Vector3 meanDirection = Vector3.zero;
+        List<Vector3> targetsVectors = new List<Vector3>();
+
+        foreach (var target in targets)
+        {
+            targetsVectors.Add(target.worldTarget.position - centerPoint);
+        }
+
+        foreach (var targetVector in targetsVectors)
+        {
+            meanDirection += targetVector.normalized;
+        }
+
+        meanDirection /= targetsVectors.Count;
+        return meanDirection.normalized;
     }
 }
