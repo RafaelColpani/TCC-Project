@@ -188,7 +188,7 @@ public class SpiderProcedural : MonoBehaviour
     {
         Vector3 meanDirection = GetMeanLegsDirection();
         float angle = Mathf.Atan2(meanDirection.y, meanDirection.x) * Mathf.Rad2Deg;
-        body.transform.rotation = Quaternion.LookRotation(meanDirection);
+        body.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     private Vector3 GetMeanLegsDirection()
