@@ -188,26 +188,17 @@ public class SpiderProcedural : MonoBehaviour
     {
         Vector3 meanDirection = GetMeanLegsDirection();
         float angle = Mathf.Atan2(meanDirection.y, meanDirection.x) * Mathf.Rad2Deg;
-        body.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        body.transform.rotation = Quaternion.LookRotation(meanDirection);
     }
 
     private Vector3 GetMeanLegsDirection()
     {
         Vector3 centerPoint = GetMeanLegsPosition();
-        Vector3 meanDirection = Vector3.zero;
-        List<Vector3> targetsVectors = new List<Vector3>();
+        Vector3 legPoint = targets[1].worldTarget.position;
+        Vector3 legVector = legPoint - centerPoint;
+        Debug.DrawRay(centerPoint, new Vector3(-legVector.y, legVector.x, 0).normalized, Color.red);
+        print(new Vector3(-legVector.y, legVector.x, 0).normalized);
 
-        foreach (var target in targets)
-        {
-            targetsVectors.Add(target.worldTarget.position - centerPoint);
-        }
-
-        foreach (var targetVector in targetsVectors)
-        {
-            meanDirection += targetVector.normalized;
-        }
-
-        meanDirection /= targetsVectors.Count;
-        return meanDirection.normalized;
+        return new Vector3(-legVector.y, legVector.x, 0).normalized;
     }
 }
