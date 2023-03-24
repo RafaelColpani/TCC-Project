@@ -77,7 +77,7 @@ public class SpiderProcedural : MonoBehaviour
         }
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         TargetsGroundHeight();
         MoveLegs();
@@ -151,7 +151,7 @@ public class SpiderProcedural : MonoBehaviour
             {
                 target.SetIsMoving(false);
                 target.ResetStepTime();
-                //target.worldTarget.position = target.localTarget.position;
+                target.worldTarget.position = target.localTarget.position;
 
                 if (this.evenIsWalking)
                     this.evenIsWalking = false;
@@ -187,7 +187,7 @@ public class SpiderProcedural : MonoBehaviour
     private void CalculateBodyRotation()
     {
         Vector3 meanDirection = GetMeanLegsDirection();
-        float angle = Mathf.Atan2(meanDirection.y, meanDirection.x) * Mathf.Rad2Deg;
+        float angle = (Mathf.Atan2(meanDirection.y, meanDirection.x) * Mathf.Rad2Deg) - 90;
         body.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
@@ -196,9 +196,8 @@ public class SpiderProcedural : MonoBehaviour
         Vector3 centerPoint = GetMeanLegsPosition();
         Vector3 legPoint = targets[1].worldTarget.position;
         Vector3 legVector = legPoint - centerPoint;
-        Debug.DrawRay(centerPoint, new Vector3(-legVector.y, legVector.x, 0).normalized, Color.red);
-        print(new Vector3(-legVector.y, legVector.x, 0).normalized);
 
+        Debug.DrawRay(centerPoint, new Vector3(-legVector.y, legVector.x, 0).normalized, Color.red);
         return new Vector3(-legVector.y, legVector.x, 0).normalized;
     }
 }
