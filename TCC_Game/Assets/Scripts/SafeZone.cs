@@ -13,9 +13,4 @@ public class SafeZone : MonoBehaviour
             saveCol.enabled = true;
         }
     }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        
-    }
 }
