@@ -19,13 +19,15 @@ public class Life : MonoBehaviour
     [SerializeField] ParticleSystem deathParticles;
 
     [HeaderPlus(" ", "DROP", (int)HeaderPlusColor.green)]
-    [SerializeField] bool hasDrop = true;
+    [SerializeField] GameObject interactable;
+    //[SerializeField] bool isPlayer = false;
     [SerializeField] List<GameObject> dropItem;
     [SerializeField] List<float> dropRate;
     #endregion
 
     #region variables
     Vector2 damageOrigin;
+    [SerializeField]bool isAlive = true;
     #endregion
 
     private void Awake()
@@ -36,29 +38,39 @@ public class Life : MonoBehaviour
         ordenedDropRates.Sort();
         //Array.Copy(dropRate, ordenedDropRates, dropRate.Count);
         //Array.Sort(ordenedDropRates);
-
-        for (int i = 0; i < 3; i++)
-            print(ordenedDropRates[i]);
     }
 
     private void Update()
     {
-        if (life <= 0)
+        if (life <= 0 && isAlive)
+        {
             Death();
+            isAlive = false;
+        }
     }
 
     #region damage
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "damage")
+        if (collision.CompareTag("damage") && isAlive)
         {
             damage dmgScript = collision.gameObject.GetComponent<damage>();
-            loseLife(dmgScript.dmg, dmgScript.dmgType);
 
-            if (life <= 0)
+            //se dano for do player, mas o alvo nao for player, ou se dano não for gerado pelo player, o alvo deve perder vida
+            if (
+                (dmgScript.isPlayer && !this.gameObject.CompareTag("Player"))
+                ||
+                (!dmgScript.isPlayer)
+                )
+            {
+                loseLife(dmgScript.dmg, dmgScript.dmgType);
+            }
+
+            //only if damage influences where drop will be launched
+            /*if (life <= 0)
             {
                 damageOrigin = this.transform.position - collision.gameObject.transform.position;
-            }
+            }*/
         }
     }
 
@@ -80,11 +92,16 @@ public class Life : MonoBehaviour
     #region death
     private void Death()
     {
-        if (hasDrop) Drop();
-        else DropInventory();
-
-        //DeathParticles();
-        Destroy(this.gameObject);
+        if (!this.CompareTag("Player"))
+        {
+            interactable.SetActive(true);
+            this.GetComponent<SpriteRenderer>().color = Color.black;
+        }
+        else
+        {
+            DropInventory();
+            Destroy(this.gameObject);
+        } 
     }
 
     private void DeathParticles()
@@ -114,15 +131,12 @@ public class Life : MonoBehaviour
         dropItem.Remove(removedItem);
     }
 
-    private void Drop() {
+    public void Drop() {
         GameObject chosenDrop = null;
         float lootDrop = Random.Range(0f, 100f);
 
         List<float> ordenedDropRates = new List<float>(dropRate);
         ordenedDropRates.Sort();
-
-        for (int i = 0; i < 3; i++)
-            print(ordenedDropRates[i]);
 
         for (int i = 0; i < dropRate.Count; i++)
         {
@@ -155,6 +169,8 @@ public class Life : MonoBehaviour
             GameObject loot = Instantiate(chosenDrop, this.transform.position, Quaternion.identity);
             loot.GetComponent<drop>().launch(damageOrigin);
         }
+
+        Destroy(this.gameObject);
     }
 
     private void DropInventory() {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class damage : MonoBehaviour
 {
-    [SerializeField] bool isPlayer = false;
+    public bool isPlayer = false;
     
     [HideInInspector] public enum DmgType { PHY, MAG }
     public DmgType dmgType = new DmgType();
@@ -25,12 +25,16 @@ public class damage : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //if(isPlayer && collision.gameObject.tag.Equals("creature"))
+        if(isPlayer && !collision.gameObject.CompareTag("Player"))
+            Destroy(this.gameObject);
+        else if (!isPlayer)
             Destroy(this.gameObject);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //if (isPlayer && collision.gameObject.tag.Equals("creature"))
+        if (isPlayer && !collision.gameObject.CompareTag("Player"))
             Destroy(this.gameObject);   
+        else if(!isPlayer)
+            Destroy(this.gameObject);
     }
 }
