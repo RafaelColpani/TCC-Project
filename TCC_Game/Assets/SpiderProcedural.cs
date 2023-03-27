@@ -8,12 +8,12 @@ public class ObjectTargets
 {
     public Transform localTarget;
     public Transform worldTarget;
+    public Transform finalTarget;
     public Transform effector;
     public bool isEven;
 
     private float stepTime;
     private bool isMoving;
-    private Vector3 moveLegPosition;
 
     #region Getters & Setters
     [HideInInspector] public bool IsMoving
@@ -25,12 +25,6 @@ public class ObjectTargets
     [HideInInspector] public float StepTime
     {
         get { return stepTime; }
-    }
-
-    [HideInInspector] public Vector3 MoveLegPosition
-    {
-        get { return moveLegPosition; }
-        set { moveLegPosition = value; }
     }
     #endregion
 
@@ -61,10 +55,13 @@ public class SpiderProcedural : MonoBehaviour
     [SerializeField] private float legArcHeight;
     [SerializeField] private float legArcSpeed;
     [SerializeField] private float bodyPositionOffset;
+    [SerializeField] private float xFinalTargetOffest;
     [SerializeField] private Transform body;
 
     private bool evenIsWalking = false;
     private bool oddIsWalking = false;
+
+    private float previousXBodyPosition;
 
     private float lerpLeg = 0;
 
@@ -75,53 +72,61 @@ public class SpiderProcedural : MonoBehaviour
             target.ResetStepTime();
             target.SetIsMoving(false);
         }
+
+        previousXBodyPosition = body.position.x;
     }
 
     private void FixedUpdate()
     {
         TargetsGroundHeight();
         MoveLegs();
+        MoveFinalTargets();
         CalculateBodyPosition();
         CalculateBodyRotation();
     }
 
     private void TargetsGroundHeight()
     {
-        RaycastHit2D hit;
+        RaycastHit2D localHit;
+        RaycastHit2D finalHit;
 
         foreach (var target in targets)
         {
-            hit = Physics2D.Raycast(target.localTarget.position, -Vector2.up);
+            localHit = Physics2D.Raycast(target.localTarget.position, -Vector2.up);
+            finalHit = Physics2D.Raycast(target.finalTarget.position, -Vector2.up);
 
-            if (hit.collider == null)
+            if (localHit.collider == null)
                 continue;
 
-            Vector3 rayPoint = hit.point;
-            rayPoint.y += hoverRayDistance;
-            target.localTarget.position = rayPoint;
+            Vector3 localRayPoint = localHit.point;
+            Vector3 finalRayPoint = finalHit.point;
+
+            localRayPoint.y += hoverRayDistance;
+            finalRayPoint.y += hoverRayDistance;
+
+            target.localTarget.position = localRayPoint;
+            target.finalTarget.position = new Vector3(target.finalTarget.position.x, finalRayPoint.y, target.finalTarget.position.z);
         }
     }
 
-    private float TargetsDistance(ObjectTargets objectTarget, bool byRealTimePosition = true)
+    private float TargetsDistance(ObjectTargets objectTarget, bool byFinalTarget = true)
     {
-        if (byRealTimePosition)
-            return (objectTarget.localTarget.position - objectTarget.worldTarget.position).sqrMagnitude;
+        if (byFinalTarget)
+            return (objectTarget.finalTarget.position - objectTarget.worldTarget.position).sqrMagnitude;
 
         else
-            return (objectTarget.MoveLegPosition - objectTarget.worldTarget.position).sqrMagnitude;
+            return (objectTarget.localTarget.position - objectTarget.worldTarget.position).sqrMagnitude;
     }
 
     private void MoveLegs()
     {
         foreach (var target in targets)
         {
-            if (TargetsDistance(target) < maxSqrTargetDistance && !target.IsMoving) continue;
+            if (TargetsDistance(target, false) < maxSqrTargetDistance && !target.IsMoving) continue;
             if (target.isEven && oddIsWalking || !target.isEven && evenIsWalking) continue;
 
             if (!target.IsMoving)
             {
-                target.MoveLegPosition = target.localTarget.position;
-
                 if (target.isEven)
                     this.evenIsWalking = true;
 
@@ -136,13 +141,13 @@ public class SpiderProcedural : MonoBehaviour
             float arc = Mathf.Sin(lerpLeg * Mathf.PI) * height;
             lerpLeg += Time.deltaTime * legArcSpeed;
 
-            var newPosition = Vector3.Lerp(target.worldTarget.position, target.localTarget.position, legStepSpeed * Time.deltaTime);
+            var newPosition = Vector3.Lerp(target.worldTarget.position, target.finalTarget.position, legStepSpeed * Time.deltaTime);
 
             if (lerpLeg < 1)
                 newPosition.y += arc;
 
             else
-                newPosition = target.localTarget.position;
+                newPosition = target.finalTarget.position;
 
             target.worldTarget.position = newPosition;
             target.IncrementStepTime(Time.deltaTime);
@@ -151,7 +156,7 @@ public class SpiderProcedural : MonoBehaviour
             {
                 target.SetIsMoving(false);
                 target.ResetStepTime();
-                target.worldTarget.position = target.localTarget.position;
+                target.worldTarget.position = target.finalTarget.position;
 
                 if (this.evenIsWalking)
                     this.evenIsWalking = false;
@@ -160,6 +165,26 @@ public class SpiderProcedural : MonoBehaviour
                     this.oddIsWalking = false;
             }
         }
+    }
+
+    private void MoveFinalTargets()
+    {
+        var offset = xFinalTargetOffest;
+
+        // body is moving left
+        if (previousXBodyPosition > body.position.x)
+            offset *= -1;
+
+        if (previousXBodyPosition == body.position.x)
+            return;
+
+        foreach (var target in targets)
+        {
+            var pos = target.localTarget.position;
+            target.finalTarget.position = new Vector3(pos.x + offset, target.finalTarget.position.y, pos.z);
+        }
+
+        previousXBodyPosition = body.position.x;
     }
 
     private void CalculateBodyPosition()
