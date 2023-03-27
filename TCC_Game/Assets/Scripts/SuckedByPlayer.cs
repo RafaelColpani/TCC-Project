@@ -9,6 +9,7 @@ public class SuckedByPlayer : MonoBehaviour
     [SerializeField] float radius;
     [SerializeField] float distance;
     [Header("Approaching Player")]
+    [SerializeField] float maxTimer = 3f;
     [SerializeField] float speed = 1f;
     [Tooltip("curve of velocity for when player approaches")]
     [SerializeField] AnimationCurve velocityCurve;
@@ -17,6 +18,7 @@ public class SuckedByPlayer : MonoBehaviour
 
     #region variables
     Rigidbody2D rb;
+    float timer = 0;
     #endregion
 
     private void Awake()
@@ -26,25 +28,35 @@ public class SuckedByPlayer : MonoBehaviour
 
     private void Update()
     {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, radius, Vector2.zero, distance);
+        if (timer < maxTimer) 
+        {
+            timer += Time.deltaTime;
+        }
+
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, radius, Vector2.zero, distance, LayerMask.GetMask("Player"));
 
         foreach (RaycastHit2D hit in hits)
         {
             Debug.DrawLine(transform.position, hit.point, Color.red);
 
-            if (hit.collider.CompareTag("Player"))
-            {
+            //if (hit.collider.CompareTag("Player"))
+            //{
                 Debug.Log("Circle cast hit object with 'Player' tag!");
                 GameObject player = hit.collider.gameObject;
-                goToPlayer(player.GetComponent<Life>(), player.GetComponent<Transform>().position);
-            }
+                if (timer >= maxTimer)
+                {
+                    goToPlayer(player.GetComponent<Life>(), player.GetComponent<Transform>().position);
+                }
+            //}
+            //else rb.gravityScale = 1;
         }
-
-        //DebugExtension.DebugCircle(transform.position, radius, Color.blue);
+        //print(hits[0]);
+        if (hits.Length == 0) rb.gravityScale = 1;
     }
 
     private void goToPlayer(Life playerInventory, Vector3 playerPos) 
     {
+        rb.gravityScale = 0;
         Vector2 direction = playerPos - transform.position;
 
         float distance = direction.magnitude;
@@ -53,6 +65,8 @@ public class SuckedByPlayer : MonoBehaviour
             getToInventory(playerInventory);
 
         float speedMultiplier = velocityCurve.Evaluate(distance);
+        print($"speedMultiplier: {speedMultiplier}");
+        //print($"distance: {distance}");
 
         Vector2 velocity = direction.normalized * speed * speedMultiplier;
         
