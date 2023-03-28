@@ -82,7 +82,7 @@ public class SpiderProcedural : MonoBehaviour
         MoveLegs();
         MoveFinalTargets();
         CalculateBodyPosition();
-        CalculateBodyRotation();
+        //CalculateBodyRotation();
     }
 
     private void TargetsGroundHeight()
