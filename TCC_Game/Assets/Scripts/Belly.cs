@@ -13,8 +13,9 @@ public class Belly : MonoBehaviour
     [Header("HP RECOVER TIMER")]
     [SerializeField] float hpRecoverMaxTimer = 2;
     [SerializeField] float hpRecoverTimer;
-    [Header("HP LOSS")]
+    [Header("HP LOSS AND GAIN")]
     [SerializeField] int hpLossFromBelly = 2;
+    [SerializeField] int hpGainFromBelly = 1;
 
     Status stats;
 
@@ -77,7 +78,7 @@ public class Belly : MonoBehaviour
         //hp increases only if timer of hp recovery is at limit
         if (hpRecoverTimer >= hpRecoverMaxTimer)
         {
-            stats.hp += 1;
+            stats.hp += hpGainFromBelly;
             hpRecoverTimer -= Time.deltaTime;
         }
         else if (hpRecoverTimer <= 0) //if timer of hp recovery reaches minimum, it gets fulfilled to the limit again
