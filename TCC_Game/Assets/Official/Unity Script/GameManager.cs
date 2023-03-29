@@ -5,13 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
-
     // Start is called before the first frame update
     void Start()
     {
-        //Scenes
-        scenesToLoad.Add(SceneManager.LoadSceneAsync("Summer1-Prototype", LoadSceneMode.Additive));  
+        Debug.Log("GameManager Start");
     }
 
     // Update is called once per frame

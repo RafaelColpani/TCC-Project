@@ -13,16 +13,25 @@ public class Load_Scene : MonoBehaviour
 {
     [SerializeField] Transform player;
     [SerializeField] enumMethod _enumMethod;
-    [SerializeField] float loadRange;
+    [SerializeField] float loadRange = 5f;
 
     //States
     [SerializeField] bool isLoaded;
     [SerializeField] bool shouldLoad;
 
+    [Space(5)]
+    [Header("Gizmo")]
+    [SerializeField] Color colorGizmo = Color.black;
+    [SerializeField] BoxCollider2D box;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        //Debug
+        box = gameObject.GetComponent<BoxCollider2D>();
+
+        //Load Scene
         if (SceneManager.sceneCount > 0)
         {
             for (int i = 0; i < SceneManager.sceneCount; i++)
@@ -110,4 +119,15 @@ public class Load_Scene : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        //Player
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, player.position);
+
+        //BoxArea
+        Gizmos.color = colorGizmo;
+        box = gameObject.GetComponent<BoxCollider2D>();
+        Gizmos.DrawWireCube(new Vector3(box.offset.x + transform.position.x, box.offset.y + transform.position.y, 1), new Vector3(box.size.x, box.size.y, 1));
+    }
 }
