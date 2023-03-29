@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InteractToDrop : MonoBehaviour, IInteractable
 {
-    [SerializeField] Life life;
+    [SerializeField] IsDamagedAndDead life;
     public void Interact() 
     {
         life.Drop();

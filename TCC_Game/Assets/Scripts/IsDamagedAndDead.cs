@@ -5,15 +5,15 @@ using UnityEngine;
 //using Random = UnityEngine.Random;
 using KevinCastejon.MoreAttributes;
 
-public class Life : MonoBehaviour
+public class IsDamagedAndDead : MonoBehaviour
 {
     #region calibration
-    [HeaderPlus(" ", "STATS", (int)HeaderPlusColor.cyan)]
+    /*[HeaderPlus(" ", "STATS", (int)HeaderPlusColor.cyan)]
     [SerializeField] int maxLife;
     [SerializeField] int life;
 
     [SerializeField] int phyDefense;
-    [SerializeField] int magDefense;
+    [SerializeField] int magDefense;*/
 
     [HeaderPlus(" ", "DEATH", (int)HeaderPlusColor.magenta)]
     [SerializeField] ParticleSystem deathParticles;
@@ -28,11 +28,12 @@ public class Life : MonoBehaviour
     #region variables
     Vector2 damageOrigin;
     [SerializeField]bool isAlive = true;
+    Status stats;
     #endregion
 
     private void Awake()
     {
-        if(maxLife > 0) life = maxLife;
+        if(stats.maxHp > 0) stats.hp = stats.maxHp;
 
         List<float> ordenedDropRates = new List<float>(dropRate);
         ordenedDropRates.Sort();
@@ -42,7 +43,7 @@ public class Life : MonoBehaviour
 
     private void Update()
     {
-        if (life <= 0 && isAlive)
+        if (stats.hp <= 0 && isAlive)
         {
             Death();
             isAlive = false;
@@ -79,14 +80,14 @@ public class Life : MonoBehaviour
         int lifeLoss;
 
         if(dmgType == global::damage.DmgType.PHY)
-            lifeLoss = damage - phyDefense;
+            lifeLoss = damage - stats.phyDefense;
         else
-            lifeLoss = damage - magDefense;
+            lifeLoss = damage - stats.magDefense;
 
         if (lifeLoss <= 0) 
             lifeLoss = 1;
 
-        life -= lifeLoss;
+        stats.hp -= lifeLoss;
     }
     #endregion
     #region death

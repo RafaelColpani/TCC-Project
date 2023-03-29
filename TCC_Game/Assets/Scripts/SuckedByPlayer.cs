@@ -45,7 +45,7 @@ public class SuckedByPlayer : MonoBehaviour
                 GameObject player = hit.collider.gameObject;
                 if (timer >= maxTimer)
                 {
-                    goToPlayer(player.GetComponent<Life>(), player.GetComponent<Transform>().position);
+                    goToPlayer(player.GetComponent<IsDamagedAndDead>(), player.GetComponent<Transform>().position);
                 }
             //}
             //else rb.gravityScale = 1;
@@ -54,7 +54,7 @@ public class SuckedByPlayer : MonoBehaviour
         if (hits.Length == 0) rb.gravityScale = 1;
     }
 
-    private void goToPlayer(Life playerInventory, Vector3 playerPos) 
+    private void goToPlayer(IsDamagedAndDead playerInventory, Vector3 playerPos) 
     {
         rb.gravityScale = 0;
         Vector2 direction = playerPos - transform.position;
@@ -74,7 +74,7 @@ public class SuckedByPlayer : MonoBehaviour
         transform.Translate(velocity * Time.deltaTime);
     }
 
-    private void getToInventory(Life playerInventory) 
+    private void getToInventory(IsDamagedAndDead playerInventory) 
     {
         //makes object get to the inventory and then destroys the one on scene
         Destroy(this.gameObject);
