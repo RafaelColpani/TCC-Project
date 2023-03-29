@@ -7,14 +7,23 @@ using UnityEngine.UI;
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     // Implementa o item com as funções de Drag.
+    [HideInInspector] public Item item;
+    [HideInInspector] public Image itemUI;
 
+    [HideInInspector]
+    public Transform initialParentSlot; // Se o jogador soltar no OnDrag, ele volta para a posição inicial
 
-    [HideInInspector] public Transform initialParentSlot; // Se o jogador soltar no OnDrag, ele volta para a posição inicial
-    Image itemUI;
     private void Start()
     {
         itemUI = GetComponent<Image>();
     }
+
+    public void InitializeItem(Item newItem)
+    {
+        item = newItem;
+        itemUI.sprite = item.uiSprite;
+    }
+
 
     public void OnBeginDrag(PointerEventData eventData)
     {

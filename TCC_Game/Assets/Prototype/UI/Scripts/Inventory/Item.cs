@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Item : ScriptableObject
 {
 
-
     [Header("Gameplay Only")]
     public ItemType type;
     public ActionType actionType;
@@ -18,7 +17,7 @@ public class Item : ScriptableObject
 
     [Header("Both")]
     public Sprite sprite;
-    public Image uiSprite;
+    public Sprite uiSprite;
 
     public bool edible; // comestível
 
@@ -34,4 +33,4 @@ public class Item : ScriptableObject
         Drop
     }
     
-}
+}   
