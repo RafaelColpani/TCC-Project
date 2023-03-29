@@ -33,7 +33,7 @@ public class IsDamagedAndDead : MonoBehaviour
 
     private void Awake()
     {
-        if(stats.maxHp > 0) stats.hp = stats.maxHp;
+        //if(stats.maxHp > 0) stats.hp = stats.maxHp;
 
         List<float> ordenedDropRates = new List<float>(dropRate);
         ordenedDropRates.Sort();
