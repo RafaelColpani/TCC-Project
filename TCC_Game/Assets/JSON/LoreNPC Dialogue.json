@@ -1,0 +1,196 @@
+{
+  "dialogue": [
+    {
+      "id": 0,
+      "character": "Lore",
+      "text": "first dialogue",
+      "condition": [
+        {
+          "type": "firstTime",
+          "bool": "true"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "character": "Lore",
+      "text": "anyway, I'll tell you if you ask'",
+      "condition": [
+        {
+          "type": "firstTime",
+          "bool": "true"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "character": "Lore",
+      "text": "second dialogue",
+      "choices": [
+        {
+          "choiceId": 1,
+          "text": "about goddess",
+          "nextId": 3
+        },
+        {
+          "choiceId": 2,
+          "text": "about artifacts",
+          "nextId": 4
+        },
+        {
+          "choiceId": 3,
+          "text": "about area",
+          "nextId": 12
+        },
+        {
+          "choiceId": 4,
+          "text": "about you",
+          "nextId": 16
+        },
+        {
+          "choiceId": 5,
+          "text": "finish dialogue",
+          "nextId": 17
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "character": "Lore",
+      "text": "goddess blablabla",
+      "nextId": 2
+    },
+    {
+      "id": 4,
+      "character": "Lore",
+      "text": "Ah, about artifacts"
+    },
+    {
+      "id": 5,
+      "character": "Lore",
+      "text": "no artifacts",
+      "condition": [
+        {
+          "type": "artifactCount",
+          "number": 0
+        }
+      ],
+      "nextId": 2
+    },
+    {
+      "id": 6,
+      "character": "Lore",
+      "text": "all artifacts",
+      "condition": [
+        {
+          "type": "artfifactCount",
+          "number": 3
+        }
+      ],
+      "nextId": 2
+    },
+    {
+      "id": 7,
+      "character": "Lore",
+      "text": "you have a few artifacts",
+      "condition": [
+        {
+          "type": "artifactCount",
+          "minValue": 0,
+          "maxValue": 3
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "character": "Lore",
+      "text": "artifact of summer",
+      "condition": [
+        {
+          "type": "hasSummer",
+          "bool": "true"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "character": "Lore",
+      "text": "artifact of autumn",
+      "condition": [
+        {
+          "type": "hasAutumn",
+          "bool": "true"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "character": "Lore",
+      "text": "artifact of winter",
+      "condition": [
+        {
+          "type": "hasWinter",
+          "bool": "true"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "character": "Lore",
+      "text": "gotta get more artifacts",
+      "nextId": 2
+    },
+    {
+      "id": 12,
+      "character": "Lore",
+      "text": "wanna check area situation?"
+    },
+    {
+      "id": 13,
+      "character": "Lore",
+      "text": "good",
+      "condition": [
+        {
+          "type": "areaCondition",
+          "number": 1
+        }
+      ],
+      "nextId": 2
+    },
+    {
+      "id": 14,
+      "character": "Lore",
+      "text": "medium",
+      "condition": [
+        {
+          "type": "areaCondition",
+          "number": 2
+        }
+      ],
+      "nextId": 2
+    },
+    {
+      "id": 15,
+      "character": "Lore",
+      "text": "bad",
+      "condition": [
+        {
+          "type": "areaCondition",
+          "number": 3
+        }
+      ],
+      "nextId": 2
+    },
+    {
+      "id": 16,
+      "character": "Lore",
+      "text": "I am blabla",
+      "nextId": 2
+    },
+    {
+      "id": 17,
+      "character": "Lore",
+      "text": "going? bye!"
+    }
+  ]
+}
