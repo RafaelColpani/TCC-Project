@@ -14,7 +14,7 @@
     {
       "id": 1,
       "character": "Lore",
-      "text": "anyway, I'll tell you if you ask'",
+      "text": "anyway, I'll tell you if you ask",
       "condition": [
         {
           "type": "firstTime",
@@ -71,8 +71,16 @@
       "text": "no artifacts",
       "condition": [
         {
-          "type": "artifactCount",
-          "number": 0
+          "type": "hasSummer",
+          "bool": false
+        },
+        {
+          "type": "hasAutumn",
+          "bool": false
+        },
+        {
+          "type": "hasWinter",
+          "bool": false
         }
       ],
       "nextId": 2
@@ -83,8 +91,16 @@
       "text": "all artifacts",
       "condition": [
         {
-          "type": "artfifactCount",
-          "number": 3
+          "type": "hasSummer",
+          "bool": true
+        },
+        {
+          "type": "hasAutumn",
+          "bool": true
+        },
+        {
+          "type": "hasWinter",
+          "bool": true
         }
       ],
       "nextId": 2
@@ -95,9 +111,8 @@
       "text": "you have a few artifacts",
       "condition": [
         {
-          "type": "artifactCount",
-          "minValue": 0,
-          "maxValue": 3
+          "type": "hasSomeArtifacts",
+          "bool": true
         }
       ]
     },
@@ -108,7 +123,7 @@
       "condition": [
         {
           "type": "hasSummer",
-          "bool": "true"
+          "bool": false
         }
       ]
     },
@@ -119,7 +134,7 @@
       "condition": [
         {
           "type": "hasAutumn",
-          "bool": "true"
+          "bool": false
         }
       ]
     },
@@ -130,7 +145,7 @@
       "condition": [
         {
           "type": "hasWinter",
-          "bool": "true"
+          "bool": false
         }
       ]
     },

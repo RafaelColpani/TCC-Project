@@ -25,8 +25,6 @@ public class Condition
     public string type;
     public bool boolValue;
     public int number;
-    public int minValue;
-    public int maxValue;
 }
 
 [System.Serializable]

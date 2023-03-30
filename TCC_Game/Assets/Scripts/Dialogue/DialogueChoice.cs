@@ -16,6 +16,5 @@ public class DialogueChoice : MonoBehaviour
     void OnClick() 
     {
         dialogueReader.Chose(nextId);
-        dialogueReader.DestroyChoices();
     }    
 }
