@@ -20,17 +20,20 @@ public class Item : ScriptableObject
     public Sprite uiSprite;
 
     public bool edible; // comestível
+    public bool isArtifact = false; // variavel provavelmente inutil, mas veremos
 
     public enum ItemType
     {
         Food,
-        Ammo
+        Ammo,
+        Artifact
     }
 
     public enum ActionType
     {
         Use,
-        Drop
+        Drop,
+        None
     }
     
 }   
