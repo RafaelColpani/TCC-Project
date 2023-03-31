@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class DialogueChoice : MonoBehaviour
 {
-    DialogueReader2 dialogueReader;
+    DialogueReader dialogueReader;
     public int nextId;
     private void Awake()
     {
-        dialogueReader = GameObject.Find("dialogueManager").GetComponent<DialogueReader2>();
+        dialogueReader = GameObject.Find("dialogueManager").GetComponent<DialogueReader>();
         this.GetComponent<Button>().onClick.AddListener(OnClick);
     }
 

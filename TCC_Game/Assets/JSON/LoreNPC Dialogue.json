@@ -7,7 +7,7 @@
       "condition": [
         {
           "type": "firstTime",
-          "bool": "true"
+          "boolValue": true
         }
       ]
     },
@@ -18,7 +18,7 @@
       "condition": [
         {
           "type": "firstTime",
-          "bool": "true"
+          "boolValue": true
         }
       ]
     },
@@ -72,15 +72,15 @@
       "condition": [
         {
           "type": "hasSummer",
-          "bool": false
+          "boolValue": false
         },
         {
           "type": "hasAutumn",
-          "bool": false
+          "boolValue": false
         },
         {
           "type": "hasWinter",
-          "bool": false
+          "boolValue": false
         }
       ],
       "nextId": 2
@@ -92,15 +92,15 @@
       "condition": [
         {
           "type": "hasSummer",
-          "bool": true
+          "boolValue": true
         },
         {
           "type": "hasAutumn",
-          "bool": true
+          "boolValue": true
         },
         {
           "type": "hasWinter",
-          "bool": true
+          "boolValue": true
         }
       ],
       "nextId": 2
@@ -112,7 +112,7 @@
       "condition": [
         {
           "type": "hasSomeArtifacts",
-          "bool": true
+          "boolValue": true
         }
       ]
     },
@@ -123,7 +123,7 @@
       "condition": [
         {
           "type": "hasSummer",
-          "bool": false
+          "boolValue": false
         }
       ]
     },
@@ -134,7 +134,7 @@
       "condition": [
         {
           "type": "hasAutumn",
-          "bool": false
+          "boolValue": false
         }
       ]
     },
@@ -145,7 +145,7 @@
       "condition": [
         {
           "type": "hasWinter",
-          "bool": false
+          "boolValue": false
         }
       ]
     },
@@ -163,10 +163,10 @@
     {
       "id": 13,
       "character": "Lore",
-      "text": "good",
+      "text": "summer good",
       "condition": [
         {
-          "type": "areaCondition",
+          "type": "summerCondition",
           "number": 1
         }
       ],
@@ -175,10 +175,10 @@
     {
       "id": 14,
       "character": "Lore",
-      "text": "medium",
+      "text": "summer medium",
       "condition": [
         {
-          "type": "areaCondition",
+          "type": "summerCondition",
           "number": 2
         }
       ],
@@ -187,10 +187,10 @@
     {
       "id": 15,
       "character": "Lore",
-      "text": "bad",
+      "text": "summer bad",
       "condition": [
         {
-          "type": "areaCondition",
+          "type": "summerCondition",
           "number": 3
         }
       ],

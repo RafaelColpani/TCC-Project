@@ -7,7 +7,7 @@ public class NpcInteractable : MonoBehaviour, IInteractable
     [HideInInspector] public int timesTalked = 0;
     [SerializeField] string fileName = "dialogue.json";
     [SerializeField] GameObject dialogueManager, dialogueGrp;
-    DialogueReader2 dialogueReader;
+    DialogueReader dialogueReader;
     [HideInInspector] public bool canTalk = true;
 
    /* private void Awake()
@@ -20,7 +20,7 @@ public class NpcInteractable : MonoBehaviour, IInteractable
         timesTalked++;
 
         dialogueManager.SetActive(true);
-        dialogueReader = GameObject.Find("dialogueManager").GetComponent<DialogueReader2>();
+        dialogueReader = GameObject.Find("dialogueManager").GetComponent<DialogueReader>();
         dialogueReader.fileName = fileName;
         dialogueReader.npcInteract = this;
 
