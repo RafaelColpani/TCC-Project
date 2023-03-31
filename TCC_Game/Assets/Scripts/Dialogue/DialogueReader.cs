@@ -118,7 +118,9 @@ public class DialogueReader : MonoBehaviour
             {
                 //checks conditions to see if it can proceed or talk
                 ChecksCondition();
+                return;
             }
+            print("test");
 
             //clears text box and talks
             ClearAndTalk();
@@ -162,7 +164,6 @@ public class DialogueReader : MonoBehaviour
                 {
                     if (condTalk.boolValue != condStatic.boolValue || condTalk.number != condStatic.number) //but their other attributes aren't...
                     {
-                        print($"condition isn't satisfied({condTalk.type} {condTalk.boolValue} {condTalk.number} : {condStatic.type} {condStatic.boolValue} {condStatic.number}). next.");
                         NextLine(); //go to next line
                     }
                 }
