@@ -24,7 +24,10 @@ public class DialogueReader : MonoBehaviour
     [HideInInspector]public Collider2D npcInteractCollider;
     DialogueConditions dialogueConditions = new DialogueConditions();
     List<Condition> conditions;
+    bool alreadyTyping;
     #endregion
+
+    private int teste = 0;
 
 
     private void Update()
@@ -34,16 +37,18 @@ public class DialogueReader : MonoBehaviour
         //if it is, it goes to the next line. if not, it completes the dialogue and checks if it must show choices
             if (Input.GetMouseButtonDown(0))
             {
-                if (dialogue.text == dialogueData.dialogue[id].text)
+                if (dialogue.text.Equals(dialogueData.dialogue[id].text))
                 {
                     if(choicesBox.activeSelf == false)//player can only skip if there isn't any choice box
                     {
+                    print("to next line");
                         NextLine();
                     }
                 }
                 else
                 {
                     StopAllCoroutines();
+                alreadyTyping = false;
                     dialogue.text = dialogueData.dialogue[id].text;
 
                     if (dialogueData.dialogue[id].choices.Count > 0 && choicesBox.activeSelf == false)
@@ -69,9 +74,8 @@ public class DialogueReader : MonoBehaviour
             Debug.LogError($"File not found: {filePath}");
         }
 
-        //pega a lista de condições
+        //pega a lista de condiï¿½ï¿½es
         conditions = dialogueConditions.TurnToConditions(npcInteract.timesTalked <= 1);
-
         //Starts dialogue
         StartDialogue();
     }
@@ -84,8 +88,9 @@ public class DialogueReader : MonoBehaviour
         {
             NextLine();
         }
+        else { ClearAndTalk(); }
 
-            ClearAndTalk();
+
 
         if (dialogueData.dialogue[id].choices.Count > 0) //if there are choices, show these choices
         {
@@ -97,7 +102,11 @@ public class DialogueReader : MonoBehaviour
     {
         name.text = dialogueData.dialogue[id].character;
         dialogue.text = string.Empty;
-        StartCoroutine(TypeLine(dialogueData.dialogue[id].text)); //types the text of the id's line
+        if (!alreadyTyping)
+        {
+            alreadyTyping = true;
+            StartCoroutine(TypeLine(dialogueData.dialogue[id].text)); //types the text of the id's line}
+        }
     }
    
     void NextLine()
@@ -117,8 +126,9 @@ public class DialogueReader : MonoBehaviour
             if (dialogueData.dialogue[id].condition.Count > 0) //checks if there is any need to check the condition at all
             {
                 //checks conditions to see if it can proceed or talk
+                print("check condition");
                 ChecksCondition();
-                return;
+                //return;
             }
             print("test");
 
@@ -135,22 +145,26 @@ public class DialogueReader : MonoBehaviour
     }
 
     IEnumerator TypeLine(string txt)
-    {
-        foreach (char c in txt.ToCharArray())
-        {
-            dialogue.text += c;
-
-            yield return new WaitForSeconds(speed);
-        }
-
-        if (dialogue.text == txt)
-        {
-            if (dialogueData.dialogue[id].choices.Count > 0 && choicesBox.activeSelf == false)
+    { 
+            teste++;
+            print($"rodou {teste} vezes. texto: {txt}");
+            foreach (char c in txt.ToCharArray())
             {
-                print("choices: "+dialogueData.dialogue[id].choices[0]);
-                ShowChoices();
+                dialogue.text += c;
+
+                yield return new WaitForSeconds(speed);
             }
-        }
+
+            if (dialogue.text == txt)
+            {
+                if (dialogueData.dialogue[id].choices.Count > 0 && choicesBox.activeSelf == false)
+                {
+                    print("choices: " + dialogueData.dialogue[id].choices[0]);
+                    ShowChoices();
+                }
+            }
+        alreadyTyping = false;
+
     }
 
     void ChecksCondition() 
@@ -164,7 +178,9 @@ public class DialogueReader : MonoBehaviour
                 {
                     if (condTalk.boolValue != condStatic.boolValue || condTalk.number != condStatic.number) //but their other attributes aren't...
                     {
-                        NextLine(); //go to next line
+                        //print(id + " "+ dialogueData.dialogue[1].nextId);
+                        if(id != dialogueData.dialogue[0].id)
+                            NextLine(); //go to next line
                     }
                 }
             }
