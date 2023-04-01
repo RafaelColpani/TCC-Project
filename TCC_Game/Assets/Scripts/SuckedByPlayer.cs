@@ -39,18 +39,12 @@ public class SuckedByPlayer : MonoBehaviour
         {
             Debug.DrawLine(transform.position, hit.point, Color.red);
 
-            //if (hit.collider.CompareTag("Player"))
-            //{
-                Debug.Log("Circle cast hit object with 'Player' tag!");
                 GameObject player = hit.collider.gameObject;
                 if (timer >= maxTimer)
                 {
                     goToPlayer(player.GetComponent<IsDamagedAndDead>(), player.GetComponent<Transform>().position);
                 }
-            //}
-            //else rb.gravityScale = 1;
         }
-        //print(hits[0]);
         if (hits.Length == 0) rb.gravityScale = 1;
     }
 
@@ -65,8 +59,6 @@ public class SuckedByPlayer : MonoBehaviour
             getToInventory(playerInventory);
 
         float speedMultiplier = velocityCurve.Evaluate(distance);
-        print($"speedMultiplier: {speedMultiplier}");
-        //print($"distance: {distance}");
 
         Vector2 velocity = direction.normalized * speed * speedMultiplier;
         

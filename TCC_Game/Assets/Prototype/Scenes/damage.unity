@@ -328,7 +328,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 182929478}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b79c4a0b60b85342b12c0c58d043e67, type: 3}
   m_Name: 
@@ -340,6 +340,7 @@ MonoBehaviour:
   hpRecoverMaxTimer: 2
   hpRecoverTimer: 0
   hpLossFromBelly: 2
+  hpGainFromBelly: 1
 --- !u!114 &182929487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,7 +388,7 @@ RectTransform:
   m_GameObject: {fileID: 246610534}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.1049, y: 2.1049, z: 2.1049}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1881117587}
@@ -396,7 +397,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -364.5, y: -116}
+  m_AnchoredPosition: {x: -753, y: -453}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &246610536
@@ -789,10 +790,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -854,7 +855,7 @@ GameObject:
   - component: {fileID: 1182779885}
   m_Layer: 3
   m_Name: Triangle
-  m_TagString: Player
+  m_TagString: creature
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1183,8 +1184,8 @@ MonoBehaviour:
   - {fileID: 331157449500458617, guid: d90f7d7306b72c048abc2c559def1ba7, type: 3}
   - {fileID: 331157449500458617, guid: b86a16dd0fbfadf42b4386cf2b657022, type: 3}
   dropRate:
-  - 100
-  - 0
+  - 50
+  - 50
   - 0
   isAlive: 1
 --- !u!114 &1320910958
@@ -1199,7 +1200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b597869efe1ac4f42a2b5cf00ef308eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: 1
+  life: 13
   maxHp: 10
   hp: 0
   maxBelly: 10

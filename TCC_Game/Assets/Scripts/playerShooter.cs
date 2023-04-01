@@ -13,7 +13,9 @@ public class playerShooter : MonoBehaviour
         if (physBullet != null)
         {
             if (Input.GetMouseButtonDown(0))
+            {
                 Shoot(physBullet);
+            }
         }
         if (magBullet != null)
         {
@@ -31,16 +33,20 @@ public class playerShooter : MonoBehaviour
         rot = this.transform.rotation;
     }
 
-    public void Shoot(GameObject bullet) 
+    public void Shoot(GameObject bullet)
     {
-        Instantiate(bullet,transform.position, rot);
+        var blt = Instantiate(bullet, transform.position, rot);
+        blt.GetComponent<damage>().creator = this.gameObject;
+
+        print($"bullet: {blt!=null}");
     }
 
-    public void ChangeBullet(GameObject newBullet) 
+    public void ChangeBullet(GameObject newBullet)
     {
         damage.DmgType dmgType = newBullet.GetComponent<damage>().dmgType;
 
-        switch (dmgType) {
+        switch (dmgType)
+        {
             case damage.DmgType.PHY:
                 physBullet = newBullet;
                 break;

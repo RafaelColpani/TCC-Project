@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -5900699604239426761}
   - component: {fileID: -283892338445202154}
   - component: {fileID: -5244245274328065523}
+  - component: {fileID: 5726075791775294963}
   m_Layer: 8
   m_Name: spr_dropPig
   m_TagString: Untagged
@@ -171,3 +172,44 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5726075791775294963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331157449500458617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc585b49e3063b5428235cccfedfa679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 4.97
+  distance: 3.47
+  maxTimer: 2
+  speed: 2
+  velocityCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 2.9973755
+      inSlope: 0.018909726
+      outSlope: 0.018909726
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.22916667
+    - serializedVersion: 3
+      time: 4.9170527
+      value: -0.01413846
+      inSlope: -1.798388
+      outSlope: -1.798388
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.066666685
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  destroyDistance: 1

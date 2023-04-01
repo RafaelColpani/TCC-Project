@@ -37,6 +37,7 @@ public class IsDamagedAndDead : MonoBehaviour
 
         List<float> ordenedDropRates = new List<float>(dropRate);
         ordenedDropRates.Sort();
+        stats = GetComponent<Status>();
         //Array.Copy(dropRate, ordenedDropRates, dropRate.Count);
         //Array.Sort(ordenedDropRates);
     }
@@ -57,21 +58,21 @@ public class IsDamagedAndDead : MonoBehaviour
         {
             damage dmgScript = collision.gameObject.GetComponent<damage>();
 
-            //se dano for do player, mas o alvo nao for player, ou se dano n�o for gerado pelo player, o alvo deve perder vida
-            if (
+            //se dano for do player, mas o alvo nao for player, ou se dano nao for gerado pelo player, o alvo deve perder vida
+            /*if (
                 (dmgScript.isPlayer && !this.gameObject.CompareTag("Player"))
                 ||
                 (!dmgScript.isPlayer)
                 )
             {
                 loseLife(dmgScript.dmg, dmgScript.dmgType);
-            }
-
-            //only if damage influences where drop will be launched
-            /*if (life <= 0)
-            {
-                damageOrigin = this.transform.position - collision.gameObject.transform.position;
             }*/
+
+            //se o dano for criado pelo ataque do objeto X, o mesmo não deverá levar o dano
+            if(dmgScript.creator != this.gameObject)
+            {
+                loseLife(dmgScript.dmg, dmgScript.dmgType);
+            }
         }
     }
 
