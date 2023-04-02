@@ -38,6 +38,7 @@ public class DialogueReader : MonoBehaviour
     DialogueConditions dialogueConditions = new DialogueConditions();
     List<Condition> conditions;
     bool alreadyTyping;
+    bool metConditions = true;
     #endregion
 
     private int teste = 0;
@@ -52,7 +53,6 @@ public class DialogueReader : MonoBehaviour
             {
                 if (choicesBox.activeSelf == false) //player can only skip if there isn't any choice box
                 {
-                    print("to next line");
                     NextLine();
                 }
             }
@@ -69,7 +69,7 @@ public class DialogueReader : MonoBehaviour
             }
         }
     }
-
+    #region lines
     public void StartAll()
     {
         //finds path to the json file to be read
@@ -111,38 +111,33 @@ public class DialogueReader : MonoBehaviour
         }
     }
 
-    void ClearAndTalk()
-    {
-        if (!alreadyTyping)
-        {
-            print("clearing");
-            name.text = dialogueData.dialogue[id].character;
-            dialogue.text = string.Empty;
-            StartCoroutine(TypeLine(dialogueData.dialogue[id].text)); //types the text of the id's line}
-        }
-    }
-
     void NextLine()
     {
         if (id < dialogueData.dialogue.Count - 1) //checks if dialogues are not finished
         {
             //checks if there is a nextId
-            if (dialogueData.dialogue[id].nextId == 0) //if there isn't, id adds 1
+            if (dialogueData.dialogue[id].nextId == 0 || !metConditions) //if there isn't a nextId or if a condition is not met, id adds 1
             {
                 id++;
             }
-            else //if there is, it gets the next id
+            else //if there is a nextId and there is no false condition, it gets the next id
             {
                 id = dialogueData.dialogue[id].nextId;
             }
+            if (!metConditions)
+            {
+                metConditions = true;
+            }
+
+
 
             if (dialogueData.dialogue[id].condition.Count > 0) //checks if there is any need to check the condition at all
             {
                 //checks conditions to see if it can proceed or talk
                 ChecksCondition();
-                //return;
             }
 
+            if (!metConditions) return;
             //clears text box and talks
             ClearAndTalk();
         }
@@ -154,23 +149,30 @@ public class DialogueReader : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+    #endregion
+
+    #region typing
+    void ClearAndTalk()
+    {
+        if (!alreadyTyping)
+        {
+            name.text = dialogueData.dialogue[id].character;
+            dialogue.text = string.Empty;
+            StartCoroutine(TypeLine(dialogueData.dialogue[id].text)); //types the text of the id's line}
+        }
+    }
 
     IEnumerator TypeLine(string txt)
+
     {
         if (!alreadyTyping)
         {
             alreadyTyping = true;
             teste++;
             dialogue.text = "";
-            if (txt.Equals("second dialogue"))
-                print($"rodou {teste} vezes. texto: {txt}");
             foreach (char c in txt.ToCharArray())
             {
-                if (txt.Equals("second dialogue"))
-                    print(c);
                 dialogue.text += c;
-                if (txt.Equals("second dialogue"))
-                    print(dialogue.text);
 
                 yield return new WaitForSeconds(speed);
             }
@@ -185,6 +187,7 @@ public class DialogueReader : MonoBehaviour
             alreadyTyping = false;
         }
     }
+    #endregion
 
     void ChecksCondition()
     {
@@ -197,12 +200,12 @@ public class DialogueReader : MonoBehaviour
                 {
                     if (
                         condTalk.boolValue != condStatic.boolValue
-                        || condTalk.number != condStatic.number
-                    ) //but their other attributes aren't...
+                        || condTalk.number != condStatic.number) // but their values arent't
                     {
-                        //print(id + " "+ dialogueData.dialogue[1].nextId);
-                        if (id != dialogueData.dialogue[0].id)
-                            NextLine(); //go to next line
+                        //show that conditions arent met
+                        metConditions = false;
+                        NextLine();
+                        return;
                     }
                 }
             }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DialogueConditions
 {
-    static bool hasSummer = false, hasAutumn = false, hasWinter = false, hasSomeArtifacts = false;
-    static int summerCondition = 1, autumnCondition = 1, winterCondition = 1;
+    static bool hasSummer = true, hasAutumn = false, hasWinter = true;
+    static int summerCondition = 2, autumnCondition = 1, winterCondition = 1;
     static int foodType = 1;
     static bool confirmation = false;
 
@@ -19,7 +19,6 @@ public class DialogueConditions
             {nameof(hasSummer), hasSummer},
             {nameof(hasAutumn), hasAutumn},
             {nameof(hasWinter), hasWinter},
-            {nameof(hasSomeArtifacts), hasSomeArtifacts},
             {nameof(confirmation), confirmation}
         };
         Dictionary<string, int> conditionInt = new Dictionary<string, int>() {

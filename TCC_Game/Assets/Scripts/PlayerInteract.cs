@@ -14,7 +14,6 @@ public class PlayerInteract : MonoBehaviour {
         {
             if (mono is IInteractable)
             {
-                print("entrou em interactable");
                 interactable = mono as IInteractable;
             }
         }
@@ -28,7 +27,6 @@ public class PlayerInteract : MonoBehaviour {
         {
             if (mono is IInteractable)
             {
-                print("saiu de interactable");
                 if(interactable == mono as IInteractable)
                 interactable = null;
             }
@@ -39,7 +37,6 @@ public class PlayerInteract : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Space) && interactable != null)
         {
-            print("interagiu");
             interactable.Interact();
         }
     }

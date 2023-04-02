@@ -17,7 +17,6 @@ public class Dialogue
     public List<Condition> condition;
     public List<Choice> choices;
     public int nextId;
-    public int nextFirstId;
 }
 
 [System.Serializable]
