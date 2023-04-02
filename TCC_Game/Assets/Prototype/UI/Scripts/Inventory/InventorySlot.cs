@@ -1,11 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
     // Implementa o slot que ira receber o Drop
+
+    public Image img;
+    public Color selectedColor, notSelectedColor;
+
+    private void Awake()
+    {
+        img = GetComponent<Image>();
+        
+        Deselect();
+    }
+
+    public void Select()
+    {
+        img.color = selectedColor;
+    }
+
+    public void Deselect()
+    {
+        img.color = notSelectedColor;
+    }
 
     public void OnDrop(PointerEventData eventData)
     {
