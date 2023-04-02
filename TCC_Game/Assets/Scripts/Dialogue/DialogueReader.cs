@@ -113,9 +113,13 @@ public class DialogueReader : MonoBehaviour
 
     void ClearAndTalk()
     {
-        name.text = dialogueData.dialogue[id].character;
-        dialogue.text = string.Empty;
-        StartCoroutine(TypeLine(dialogueData.dialogue[id].text)); //types the text of the id's line}
+        if (!alreadyTyping)
+        {
+            print("clearing");
+            name.text = dialogueData.dialogue[id].character;
+            dialogue.text = string.Empty;
+            StartCoroutine(TypeLine(dialogueData.dialogue[id].text)); //types the text of the id's line}
+        }
     }
 
     void NextLine()
