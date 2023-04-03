@@ -8,7 +8,7 @@ using TMPro;
 public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     // Implementa o item com as funções de Drag.
-    [HideInInspector] public Item item;
+    public Item item;
     [HideInInspector] public Image itemUI;
 
     [HideInInspector] public int count = 1; // conta o quanto de items estão empilhados
@@ -81,6 +81,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         bool textActive = count > 1; // se count>1 for true
         countText.gameObject.SetActive(textActive);
         countImageBase.gameObject.SetActive(textActive);
+
         StopAllCoroutines();
         StartCoroutine("ShowItemName", this);
     }
@@ -91,6 +92,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
         itemUI.raycastTarget = false;
+
         StopAllCoroutines();
         StartCoroutine("ShowItemName", this);
     }

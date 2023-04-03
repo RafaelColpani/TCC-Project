@@ -8,13 +8,32 @@ public class DemoScript : MonoBehaviour
     public Item[] itemsToPickup;
     public void PickupItem(int id)
     {
-        bool freeSlot = inventoryManager.AddItem(itemsToPickup[id]);
+        bool hasFreeSlot = inventoryManager.AddItem(itemsToPickup[id]);
 
-        if (freeSlot == true)
+        // se ha um slot livre
+        if (hasFreeSlot == true)
             print("ADDED");
 
-        else 
+        else
             print("NOT ADDED: NO SPACE LEFT");
+    }
+
+    public void RemoveAllItems()
+    {
+        inventoryManager.RemoveAllItems();
+    }
+
+    // chamado com X condicao
+    public void RemoveItem()
+    {
+        // obtem slot do item selecionado
+        inventoryManager.GetSelectedItem(false);
+        // Destroi gObject do item
+    }
+
+    public void UseSelectedItem()
+    {
+        inventoryManager.GetSelectedItem(true);
     }
 
     public void GetSelectedItem()
@@ -28,7 +47,8 @@ public class DemoScript : MonoBehaviour
             print("no item received");
     }
 
-    public void UseSelectedItem()
+    // estou ficando bilu teteia por isso parei de pensar e vou commitar, obrigado
+    public void UseSelectedItem2()
     {
         Item receivedItem = inventoryManager.GetSelectedItem(true);
         if (receivedItem != null)

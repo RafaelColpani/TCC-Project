@@ -32,31 +32,44 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    [Tooltip("Funcao 'atalho' para obter o item selecionado")]
     public Item GetSelectedItem(bool use)
     {
-        InventorySlot slot = inventorySlots[selectedSlot]; //temp
+        InventoryItem itemInSlot = inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>();
+
+        if (itemInSlot != null)
+            return itemInSlot.item;
+
+        return null;
+    }
+
+    /// <summary>
+    /// Usar item
+    /// </summary>
+    /// <returns>Item item</returns>
+    public Item UseSelectedItem()
+    {
+        InventorySlot slot = inventorySlots[selectedSlot];
         InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
 
         if (itemInSlot != null)
         {
             Item item = itemInSlot.item;
-            if(use == true)
-            {
-                itemInSlot.count--;
 
-                if (itemInSlot.count <= 0)
-                {
-                    Destroy(itemInSlot.gameObject);
-                }
-                else
-                    itemInSlot.RefreshCount();
-            }
+            // USAR O ITEM
+            itemInSlot.count--;
+
+            // Usar item (atribuir evento ou funcao de uso aqui depois)
+
+            if (itemInSlot.count <= 0)
+                Destroy(itemInSlot.gameObject);
+            else
+                itemInSlot.RefreshCount();
 
             return item;
         }
         return null;
     }
-
     void ChangeSelectedSlot(int newValue)
     {
         if (selectedSlot >= 0)
@@ -110,11 +123,30 @@ public class InventoryManager : MonoBehaviour
         return false;
     }
 
+    public void RemoveAllItems()
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            if(inventorySlots[i].GetComponentInChildren<InventoryItem>() != null)
+                Destroy(inventorySlots[i].GetComponentInChildren<InventoryItem>().gameObject);
+        }
+    }
+
+    /// <summary>
+    /// Remove o item do inventário
+    /// </summary>
+    public void DropSelectedItem()
+    {   
+        // faz alguma animação (animator e trigger)
+
+        Destroy(inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>());
+
+        // funcao de dropar o item
+    }
     void SpawnNewItem(Item item, InventorySlot slot)
     {
         GameObject newItemGo = Instantiate(InventoryItemPrefab, slot.transform);
         InventoryItem inventoryItem = newItemGo.GetComponent<InventoryItem>();
         inventoryItem.InitializeItem(item);
-        
     }
 }
