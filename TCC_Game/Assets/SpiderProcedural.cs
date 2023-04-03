@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using KevinCastejon.MoreAttributes;
 
 [System.Serializable]
 public class ObjectTargets
 {
-    public Transform localTarget;
-    public Transform worldTarget;
+    [Tooltip("The Target that follows among the body. Must be an object INSIDE the sprite parent.")]
+    public Transform bodyTarget;
+    [Tooltip("The target that the effector is following. Must be an object OUTSIDE the sprite parent.")]
+    public Transform effectorTarget;
+    [Tooltip("The target that will follow the bodyTarget with an offsite on the x axis. Must be an abject INSIDE the sprite parent.")]
     public Transform finalTarget;
+    [Tooltip("The GameObject acting as the effector. Must be a child of the final bone of a leg.")]
     public Transform effector;
+    [Tooltip("The legs will move accordingly to its timing. Even legs will not walk while Odds legs are walking, and vice versa.")]
     public bool isEven;
 
     private float stepTime;
@@ -48,23 +53,48 @@ public class ObjectTargets
 
 public class SpiderProcedural : MonoBehaviour
 {
+    #region Inspector VARs
+    [HeaderPlus(" ", "- TARGETS OBJECTS -", (int)HeaderPlusColor.green)]
     [SerializeField] private List<ObjectTargets> targets;
-    [SerializeField] private float hoverRayDistance;
-    [SerializeField] private float maxSqrTargetDistance;
-    [SerializeField] private float legStepSpeed;
-    [SerializeField] private float legArcHeight;
-    [SerializeField] private float legArcSpeed;
-    [SerializeField] private float bodyPositionOffset;
-    [SerializeField] private float xFinalTargetOffest;
-    [SerializeField] private Transform body;
 
+    [HeaderPlus(" ", "- DISTANCES -", (int)HeaderPlusColor.yellow)]
+    [Tooltip("The distance that the targets will be at the raycasted collider.")]
+    [SerializeField] private float hoverRayDistance;
+    [Tooltip("The maximum distance that the effectorTarget has to be from the bodyTarget to move the leg. Distance calculated with sqrMagnitude.")]
+    [SerializeField] private float maxSqrTargetDistance;
+    [Tooltip("The maximum distance that the raycast of the targets will detect collisions.")]
+    [SerializeField] private float groundRaycastDistance;
+
+    [HeaderPlus(" ", "- LEGS -", (int)HeaderPlusColor.cyan)]
+    [Tooltip("The speedthat the effectorTarget will move to it's destination when moving (finalTarget).")]
+    [SerializeField] private float legStepSpeed;
+    [Tooltip("The height of the arc that the leg makes when moving.")]
+    [SerializeField] private float legArcHeight;
+    [Tooltip("The speed of the arc that the leg makes when moving.")]
+    [SerializeField] private float legArcSpeed;
+    [Tooltip("The offset in the x axis that the finalTarget makes from the position of the bodyTarget.")]
+    [SerializeField] private float xFinalTargetOffest;
+
+    [HeaderPlus(" ", "- BODY -", (int)HeaderPlusColor.magenta)]
+    [Tooltip("The object that parents all bones objects. Must be an empty object holding the bones objects as a parent.")]
+    [SerializeField] private Transform body;
+    [Tooltip("The offset that the body makes in the y axis.")]
+    [SerializeField] private float bodyPositionOffset;
+
+    [HeaderPlus(" ", "- ROTATION -", (int)HeaderPlusColor.red)]
+    [Tooltip("Tells if the body will rotate accordingly to the position of the legs. Better used with a spider like animal for example.")]
+    [SerializeField] private bool makeRotation;
+    #endregion
+
+    #region private VARs
     private bool evenIsWalking = false;
     private bool oddIsWalking = false;
 
     private float previousXBodyPosition;
-
     private float lerpLeg = 0;
+    #endregion
 
+    #region Unity Methods
     private void Start()
     {
         foreach (var target in targets)
@@ -82,9 +112,15 @@ public class SpiderProcedural : MonoBehaviour
         MoveLegs();
         MoveFinalTargets();
         CalculateBodyPosition();
-        //CalculateBodyRotation();
-    }
 
+        if (makeRotation)
+            CalculateBodyRotation();
+    }
+    #endregion
+
+    #region Private Methods
+
+    #region Procedural Flow
     private void TargetsGroundHeight()
     {
         RaycastHit2D localHit;
@@ -92,8 +128,8 @@ public class SpiderProcedural : MonoBehaviour
 
         foreach (var target in targets)
         {
-            localHit = Physics2D.Raycast(target.localTarget.position, -Vector2.up);
-            finalHit = Physics2D.Raycast(target.finalTarget.position, -Vector2.up);
+            localHit = Physics2D.Raycast(target.bodyTarget.position, -Vector2.up, groundRaycastDistance);
+            finalHit = Physics2D.Raycast(target.finalTarget.position, -Vector2.up, groundRaycastDistance);
 
             if (localHit.collider == null)
                 continue;
@@ -104,18 +140,9 @@ public class SpiderProcedural : MonoBehaviour
             localRayPoint.y += hoverRayDistance;
             finalRayPoint.y += hoverRayDistance;
 
-            target.localTarget.position = localRayPoint;
-            target.finalTarget.position = new Vector3(target.finalTarget.position.x, finalRayPoint.y, target.finalTarget.position.z);
+            target.bodyTarget.position = localRayPoint;
+            target.finalTarget.position = finalRayPoint; //new Vector3(target.finalTarget.position.x, finalRayPoint.y, target.finalTarget.position.z);
         }
-    }
-
-    private float TargetsDistance(ObjectTargets objectTarget, bool byFinalTarget = true)
-    {
-        if (byFinalTarget)
-            return (objectTarget.finalTarget.position - objectTarget.worldTarget.position).sqrMagnitude;
-
-        else
-            return (objectTarget.localTarget.position - objectTarget.worldTarget.position).sqrMagnitude;
     }
 
     private void MoveLegs()
@@ -141,7 +168,7 @@ public class SpiderProcedural : MonoBehaviour
             float arc = Mathf.Sin(lerpLeg * Mathf.PI) * height;
             lerpLeg += Time.deltaTime * legArcSpeed;
 
-            var newPosition = Vector3.Lerp(target.worldTarget.position, target.finalTarget.position, legStepSpeed * Time.deltaTime);
+            var newPosition = Vector3.Lerp(target.effectorTarget.position, target.finalTarget.position, legStepSpeed * Time.deltaTime);
 
             if (lerpLeg < 1)
                 newPosition.y += arc;
@@ -149,14 +176,14 @@ public class SpiderProcedural : MonoBehaviour
             else
                 newPosition = target.finalTarget.position;
 
-            target.worldTarget.position = newPosition;
+            target.effectorTarget.position = newPosition;
             target.IncrementStepTime(Time.deltaTime);
 
-            if (TargetsDistance(target) <= 0.001f) //
+            if (TargetsDistance(target) <= 0.001f)
             {
                 target.SetIsMoving(false);
                 target.ResetStepTime();
-                target.worldTarget.position = target.finalTarget.position;
+                target.effectorTarget.position = target.finalTarget.position;
 
                 if (this.evenIsWalking)
                     this.evenIsWalking = false;
@@ -180,8 +207,8 @@ public class SpiderProcedural : MonoBehaviour
 
         foreach (var target in targets)
         {
-            var pos = target.localTarget.position;
-            target.finalTarget.position = new Vector3(pos.x + offset, target.finalTarget.position.y, pos.z);
+            var pos = target.bodyTarget.position;
+            target.finalTarget.position = new Vector3(pos.x + offset, target.bodyTarget.position.y, pos.z);
         }
 
         previousXBodyPosition = body.position.x;
@@ -191,7 +218,25 @@ public class SpiderProcedural : MonoBehaviour
     {
         Vector3 meanPosition = GetMeanLegsPosition();
 
-        body.position = new Vector3(body.position.x, meanPosition.y * bodyPositionOffset, body.position.z);
+        body.position = new Vector3(body.position.x, meanPosition.y + bodyPositionOffset, body.position.z);
+    }
+
+    private void CalculateBodyRotation()
+    {
+        Vector3 meanDirection = GetMeanLegsDirection();
+        float angle = (Mathf.Atan2(meanDirection.y, meanDirection.x) * Mathf.Rad2Deg) - 90;
+        body.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+    #endregion
+
+    #region Getters Aux
+    private float TargetsDistance(ObjectTargets objectTarget, bool byFinalTarget = true)
+    {
+        if (byFinalTarget)
+            return (objectTarget.finalTarget.position - objectTarget.effectorTarget.position).sqrMagnitude;
+
+        else
+            return (objectTarget.bodyTarget.position - objectTarget.effectorTarget.position).sqrMagnitude;
     }
 
     private Vector3 GetMeanLegsPosition()
@@ -201,28 +246,30 @@ public class SpiderProcedural : MonoBehaviour
 
         foreach (ObjectTargets target in targets)
         {
-            x += target.worldTarget.position.x;
-            y += target.worldTarget.position.y;
-            z += target.worldTarget.position.z;
+            x += target.effectorTarget.position.x;
+            y += target.effectorTarget.position.y;
+            z += target.effectorTarget.position.z;
         }
 
         return new Vector3(x / numberOfPositions, y / numberOfPositions, z / numberOfPositions);
     }
 
-    private void CalculateBodyRotation()
-    {
-        Vector3 meanDirection = GetMeanLegsDirection();
-        float angle = (Mathf.Atan2(meanDirection.y, meanDirection.x) * Mathf.Rad2Deg) - 90;
-        body.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-    }
-
     private Vector3 GetMeanLegsDirection()
     {
         Vector3 centerPoint = GetMeanLegsPosition();
-        Vector3 legPoint = targets[1].worldTarget.position;
+        Vector3 legPoint = targets[1].effectorTarget.position;
         Vector3 legVector = legPoint - centerPoint;
 
         Debug.DrawRay(centerPoint, new Vector3(-legVector.y, legVector.x, 0).normalized, Color.red);
         return new Vector3(-legVector.y, legVector.x, 0).normalized;
+    }
+    #endregion
+
+    #endregion
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(GetMeanLegsPosition(), new Vector3(0.1f, 0.1f, 0));
     }
 }
