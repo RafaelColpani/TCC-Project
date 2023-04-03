@@ -58,7 +58,7 @@ public class drop : MonoBehaviour
         transform.localScale = size;
     }
 
-    public void launch(Vector2 distDamage) {
+    public void launch() {
         //se loot vai na direção oposta do tiro
         /*float distSize = Mathf.Abs(distDamage.x) + Mathf.Abs(distDamage.y);
         Vector2 angle = new Vector2(distDamage.x / distSize * 1.5f, distDamage.y / distSize * 1.5f);

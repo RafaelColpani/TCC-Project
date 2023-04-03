@@ -17,7 +17,6 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public TextMeshProUGUI itemName;
     CanvasGroup canvasGroup;
-    Coroutine itemNameChecker;
 
     [HideInInspector]
     public Transform initialParentSlot; // Se o jogador soltar no OnDrag, ele volta para a posição inicial
@@ -58,7 +57,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         if    (itemUI == null)      itemUI = GetComponent<Image>();
         if (countText == null)   countText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        if (itemName == null) itemName = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        if (itemName == null)     itemName = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
 
         /* GetComponentInChildren<TextMeshProUGUI>();*/
 

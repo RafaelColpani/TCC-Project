@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// aaaaaa
+/// </summary>
 public class SuckedByPlayer : MonoBehaviour
 {
     #region callibration
@@ -21,9 +24,26 @@ public class SuckedByPlayer : MonoBehaviour
     float timer = 0;
     #endregion
 
+    [SerializeField] Item item;
+    [SerializeField] InventoryManager inventoryM;
+
+    IsDamagedAndDead idadRef;
+
     private void Awake()
     {
         rb =  this.GetComponent<Rigidbody2D>();
+
+        
+        
+        print("SuckedByPlayer AWAKE");
+    }
+
+    private void Start()
+    {
+        inventoryM = FindObjectOfType<InventoryManager>();
+
+        this.GetComponent<SpriteRenderer>().color = Color.white;
+        this.GetComponent<SpriteRenderer>().sprite = item.sprite;
     }
 
     private void Update()
@@ -40,15 +60,17 @@ public class SuckedByPlayer : MonoBehaviour
             Debug.DrawLine(transform.position, hit.point, Color.red);
 
                 GameObject player = hit.collider.gameObject;
+
                 if (timer >= maxTimer)
                 {
-                    goToPlayer(player.GetComponent<IsDamagedAndDead>(), player.GetComponent<Transform>().position);
+                    GoToPlayer(player.GetComponent<IsDamagedAndDead>(), player.GetComponent<Transform>().position);
                 }
         }
         if (hits.Length == 0) rb.gravityScale = 1;
     }
 
-    private void goToPlayer(IsDamagedAndDead playerInventory, Vector3 playerPos) 
+    // Item é atraído ao player
+    private void GoToPlayer(IsDamagedAndDead playerInventory, Vector3 playerPos) 
     {
         rb.gravityScale = 0;
         Vector2 direction = playerPos - transform.position;
@@ -56,7 +78,7 @@ public class SuckedByPlayer : MonoBehaviour
         float distance = direction.magnitude;
 
         if (distance <= destroyDistance)
-            getToInventory(playerInventory);
+            GetToInventory(playerInventory);
 
         float speedMultiplier = velocityCurve.Evaluate(distance);
 
@@ -66,9 +88,15 @@ public class SuckedByPlayer : MonoBehaviour
         transform.Translate(velocity * Time.deltaTime);
     }
 
-    private void getToInventory(IsDamagedAndDead playerInventory) 
+    private void GetToInventory(IsDamagedAndDead playerInventory) 
     {
-        //makes object get to the inventory and then destroys the one on scene
+        // makes object get to the inventory and then destroys the one on scene
+
+        if (inventoryM.AddItem(item))
+        {
+            print($"Item {transform.name} ao inventario");
+        }
+
         Destroy(this.gameObject);
 
     }

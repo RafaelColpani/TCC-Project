@@ -11,6 +11,7 @@ public class Item : ScriptableObject
     public ItemType type;
     public ActionType actionType;
     
+
     [Header("UI")]
     public bool stackable = false; // "pilhável"
     

@@ -8,6 +8,8 @@ public class InventoryManager : MonoBehaviour
     public GameObject InventoryItemPrefab;
     public int maxStackedItems = 4;
 
+    public Item[] allItemsList;
+
     int selectedSlot = -1;
 
     float scrollSpeed = 1f;
@@ -17,7 +19,6 @@ public class InventoryManager : MonoBehaviour
         // first slot selected by default
         ChangeSelectedSlot(0);
     }
-
     private void Update()
     {
         // adaptar para input system se necessario
