@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 252407507}
   - component: {fileID: 252407506}
   - component: {fileID: 252407510}
+  - component: {fileID: 252407511}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Player
@@ -394,6 +395,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d162fd14e7e2d2468bdc2d2aa740009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &252407511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252407505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b597869efe1ac4f42a2b5cf00ef308eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLife: 3
+  life: 1
+  maxHp: 10
+  hp: 0
+  maxBelly: 10
+  belly: 0
+  phyDefense: 0
+  magDefense: 0
 --- !u!1 &1251798723
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,3 +657,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf24964958559234196e6b7c20c77e75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitBetweenChangeAndSave: 1
+  waitForRune: 0.5
