@@ -30,7 +30,7 @@ public class IsDamagedAndDead : MonoBehaviour
 
     #region variables
     Vector2 damageOrigin;
-    [SerializeField]bool isAlive = true;
+    [SerializeField] bool isAlive = true;
     Status stats;
     #endregion
 
@@ -47,10 +47,24 @@ public class IsDamagedAndDead : MonoBehaviour
 
     private void Update()
     {
-        if (stats.hp <= 0 && isAlive)
+        if (isAlive)
         {
-            Death();
-            isAlive = false;
+            if (this.gameObject.CompareTag("Player"))
+            {
+                if (PlayerPrefs.GetInt("Player_HP") <= 0)
+                {
+                    Death();
+                    isAlive = false;
+                }
+            }
+            else
+            {
+                if (stats.hp <= 0)
+                {
+                    Death();
+                    isAlive = false;
+                }
+            }
         }
     }
 
@@ -74,26 +88,37 @@ public class IsDamagedAndDead : MonoBehaviour
             //se o dano for criado pelo ataque do objeto X, o mesmo não deverá levar o dano
 
             //dmgScript.creator = this.gameObject;
-            if(dmgScript.creator != this.gameObject)
+            if (dmgScript.creator != this.gameObject)
             {
                 loseLife(dmgScript.dmg, dmgScript.dmgType);
             }
         }
     }
 
-    private void loseLife (int damage, damage.DmgType dmgType)
+    private void loseLife(int damage, damage.DmgType dmgType)
     {
         int lifeLoss;
 
-        if(dmgType == global::damage.DmgType.PHY)
+        if (dmgType == global::damage.DmgType.PHY)
+        {
             lifeLoss = damage - stats.phyDefense;
+        }
         else
+        {
             lifeLoss = damage - stats.magDefense;
+        }
 
-        if (lifeLoss <= 0) 
+        if (lifeLoss <= 0)
             lifeLoss = 1;
 
-        stats.hp -= lifeLoss;
+        if (this.gameObject.CompareTag("Player"))
+        {
+            PlayerPrefs.SetInt("Player_HP", PlayerPrefs.GetInt("Player_HP") - lifeLoss);
+        }
+        else
+        {
+            stats.hp -= lifeLoss;
+        }
     }
     #endregion
 
@@ -119,7 +144,7 @@ public class IsDamagedAndDead : MonoBehaviour
         {
             DropInventory();
             Destroy(this.gameObject);
-        } 
+        }
     }
 
     private void DeathParticles()
@@ -131,7 +156,7 @@ public class IsDamagedAndDead : MonoBehaviour
 
         float targetAngle = Vector2.SignedAngle(Vector2.up, angle);
 
-        ParticleSystem deathPrt = Instantiate(deathParticles, this.transform.position, Quaternion.Euler(180,90,0));
+        ParticleSystem deathPrt = Instantiate(deathParticles, this.transform.position, Quaternion.Euler(180, 90, 0));
         ParticleSystem.ShapeModule prtShape = deathPrt.shape;
         prtShape.rotation = new Vector3(deathPrt.shape.rotation.x - targetAngle, 0, 0);
     }
@@ -144,7 +169,7 @@ public class IsDamagedAndDead : MonoBehaviour
     /// Adiciona item dropavel a lista de itens do jogador
     /// </summary>
     /// <param name="newItem"></param>
-    public void AddDrop(GameObject newItem) 
+    public void AddDrop(GameObject newItem)
     {
         droppableItem.Add(newItem);
         dropRate.Add(0);
@@ -154,7 +179,7 @@ public class IsDamagedAndDead : MonoBehaviour
     /// Remove item dropavel da lista
     /// </summary>
     /// <param name="newItem"></param>
-    public void RemoveDrop(GameObject removedItem) 
+    public void RemoveDrop(GameObject removedItem)
     {
         dropRate.RemoveAt(droppableItem.IndexOf(removedItem));
         droppableItem.Remove(removedItem);
@@ -163,7 +188,8 @@ public class IsDamagedAndDead : MonoBehaviour
     /// <summary>
     /// Dropa os itens da lista
     /// </summary>
-    public void Drop() {
+    public void Drop()
+    {
         GameObject chosenDrop = null;
         float lootDrop = Random.Range(0f, 100f);
 
@@ -217,7 +243,8 @@ public class IsDamagedAndDead : MonoBehaviour
     /// <summary>
     /// Se o player morrer, dropa os itens do player para fora do inventário 
     /// </summary>
-    private void DropInventory() {
+    private void DropInventory()
+    {
         for (int i = 0; i < droppableItem.Count; i++)
         {
             GameObject loot = Instantiate(droppableItem[i], this.transform.position, Quaternion.identity);
