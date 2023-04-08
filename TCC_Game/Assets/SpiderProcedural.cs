@@ -84,6 +84,14 @@ public class SpiderProcedural : MonoBehaviour
     [HeaderPlus(" ", "- ROTATION -", (int)HeaderPlusColor.red)]
     [Tooltip("Tells if the body will rotate accordingly to the position of the legs. Better used with a spider like animal for example.")]
     [SerializeField] private bool makeRotation;
+
+    [HeaderPlus(" ", "- GROUND -", (int)HeaderPlusColor.white)]
+    [Tooltip("Says what layers the targets will raycast to.")]
+    [SerializeField] private LayerMask targetsDetections;
+    [Tooltip("The transform in the position that will check if the object is grounded.")]
+    [SerializeField] private Transform groundCheck;
+    [Tooltip("The radius of the circle that will detect the ground from the checkGround Transform position.")]
+    [SerializeField] private float groundCheckRadius;
     #endregion
 
     #region private VARs
@@ -108,6 +116,8 @@ public class SpiderProcedural : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, targetsDetections)) return;
+
         TargetsGroundHeight();
         MoveLegs();
         MoveFinalTargets();
@@ -128,8 +138,8 @@ public class SpiderProcedural : MonoBehaviour
 
         foreach (var target in targets)
         {
-            localHit = Physics2D.Raycast(target.bodyTarget.position, -Vector2.up, groundRaycastDistance);
-            finalHit = Physics2D.Raycast(target.finalTarget.position, -Vector2.up, groundRaycastDistance);
+            localHit = Physics2D.Raycast(target.bodyTarget.position, -Vector2.up, groundRaycastDistance, targetsDetections);
+            finalHit = Physics2D.Raycast(target.finalTarget.position, -Vector2.up, groundRaycastDistance, targetsDetections);
 
             if (localHit.collider == null)
                 continue;
@@ -141,7 +151,7 @@ public class SpiderProcedural : MonoBehaviour
             finalRayPoint.y += hoverRayDistance;
 
             target.bodyTarget.position = localRayPoint;
-            target.finalTarget.position = finalRayPoint; //new Vector3(target.finalTarget.position.x, finalRayPoint.y, target.finalTarget.position.z);
+            target.finalTarget.position = finalRayPoint;
         }
     }
 

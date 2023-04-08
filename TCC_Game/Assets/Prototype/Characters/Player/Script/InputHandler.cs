@@ -20,6 +20,12 @@ public class InputHandler : MonoBehaviour
     [HeaderPlus(" ", "- JUMP COMMAND -", (int)HeaderPlusColor.yellow)]
     [Tooltip("Controls the force (aka height) of player jump.")]
     [SerializeField] private float jumpForce;
+    [Tooltip("The transform in the position that will check if the object is grounded.")]
+    [SerializeField] private Transform groundCheck;
+    [Tooltip("The radius of the circle that will detect the ground from the checkGround Transform position.")]
+    [SerializeField] private float groundCheckRadius;
+    [Tooltip("The layer(s) that will be considered ground to perform a jump.")]
+    [SerializeField] private LayerMask groundLayer;
     #endregion
 
     #region Commands
@@ -40,7 +46,7 @@ public class InputHandler : MonoBehaviour
         AssignCommands();
     }
 
-    private void Update() 
+    private void FixedUpdate() 
     {
         var readedMoveValue = playerActions.Movement.Move.ReadValue<float>();
         moveCommand.Execute(this.gameObject, characterController, readedMoveValue);
@@ -62,7 +68,7 @@ public class InputHandler : MonoBehaviour
     private void InitializeCommands()
     {
         moveCommand = new MoveCommand(walkSpeed);
-        pressJumpCommand = new PressJumpCommand(jumpForce);
+        pressJumpCommand = new PressJumpCommand(jumpForce, groundCheck, groundCheckRadius, groundLayer);
         releaseJumpCommand = new ReleaseJumpCommand();
     }
 
