@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 8037312660112588793}
   - component: {fileID: -5900699604239426761}
   - component: {fileID: -283892338445202154}
-  - component: {fileID: -5516888031270633174}
-  - component: {fileID: 6877651390381193952}
+  - component: {fileID: -5244245274328065523}
+  - component: {fileID: 5726075791775294963}
   m_Layer: 8
-  m_Name: spr_dropCow
+  m_Name: spr_dropMeat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.6603774, g: 0.49587703, b: 0.40806338, a: 1}
+  m_Color: {r: 0.89097375, g: 0.43921566, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,7 +100,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 3
+  m_Mass: 2
   m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -135,7 +135,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-5516888031270633174
+--- !u!114 &-5244245274328065523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9df817e88d34442b8c9399bea38df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchForce: 15
+  launchForce: 12
   curve:
     serializedVersion: 2
     m_Curve:
@@ -163,16 +163,16 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: -2.7433844
-      outSlope: -2.7433844
+      inSlope: -1.7863275
+      outSlope: -1.7863275
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.17500001
+      inWeight: 0.24374998
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6877651390381193952
+--- !u!114 &5726075791775294963
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,5 +213,5 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   destroyDistance: 1
-  item: {fileID: 11400000, guid: 67ae6f92adee73d409f5bd39d2a62a1f, type: 2}
+  item: {fileID: 11400000, guid: 5617a0a708b0b2c4b82d53e5f83d2d19, type: 2}
   inventoryM: {fileID: 0}

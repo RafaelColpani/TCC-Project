@@ -10,6 +10,8 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 
     public Image img;
     public Color selectedColor, notSelectedColor;
+    public Color artifactSelectedColor, artifactNotSelectedColor;
+    public bool isArtifactSlot = false;
 
     private void Awake()
     {
@@ -21,11 +23,15 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     public void Select()
     {
         img.color = selectedColor;
+        if (isArtifactSlot)
+            img.color = artifactSelectedColor;
     }
 
     public void Deselect()
     {
         img.color = notSelectedColor;
+        if (isArtifactSlot)
+            img.color = artifactNotSelectedColor;
     }
 
     public void OnDrop(PointerEventData eventData)
