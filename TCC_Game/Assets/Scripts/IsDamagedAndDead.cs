@@ -51,7 +51,6 @@ public class IsDamagedAndDead : MonoBehaviour
 
     private void Update()
     {
-        print(transform.position);
         if (isAlive)
         {
             if (stats.hp <= 0)

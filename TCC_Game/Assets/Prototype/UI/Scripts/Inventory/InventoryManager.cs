@@ -114,8 +114,18 @@ public class InventoryManager : MonoBehaviour
 
             else
             {
-                Destroy(itemInSlot.gameObject);
-                StartCoroutine(TimedDrop(selectedSlot));
+                if (itemInSlot.count <= 0)
+                {
+                    StartCoroutine(TimedDrop(selectedSlot));
+                }
+                else
+                {
+                    itemInSlot.RefreshCount();
+                    StartCoroutine(TimedDrop(selectedSlot));
+                }
+
+                //Destroy(itemInSlot.gameObject);
+                
             }
 
             return item;
@@ -220,12 +230,17 @@ public class InventoryManager : MonoBehaviour
                     GameObject.FindGameObjectWithTag("Player").transform.position,
                     Quaternion.identity);
 
-        drop.GetComponent<SuckedByPlayer>().enabled = false;
+        //drop.GetComponent<SuckedByPlayer>().enabled = false;
 
         drop.GetComponent<drop>().launch();
 
-        Destroy(inventorySlots[i].GetComponentInChildren<InventoryItem>().gameObject);
-        yield return new WaitForSeconds(10f);
+        //Destroy(inventorySlots[i].GetComponentInChildren<InventoryItem>().gameObject);
+        //InventorySlot slot = inventorySlots[i];
+        //InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+        //itemInSlot.RefreshCount();
+
+        int secondsAfterDrop = 12;
+        yield return new WaitForSeconds(secondsAfterDrop);
 
         Destroy(drop);
     }
