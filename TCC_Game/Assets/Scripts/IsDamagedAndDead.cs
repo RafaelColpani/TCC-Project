@@ -37,33 +37,27 @@ public class IsDamagedAndDead : MonoBehaviour
     private void Awake()
     {
         //if(stats.maxHp > 0) stats.hp = stats.maxHp;
+        if (this.gameObject.CompareTag("Player"))
+        {
+            if (PlayerPrefs.GetInt("maxHP") > 0) stats.hp = PlayerPrefs.GetInt("maxHP");
+        }
 
         List<float> ordenedDropRates = new List<float>(dropRate);
         ordenedDropRates.Sort();
         stats = GetComponent<Status>();
-        //Array.Copy(dropRate, ordenedDropRates, dropRate.Count);
-        //Array.Sort(ordenedDropRates);
+
+        print(transform.position);
     }
 
     private void Update()
     {
+        print(transform.position);
         if (isAlive)
         {
-            if (this.gameObject.CompareTag("Player"))
+            if (stats.hp <= 0)
             {
-                if (PlayerPrefs.GetInt("Player_HP") <= 0)
-                {
-                    Death();
-                    isAlive = false;
-                }
-            }
-            else
-            {
-                if (stats.hp <= 0)
-                {
-                    Death();
-                    isAlive = false;
-                }
+                Death();
+                isAlive = false;
             }
         }
     }
@@ -142,23 +136,10 @@ public class IsDamagedAndDead : MonoBehaviour
         // SE FOR O PLAYER
         else
         {
-            DropInventory();
+            //DropInventory();
+            FindObjectOfType<InventoryManager>()?.RemoveAllItems();
             Destroy(this.gameObject);
         }
-    }
-
-    private void DeathParticles()
-    {
-        float distSize = Mathf.Abs(damageOrigin.x) + Mathf.Abs(damageOrigin.y);
-        Vector2 angle = new Vector2(damageOrigin.x / distSize * 1.5f, damageOrigin.y / distSize * 1.5f);
-
-        angle += Vector2.up;
-
-        float targetAngle = Vector2.SignedAngle(Vector2.up, angle);
-
-        ParticleSystem deathPrt = Instantiate(deathParticles, this.transform.position, Quaternion.Euler(180, 90, 0));
-        ParticleSystem.ShapeModule prtShape = deathPrt.shape;
-        prtShape.rotation = new Vector3(deathPrt.shape.rotation.x - targetAngle, 0, 0);
     }
     #endregion
 
@@ -228,28 +209,23 @@ public class IsDamagedAndDead : MonoBehaviour
         {
             GameObject loot = Instantiate(chosenDrop, this.transform.position, Quaternion.identity);
             loot.GetComponent<drop>().launch();
-            GetChosenDrop(chosenDrop);
         }
 
         // reminder: destroi este objeto, não o loot
         Destroy(this.gameObject);
     }
 
-    public GameObject GetChosenDrop(GameObject chosenDrop)
-    {
-        return chosenDrop;
-    }
-
     /// <summary>
     /// Se o player morrer, dropa os itens do player para fora do inventário 
     /// </summary>
-    private void DropInventory()
-    {
-        for (int i = 0; i < droppableItem.Count; i++)
-        {
-            GameObject loot = Instantiate(droppableItem[i], this.transform.position, Quaternion.identity);
-            loot.GetComponent<drop>().launch();
-        }
-    }
+    /// 
+    //private void DropInventory()
+    //{
+    //    for (int i = 0; i < droppableItem.Count; i++)
+    //    {
+    //        GameObject loot = Instantiate(droppableItem[i], this.transform.position, Quaternion.identity);
+    //        loot.GetComponent<drop>().launch();
+    //    }
+    //}
     #endregion
 }

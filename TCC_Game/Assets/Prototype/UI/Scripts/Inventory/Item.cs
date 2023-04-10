@@ -10,7 +10,7 @@ public class Item : ScriptableObject
     [Header("Gameplay Only")]
     public ItemType type;
     public ActionType actionType;
-    
+    public GameObject PrefabReference;
 
     [Header("UI")]
     public bool stackable = false; // "pilhável"

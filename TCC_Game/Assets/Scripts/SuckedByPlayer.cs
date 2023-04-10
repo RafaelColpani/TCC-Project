@@ -33,8 +33,9 @@ public class SuckedByPlayer : MonoBehaviour
     {
         rb =  this.GetComponent<Rigidbody2D>();
 
-        
-        
+        GetComponent<SpriteRenderer>().color = Color.white;
+        GetComponent<SpriteRenderer>().sprite = item.sprite;
+
         print("SuckedByPlayer AWAKE");
     }
 

@@ -53,14 +53,14 @@ public class InventoryManager : MonoBehaviour
                     return;
                 }
 
-                UseSelectedItem();
+                UseSelectedItem(true);
                 print("usou o item");
             }
             else if (Input.GetKeyDown(KeyCode.Q)) // dropar
             {
                 if(itemInSlot != null)
                 {
-                    UseSelectedItem();
+                    UseSelectedItem(false);
                     print("dropou o item");
                 }
             }
@@ -86,9 +86,10 @@ public class InventoryManager : MonoBehaviour
 
     /// <summary>
     /// Função para usar ou dropar item. Esta função remove o item do inventário e destrói o GameObject.
+    /// Se "use" for false, entao o item é dropado
     /// </summary>
     /// <returns>Item item</returns>
-    public Item UseSelectedItem()
+    public Item UseSelectedItem(bool use)
     {
         InventorySlot slot = inventorySlots[selectedSlot];
         InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
@@ -100,12 +101,22 @@ public class InventoryManager : MonoBehaviour
             // USAR O ITEM
             itemInSlot.count--;
 
-            // Usar item (atribuir evento ou funcao de uso aqui depois)
+            // Usar item
+            if (use)
+            {
+                if (itemInSlot.count <= 0)
+                {
+                    Destroy(itemInSlot.gameObject);
+                }
+                else
+                    itemInSlot.RefreshCount();
+            }
 
-            if (itemInSlot.count <= 0)
-                Destroy(itemInSlot.gameObject);
             else
-                itemInSlot.RefreshCount();
+            {
+                Destroy(itemInSlot.gameObject);
+                StartCoroutine(TimedDrop(selectedSlot));
+            }
 
             return item;
         }
@@ -183,7 +194,11 @@ public class InventoryManager : MonoBehaviour
         {
             if(inventorySlots[i].GetComponentInChildren<InventoryItem>() != null &&
                 !inventorySlots[i].isArtifactSlot)
-                Destroy(inventorySlots[i].GetComponentInChildren<InventoryItem>().gameObject);
+            {
+                // drop animation
+                StartCoroutine(TimedDrop(i));
+                
+            }
         }
     }
 
@@ -196,5 +211,22 @@ public class InventoryManager : MonoBehaviour
         GameObject newItemGo = Instantiate(InventoryItemPrefab, slot.transform);
         InventoryItem inventoryItem = newItemGo.GetComponent<InventoryItem>();
         inventoryItem.InitializeItem(item);
+    }
+
+    IEnumerator TimedDrop(int i)
+    {
+        GameObject drop = Instantiate
+                    (inventorySlots[i].GetComponentInChildren<InventoryItem>().item.PrefabReference,
+                    GameObject.FindGameObjectWithTag("Player").transform.position,
+                    Quaternion.identity);
+
+        drop.GetComponent<SuckedByPlayer>().enabled = false;
+
+        drop.GetComponent<drop>().launch();
+
+        Destroy(inventorySlots[i].GetComponentInChildren<InventoryItem>().gameObject);
+        yield return new WaitForSeconds(10f);
+
+        Destroy(drop);
     }
 }
