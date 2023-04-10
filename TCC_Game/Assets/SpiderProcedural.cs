@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D.IK;
 using KevinCastejon.MoreAttributes;
 
 [System.Serializable]
@@ -51,6 +52,8 @@ public class ObjectTargets
     #endregion
 }
 
+[RequireComponent(typeof(GravityController))]
+[RequireComponent(typeof(IKManager2D))]
 public class SpiderProcedural : MonoBehaviour
 {
     #region Inspector VARs
@@ -95,6 +98,9 @@ public class SpiderProcedural : MonoBehaviour
     #endregion
 
     #region private VARs
+    private GravityController gravityController;
+    private IKManager2D ikManager;
+
     private bool evenIsWalking = false;
     private bool oddIsWalking = false;
 
@@ -103,6 +109,12 @@ public class SpiderProcedural : MonoBehaviour
     #endregion
 
     #region Unity Methods
+    private void Awake()
+    {
+        gravityController = GetComponent<GravityController>();
+        ikManager = GetComponent<IKManager2D>();
+    }
+
     private void Start()
     {
         foreach (var target in targets)
@@ -112,13 +124,22 @@ public class SpiderProcedural : MonoBehaviour
         }
 
         previousXBodyPosition = body.position.x;
+        ikManager.enabled = true;
     }
 
     private void FixedUpdate()
     {
-        if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, targetsDetections)) return;
-
         TargetsGroundHeight();
+
+        if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, targetsDetections))
+        {
+            gravityController.SetIsOn(true);
+            //ikManager.enabled = false;
+            return;
+        }
+
+        gravityController.SetIsOn(false);
+        //ikManager.enabled = true;
         MoveLegs();
         MoveFinalTargets();
         CalculateBodyPosition();
@@ -138,8 +159,13 @@ public class SpiderProcedural : MonoBehaviour
 
         foreach (var target in targets)
         {
-            localHit = Physics2D.Raycast(target.bodyTarget.position, -Vector2.up, groundRaycastDistance, targetsDetections);
-            finalHit = Physics2D.Raycast(target.finalTarget.position, -Vector2.up, groundRaycastDistance, targetsDetections);
+            if (gravityController.GetIsOn())
+            {
+                target.effectorTarget.position = target.bodyTarget.position;
+            }
+
+            localHit = Physics2D.Raycast(target.bodyTarget.position, -Vector2.up, gravityController.GetIsOn()? Mathf.Infinity : groundRaycastDistance, targetsDetections);
+            finalHit = Physics2D.Raycast(target.finalTarget.position, -Vector2.up, gravityController.GetIsOn() ? Mathf.Infinity : groundRaycastDistance, targetsDetections);
 
             if (localHit.collider == null)
                 continue;
@@ -276,10 +302,4 @@ public class SpiderProcedural : MonoBehaviour
     #endregion
 
     #endregion
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(GetMeanLegsPosition(), new Vector3(0.1f, 0.1f, 0));
-    }
 }
