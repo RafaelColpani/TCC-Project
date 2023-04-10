@@ -7048,6 +7048,7 @@ GameObject:
   - component: {fileID: 3096276860243188175}
   - component: {fileID: 3096276860243188170}
   - component: {fileID: 3096276860243188169}
+  - component: {fileID: 8111754446470871482}
   - component: {fileID: 3096276860243188168}
   m_Layer: 5
   m_Name: tab_credits
@@ -7116,7 +7117,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3096276860243188168
+--- !u!114 &8111754446470871482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7124,6 +7125,20 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3096276860243188174}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac7df187d4482744abd9d9897b88ecf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tabGroup: {fileID: 7600551223068974775}
+  buttonBackground: {fileID: 0}
+--- !u!114 &3096276860243188168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096276860243188174}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
   m_Name: 
@@ -7456,7 +7471,7 @@ GameObject:
   - component: {fileID: 3096276860306376545}
   - component: {fileID: 3096276860306376547}
   - component: {fileID: 3096276860306376476}
-  - component: {fileID: 3096276860306376477}
+  - component: {fileID: 7600551223068974775}
   m_Layer: 5
   m_Name: grp_tgg_tabs
   m_TagString: Untagged
@@ -7556,13 +7571,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3096276860306376551}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2fafe2cfe61f6974895a912c3755e8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 0
---- !u!114 &3096276860306376477
+--- !u!114 &7600551223068974775
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7571,9 +7586,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3096276860306376551}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 501a86d3dac4eb545b6eaf9855c6dd33, type: 3}
+  m_Script: {fileID: 11500000, guid: 92994f6b75e47874e88d1a58cf4a5753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tabButtons: []
+  selectedTab: {fileID: 0}
+  _normalButton: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  _hoverButton: {fileID: 5524590292671962877, guid: f7043b7291f49844b9671b3d3dedcbb5, type: 3}
+  _selectedButton: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &3096276860316737445
 GameObject:
   m_ObjectHideFlags: 0
@@ -7720,6 +7740,7 @@ GameObject:
   - component: {fileID: 3096276860319376657}
   - component: {fileID: 3096276860319376652}
   - component: {fileID: 3096276860319376659}
+  - component: {fileID: 5670968490817257560}
   - component: {fileID: 3096276860319376653}
   m_Layer: 5
   m_Name: tab_general
@@ -7788,7 +7809,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3096276860319376653
+--- !u!114 &5670968490817257560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7796,6 +7817,20 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3096276860319376656}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac7df187d4482744abd9d9897b88ecf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tabGroup: {fileID: 7600551223068974775}
+  buttonBackground: {fileID: 0}
+--- !u!114 &3096276860319376653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096276860319376656}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
   m_Name: 
@@ -9064,6 +9099,7 @@ GameObject:
   - component: {fileID: 3096276860654587914}
   - component: {fileID: 3096276860654587909}
   - component: {fileID: 3096276860654587908}
+  - component: {fileID: 3715397844839665645}
   - component: {fileID: 3096276860654587910}
   m_Layer: 5
   m_Name: tab_controls
@@ -9132,7 +9168,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3096276860654587910
+--- !u!114 &3715397844839665645
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9140,6 +9176,20 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3096276860654587913}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac7df187d4482744abd9d9897b88ecf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tabGroup: {fileID: 7600551223068974775}
+  buttonBackground: {fileID: 0}
+--- !u!114 &3096276860654587910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096276860654587913}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
   m_Name: 
