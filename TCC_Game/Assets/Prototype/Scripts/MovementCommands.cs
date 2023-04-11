@@ -31,35 +31,56 @@ public class PressJumpCommand : ICommand
     private float groundCheckRadius;
     private Transform groundCheck;
     private LayerMask groundLayer;
-    private SpiderProcedural procedural;
-    private Rigidbody2D rigidBody;
+    private InputHandler ih;
+    private Rigidbody2D rb;
+    private float jumpTime;
+    private GravityController gc;
 
-    public PressJumpCommand(float jumpForce, Transform groundCheck, float groundCheckRadius, LayerMask groundLayer, SpiderProcedural procedural = null, Rigidbody2D rigidBody = null)
+    private float jumpStartTime;
+    private Vector3 initialPosition;
+
+    private bool startedJump = false;
+    private float velocity = 0f;
+
+    public PressJumpCommand(float jumpForce, Transform groundCheck, float groundCheckRadius, LayerMask groundLayer, InputHandler ih, Rigidbody2D rb, float jumpTime, GravityController gc)
     {
         this.jumpForce = jumpForce;
         this.groundCheck = groundCheck;
         this.groundCheckRadius = groundCheckRadius;
         this.groundLayer = groundLayer;
-        this.procedural = procedural;
-        this.rigidBody = rigidBody;
+        this.ih = ih;
+        this.rb = rb;
+        this.jumpTime = jumpTime;
+        this.gc = gc;
     }
 
     public void Execute(GameObject actor, CharacterController characterController = null, float value = 1)
     {
-        if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, groundLayer)) return;
-        //if (procedural != null)
-            //procedural.ProceduralIsOn = false;
-
-        Vector3 velocity = rigidBody.velocity;
-        velocity.y += jumpForce;
-
-        if (characterController != null)
+        if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, groundLayer))
         {
-            //rigidBody.velocity = new Vector2(rigidBody.velocity.x, velocity.y);
-            //actor.transform.position += velocity;
-            //characterController.Move(velocity);
-            //StartCoroutine(JumpCoroutine(jumpForce, 5, actor.transform));
+            ih.jumped = false;
+            startedJump = false;
+            velocity = 0;
+            return;
         }
+        //if (procedural != null)
+        //procedural.ProceduralIsOn = false;
+        if (!startedJump)
+        {
+            startedJump = true;
+        }
+
+        //rigidBody.velocity = new Vector2(rigidBody.velocity.x, velocity.y);
+        //actor.transform.position = Vector3.Lerp(actor.transform.position, actor.transform.up * jumpForce, 2);
+        //characterController.Move(new Vector3(0, jumpForce, 0));
+        //StartCoroutine(JumpCoroutine(jumpForce, 5, actor.transform));
+        //velocity += jumpForce;
+        //actor.transform.Translate(new Vector3(0, jumpForce, 0));
+        //float vPos = rb.position.y + jumpForce * Time.fixedDeltaTime;
+        //rb.MovePosition(new Vector2(rb.position.x, vPos));
+        gc.Velocity = new Vector3(gc.Velocity.x, gc.Velocity.y + jumpForce, gc.Velocity.z);
+        
+        Debug.Log("jumping");
     }
 }
 

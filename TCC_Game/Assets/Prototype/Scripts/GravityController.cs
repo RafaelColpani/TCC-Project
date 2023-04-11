@@ -17,6 +17,16 @@ public class GravityController : MonoBehaviour
     private float maxTimer = 2f;
     private float totalGravity;
 
+    public Vector3 Velocity
+    {
+        get { return velocity; }
+        set 
+        {
+            isOn = true;
+            velocity = value; 
+        }
+    }
+
     private void Update()
     {
         if (!isOn)

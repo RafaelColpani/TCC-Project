@@ -13,6 +13,7 @@ public class InputHandler : MonoBehaviour
     private CharacterController characterController;
     private SpiderProcedural procedural;
     private Rigidbody2D rigidbody;
+    private GravityController gc;
 
     #region Inspector VARs
     [HeaderPlus(" ", "- MOVE COMMAND -", (int)HeaderPlusColor.green)]
@@ -28,12 +29,17 @@ public class InputHandler : MonoBehaviour
     [SerializeField] private float groundCheckRadius;
     [Tooltip("The layer(s) that will be considered ground to perform a jump.")]
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private GameObject body;
     #endregion
 
     #region Commands
     private MoveCommand moveCommand;
     private PressJumpCommand pressJumpCommand;
     private ReleaseJumpCommand releaseJumpCommand;
+    #endregion
+
+    #region VARs
+    public bool jumped = false;
     #endregion
 
     #endregion
@@ -45,6 +51,7 @@ public class InputHandler : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         procedural = GetComponent<SpiderProcedural>();
         rigidbody = GetComponentInChildren<Rigidbody2D>();
+        gc = GetComponent<GravityController>();
 
         LoadInputBindings();
         InitializeCommands();
@@ -56,8 +63,13 @@ public class InputHandler : MonoBehaviour
         var readedMoveValue = playerActions.Movement.Move.ReadValue<float>();
         moveCommand.Execute(this.gameObject, characterController, readedMoveValue);
 
-        if (JumpUtils.IsGrounded(groundCheck, groundCheckRadius, groundLayer))
-            rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
+        if (jumped && JumpUtils.IsGrounded(groundCheck, groundCheckRadius, groundLayer))
+        {
+            pressJumpCommand.Execute(this.gameObject, characterController);
+        }
+
+        //else if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, groundLayer))
+            //jumped = false;
     }
     #endregion
 
@@ -76,13 +88,13 @@ public class InputHandler : MonoBehaviour
     private void InitializeCommands()
     {
         moveCommand = new MoveCommand(walkSpeed);
-        pressJumpCommand = new PressJumpCommand(jumpForce, groundCheck, groundCheckRadius, groundLayer, procedural, rigidbody);
+        pressJumpCommand = new PressJumpCommand(jumpForce, groundCheck, groundCheckRadius, groundLayer, this, rigidbody, 3, gc);
         releaseJumpCommand = new ReleaseJumpCommand();
     }
 
     private void AssignCommands()
     {
-        playerActions.Movement.Jump.performed += ctx => pressJumpCommand.Execute(this.gameObject, characterController);
+        playerActions.Movement.Jump.performed += ctx => pressJumpCommand.Execute(body);
         playerActions.Movement.Jump.canceled += ctx => releaseJumpCommand.Execute(this.gameObject);
     }
     #endregion
