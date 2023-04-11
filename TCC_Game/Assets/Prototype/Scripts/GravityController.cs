@@ -17,11 +17,6 @@ public class GravityController : MonoBehaviour
     private float maxTimer = 2f;
     private float totalGravity;
 
-    private void Awake()
-    {
-        
-    }
-
     private void Update()
     {
         if (!isOn)

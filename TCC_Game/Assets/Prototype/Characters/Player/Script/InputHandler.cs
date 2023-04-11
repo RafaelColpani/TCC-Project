@@ -11,6 +11,8 @@ public class InputHandler : MonoBehaviour
     #region VARs
     private PlayerActions playerActions;
     private CharacterController characterController;
+    private SpiderProcedural procedural;
+    private Rigidbody2D rigidbody;
 
     #region Inspector VARs
     [HeaderPlus(" ", "- MOVE COMMAND -", (int)HeaderPlusColor.green)]
@@ -33,6 +35,7 @@ public class InputHandler : MonoBehaviour
     private PressJumpCommand pressJumpCommand;
     private ReleaseJumpCommand releaseJumpCommand;
     #endregion
+
     #endregion
 
     #region Unity Methods
@@ -40,6 +43,8 @@ public class InputHandler : MonoBehaviour
     {
         playerActions = new PlayerActions();
         characterController = GetComponent<CharacterController>();
+        procedural = GetComponent<SpiderProcedural>();
+        rigidbody = GetComponentInChildren<Rigidbody2D>();
 
         LoadInputBindings();
         InitializeCommands();
@@ -50,6 +55,9 @@ public class InputHandler : MonoBehaviour
     {
         var readedMoveValue = playerActions.Movement.Move.ReadValue<float>();
         moveCommand.Execute(this.gameObject, characterController, readedMoveValue);
+
+        if (JumpUtils.IsGrounded(groundCheck, groundCheckRadius, groundLayer))
+            rigidbody.velocity = new Vector2(rigidbody.velocity.x, 0);
     }
     #endregion
 
@@ -68,13 +76,13 @@ public class InputHandler : MonoBehaviour
     private void InitializeCommands()
     {
         moveCommand = new MoveCommand(walkSpeed);
-        pressJumpCommand = new PressJumpCommand(jumpForce, groundCheck, groundCheckRadius, groundLayer);
+        pressJumpCommand = new PressJumpCommand(jumpForce, groundCheck, groundCheckRadius, groundLayer, procedural, rigidbody);
         releaseJumpCommand = new ReleaseJumpCommand();
     }
 
     private void AssignCommands()
     {
-        playerActions.Movement.Jump.performed += ctx => pressJumpCommand.Execute(this.gameObject);
+        playerActions.Movement.Jump.performed += ctx => pressJumpCommand.Execute(this.gameObject, characterController);
         playerActions.Movement.Jump.canceled += ctx => releaseJumpCommand.Execute(this.gameObject);
     }
     #endregion

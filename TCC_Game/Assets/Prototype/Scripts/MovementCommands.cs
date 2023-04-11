@@ -2,7 +2,6 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.FullSerializer;
 
 #region COMMANDS
 public class MoveCommand : ICommand
@@ -32,20 +31,35 @@ public class PressJumpCommand : ICommand
     private float groundCheckRadius;
     private Transform groundCheck;
     private LayerMask groundLayer;
+    private SpiderProcedural procedural;
+    private Rigidbody2D rigidBody;
 
-    public PressJumpCommand(float jumpForce, Transform groundCheck, float groundCheckRadius, LayerMask groundLayer)
+    public PressJumpCommand(float jumpForce, Transform groundCheck, float groundCheckRadius, LayerMask groundLayer, SpiderProcedural procedural = null, Rigidbody2D rigidBody = null)
     {
         this.jumpForce = jumpForce;
         this.groundCheck = groundCheck;
         this.groundCheckRadius = groundCheckRadius;
         this.groundLayer = groundLayer;
+        this.procedural = procedural;
+        this.rigidBody = rigidBody;
     }
 
     public void Execute(GameObject actor, CharacterController characterController = null, float value = 1)
     {
         if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, groundLayer)) return;
-        //TODO: Jump Performed
+        //if (procedural != null)
+            //procedural.ProceduralIsOn = false;
 
+        Vector3 velocity = rigidBody.velocity;
+        velocity.y += jumpForce;
+
+        if (characterController != null)
+        {
+            //rigidBody.velocity = new Vector2(rigidBody.velocity.x, velocity.y);
+            //actor.transform.position += velocity;
+            //characterController.Move(velocity);
+            //StartCoroutine(JumpCoroutine(jumpForce, 5, actor.transform));
+        }
     }
 }
 

@@ -103,9 +103,18 @@ public class SpiderProcedural : MonoBehaviour
 
     private bool evenIsWalking = false;
     private bool oddIsWalking = false;
+    private bool proceduralIsOn = true;
 
     private float previousXBodyPosition;
     private float lerpLeg = 0;
+    #endregion
+
+    #region Public VARs
+    public bool ProceduralIsOn
+    {
+        get { return this.proceduralIsOn; }
+        set { this.proceduralIsOn = value; }
+    }
     #endregion
 
     #region Unity Methods
@@ -131,14 +140,14 @@ public class SpiderProcedural : MonoBehaviour
     {
         TargetsGroundHeight();
 
-        if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, targetsDetections))
+        if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, targetsDetections) || !proceduralIsOn)
         {
             gravityController.SetIsOn(true);
             //ikManager.enabled = false;
             return;
         }
-
         gravityController.SetIsOn(false);
+        proceduralIsOn = true;
         //ikManager.enabled = true;
         MoveLegs();
         MoveFinalTargets();
