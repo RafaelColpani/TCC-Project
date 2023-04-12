@@ -1,18 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
-public class CustomLog : MonoBehaviour
+public static class CustomLog 
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public static void Log(this Object myObj, object msg ){
+        Debug.Log($"{myObj.name}: msg");
     }
 }

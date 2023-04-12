@@ -17,7 +17,10 @@ namespace KevinCastejon.MoreAttributes
             position = EditorGUI.IndentedRect(position);
             float originalWidth = position.width;
             position.width = position.height;
-            GUI.DrawTexture(position, EditorGUIUtility.Load(headerIcon.iconPath) as Texture2D);
+
+            if (headerIcon.iconPath != " ")
+                GUI.DrawTexture(position, EditorGUIUtility.Load(headerIcon.iconPath) as Texture2D);
+
             if (!headerIcon.textIsNull)
             {
                 Color previousColor = Color.white;
