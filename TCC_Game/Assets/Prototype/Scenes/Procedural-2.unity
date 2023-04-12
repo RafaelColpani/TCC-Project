@@ -2287,8 +2287,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 846272564}
-  - component: {fileID: 846272565}
   - component: {fileID: 846272566}
+  - component: {fileID: 846272565}
   m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
@@ -2313,7 +2313,23 @@ Transform:
   m_Father: {fileID: 690839767148648516}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &846272565
+--- !u!70 &846272565
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846272563}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.12, y: 5.79}
+  m_Size: {x: 1.06, y: 7.35}
+  m_Direction: 0
+--- !u!50 &846272566
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -2334,22 +2350,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
---- !u!70 &846272566
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 846272563}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.09, y: 5.84}
-  m_Size: {x: 1.11, y: 7.44}
-  m_Direction: 0
 --- !u!1 &855621698
 GameObject:
   m_ObjectHideFlags: 0
@@ -6121,8 +6121,8 @@ GameObject:
   - component: {fileID: 1827971957481570344}
   - component: {fileID: 1827971957481570347}
   - component: {fileID: 1827971957481570348}
-  - component: {fileID: 1827971957481570349}
   - component: {fileID: 1827971957481570350}
+  - component: {fileID: 1827971957481570351}
   m_Layer: 7
   m_Name: spr_raposo
   m_TagString: Untagged
@@ -6224,7 +6224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 5
-  jumpForce: 19
+  jumpForce: 6
   groundCheck: {fileID: 1090130865}
   groundCheckRadius: 0.5
   groundLayer:
@@ -6232,24 +6232,6 @@ MonoBehaviour:
     m_Bits: 64
   body: {fileID: 846272563}
   jumped: 0
---- !u!143 &1827971957481570349
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1827971957481570343}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 7.81
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 6, z: 0}
 --- !u!114 &1827971957481570350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6288,6 +6270,24 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!143 &1827971957481570351
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1827971957481570343}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 7.72
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 6, z: 0}
 --- !u!114 &1836749507194231824
 MonoBehaviour:
   m_ObjectHideFlags: 0

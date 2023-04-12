@@ -18,6 +18,7 @@ public class MoveCommand : ICommand
     public void Execute(GameObject actor, CharacterController characterController = null, float value = 1)
     {
         Vector3 movement = actor.transform.right * (value * walkSpeed);
+        ChangeDirection(actor.transform, movement);
 
         // moving by character controller
         if (characterController != null)
@@ -26,9 +27,13 @@ public class MoveCommand : ICommand
         }
     }
 
-    private void ChangeDirection(Transform actor)
+    private void ChangeDirection(Transform actor, Vector3 movement)
     {
-
+        if ((isFacingRight && movement.x < 0) || (!isFacingRight && movement.x > 0))
+        {
+            isFacingRight = !isFacingRight;
+            actor.localScale = new Vector3(actor.localScale.x * -1, actor.localScale.y, actor.localScale.z);
+        }
     }
 }
 

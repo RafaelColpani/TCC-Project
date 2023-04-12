@@ -47,7 +47,7 @@ public class GravityController : MonoBehaviour
         {
             timer += Time.deltaTime;
         }
-        print(velocity);
+        
         velocity.y -= gravityCurve.Evaluate(gravity * timer);
         body.transform.Translate(velocity * Time.deltaTime);
     }
