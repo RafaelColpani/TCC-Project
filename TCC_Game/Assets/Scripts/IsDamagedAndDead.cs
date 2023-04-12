@@ -45,8 +45,6 @@ public class IsDamagedAndDead : MonoBehaviour
         List<float> ordenedDropRates = new List<float>(dropRate);
         ordenedDropRates.Sort();
         stats = GetComponent<Status>();
-
-        print(transform.position);
     }
 
     private void Update()
