@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class TabGroup : MonoBehaviour
 {
-    public List<TabButton> tabButtons;
-    public TabButton selectedTab;
+    public List<_TabButton> tabButtons;
+    public _TabButton selectedTab;
 
     public List<GameObject> tabContent;
 
@@ -29,25 +29,25 @@ public class TabGroup : MonoBehaviour
     {
         if(selectedTab == null && firstTabSelected != null)
         {
-            selectedTab = firstTabSelected.GetComponent<TabButton>();
+            selectedTab = firstTabSelected.GetComponent<_TabButton>();
             OnTabSelected(selectedTab);
         }
     }
 
-    public void Subscribe(TabButton button)
+    public void Subscribe(_TabButton button)
     {
         if(tabButtons == null)
         {
-            tabButtons = new List<TabButton>();
+            tabButtons = new List<_TabButton>();
             tabButtons.Add(button);
-            OnTabSelected(firstTabSelected.GetComponent<TabButton>());
+            OnTabSelected(firstTabSelected.GetComponent<_TabButton>());
         }
 
         tabButtons.Add(button);
 
         tabButtons.Reverse();
     }
-    public void OnTabEnter(TabButton button)
+    public void OnTabEnter(_TabButton button)
     {
         ResetTabs();
         if(selectedTab == null || button != selectedTab)
@@ -55,11 +55,11 @@ public class TabGroup : MonoBehaviour
             button.buttonBackground.sprite = _hoverButton;
         }
     }
-    public void OnTabExit(TabButton button)
+    public void OnTabExit(_TabButton button)
     {
         ResetTabs();
     }
-    public void OnTabSelected(TabButton button)
+    public void OnTabSelected(_TabButton button)
     {
         selectedTab = button;
         ResetTabs();
@@ -79,7 +79,7 @@ public class TabGroup : MonoBehaviour
     public void ResetTabs()
     {
         
-        foreach(TabButton button in tabButtons)
+        foreach(_TabButton button in tabButtons)
         {
             if (selectedTab != null && button == selectedTab) { continue; }
              
