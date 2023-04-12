@@ -54,7 +54,7 @@ public class ObjectTargets
 
 [RequireComponent(typeof(GravityController))]
 [RequireComponent(typeof(IKManager2D))]
-public class SpiderProcedural : MonoBehaviour
+public class ProceduralLegs : MonoBehaviour
 {
     #region Inspector VARs
     [HeaderPlus(" ", "- TARGETS OBJECTS -", (int)HeaderPlusColor.green)]
