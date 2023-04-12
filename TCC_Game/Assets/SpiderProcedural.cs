@@ -99,7 +99,6 @@ public class SpiderProcedural : MonoBehaviour
 
     #region private VARs
     private GravityController gravityController;
-    private IKManager2D ikManager;
 
     private bool evenIsWalking = false;
     private bool oddIsWalking = false;
@@ -121,7 +120,6 @@ public class SpiderProcedural : MonoBehaviour
     private void Awake()
     {
         gravityController = GetComponent<GravityController>();
-        ikManager = GetComponent<IKManager2D>();
     }
 
     private void Start()
@@ -133,22 +131,24 @@ public class SpiderProcedural : MonoBehaviour
         }
 
         previousXBodyPosition = body.position.x;
-        ikManager.enabled = true;
     }
 
     private void FixedUpdate()
     {
         TargetsGroundHeight();
 
-        if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, targetsDetections) || !proceduralIsOn)
+        if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, targetsDetections))
         {
             gravityController.SetIsOn(true);
-            //ikManager.enabled = false;
+            gravityController.Jumped = false;
             return;
         }
-        gravityController.SetIsOn(false);
-        proceduralIsOn = true;
-        //ikManager.enabled = true;
+
+        if (!gravityController.Jumped)
+            gravityController.SetIsOn(false);
+        else
+            return;
+
         MoveLegs();
         MoveFinalTargets();
         CalculateBodyPosition();

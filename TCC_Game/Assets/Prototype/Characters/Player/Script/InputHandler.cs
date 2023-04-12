@@ -5,14 +5,12 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using KevinCastejon.MoreAttributes;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(GravityController))]
 public class InputHandler : MonoBehaviour
 {
     #region VARs
     private PlayerActions playerActions;
     private CharacterController characterController;
-    private SpiderProcedural procedural;
-    private Rigidbody2D rigidbody;
     private GravityController gc;
 
     #region Inspector VARs
@@ -49,8 +47,6 @@ public class InputHandler : MonoBehaviour
     {
         playerActions = new PlayerActions();
         characterController = GetComponent<CharacterController>();
-        procedural = GetComponent<SpiderProcedural>();
-        rigidbody = GetComponentInChildren<Rigidbody2D>();
         gc = GetComponent<GravityController>();
 
         LoadInputBindings();
@@ -67,9 +63,6 @@ public class InputHandler : MonoBehaviour
         {
             pressJumpCommand.Execute(this.gameObject, characterController);
         }
-
-        //else if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, groundLayer))
-            //jumped = false;
     }
     #endregion
 
@@ -88,7 +81,7 @@ public class InputHandler : MonoBehaviour
     private void InitializeCommands()
     {
         moveCommand = new MoveCommand(walkSpeed);
-        pressJumpCommand = new PressJumpCommand(jumpForce, groundCheck, groundCheckRadius, groundLayer, this, rigidbody, 3, gc);
+        pressJumpCommand = new PressJumpCommand(jumpForce, groundCheck, groundCheckRadius, groundLayer, gc);
         releaseJumpCommand = new ReleaseJumpCommand();
     }
 

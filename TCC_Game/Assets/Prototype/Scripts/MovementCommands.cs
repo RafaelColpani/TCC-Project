@@ -7,10 +7,12 @@ using System.Collections.Generic;
 public class MoveCommand : ICommand
 {
     private float walkSpeed;
+    private bool isFacingRight;
 
     public MoveCommand(float walkSpeed, float gravity = 9.81f)
     {
         this.walkSpeed = walkSpeed;
+        this.isFacingRight = true;
     }
 
     public void Execute(GameObject actor, CharacterController characterController = null, float value = 1)
@@ -23,6 +25,11 @@ public class MoveCommand : ICommand
             characterController.Move(movement * Time.fixedDeltaTime);
         }
     }
+
+    private void ChangeDirection(Transform actor)
+    {
+
+    }
 }
 
 public class PressJumpCommand : ICommand
@@ -31,56 +38,23 @@ public class PressJumpCommand : ICommand
     private float groundCheckRadius;
     private Transform groundCheck;
     private LayerMask groundLayer;
-    private InputHandler ih;
-    private Rigidbody2D rb;
-    private float jumpTime;
     private GravityController gc;
 
-    private float jumpStartTime;
-    private Vector3 initialPosition;
 
-    private bool startedJump = false;
-    private float velocity = 0f;
-
-    public PressJumpCommand(float jumpForce, Transform groundCheck, float groundCheckRadius, LayerMask groundLayer, InputHandler ih, Rigidbody2D rb, float jumpTime, GravityController gc)
+    public PressJumpCommand(float jumpForce, Transform groundCheck, float groundCheckRadius, LayerMask groundLayer, GravityController gc)
     {
         this.jumpForce = jumpForce;
         this.groundCheck = groundCheck;
         this.groundCheckRadius = groundCheckRadius;
         this.groundLayer = groundLayer;
-        this.ih = ih;
-        this.rb = rb;
-        this.jumpTime = jumpTime;
         this.gc = gc;
     }
 
     public void Execute(GameObject actor, CharacterController characterController = null, float value = 1)
     {
-        if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, groundLayer))
-        {
-            ih.jumped = false;
-            startedJump = false;
-            velocity = 0;
-            return;
-        }
-        //if (procedural != null)
-        //procedural.ProceduralIsOn = false;
-        if (!startedJump)
-        {
-            startedJump = true;
-        }
+        if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, groundLayer)) return;
 
-        //rigidBody.velocity = new Vector2(rigidBody.velocity.x, velocity.y);
-        //actor.transform.position = Vector3.Lerp(actor.transform.position, actor.transform.up * jumpForce, 2);
-        //characterController.Move(new Vector3(0, jumpForce, 0));
-        //StartCoroutine(JumpCoroutine(jumpForce, 5, actor.transform));
-        //velocity += jumpForce;
-        //actor.transform.Translate(new Vector3(0, jumpForce, 0));
-        //float vPos = rb.position.y + jumpForce * Time.fixedDeltaTime;
-        //rb.MovePosition(new Vector2(rb.position.x, vPos));
-        gc.Velocity = new Vector3(gc.Velocity.x, gc.Velocity.y + jumpForce, gc.Velocity.z);
-        
-        Debug.Log("jumping");
+        gc.Velocity = new Vector3(gc.Velocity.x, jumpForce, gc.Velocity.z);
     }
 }
 

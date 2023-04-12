@@ -13,9 +13,9 @@ public class GravityController : MonoBehaviour
 
     Vector3 velocity = Vector3.zero;
     private bool isOn = false;
+    private bool jumped = false;
     float timer = 0f;
     private float maxTimer = 2f;
-    private float totalGravity;
 
     public Vector3 Velocity
     {
@@ -23,8 +23,15 @@ public class GravityController : MonoBehaviour
         set 
         {
             isOn = true;
+            jumped = true;
             velocity = value; 
         }
+    }
+
+    public bool Jumped
+    {
+        get { return jumped; }
+        set { jumped = value; }
     }
 
     private void Update()
@@ -39,9 +46,8 @@ public class GravityController : MonoBehaviour
         if (timer < maxTimer)
         {
             timer += Time.deltaTime;
-
         }
-        
+        print(velocity);
         velocity.y -= gravityCurve.Evaluate(gravity * timer);
         body.transform.Translate(velocity * Time.deltaTime);
     }
