@@ -12,6 +12,21 @@ public class TabGroup : MonoBehaviour
 
     public Sprite _normalButton, _hoverButton, _selectedButton;
 
+    [SerializeField] GameObject firstTabSelected;
+
+    private void Start()
+    {
+        int tabsQuantity = 0;
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).gameObject.activeSelf)
+            tabsQuantity++;
+        }
+        print(tabsQuantity);
+
+        OnTabSelected(firstTabSelected.GetComponent<TabButton>());
+    }
+
     public void Subscribe(TabButton button)
     {
         if(tabButtons == null)
@@ -20,6 +35,8 @@ public class TabGroup : MonoBehaviour
         }
 
         tabButtons.Add(button);
+
+        tabButtons.Reverse();
     }
     public void OnTabEnter(TabButton button)
     {
