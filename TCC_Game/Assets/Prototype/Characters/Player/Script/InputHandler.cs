@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using KevinCastejon.MoreAttributes;
 
 [RequireComponent(typeof(GravityController))]
+[RequireComponent(typeof(CharacterController))]
 public class InputHandler : MonoBehaviour
 {
     #region VARs
@@ -14,11 +15,15 @@ public class InputHandler : MonoBehaviour
     private GravityController gc;
 
     #region Inspector VARs
-    [HeaderPlus(" ", "- MOVE COMMAND -", (int)HeaderPlusColor.green)]
+    [HeaderPlus(" ", "- GENERAL -", (int)HeaderPlusColor.green)]
+    [Tooltip("The Transform of the player's body.")]
+    [SerializeField] private Transform body;
+
+    [HeaderPlus(" ", "- MOVE COMMAND -", (int)HeaderPlusColor.yellow)]
     [Tooltip("Controls the speed of player walk.")]
     [SerializeField] private float walkSpeed;
 
-    [HeaderPlus(" ", "- JUMP COMMAND -", (int)HeaderPlusColor.yellow)]
+    [HeaderPlus(" ", "- JUMP COMMAND -", (int)HeaderPlusColor.cyan)]
     [Tooltip("Controls the force (aka height) of player jump.")]
     [SerializeField] private float jumpForce;
     [Tooltip("The transform in the position that will check if the object is grounded.")]
@@ -27,17 +32,12 @@ public class InputHandler : MonoBehaviour
     [SerializeField] private float groundCheckRadius;
     [Tooltip("The layer(s) that will be considered ground to perform a jump.")]
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private GameObject body;
     #endregion
 
     #region Commands
     private MoveCommand moveCommand;
     private PressJumpCommand pressJumpCommand;
     private ReleaseJumpCommand releaseJumpCommand;
-    #endregion
-
-    #region VARs
-    public bool jumped = false;
     #endregion
 
     #endregion
@@ -57,12 +57,7 @@ public class InputHandler : MonoBehaviour
     private void FixedUpdate() 
     {
         var readedMoveValue = playerActions.Movement.Move.ReadValue<float>();
-        moveCommand.Execute(this.gameObject, characterController, readedMoveValue);
-
-        if (jumped && JumpUtils.IsGrounded(groundCheck, groundCheckRadius, groundLayer))
-        {
-            pressJumpCommand.Execute(this.gameObject, characterController);
-        }
+        moveCommand.Execute(this.gameObject.transform, characterController, readedMoveValue);
     }
     #endregion
 
@@ -88,7 +83,7 @@ public class InputHandler : MonoBehaviour
     private void AssignCommands()
     {
         playerActions.Movement.Jump.performed += ctx => pressJumpCommand.Execute(body);
-        playerActions.Movement.Jump.canceled += ctx => releaseJumpCommand.Execute(this.gameObject);
+        playerActions.Movement.Jump.canceled += ctx => releaseJumpCommand.Execute(body);
     }
     #endregion
 

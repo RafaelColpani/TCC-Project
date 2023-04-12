@@ -4,21 +4,22 @@ using System.Collections;
 using System.Collections.Generic;
 
 #region COMMANDS
+/// <summary>Perform the walk movement, given the actors Transform who will execute it.</summary>
 public class MoveCommand : ICommand
 {
     private float walkSpeed;
     private bool isFacingRight;
 
-    public MoveCommand(float walkSpeed, float gravity = 9.81f)
+    public MoveCommand(float walkSpeed)
     {
         this.walkSpeed = walkSpeed;
         this.isFacingRight = true;
     }
 
-    public void Execute(GameObject actor, CharacterController characterController = null, float value = 1)
+    public void Execute(Transform actor, CharacterController characterController = null, float value = 1)
     {
-        Vector3 movement = actor.transform.right * (value * walkSpeed);
-        ChangeDirection(actor.transform, movement);
+        Vector3 movement = actor.right * (value * walkSpeed);
+        ChangeDirection(actor, movement);
 
         // moving by character controller
         if (characterController != null)
@@ -37,6 +38,7 @@ public class MoveCommand : ICommand
     }
 }
 
+/// <summary>Perform the jump movement, given the actors Transform and its GravityController who will execute it</summary>
 public class PressJumpCommand : ICommand
 {
     private float jumpForce;
@@ -55,7 +57,7 @@ public class PressJumpCommand : ICommand
         this.gc = gc;
     }
 
-    public void Execute(GameObject actor, CharacterController characterController = null, float value = 1)
+    public void Execute(Transform actor, CharacterController characterController = null, float value = 1)
     {
         if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, groundLayer)) return;
 
@@ -63,9 +65,10 @@ public class PressJumpCommand : ICommand
     }
 }
 
+/// <summary>Perform the released jump button movement, given the actors Transform and its GravityController who will execute it</summary>
 public class ReleaseJumpCommand : ICommand
 {
-    public void Execute(GameObject actor, CharacterController characterController = null, float value = 1)
+    public void Execute(Transform actor, CharacterController characterController = null, float value = 1)
     {
         //TODO: Jump Released
         Debug.Log($"Released Jump");

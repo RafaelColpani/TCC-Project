@@ -34,7 +34,7 @@ public class GravityController : MonoBehaviour
         set { jumped = value; }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!isOn)
         {
@@ -45,11 +45,11 @@ public class GravityController : MonoBehaviour
 
         if (timer < maxTimer)
         {
-            timer += Time.deltaTime;
+            timer += Time.fixedDeltaTime;
         }
         
         velocity.y -= gravityCurve.Evaluate(gravity * timer);
-        body.transform.Translate(velocity * Time.deltaTime);
+        body.transform.Translate(velocity * Time.fixedDeltaTime);
     }
 
     #region isOn Aux

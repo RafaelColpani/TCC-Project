@@ -137,17 +137,7 @@ public class SpiderProcedural : MonoBehaviour
     {
         TargetsGroundHeight();
 
-        if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, targetsDetections))
-        {
-            gravityController.SetIsOn(true);
-            gravityController.Jumped = false;
-            return;
-        }
-
-        if (!gravityController.Jumped)
-            gravityController.SetIsOn(false);
-        else
-            return;
+        if (!CanMoveLegs()) return;
 
         MoveLegs();
         MoveFinalTargets();
@@ -188,6 +178,22 @@ public class SpiderProcedural : MonoBehaviour
             target.bodyTarget.position = localRayPoint;
             target.finalTarget.position = finalRayPoint;
         }
+    }
+
+    private bool CanMoveLegs()
+    {
+        if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, targetsDetections))
+        {
+            gravityController.SetIsOn(true);
+            gravityController.Jumped = false;
+            return false;
+        }
+
+        if (gravityController.Jumped)
+            return false;
+
+        gravityController.SetIsOn(false);
+        return true;
     }
 
     private void MoveLegs()
