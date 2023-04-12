@@ -1543,6 +1543,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3096276859051564115}
   - component: {fileID: 3096276859051564108}
+  - component: {fileID: 5791105236692779849}
   m_Layer: 5
   m_Name: sld_sfx
   m_TagString: Untagged
@@ -1619,12 +1620,36 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3096276860255115886}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5791105236692779849}
+        m_TargetAssemblyTypeName: ChangeSliderLabel, Assembly-CSharp
+        m_MethodName: ChangeValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5791105236692779849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096276859051564114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f20e106fb88e23f468a245ad13d24ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3096276859053309351
 GameObject:
   m_ObjectHideFlags: 0
@@ -7523,6 +7548,7 @@ MonoBehaviour:
   _normalButton: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   _hoverButton: {fileID: 5524590292671962877, guid: f7043b7291f49844b9671b3d3dedcbb5, type: 3}
   _selectedButton: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  firstTabSelected: {fileID: 0}
 --- !u!1 &3096276860316737445
 GameObject:
   m_ObjectHideFlags: 0
@@ -9451,6 +9477,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3096276860679453171}
   - component: {fileID: 3096276860679453164}
+  - component: {fileID: 5783168486887091129}
   m_Layer: 5
   m_Name: sld_bgm
   m_TagString: Untagged
@@ -9527,12 +9554,36 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3096276859804308460}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5783168486887091129}
+        m_TargetAssemblyTypeName: ChangeSliderLabel, Assembly-CSharp
+        m_MethodName: ChangeValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5783168486887091129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096276860679453170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f20e106fb88e23f468a245ad13d24ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3096276860694243159
 GameObject:
   m_ObjectHideFlags: 0
@@ -9935,6 +9986,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3096276860839034734}
   - component: {fileID: 3096276860839034735}
+  - component: {fileID: 7308059648269632342}
   m_Layer: 5
   m_Name: sld_master
   m_TagString: Untagged
@@ -10011,12 +10063,36 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3096276861089525670}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 1
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7308059648269632342}
+        m_TargetAssemblyTypeName: ChangeSliderLabel, Assembly-CSharp
+        m_MethodName: ChangeValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7308059648269632342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096276860839034733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f20e106fb88e23f468a245ad13d24ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3096276860851615531
 GameObject:
   m_ObjectHideFlags: 0

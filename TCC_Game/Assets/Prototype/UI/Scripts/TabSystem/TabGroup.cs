@@ -23,8 +23,15 @@ public class TabGroup : MonoBehaviour
             tabsQuantity++;
         }
         print(tabsQuantity);
+    }
 
-        OnTabSelected(firstTabSelected.GetComponent<TabButton>());
+    private void Update()
+    {
+        if(selectedTab == null && firstTabSelected != null)
+        {
+            selectedTab = firstTabSelected.GetComponent<TabButton>();
+            OnTabSelected(selectedTab);
+        }
     }
 
     public void Subscribe(TabButton button)
@@ -32,6 +39,8 @@ public class TabGroup : MonoBehaviour
         if(tabButtons == null)
         {
             tabButtons = new List<TabButton>();
+            tabButtons.Add(button);
+            OnTabSelected(firstTabSelected.GetComponent<TabButton>());
         }
 
         tabButtons.Add(button);
