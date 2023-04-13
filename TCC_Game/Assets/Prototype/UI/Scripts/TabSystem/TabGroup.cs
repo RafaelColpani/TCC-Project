@@ -47,6 +47,11 @@ public class TabGroup : MonoBehaviour
 
         tabButtons.Reverse();
     }
+
+    public void SelectFirstTab()
+    {
+        OnTabSelected(firstTabSelected.GetComponent<_TabButton>());
+    }
     public void OnTabEnter(_TabButton button)
     {
         ResetTabs();
