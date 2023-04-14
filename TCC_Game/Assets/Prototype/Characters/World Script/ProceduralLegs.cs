@@ -290,7 +290,7 @@ public class ProceduralLegs : MonoBehaviour
             return (objectTarget.bodyTarget.position - objectTarget.effectorTarget.position).sqrMagnitude;
     }
 
-    private Vector3 GetMeanLegsPosition()
+    public Vector3 GetMeanLegsPosition()
     {
         float x = 0f, y = 0f, z = 0f;
         int numberOfPositions = targets.Count;
@@ -305,13 +305,16 @@ public class ProceduralLegs : MonoBehaviour
         return new Vector3(x / numberOfPositions, y / numberOfPositions, z / numberOfPositions);
     }
 
-    private Vector3 GetMeanLegsDirection()
+    public Vector3 GetMeanLegsDirection()
     {
         Vector3 centerPoint = GetMeanLegsPosition();
         Vector3 legPoint = targets[1].effectorTarget.position;
         Vector3 legVector = legPoint - centerPoint;
+        if (legVector.x < 0)
+            legVector *= -1;
 
-        Debug.DrawRay(centerPoint, new Vector3(-legVector.y, legVector.x, 0).normalized, Color.red);
+        Debug.DrawRay(centerPoint, new Vector3(-legVector.y, legVector.x, 0).normalized, Color.yellow);
+        print(new Vector3(-legVector.y, legVector.x, 0).normalized);
         return new Vector3(-legVector.y, legVector.x, 0).normalized;
     }
     #endregion

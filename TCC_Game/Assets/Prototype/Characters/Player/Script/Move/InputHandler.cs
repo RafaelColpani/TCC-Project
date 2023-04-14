@@ -7,12 +7,14 @@ using KevinCastejon.MoreAttributes;
 
 [RequireComponent(typeof(GravityController))]
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(ProceduralLegs))]
 public class InputHandler : MonoBehaviour
 {
     #region VARs
     private PlayerActions playerActions;
     private CharacterController characterController;
-    private GravityController gc;
+    private GravityController gravityController;
+    private ProceduralLegs proceduralLegs;
 
     #region Inspector VARs
     [HeaderPlus(" ", "- GENERAL -", (int)HeaderPlusColor.green)]
@@ -47,7 +49,8 @@ public class InputHandler : MonoBehaviour
     {
         playerActions = new PlayerActions();
         characterController = GetComponent<CharacterController>();
-        gc = GetComponent<GravityController>();
+        gravityController = GetComponent<GravityController>();
+        proceduralLegs = GetComponent<ProceduralLegs>();
 
         LoadInputBindings();
         InitializeCommands();
@@ -57,6 +60,7 @@ public class InputHandler : MonoBehaviour
     private void FixedUpdate() 
     {
         var readedMoveValue = playerActions.Movement.Move.ReadValue<float>();
+        moveCommand.ChangeMoveDirection(proceduralLegs.GetMeanLegsDirection());
         moveCommand.Execute(this.gameObject.transform, characterController, readedMoveValue);
     }
     #endregion
@@ -76,7 +80,7 @@ public class InputHandler : MonoBehaviour
     private void InitializeCommands()
     {
         moveCommand = new MoveCommand(walkSpeed);
-        pressJumpCommand = new PressJumpCommand(jumpForce, groundCheck, groundCheckRadius, groundLayer, gc);
+        pressJumpCommand = new PressJumpCommand(jumpForce, groundCheck, groundCheckRadius, groundLayer, gravityController);
         releaseJumpCommand = new ReleaseJumpCommand();
     }
 
