@@ -314,7 +314,6 @@ public class ProceduralLegs : MonoBehaviour
             legVector *= -1;
 
         Debug.DrawRay(centerPoint, new Vector3(-legVector.y, legVector.x, 0).normalized, Color.yellow);
-        print(new Vector3(-legVector.y, legVector.x, 0).normalized);
         return new Vector3(-legVector.y, legVector.x, 0).normalized;
     }
     #endregion
