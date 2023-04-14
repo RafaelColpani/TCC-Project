@@ -7420,7 +7420,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3343116562535953605}
+        m_TargetAssemblyTypeName: ChangeResolution, Assembly-CSharp
+        m_MethodName: ToggleFullscreen
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &3096276860306376551
 GameObject:
@@ -12299,6 +12311,7 @@ GameObject:
   - component: {fileID: 1361824963643330659}
   - component: {fileID: 7003175355808880830}
   - component: {fileID: 1541093555744731627}
+  - component: {fileID: 3343116562535953605}
   m_Layer: 5
   m_Name: drp_resList
   m_TagString: Untagged
@@ -12417,20 +12430,48 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Option A
+    - m_Text: 1024x768
       m_Image: {fileID: 0}
-    - m_Text: Option B
+    - m_Text: 1280x720
       m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: 1366x768
       m_Image: {fileID: 0}
-    - m_Text: Option D
+    - m_Text: 1440x1080
       m_Image: {fileID: 0}
-    - m_Text: Option E
+    - m_Text: 1920x1080
+      m_Image: {fileID: 0}
+    - m_Text: 2560x1440
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3343116562535953605}
+        m_TargetAssemblyTypeName: ChangeResolution, Assembly-CSharp
+        m_MethodName: SetResolution
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
+--- !u!114 &3343116562535953605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4198184441596485327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 798646f20a66fd247849188d149d472c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolutionDropdown: {fileID: 1541093555744731627}
+  fullscreen: 0
 --- !u!1 &4202115767473564402
 GameObject:
   m_ObjectHideFlags: 0
