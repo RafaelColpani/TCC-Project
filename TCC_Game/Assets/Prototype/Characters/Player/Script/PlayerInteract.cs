@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-
     IInteractable interactable;
 
     private void OnTriggerStay2D(Collider2D collision)
