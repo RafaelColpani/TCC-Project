@@ -13,7 +13,6 @@ public class playerShooter : MonoBehaviour
     {
         objList = new List<GameObject>();
         ObtainChildren(obj.transform);
-        print(objList.Count);
     }
 
     void ObtainChildren(Transform children) 
@@ -60,7 +59,7 @@ public class playerShooter : MonoBehaviour
         var blt = Instantiate(bullet, transform.position, rot);
         blt.GetComponent<damage>().creator = objList;
 
-        print($"bullet: {blt!=null}");
+        print($"bullet: {blt!=null} " + " " + "[ playerShooter.cs ]");
     }
 
     public void ChangeBullet(GameObject newBullet)
