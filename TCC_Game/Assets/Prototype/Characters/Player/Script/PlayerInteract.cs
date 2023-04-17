@@ -6,20 +6,22 @@ public class PlayerInteract : MonoBehaviour {
 
     IInteractable interactable;
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerStay(Collider collision)
     {
         var mb = collision.GetComponents<MonoBehaviour>();
+        print("colliding");
 
         foreach (MonoBehaviour mono in mb) 
         {
             if (mono is IInteractable)
             {
+                print("entering interactable do "+collision.gameObject.name);
                 interactable = mono as IInteractable;
             }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit(Collider collision)
     {
         var mb = collision.GetComponents<MonoBehaviour>();
 
@@ -37,6 +39,8 @@ public class PlayerInteract : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Space) && interactable != null)
         {
+
+            Debug.Log("F");
             interactable.Interact();
         }
     }

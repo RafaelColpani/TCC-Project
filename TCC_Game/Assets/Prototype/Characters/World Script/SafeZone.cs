@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SafeZone : MonoBehaviour
 {
-    [SerializeField] Collider2D saveCol;
-    private void OnTriggerExit2D(Collider2D collision)
+    [SerializeField] Collider saveCol;
+    private void OnTriggerExit(Collider collision)
     {
         if (collision.tag.Equals("Player")) 
         {

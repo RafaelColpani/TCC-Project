@@ -9,13 +9,16 @@ public class NpcInteractable : MonoBehaviour, IInteractable
     [SerializeField] GameObject dialogueManager, dialogueGrp;
     DialogueReader dialogueReader;
     [HideInInspector] public bool canTalk = true;
-
-   /* private void Awake()
+   /*
+    private void Awake()
     {
-        dialogueReader = GameObject.Find("dialogueManager").GetComponent<DialogueReader2>();
-    }*/
+        dialogueReader = GameObject.Find("dialogueManager").GetComponent<DialogueReader>();
+    }
+   */
     public void Interact()
     {
+        Debug.Log("aaaaaa");
+
         if(canTalk){
         timesTalked++;
 

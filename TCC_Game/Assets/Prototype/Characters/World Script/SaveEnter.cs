@@ -6,13 +6,13 @@ public class SaveEnter : MonoBehaviour, IInteractable
 {
     [SerializeField] float waitBetweenChangeAndSave = 1;
     [SerializeField] float waitForRune = 0.5f;
-    Collider2D collider;
+    Collider collider;
     bool firstTime = true;
     SpriteRenderer sprRender;
 
     private void Awake()
     {
-        collider = this.GetComponent<Collider2D>();
+        collider = this.GetComponent<Collider>();
         sprRender = GetComponent<SpriteRenderer>();
     }
     public void Interact() 

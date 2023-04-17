@@ -10,30 +10,36 @@ public class damage : MonoBehaviour
     public DmgType dmgType = new DmgType();
     public int dmg;
     [SerializeField] float lifeTime = 5;
-    Rigidbody2D rb;
-    [HideInInspector] public GameObject creator;
+    Rigidbody rb;
+    [HideInInspector] public List<GameObject> creator;
 
     private void Awake()
     {
-        rb = this.GetComponent<Rigidbody2D>();
+        rb = this.GetComponent<Rigidbody>();
 
         rb.velocity = Vector3.zero;
-        rb.AddForce(transform.right * 5, ForceMode2D.Impulse);
+        rb.AddForce(transform.right * 5, ForceMode.Impulse);
 
 
         Destroy(this.gameObject, lifeTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
         //se o colisor não for o criador da bala, ela n será destroída
-        if (creator != collision.gameObject)
+        if (!creator.Contains(collision.gameObject))
+        {
+            print("destrói bala: "+collision.gameObject.name);
             Destroy(this.gameObject);
+        }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         //se o colisor não for o criador da bala, ela n será destroída
-        if (creator != collision.gameObject)
+        if (!creator.Contains(collision.gameObject))
+        {
+            print("destrói bala: " + collision.gameObject.name);
             Destroy(this.gameObject);
+        }
     }
 }

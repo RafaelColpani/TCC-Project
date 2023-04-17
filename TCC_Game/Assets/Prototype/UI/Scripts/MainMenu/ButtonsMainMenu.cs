@@ -7,7 +7,7 @@ public class ButtonsMainMenu : MonoBehaviour
 {
     public void NewGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("LoadRoom");
     }
 
     public void LoadGame()

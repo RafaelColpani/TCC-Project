@@ -6,6 +6,28 @@ public class playerShooter : MonoBehaviour
 {
     Quaternion rot;
     [SerializeField] GameObject physBullet, magBullet;
+    [SerializeField] Transform obj;
+    List<GameObject> objList;
+
+    private void Start()
+    {
+        objList = new List<GameObject>();
+        ObtainChildren(obj.transform);
+        print(objList.Count);
+    }
+
+    void ObtainChildren(Transform children) 
+    {
+        foreach (Transform objChild in children) 
+        {
+            objList.Add(objChild.gameObject);
+            if (objChild.childCount > 0)
+            {
+                ObtainChildren(objChild.transform);
+            }
+        }
+    }
+
     void Update()
     {
         TurnObject();
@@ -36,7 +58,7 @@ public class playerShooter : MonoBehaviour
     public void Shoot(GameObject bullet)
     {
         var blt = Instantiate(bullet, transform.position, rot);
-        blt.GetComponent<damage>().creator = this.gameObject;
+        blt.GetComponent<damage>().creator = objList;
 
         print($"bullet: {blt!=null}");
     }

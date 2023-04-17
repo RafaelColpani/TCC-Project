@@ -60,7 +60,7 @@ public class IsDamagedAndDead : MonoBehaviour
     }
 
     #region damage
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("damage") && isAlive)
         {
@@ -79,7 +79,7 @@ public class IsDamagedAndDead : MonoBehaviour
             //se o dano for criado pelo ataque do objeto X, o mesmo não deverá levar o dano
 
             //dmgScript.creator = this.gameObject;
-            if (dmgScript.creator != this.gameObject)
+            if (!dmgScript.creator.Contains(collision.gameObject))
             {
                 loseLife(dmgScript.dmg, dmgScript.dmgType);
             }
