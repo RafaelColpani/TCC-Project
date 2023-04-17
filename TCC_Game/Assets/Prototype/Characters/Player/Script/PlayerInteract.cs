@@ -41,7 +41,7 @@ public class PlayerInteract : MonoBehaviour {
         {
 
             Debug.Log("F");
-            interactable.Interact();
+            interactable?.Interact();
         }
     }
 }
