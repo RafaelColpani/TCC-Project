@@ -8,12 +8,12 @@ public class SaveEnter : MonoBehaviour, IInteractable
     [SerializeField] float waitForRune = 0.5f;
     Collider collider;
     bool firstTime = true;
-    SpriteRenderer sprRender;
+    //SpriteRenderer sprRender;
 
     private void Awake()
     {
         collider = this.GetComponent<Collider>();
-        sprRender = GetComponent<SpriteRenderer>();
+       // sprRender = GetComponent<SpriteRenderer>();
     }
     public void Interact() 
     {
@@ -35,7 +35,7 @@ public class SaveEnter : MonoBehaviour, IInteractable
     {
         print("changed");
         firstTime = false;
-        sprRender.color = Color.red;
+        //sprRender.color = Color.red;
         yield return new WaitForSeconds(waitBetweenChangeAndSave);
         StartCoroutine(Save());
     }
