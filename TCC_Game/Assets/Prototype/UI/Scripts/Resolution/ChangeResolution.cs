@@ -14,10 +14,10 @@ public class ChangeResolution : MonoBehaviour
     int filteredIndexDistance = 0;
     private void Start()
     {
-        resolutions = Screen.resolutions;
-
+        fullscreen = Screen.fullScreen;
         resolutionDropdown.ClearOptions();
 
+        resolutions = Screen.resolutions;
         List<string> _options = new();
 
         int currentResolutionIndex = 0;
@@ -34,7 +34,6 @@ public class ChangeResolution : MonoBehaviour
                 resolutions[j].height == Screen.height)
                 {
                     currentResolutionIndex = i;
-                    SetResolution(currentResolutionIndex);
                 }
                 filteredIndexDistance++; i++;
             }
@@ -51,9 +50,6 @@ public class ChangeResolution : MonoBehaviour
         {
             Resolution resolution = resolutions[resolutionIndex + resolutions.Length - filteredIndexDistance];
             Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-
-            Debug.Log($"index resolucao atual: {resolutionIndex}" +
-                            $"\n{resolution.width}, {resolution.height}");
         }
     }
 

@@ -11,5 +11,9 @@ public class ResolutionFix : MonoBehaviour
         {
             Screen.SetResolution(1024, 768, Screen.fullScreen);
         }
+        else
+        {
+            Screen.SetResolution(Screen.width, Screen.height, Screen.fullScreen);
+        }
     }
 }

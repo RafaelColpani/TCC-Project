@@ -16,5 +16,21 @@ public class OpenClose : MonoBehaviour
         {
             panel.SetActive(true);
         }
+        //KeepThisActive();
     }
+
+    //public bool KeepThisActive()
+    //{
+    //    for (int i = 0; i < transform.root.childCount; i++)
+    //    {
+    //        if (panel.activeSelf &&
+    //            transform.root.GetChild(i).TryGetComponent<OpenClose>(out OpenClose oc)  &&
+    //            transform.root.GetChild(i).GetComponent<OpenClose>().panel.gameObject.activeSelf &&
+    //            transform.root.GetChild(i).GetComponent<OpenClose>().panel.gameObject != this)
+    //        {
+    //            transform.root.GetChild(i).GetComponent<OpenClose>().panel.gameObject.SetActive(false);
+    //        }
+    //    }
+    //    return false;
+    //}
 }
