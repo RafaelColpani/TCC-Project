@@ -93,7 +93,7 @@ public class InventoryManager : MonoBehaviour
     {
         InventorySlot slot = inventorySlots[selectedSlot];
         InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-
+        
         if (itemInSlot != null)
         {
             Item item = itemInSlot.item;
@@ -120,19 +120,22 @@ public class InventoryManager : MonoBehaviour
                 }
                 else
                 {
-                    itemInSlot.RefreshCount();
                     StartCoroutine(TimedDrop(selectedSlot));
+                    itemInSlot.RefreshCount();
                 }
 
                 //Destroy(itemInSlot.gameObject);
                 
             }
 
+            if (itemInSlot.count < 0)
+                itemInSlot.count = 0;
+            print("itemInSlot count: "+itemInSlot.count);
+
             return item;
         }
         return null;
     }
-
 
     void ChangeSelectedSlot(int newValue)
     {
@@ -234,12 +237,8 @@ public class InventoryManager : MonoBehaviour
 
         drop.GetComponent<drop>().launch();
 
-        //Destroy(inventorySlots[i].GetComponentInChildren<InventoryItem>().gameObject);
-        //InventorySlot slot = inventorySlots[i];
-        //InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-        //itemInSlot.RefreshCount();
-
         int secondsAfterDrop = 12;
+        Destroy(inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>().gameObject);
         yield return new WaitForSeconds(secondsAfterDrop);
 
         Destroy(drop);
