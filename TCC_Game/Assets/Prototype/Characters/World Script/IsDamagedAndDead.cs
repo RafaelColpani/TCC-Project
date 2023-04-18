@@ -127,7 +127,7 @@ public class IsDamagedAndDead : MonoBehaviour
             interactable.SetActive(true);
 
             //obtem componente do gameobject "morto"
-            this.GetComponent<SpriteRenderer>().color = Color.black;
+            //this.GetComponent<SpriteRenderer>().color = Color.black;
         }
 
         // SE FOR O PLAYER
