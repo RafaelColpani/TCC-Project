@@ -10,24 +10,30 @@ public class NpcInteractable : MonoBehaviour, IInteractable
     DialogueReader dialogueReader;
     [HideInInspector] public bool canTalk = true;
 
-   /* private void Awake()
-    {
-        dialogueReader = GameObject.Find("dialogueManager").GetComponent<DialogueReader2>();
-    }*/
+    /*
+     private void Awake()
+     {
+        dialogueReader = GameObject.Find("dialogueManager").GetComponent<DialogueReader>();
+     }
+    */
+    
     public void Interact()
     {
-        if(canTalk){
-        timesTalked++;
+        Debug.Log("Into Interact void");
 
-        dialogueManager.SetActive(true);
-        dialogueReader = GameObject.Find("dialogueManager").GetComponent<DialogueReader>();
-        dialogueReader.fileName = fileName;
-        dialogueReader.npcInteract = this;
+        if (canTalk)
+        {
+            timesTalked++;
 
-        dialogueGrp.SetActive(true);
+            dialogueManager.SetActive(true);
+            dialogueReader = GameObject.Find("dialogueManager").GetComponent<DialogueReader>();
+            dialogueReader.fileName = fileName;
+            dialogueReader.npcInteract = this;
 
-        dialogueReader.StartAll();
-        canTalk = false;
+            dialogueGrp.SetActive(true);
+
+            dialogueReader.StartAll();
+            canTalk = false;
         }
     }
 }

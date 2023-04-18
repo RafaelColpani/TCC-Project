@@ -78,6 +78,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         countText.text = count.ToString();
         bool textActive = count > 1; // se count>1 for true
+        print(textActive);
         countText.gameObject.SetActive(textActive);
         countImageBase.gameObject.SetActive(textActive);
 

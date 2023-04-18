@@ -11,7 +11,7 @@ public class damage : MonoBehaviour
     public int dmg;
     [SerializeField] float lifeTime = 5;
     Rigidbody2D rb;
-    [HideInInspector] public GameObject creator;
+    [HideInInspector] public List<GameObject> creator;
 
     private void Awake()
     {
@@ -27,13 +27,19 @@ public class damage : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //se o colisor não for o criador da bala, ela n será destroída
-        if (creator != collision.gameObject)
+        if (!creator.Contains(collision.gameObject))
+        {
+            print("destrói bala: "+ collision.gameObject.name + " " + " [damage.cs] ");
             Destroy(this.gameObject);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //se o colisor não for o criador da bala, ela n será destroída
-        if (creator != collision.gameObject)
+        if (!creator.Contains(collision.gameObject))
+        {
+            print("destrói bala: " + collision.gameObject.name + " " + " [damage.cs] ");
             Destroy(this.gameObject);
+        }
     }
 }
