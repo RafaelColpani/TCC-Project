@@ -6,16 +6,16 @@ public class SaveEnter : MonoBehaviour, IInteractable
 {
     [SerializeField] float waitBetweenChangeAndSave = 1;
     [SerializeField] float waitForRune = 0.5f;
-    Collider collider;
+    Collider2D collider;
     bool firstTime = true;
     //SpriteRenderer sprRender;
 
     private void Awake()
     {
-        collider = this.GetComponent<Collider>();
-       // sprRender = GetComponent<SpriteRenderer>();
+        collider = this.GetComponent<Collider2D>();
+        // sprRender = GetComponent<SpriteRenderer>();
     }
-    public void Interact() 
+    public void Interact()
     {
         if (collider.enabled)
         {
@@ -25,26 +25,27 @@ public class SaveEnter : MonoBehaviour, IInteractable
             {
                 StartCoroutine(ChangeTree());
             }
-            else {
+            else
+            {
                 StartCoroutine(Save());
             }
         }
     }
 
-    IEnumerator ChangeTree() 
+    IEnumerator ChangeTree()
     {
-        print("changed");
+        print("First time in save" + "changed" + "[ SaveEnter.cs ]");
         firstTime = false;
         //sprRender.color = Color.red;
         yield return new WaitForSeconds(waitBetweenChangeAndSave);
         StartCoroutine(Save());
     }
 
-    IEnumerator Save() 
+    IEnumerator Save()
     {
-        print("Save DONE and disabled! Run animation.");
-        print("Boom");
+        print("Save DONE and disabled! Run animation" + " " + "[ SaveEnter.cs ]");
+        //print("Boom");
         yield return new WaitForSeconds(waitForRune);
-        print("show rune");
+        //print("show rune");
     }
 }

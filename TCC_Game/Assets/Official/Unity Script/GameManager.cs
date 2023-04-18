@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("GameManager Start");
+        Debug.Log("GameManager Start" + " " + " [GameManager.cs] ");
 
         //FPS Log
         frameDeltaTime = new float[50];
