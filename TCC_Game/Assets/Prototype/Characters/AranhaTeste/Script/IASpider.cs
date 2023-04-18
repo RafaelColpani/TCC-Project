@@ -10,14 +10,16 @@ public class IASpider : MonoBehaviour
     [Space(5)]
 
     [HeaderPlus(" ", "- Set Itens? -", (int)HeaderPlusColor.magenta)]
-    [SerializeField] [Tooltip("Circle Collider 2D in trigger mode")] CircleCollider2D circleCollider2D;
-    private GameObject playerTarget;
+    [SerializeField] [Tooltip("This is a trigger obj for the player detect")] Collider2D TriggerCollider2D;
+    [SerializeField] GameObject playerTarget;
+    [SerializeField] GameObject spiderBody;
     [Space(5)]
 
     [HeaderPlus(" ", "- General Variables -", (int)HeaderPlusColor.green)]
     [SerializeField] float colliderRadiusRaycast = 0.5f;
     [SerializeField] float raycastDist = 2.5f;
     [SerializeField] float speed = 2.5f;
+    private float distance = 2.5f;
     [Space(5)]
 
     [HeaderPlus(" ", "- Debug Zone -", (int)HeaderPlusColor.red)]
@@ -27,37 +29,44 @@ public class IASpider : MonoBehaviour
     void Start()
     {
         RaycastHit2D raycast2D;
-        playerTarget = GameObject.FindWithTag("Player");
+        //playerTarget = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        circleCollider2D.radius = colliderRadiusRaycast;
+        SimpleIA();
         
-        if (_simplesIA)
-        {
-            SimpleIA();
-        }
-
         //Debug Zone
         if (_debugPlayerVariables)
         {
             DebugZone();
         }
-
     }
 
     #region IA
+    /*
+    private void OnTriggerEnter2D(Collider2D TriggerCollider2D) {
+        if(_simplesIA )
+        {
+            print("Simple IA Start" + " " + " [IA Spider.cs] ");
+            SimpleIA();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D TriggerCollider2D) {
+        if(_simplesIA)
+        {
+            print("Simple IA Off" + " " + " [IA Spider.cs] ");
+        }
+    }
+    */
     void SimpleIA()
     {
-        //Get distance (radius) form collider for limit the raycast
+        distance = Vector2.Distance(spiderBody.transform.position, playerTarget.transform.position);
+        Vector2 direction = playerTarget.transform.position - spiderBody.transform.position;
 
-        //find player
-
-        //check distance between player and spider
-
-        //go to player
+        spiderBody.transform.position = Vector2.MoveTowards(this.spiderBody.transform.position, playerTarget.transform.position, speed * Time.deltaTime);
     }
     #endregion
 
@@ -65,4 +74,6 @@ public class IASpider : MonoBehaviour
     {
         Debug.Log("Player target debug [ " + playerTarget + " ]");
     }
+
+   
 }
