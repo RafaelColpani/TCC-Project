@@ -227,7 +227,7 @@ public class InventoryManager : MonoBehaviour
     {
         GameObject drop = Instantiate
                     (inventorySlots[i].GetComponentInChildren<InventoryItem>().item.PrefabReference,
-                    GameObject.FindGameObjectWithTag("Player").transform.position,
+                    GameObject.FindGameObjectWithTag("TargetPlayer").transform.position,
                     Quaternion.identity);
 
         //drop.GetComponent<SuckedByPlayer>().enabled = false;

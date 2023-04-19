@@ -11,7 +11,7 @@ public class IASpider : MonoBehaviour
 
     [HeaderPlus(" ", "- Set Itens? -", (int)HeaderPlusColor.magenta)]
     [SerializeField] [Tooltip("This is a trigger obj for the player detect")] Collider2D TriggerCollider2D;
-    [SerializeField] GameObject playerTarget;
+    private GameObject playerTarget;
     [SerializeField] GameObject spiderBody;
     [Space(5)]
 
@@ -29,12 +29,15 @@ public class IASpider : MonoBehaviour
     void Start()
     {
         RaycastHit2D raycast2D;
-        //playerTarget = GameObject.FindWithTag("Player");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        //FindPlayer
+        playerTarget = GameObject.FindWithTag("TargetPlayer");
+
         SimpleIA();
         
         //Debug Zone
@@ -63,6 +66,7 @@ public class IASpider : MonoBehaviour
     */
     void SimpleIA()
     {
+      
         distance = Vector2.Distance(spiderBody.transform.position, playerTarget.transform.position);
         Vector2 direction = playerTarget.transform.position - spiderBody.transform.position;
 
