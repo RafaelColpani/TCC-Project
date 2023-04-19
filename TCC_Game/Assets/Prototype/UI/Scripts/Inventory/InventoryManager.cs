@@ -7,13 +7,13 @@ public class InventoryManager : MonoBehaviour
     public InventorySlot[] inventorySlots;
 
     //public Item[] allItemsList;
-    
+
     public GameObject InventoryItemPrefab;
 
     public int maxStackedItems = 4;
-    
+
     int selectedSlot = -1;
-    
+
     private void Start()
     {
         // first slot selected by default
@@ -24,7 +24,7 @@ public class InventoryManager : MonoBehaviour
     private void Update()
     {
         // adaptar para input system se necessario
-        if(Input.inputString != null)
+        if (Input.inputString != null)
         {
             InventoryItem itemInSlot = inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>();
 
@@ -58,7 +58,7 @@ public class InventoryManager : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.Q)) // dropar
             {
-                if(itemInSlot != null)
+                if (itemInSlot != null)
                 {
                     UseSelectedItem(false);
                     print("dropou o item");
@@ -120,19 +120,22 @@ public class InventoryManager : MonoBehaviour
                 }
                 else
                 {
-                    itemInSlot.RefreshCount();
                     StartCoroutine(TimedDrop(selectedSlot));
+                    itemInSlot.RefreshCount();
                 }
 
                 //Destroy(itemInSlot.gameObject);
-                
+
             }
+
+            if (itemInSlot.count < 0)
+                itemInSlot.count = 0;
+            print("itemInSlot count: " + itemInSlot.count);
 
             return item;
         }
         return null;
     }
-
 
     void ChangeSelectedSlot(int newValue)
     {
@@ -148,17 +151,18 @@ public class InventoryManager : MonoBehaviour
         inventorySlots[newValue].Select();
         selectedSlot = newValue;
     }
-    
+
 
     // Verifica se ha algum slot com o mesmo item com a quantiadade menor que o maximo
     public bool AddItem(Item item)
     {
         // STACKING
-        for (int i = 0; i < inventorySlots.Length; i++){
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
             InventorySlot slot = inventorySlots[i];
             InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
 
-            if(
+            if (
              itemInSlot != null &&
              itemInSlot.item == item &&
              itemInSlot.count < maxStackedItems &&
@@ -202,12 +206,12 @@ public class InventoryManager : MonoBehaviour
     {
         for (int i = 0; i < inventorySlots.Length; i++)
         {
-            if(inventorySlots[i].GetComponentInChildren<InventoryItem>() != null &&
+            if (inventorySlots[i].GetComponentInChildren<InventoryItem>() != null &&
                 !inventorySlots[i].isArtifactSlot)
             {
                 // drop animation
                 StartCoroutine(TimedDrop(i));
-                
+
             }
         }
     }
@@ -215,7 +219,7 @@ public class InventoryManager : MonoBehaviour
     /// <summary>
     /// Remove o item do inventário
     /// </summary>
-    
+
     void SpawnNewItem(Item item, InventorySlot slot)
     {
         GameObject newItemGo = Instantiate(InventoryItemPrefab, slot.transform);
@@ -227,19 +231,15 @@ public class InventoryManager : MonoBehaviour
     {
         GameObject drop = Instantiate
                     (inventorySlots[i].GetComponentInChildren<InventoryItem>().item.PrefabReference,
-                    GameObject.FindGameObjectWithTag("TargetPlayer").transform.position,
+                    GameObject.FindGameObjectWithTag("Player").transform.position,
                     Quaternion.identity);
 
         //drop.GetComponent<SuckedByPlayer>().enabled = false;
 
         drop.GetComponent<drop>().launch();
 
-        //Destroy(inventorySlots[i].GetComponentInChildren<InventoryItem>().gameObject);
-        //InventorySlot slot = inventorySlots[i];
-        //InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-        //itemInSlot.RefreshCount();
-
         int secondsAfterDrop = 12;
+        Destroy(inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>().gameObject);
         yield return new WaitForSeconds(secondsAfterDrop);
 
         Destroy(drop);
