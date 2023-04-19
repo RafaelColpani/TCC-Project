@@ -29,6 +29,7 @@ public class IASpider : MonoBehaviour
     void Start()
     {
         RaycastHit2D raycast2D;
+        playerTarget = GameObject.FindWithTag("TargetPlayer");
         
     }
 
@@ -36,9 +37,8 @@ public class IASpider : MonoBehaviour
     void Update()
     {
         //FindPlayer
-        playerTarget = GameObject.FindWithTag("TargetPlayer");
 
-        SimpleIA();
+       // SimpleIA();
         
         //Debug Zone
         if (_debugPlayerVariables)
@@ -48,25 +48,26 @@ public class IASpider : MonoBehaviour
     }
 
     #region IA
-    /*
-    private void OnTriggerEnter2D(Collider2D TriggerCollider2D) {
-        if(_simplesIA )
+  //  /*
+    private void OnTriggerStay2D(Collider2D collider)
+    { 
+        if (collider.CompareTag("Player")) 
         {
-            print("Simple IA Start" + " " + " [IA Spider.cs] ");
+            print("aaaaaaaa");
             SimpleIA();
         }
-    }
+        /*
+       if(playerTarget)
+            print("Simple IA Start" + " " + " [IA Spider.cs] ");
+        */
 
-    private void OnTriggerExit2D(Collider2D TriggerCollider2D) {
-        if(_simplesIA)
-        {
-            print("Simple IA Off" + " " + " [IA Spider.cs] ");
-        }
     }
-    */
+  // */
+    
     void SimpleIA()
     {
-      
+        print("bbbbbbbb");
+
         distance = Vector2.Distance(spiderBody.transform.position, playerTarget.transform.position);
         Vector2 direction = playerTarget.transform.position - spiderBody.transform.position;
 
