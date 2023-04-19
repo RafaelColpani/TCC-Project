@@ -2,25 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class UISounds : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class UISounds : MonoBehaviour
 {
-
     public AudioSource click, hover, close;
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Debug.Log("nome do obj clicado: " + eventData.selectedObject.name);
-        click.Play();
-    }
+    Button[] buttons = FindObjectsOfType<Button>();
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        hover.Play();
-    }
+    public GameObject[] closeButtons;
 
-    public void OnPointerExit(PointerEventData eventData)
+    private void Start()
     {
-        close.Play();
+        foreach (Button button in buttons)
+        {
+            for (int i = 0; i < closeButtons.Length; i++)
+            {
+                if(button == closeButtons[i])
+                {
+                    button.gameObject.AddComponent<ButtonSound>();
+                    button.gameObject.AddComponent<ButtonSound>().isExitButton = true;
+                }
+                else
+                    button.gameObject.AddComponent<ButtonSound>();
+            }
+        }
     }
 }
