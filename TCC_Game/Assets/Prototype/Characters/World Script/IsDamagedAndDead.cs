@@ -17,6 +17,8 @@ public class IsDamagedAndDead : MonoBehaviour
 
     [HeaderPlus(" ", "DEATH", (int)HeaderPlusColor.magenta)]
     [SerializeField] ParticleSystem deathParticles;
+    [SerializeField] GameObject deathIcon;
+    [SerializeField] Vector3 deathIconOffset;
 
     [HeaderPlus(" ", "DROP", (int)HeaderPlusColor.green)]
     [SerializeField] GameObject interactable; // raio de interação
@@ -32,6 +34,7 @@ public class IsDamagedAndDead : MonoBehaviour
     Vector2 damageOrigin;
     [SerializeField] bool isAlive = true;
     Status stats;
+    GameObject instantiatedDeathIcon;
     #endregion
 
     private void Awake()
@@ -125,6 +128,10 @@ public class IsDamagedAndDead : MonoBehaviour
         {
             // habilita a area de interacao
             interactable.SetActive(true);
+            //mostra ícone de morte acima da criatura
+            instantiatedDeathIcon = Instantiate(deathIcon);
+            instantiatedDeathIcon.GetComponent<FollowObject>().obj = this.gameObject.transform;
+            instantiatedDeathIcon.GetComponent<FollowObject>().offset = deathIconOffset;
 
             //obtem componente do gameobject "morto"
             //this.GetComponent<SpriteRenderer>().color = Color.black;
@@ -209,6 +216,7 @@ public class IsDamagedAndDead : MonoBehaviour
         }
 
         // reminder: destroi este objeto, não o loot
+        Destroy(instantiatedDeathIcon);
         Destroy(this.gameObject);
     }
 
