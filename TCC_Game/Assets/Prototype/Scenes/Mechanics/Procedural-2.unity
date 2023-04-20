@@ -6509,6 +6509,7 @@ GameObject:
   - component: {fileID: 1670789330608733783}
   - component: {fileID: 1670789330608733782}
   - component: {fileID: 1670789330608733781}
+  - component: {fileID: 1670789330608733784}
   m_Layer: 0
   m_Name: spr_player
   m_TagString: Untagged
@@ -8333,6 +8334,29 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &1670789330608733784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569652437086463538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0171d515b75d456786510ed2c3641f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topRaycastPositionValue: 2.69
+  bottomRaycastPositionValue: 1.04
+  xOffset: 0.32
+  numberOfMidRaycasts: 5
+  raycastsDistanceSum: 0.16
+  bottomRaycastDistance: 0.14
+  body: {fileID: 933308989}
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  showGizmo: 1
 --- !u!114 &1683747161910867541
 MonoBehaviour:
   m_ObjectHideFlags: 0
