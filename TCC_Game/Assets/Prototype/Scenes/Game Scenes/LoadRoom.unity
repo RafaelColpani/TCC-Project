@@ -989,6 +989,37 @@ MonoBehaviour:
   - {x: 0.9692863, y: -1.0131938, z: 0}
   - {x: -0.13646801, y: 1.1173867, z: 0}
   - {x: -0.8744988, y: 0.6368509, z: 0}
+--- !u!1 &329284058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 329284059}
+  m_Layer: 3
+  m_Name: L_Pezinho
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &329284059
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329284058}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.461, y: 2.132, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1883222411}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &361445866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,6 +1147,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &378345480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 378345481}
+  m_Layer: 3
+  m_Name: R_Pezinho
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &378345481
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378345480}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.747, y: 2.132, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1883222411}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &392220828
 GameObject:
@@ -1854,7 +1916,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 861392008}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 76.45002, y: -7.34, z: -10.006417}
+  m_LocalPosition: {x: 76.45002, y: -4, z: -10.006417}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2570,19 +2632,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2709871301875484105, guid: f333b7f77de76aa4da507d42ea96f16b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9999922
+      value: 0.9999923
       objectReference: {fileID: 0}
     - target: {fileID: 2709871301875484105, guid: f333b7f77de76aa4da507d42ea96f16b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00395948
+      value: -0.0039249207
       objectReference: {fileID: 0}
     - target: {fileID: 3028456866520156689, guid: f333b7f77de76aa4da507d42ea96f16b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.810334
+      value: 0.810325
       objectReference: {fileID: 0}
     - target: {fileID: 3028456866520156689, guid: f333b7f77de76aa4da507d42ea96f16b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.5859682
+      value: 0.58598065
       objectReference: {fileID: 0}
     - target: {fileID: 3028456867877620484, guid: f333b7f77de76aa4da507d42ea96f16b, type: 3}
       propertyPath: m_Name
@@ -2598,7 +2660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3028456867877620487, guid: f333b7f77de76aa4da507d42ea96f16b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.4
+      value: -0.06
       objectReference: {fileID: 0}
     - target: {fileID: 3028456867877620487, guid: f333b7f77de76aa4da507d42ea96f16b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2636,13 +2698,21 @@ PrefabInstance:
       propertyPath: walkSpeed
       value: 7.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3700128991932519069, guid: f333b7f77de76aa4da507d42ea96f16b, type: 3}
+      propertyPath: targets.Array.data[0].foot
+      value: 
+      objectReference: {fileID: 329284059}
+    - target: {fileID: 3700128991932519069, guid: f333b7f77de76aa4da507d42ea96f16b, type: 3}
+      propertyPath: targets.Array.data[1].foot
+      value: 
+      objectReference: {fileID: 378345481}
     - target: {fileID: 7433780498123023147, guid: f333b7f77de76aa4da507d42ea96f16b, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.98000187
       objectReference: {fileID: 0}
     - target: {fileID: 7433780498123023147, guid: f333b7f77de76aa4da507d42ea96f16b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.19898862
+      value: 0.19898836
       objectReference: {fileID: 0}
     - target: {fileID: 7978678483816537437, guid: f333b7f77de76aa4da507d42ea96f16b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2654,11 +2724,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7978678483816537437, guid: f333b7f77de76aa4da507d42ea96f16b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9999348
+      value: 0.9999342
       objectReference: {fileID: 0}
     - target: {fileID: 7978678483816537437, guid: f333b7f77de76aa4da507d42ea96f16b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.01142364
+      value: -0.011473324
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3028456866614250112, guid: f333b7f77de76aa4da507d42ea96f16b, type: 3}
@@ -4128,7 +4198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2026602200}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 76.45002, y: -7.34, z: -10.006417}
+  m_LocalPosition: {x: 76.45002, y: -4, z: -10.006417}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
