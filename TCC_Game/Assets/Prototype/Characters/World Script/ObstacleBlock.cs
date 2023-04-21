@@ -67,7 +67,8 @@ public class ObstacleBlock : MonoBehaviour
 
     private void Update()
     {
-        GenerateRaycasts();
+        print(HaveAnyRaycastHit());
+        if (!HaveAnyRaycastHit()) return;
     }
     #endregion
 
@@ -81,39 +82,56 @@ public class ObstacleBlock : MonoBehaviour
         float sumOfMidPositions = (this.topRaycastPositionValue - this.bottomRaycastPositionValue) / quantityDivision;
         float fixedSum = sumOfMidPositions;
 
-        var bottomRaycastPosition = new Vector3(body.position.x + xOffset, body.position.y + this.bottomRaycastPositionValue, 0);
+        var bottomRaycastPosition = new Vector3(
+            body.position.x + xOffset * DirectionMultiplier(),
+            body.position.y + this.bottomRaycastPositionValue,
+            body.position.z);
+
         raycastPositions.Add(bottomRaycastPosition);
 
         for (int i = 0; i < numberOfMidRaycasts; i++)
         {
             raycastPositions.Add(new Vector3(
-                body.position.x + xOffset,
+                body.position.x + xOffset * DirectionMultiplier(),
                 body.position.y + this.bottomRaycastPositionValue + sumOfMidPositions,
                 body.position.z));
 
             sumOfMidPositions += fixedSum;
         }
 
-        raycastPositions.Add(new Vector3(this.body.position.x + xOffset, this.body.position.y + topRaycastPositionValue, 0));
+        raycastPositions.Add(new Vector3(
+            this.body.position.x + xOffset * DirectionMultiplier(),
+            this.body.position.y + topRaycastPositionValue,
+            this.body.position.z));
     }
 
-    private void GenerateRaycasts()
+    private bool HaveAnyRaycastHit()
     {
         raycastHits.Clear();
-
         var distance = bottomRaycastDistance;
+
         foreach (Vector3 raycastPosition in raycastPositions)
         {
-            RaycastHit2D hit = Physics2D.Raycast(raycastPosition, Vector2.right, distance, obstacleLayers);
+            RaycastHit2D hit = Physics2D.Raycast(raycastPosition, Vector2.right * DirectionMultiplier(), distance, obstacleLayers);
             raycastHits.Add(hit);
             distance += raycastsDistanceSum;
         }
 
-        bool obstacleHitted = raycastHits.Any(hit => hit.collider != null && !hit.collider.isTrigger);
+        return raycastHits.Any(hit => hit.collider != null && !hit.collider.isTrigger);
+    }
 
-        if (!obstacleHitted) return;
+    private int DirectionMultiplier()
+    {
+        if (IsFacingRight())
+            return 1;
 
-        //TODO: block movement
+        else
+            return -1;
+    }
+
+    private bool IsFacingRight()
+    {
+        return this.transform.localScale.x > 0;
     }
     #endregion
 
@@ -121,8 +139,8 @@ public class ObstacleBlock : MonoBehaviour
     {
         if (!showGizmo) return;
 
-        var bottomPos = new Vector3(this.body.position.x + xOffset, this.body.position.y + bottomRaycastPositionValue, 0);
-        var topPos = new Vector3(this.body.position.x + xOffset, this.body.position.y + topRaycastPositionValue, 0);
+        var bottomPos = new Vector3(this.body.position.x + xOffset * DirectionMultiplier(), this.body.position.y + bottomRaycastPositionValue, 0);
+        var topPos = new Vector3(this.body.position.x + xOffset * DirectionMultiplier(), this.body.position.y + topRaycastPositionValue, 0);
 
         Gizmos.color = Color.red;
         //top raycast position
@@ -131,7 +149,7 @@ public class ObstacleBlock : MonoBehaviour
         Gizmos.DrawCube(bottomPos, new Vector3(0.1f, 0.1f, 0));
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawLine(bottomPos, new Vector3(bottomPos.x + bottomRaycastDistance, bottomPos.y, bottomPos.z));
+        Gizmos.DrawLine(bottomPos, new Vector3(bottomPos.x + bottomRaycastDistance * DirectionMultiplier(), bottomPos.y, bottomPos.z));
 
         int quantityDivision = numberOfMidRaycasts + 1;
         float sumOfMidPositions = (this.topRaycastPositionValue - this.bottomRaycastPositionValue) / quantityDivision;
@@ -141,16 +159,16 @@ public class ObstacleBlock : MonoBehaviour
         for (int i = 0; i < numberOfMidRaycasts; i++)
         {
             var newPosition = new Vector3(
-                body.position.x + xOffset,
+                body.position.x + xOffset * DirectionMultiplier(),
                 body.position.y + this.bottomRaycastPositionValue + sumOfMidPositions,
                 body.position.z);
 
-            Gizmos.DrawLine(newPosition, new Vector3(newPosition.x + distance, newPosition.y, newPosition.z));
+            Gizmos.DrawLine(newPosition, new Vector3(newPosition.x + distance * DirectionMultiplier(), newPosition.y, newPosition.z));
 
             sumOfMidPositions += fixedSum;
             distance += raycastsDistanceSum;
         }
 
-        Gizmos.DrawLine(topPos, new Vector3(topPos.x + distance, topPos.y, topPos.z));
+        Gizmos.DrawLine(topPos, new Vector3(topPos.x + distance * DirectionMultiplier(), topPos.y, topPos.z));
     }
 }

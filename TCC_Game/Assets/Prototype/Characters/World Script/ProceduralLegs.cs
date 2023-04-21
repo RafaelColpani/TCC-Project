@@ -15,6 +15,8 @@ public class ObjectTargets
     public Transform finalTarget;
     [Tooltip("The GameObject acting as the effector. Must be a child of the final bone of a leg.")]
     public Transform effector;
+    [Tooltip("An empty GameObject that will represent the position of the players foot, following the body.")]
+    public Transform foot;
     [Tooltip("The legs will move accordingly to its timing. Even legs will not walk while Odds legs are walking, and vice versa.")]
     public bool isEven;
 
@@ -22,13 +24,13 @@ public class ObjectTargets
     private bool isMoving;
 
     #region Getters & Setters
-    [HideInInspector] public bool IsMoving
+    public bool IsMoving
     {
         get { return isMoving; }
         set { isMoving = value; }
     }
 
-    [HideInInspector] public float StepTime
+    public float StepTime
     {
         get { return stepTime; }
     }
@@ -48,6 +50,12 @@ public class ObjectTargets
     public void ResetStepTime()
     {
         stepTime = 0;
+    }
+
+    public void TargetsGoToFoot()
+    {
+        bodyTarget.position = foot.position;
+        finalTarget.position = foot.position;
     }
     #endregion
 }
@@ -160,7 +168,9 @@ public class ProceduralLegs : MonoBehaviour
         {
             if (gravityController.GetIsOn())
             {
+                target.TargetsGoToFoot();
                 target.effectorTarget.position = target.bodyTarget.position;
+                continue;
             }
 
             localHit = Physics2D.Raycast(target.bodyTarget.position, -Vector2.up, gravityController.GetIsOn()? Mathf.Infinity : groundRaycastDistance, targetsDetections);
