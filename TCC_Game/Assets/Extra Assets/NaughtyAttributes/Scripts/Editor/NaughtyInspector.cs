@@ -198,8 +198,8 @@ namespace NaughtyAttributes.Editor
         private static IEnumerable<IGrouping<string, SerializedProperty>> GetGroupedProperties(IEnumerable<SerializedProperty> properties)
         {
             return properties
-                .Where(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p) != null)
-                .GroupBy(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p).Name);
+                .Where(p => PropertyUtility.GetAttribute<FoldoutAttributeAttribute>(p) != null)
+                .GroupBy(p => PropertyUtility.GetAttribute<FoldoutAttributeAttribute>(p).Name);
         }
 
         private static IEnumerable<IGrouping<string, SerializedProperty>> GetFoldoutProperties(IEnumerable<SerializedProperty> properties)

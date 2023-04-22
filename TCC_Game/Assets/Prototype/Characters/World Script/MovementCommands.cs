@@ -8,14 +8,24 @@ using System.Collections.Generic;
 public class MoveCommand : ICommand
 {
     private float walkSpeed;
+    private Vector3 moveDirection;
     private bool isFacingRight;
     private bool canWalk;
+    private bool canMove;
+
+    public bool CanMove
+    {
+        get { return this.canMove; }
+        set { this.canMove = value; }
+    }
 
     public MoveCommand(float walkSpeed)
     {
         this.walkSpeed = walkSpeed;
+        this.moveDirection = Vector3.zero;
         this.isFacingRight = true;
         this.canWalk = true;
+        this.canMove = true;
     }
 
     public void Execute(Transform actor, CharacterController characterController = null, float value = 1)
@@ -25,11 +35,24 @@ public class MoveCommand : ICommand
         if (!canWalk) return;
 
         // moving by character controller
+        if (!canMove) return;
+
         if (characterController != null)
         {
             characterController.Move(movement * Time.fixedDeltaTime);
             Debug.Log(movement);
         }
+    }
+
+    public void ChangeMoveDirection(Vector3 value)
+    {
+        // rotate 90 degress (counter clock-wise), looking to the left
+        this.moveDirection = new Vector3(-value.y, value.x, 0);
+        this.moveDirection *= -1;
+
+        //inverts if is looking to the right
+        //if (isFacingRight)
+            //this.moveDirection *= -1;
     }
 
     private void ChangeDirection(Transform actor, Vector3 movement)
