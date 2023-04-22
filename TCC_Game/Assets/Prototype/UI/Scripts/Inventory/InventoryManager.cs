@@ -28,7 +28,7 @@ public class InventoryManager : MonoBehaviour
         {
             InventoryItem itemInSlot = inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>();
 
-            // verifica se é um número, e se for, o extrai e usa como index
+            // verifica se ï¿½ um nï¿½mero, e se for, o extrai e usa como index
             bool isNumber = int.TryParse(Input.inputString, out int number);
             if (isNumber && number > 0 && number < 4)
             {
@@ -40,6 +40,18 @@ public class InventoryManager : MonoBehaviour
                 if (itemInSlot?.item.type == Item.ItemType.Food)
                 {
                     print("type: food"); // eat
+                    GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+                    foreach (GameObject po in playerObjects)
+                    {
+                        if (po.GetComponent<Belly>() != null)
+                        {
+                            if (itemInSlot != null)
+                            {
+                                po.GetComponent<Belly>().Eat(itemInSlot.item.bellyFiller);
+                                UseSelectedItem(true);
+                            }
+                        }
+                    }
                 }
 
                 else if (itemInSlot?.item.type == Item.ItemType.Ammo)
@@ -85,8 +97,8 @@ public class InventoryManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Função para usar ou dropar item. Esta função remove o item do inventário e destrói o GameObject.
-    /// Se "use" for false, entao o item é dropado
+    /// Funï¿½ï¿½o para usar ou dropar item. Esta funï¿½ï¿½o remove o item do inventï¿½rio e destrï¿½i o GameObject.
+    /// Se "use" for false, entao o item ï¿½ dropado
     /// </summary>
     /// <returns>Item item</returns>
     public Item UseSelectedItem(bool use)
@@ -198,7 +210,7 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
-        // TODOS JÁ ESTÃO CHEIOS
+        // TODOS Jï¿½ ESTï¿½O CHEIOS
         return false;
     }
 
@@ -217,7 +229,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Remove o item do inventário
+    /// Remove o item do inventï¿½rio
     /// </summary>
 
     void SpawnNewItem(Item item, InventorySlot slot)

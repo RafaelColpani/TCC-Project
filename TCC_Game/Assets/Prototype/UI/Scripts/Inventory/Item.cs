@@ -11,16 +11,17 @@ public class Item : ScriptableObject
     public ItemType type;
     public ActionType actionType;
     public GameObject PrefabReference;
+    public int bellyFiller;
 
     [Header("UI")]
-    public bool stackable = false; // "pilhável"
+    public bool stackable = false; // "pilhï¿½vel"
     
 
     [Header("Both")]
     public Sprite sprite;
     public Sprite uiSprite;
 
-    public bool edible; // comestível
+    public bool edible; // comestï¿½vel
     public bool isArtifact = false; // variavel provavelmente inutil, mas veremos
 
     public enum ItemType
