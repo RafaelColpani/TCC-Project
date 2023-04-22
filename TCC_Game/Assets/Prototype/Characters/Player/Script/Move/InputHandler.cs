@@ -111,6 +111,7 @@ public class InputHandler : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         canWalk = true;
+    }
 
     public MoveCommand GetMovementCommand()
     {

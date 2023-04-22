@@ -20,8 +20,6 @@ public class ObjectTargets
     [Tooltip("The legs will move accordingly to its timing. Even legs will not walk while Odds legs are walking, and vice versa.")]
     public bool isEven;
 
-    public Transform foot;
-
     private float stepTime;
     private bool isMoving;
 
