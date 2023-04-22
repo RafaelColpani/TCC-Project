@@ -105,7 +105,7 @@ public class InventoryManager : MonoBehaviour
     {
         InventorySlot slot = inventorySlots[selectedSlot];
         InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-
+        
         if (itemInSlot != null)
         {
             Item item = itemInSlot.item;

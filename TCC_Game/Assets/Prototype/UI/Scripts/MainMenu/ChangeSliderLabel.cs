@@ -15,6 +15,7 @@ public class ChangeSliderLabel : MonoBehaviour
     {
         sld = GetComponent<Slider>();
         inputLabel = GetComponentInChildren<TextMeshProUGUI>();
+        ChangeValue();
     }
 
     public void ChangeValue()
