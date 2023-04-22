@@ -241,6 +241,8 @@ public class InventoryManager : MonoBehaviour
 
     IEnumerator TimedDrop(int i)
     {
+        if (inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>().gameObject == null) yield return null;
+
         GameObject drop = Instantiate
                     (inventorySlots[i].GetComponentInChildren<InventoryItem>().item.PrefabReference,
                     GameObject.FindGameObjectWithTag("Player").transform.position,

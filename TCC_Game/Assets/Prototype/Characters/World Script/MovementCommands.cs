@@ -9,22 +9,26 @@ public class MoveCommand : ICommand
 {
     private float walkSpeed;
     private bool isFacingRight;
+    private bool canWalk;
 
     public MoveCommand(float walkSpeed)
     {
         this.walkSpeed = walkSpeed;
         this.isFacingRight = true;
+        this.canWalk = true;
     }
 
     public void Execute(Transform actor, CharacterController characterController = null, float value = 1)
     {
         Vector3 movement = actor.right * (value * walkSpeed);
         ChangeDirection(actor, movement);
+        if (!canWalk) return;
 
         // moving by character controller
         if (characterController != null)
         {
             characterController.Move(movement * Time.fixedDeltaTime);
+            Debug.Log(movement);
         }
     }
 
@@ -35,6 +39,11 @@ public class MoveCommand : ICommand
             isFacingRight = !isFacingRight;
             actor.localScale = new Vector3(actor.localScale.x * -1, actor.localScale.y, actor.localScale.z);
         }
+    }
+
+    public void SetCanWalk(bool value = false)
+    {
+        this.canWalk = value;
     }
 }
 

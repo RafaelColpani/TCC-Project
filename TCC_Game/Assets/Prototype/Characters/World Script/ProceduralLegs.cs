@@ -146,8 +146,10 @@ public class ProceduralLegs : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         TargetsGroundHeight();
 
+        if (!proceduralIsOn) return;
         if (!CanMoveLegs()) return;
 
         MoveLegs();
@@ -248,6 +250,7 @@ public class ProceduralLegs : MonoBehaviour
                 target.SetIsMoving(false);
                 target.ResetStepTime();
                 target.effectorTarget.position = target.finalTarget.position;
+                //TODO: Footstep Sound
 
                 if (this.evenIsWalking)
                     this.evenIsWalking = false;

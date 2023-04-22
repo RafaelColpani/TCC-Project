@@ -14,6 +14,7 @@ public class InputHandler : MonoBehaviour
     private CharacterController characterController;
     private GravityController gc;
 
+    public bool canWalk = true;
     #region Inspector VARs
     [HeaderPlus(" ", "- GENERAL -", (int)HeaderPlusColor.green)]
     [Tooltip("The Transform of the player's body.")]
@@ -56,6 +57,7 @@ public class InputHandler : MonoBehaviour
 
     private void FixedUpdate() 
     {
+        if (!canWalk) return;
         var readedMoveValue = playerActions.Movement.Move.ReadValue<float>();
         moveCommand.Execute(this.gameObject.transform, characterController, readedMoveValue);
     }
@@ -84,6 +86,27 @@ public class InputHandler : MonoBehaviour
     {
         playerActions.Movement.Jump.performed += ctx => pressJumpCommand.Execute(body);
         playerActions.Movement.Jump.canceled += ctx => releaseJumpCommand.Execute(body);
+    }
+
+    public void SetCanWalk(bool value = false)
+    {
+        if (value)
+        {
+            StartCoroutine(DelayedCanWalk());
+        }
+
+        else
+        {
+            canWalk = value;
+        }
+
+        moveCommand.SetCanWalk(value);
+    }
+
+    IEnumerator DelayedCanWalk()
+    {
+        yield return new WaitForSeconds(1);
+        canWalk = true;
     }
     #endregion
 
