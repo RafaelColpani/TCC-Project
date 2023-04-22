@@ -55,6 +55,8 @@ public class ObstacleBlock : MonoBehaviour
     [SerializeField] bool moveByInputHandler;
     #endregion
 
+    // -------------
+
     #region Ceiling Block
     [Foldout("Ceiling Block")]
     [HeaderPlus(" ", "- ROOT POSITIONS -", (int)HeaderPlusColor.green)]
@@ -83,6 +85,8 @@ public class ObstacleBlock : MonoBehaviour
     [Foldout("Ceiling Block")]
     [SerializeField] float topRaycastsDistance;
     #endregion
+
+    // -------------
 
     #region General
     [HeaderPlus(" ", "- GENERAL DETECTION -", (int)HeaderPlusColor.white)]

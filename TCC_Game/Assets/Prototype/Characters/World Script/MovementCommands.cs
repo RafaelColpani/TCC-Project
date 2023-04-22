@@ -29,8 +29,6 @@ public class MoveCommand : ICommand
     public void Execute(Transform actor, CharacterController characterController = null, float value = 1)
     {
         Vector3 movement = actor.right * (value * walkSpeed);
-        //movement = new Vector3(movement.x * moveDirection.x, movement.y * moveDirection.y, 0);
-        //Debug.Log(moveDirection);
         ChangeDirection(actor, movement);
 
         // moving by character controller
