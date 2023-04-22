@@ -89,6 +89,11 @@ public class InputHandler : MonoBehaviour
         playerActions.Movement.Jump.performed += ctx => pressJumpCommand.Execute(body);
         playerActions.Movement.Jump.canceled += ctx => releaseJumpCommand.Execute(body);
     }
+
+    public MoveCommand GetMovementCommand()
+    {
+        return this.moveCommand;
+    }
     #endregion
 
     #region Enable & Disable

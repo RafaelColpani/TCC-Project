@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 74912216}
   m_Layer: 9
   m_Name: Square
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -438,8 +438,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 74912214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.34, y: -2.95, z: 0}
-  m_LocalScale: {x: 7.2262497, y: 0.5, z: 1}
+  m_LocalPosition: {x: 8.34, y: -1.6, z: 0}
+  m_LocalScale: {x: 7.2262497, y: 0.65144706, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1698032265}
@@ -1174,7 +1174,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 353920393}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.153, y: 0, z: 0}
+  m_LocalPosition: {x: 0.1556, y: -0.0118, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1914,7 +1914,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474111593}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0952, y: 0, z: 0}
+  m_LocalPosition: {x: -0.096, y: -0.0058, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6717,9 +6717,9 @@ GameObject:
   - component: {fileID: 1670789330608733778}
   - component: {fileID: 1670789330608733779}
   - component: {fileID: 1670789330608733783}
+  - component: {fileID: 1670789330608733784}
   - component: {fileID: 1670789330608733782}
   - component: {fileID: 1670789330608733781}
-  - component: {fileID: 1670789330608733784}
   m_Layer: 0
   m_Name: spr_player
   m_TagString: Untagged
@@ -8542,7 +8542,7 @@ MonoBehaviour:
   walkSpeed: 5
   jumpForce: 10
   groundCheck: {fileID: 1313045014}
-  groundCheckRadius: 0.5
+  groundCheckRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -8558,17 +8558,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0171d515b75d456786510ed2c3641f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topRaycastPositionValue: 2.69
-  bottomRaycastPositionValue: 1.04
-  xOffset: 0.32
-  numberOfMidRaycasts: 10
-  raycastsDistanceSum: 0.15
-  bottomRaycastDistance: 0.14
-  body: {fileID: 933308989}
+  topFrontRaycastPositionValue: 2.66
+  bottomFrontRaycastPositionValue: 1.01
+  bottomFrontAirRaycastPositionValue: 0.61
+  xOffset: 0.16
+  numberOfFrontMidRaycasts: 10
+  frontRaycastsDistance: 0.3
+  maxSlopeAngle: 60
+  moveByInputHandler: 1
+  leadingTopRaycastPositionValue: -0.18
+  trailingTopRaycastPositionValue: 0.28
+  yOffset: 2.9
+  numberOfTopMidRaycasts: 3
+  topRaycastsDistance: 0.21
   obstacleLayers:
     serializedVersion: 2
-    m_Bits: 0
-  showGizmo: 1
+    m_Bits: 512
+  body: {fileID: 933308989}
+  showGizmo: 0
+  showBottomMidAirRaycastPosition: 0
 --- !u!114 &1683747161910867541
 MonoBehaviour:
   m_ObjectHideFlags: 0

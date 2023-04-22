@@ -10,12 +10,20 @@ public class MoveCommand : ICommand
     private float walkSpeed;
     private Vector3 moveDirection;
     private bool isFacingRight;
+    private bool canMove;
+
+    public bool CanMove
+    {
+        get { return this.canMove; }
+        set { this.canMove = value; }
+    }
 
     public MoveCommand(float walkSpeed)
     {
         this.walkSpeed = walkSpeed;
         this.moveDirection = Vector3.zero;
         this.isFacingRight = true;
+        this.canMove = true;
     }
 
     public void Execute(Transform actor, CharacterController characterController = null, float value = 1)
@@ -26,6 +34,8 @@ public class MoveCommand : ICommand
         ChangeDirection(actor, movement);
 
         // moving by character controller
+        if (!canMove) return;
+
         if (characterController != null)
         {
             characterController.Move(movement * Time.fixedDeltaTime);

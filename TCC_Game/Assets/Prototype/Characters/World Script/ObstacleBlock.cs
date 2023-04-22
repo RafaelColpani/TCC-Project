@@ -4,120 +4,235 @@ using UnityEngine;
 using KevinCastejon.MoreAttributes;
 using NaughtyAttributes;
 using System.Linq;
+using UnityEngine.UIElements;
 
+[RequireComponent(typeof(GravityController))]
 public class ObstacleBlock : MonoBehaviour
 {
     #region Inspector Vars
+    #region Front Block
+    [Foldout("Front Block")]
     [HeaderPlus(" ", "- ROOT POSITIONS -", (int)HeaderPlusColor.green)]
     [Tooltip("Sets the position of the most top raycast detection.")]
     [ValidateInput("IsGreaterThanBottom", "Top Raycast must be greater or equal than bottom")]
-    [SerializeField] float topRaycastPositionValue;
+    [SerializeField] float topFrontRaycastPositionValue;
+
     [Tooltip("Sets the position of the most bottom raycast detection.")]
     [ValidateInput("IsLowerThanTop", "Bottom Raycast must be lower or equal than top")]
-    [SerializeField] float bottomRaycastPositionValue;
-    [Tooltip("The x position offset that that raycast will cast.")]
-    [MinValue(0)]
+    [Foldout("Front Block")]
+    [SerializeField] float bottomFrontRaycastPositionValue;
+
+    [Tooltip("Sets the position of the most bottom raycast detection when in mid air.")]
+    [ValidateInput("IsLowerThanTop", "Bottom Raycast must be lower or equal than top")]
+    [Foldout("Front Block")]
+    [SerializeField] float bottomFrontAirRaycastPositionValue;
+
+    [Tooltip("The x position offset that front raycasts will cast.")]
+    [MinValue(0)] [Foldout("Front Block")]
     [SerializeField] float xOffset;
 
+    // -------------
+
+    [Foldout("Front Block")]
     [HeaderPlus(" ", "- RAYCASTS -", (int)HeaderPlusColor.yellow)]
     [Tooltip("The number of raycasts that will generate between the bottom and top raycasts. This number DO NOT INCLUDE the top and bottom.")]
     [MinValue(0)]
-    [SerializeField] int numberOfMidRaycasts;
-    [Tooltip("The sum of the distance for each raycast.")]
-    [MinValue(0)]
-    [SerializeField] float raycastsDistanceSum;
-    [Tooltip("The distance of bottom raycast.")]
-    [MinValue(0)]
-    [SerializeField] float bottomRaycastDistance;
+    [SerializeField] int numberOfFrontMidRaycasts;
 
-    [HeaderPlus(" ", "- BODY -", (int)HeaderPlusColor.cyan)]
-    [Tooltip("The parent object that contains all the bones of the character.")]
-    [SerializeField] Transform body;
+    [Tooltip("The distance of each front raycasts.")]
+    [MinValue(0)] [Foldout("Front Block")]
+    [SerializeField] float frontRaycastsDistance;
 
-    [HeaderPlus(" ", "- DETECTION -", (int)HeaderPlusColor.magenta)]
+    [Foldout("Front Block")]
+    [Tooltip("The maximum angle allowed for the character walk in a slope, in degrees.")]
+    [SerializeField] float maxSlopeAngle;
+
+    // -------------
+
+    [Foldout("Front Block")]
+    [HeaderPlus(" ", "- MOVE COMMAND -", (int)HeaderPlusColor.cyan)]
+    [Tooltip("If the move command in this character is in an Input Handler, check this box.")]
+    [SerializeField] bool moveByInputHandler;
+    #endregion
+
+    #region Ceiling Block
+    [Foldout("Ceiling Block")]
+    [HeaderPlus(" ", "- ROOT POSITIONS -", (int)HeaderPlusColor.green)]
+    [Tooltip("Sets the posiiton of the most leading (most left) raycast position.")]
+    [ValidateInput("IsLowerThanTrailing", "Leading Raycast must be lower or equal than trailing")]
+    [SerializeField] float leadingTopRaycastPositionValue;
+
+    [Tooltip("Sets the posiiton of the most trailing (most right) raycast position.")]
+    [Foldout("Ceiling Block")] [ValidateInput("IsGreaterThanLeading", "Trailing Raycast must be greater or equal than leading")]
+    [SerializeField] float trailingTopRaycastPositionValue;
+
+    [Tooltip("The y position offset that upper raycasts will cast.")]
+    [MinValue(0)] [Foldout("Ceiling Block")]
+    [SerializeField] float yOffset;
+
+    // -------------
+
+    [Foldout("Ceiling Block")]
+    [HeaderPlus(" ", "- RAYCASTS -", (int)HeaderPlusColor.yellow)]
+    [Tooltip("The number of raycasts that will generate between the leading and trailing raycasts. This number DO NOT INCLUDE the leading and trailing.")]
+    [MinValue(0)]
+    [SerializeField] int numberOfTopMidRaycasts;
+
+    [Tooltip("The distance of each top raycasts.")]
+    [MinValue(0)]
+    [Foldout("Ceiling Block")]
+    [SerializeField] float topRaycastsDistance;
+    #endregion
+
+    #region General
+    [HeaderPlus(" ", "- GENERAL DETECTION -", (int)HeaderPlusColor.white)]
     [Tooltip("The layers that will be considered as obstacle.")]
     [SerializeField] LayerMask obstacleLayers;
 
+    [HeaderPlus(" ", "- BODY -", (int)HeaderPlusColor.white)]
+    [Tooltip("The parent object that contains all the bones of the character.")]
+    [SerializeField] Transform body;
+
     [HeaderPlus(" ", "- GIZMO -", (int)HeaderPlusColor.white)]
     [SerializeField] bool showGizmo;
+    [SerializeField] bool showBottomMidAirRaycastPosition;
+    #endregion
     #endregion
 
     #region VARS
-    private List<Vector3> raycastPositions;
-    private List<RaycastHit2D> raycastHits;
+    private List<Vector3> frontRaycastPositions;
+    private List<Vector3> topRaycastPositions;
+
+    private MoveCommand moveCommand;
+    private GravityController gravityController;
     #endregion
 
-    #region Naughty Attributos Validators
+    #region Naughty Attributes Validators
     private bool IsGreaterThanBottom(float top)
     {
-        return top >= bottomRaycastPositionValue;
+        return top >= bottomFrontRaycastPositionValue;
     }
 
     private bool IsLowerThanTop(float bottom)
     {
-        return bottom <= topRaycastPositionValue;
+        return bottom <= topFrontRaycastPositionValue;
+    }
+
+    private bool IsGreaterThanLeading(float trailing)
+    {
+        return trailing >= leadingTopRaycastPositionValue;
+    }
+
+    private bool IsLowerThanTrailing(float leading)
+    {
+        return leading <= trailingTopRaycastPositionValue;
     }
     #endregion
 
     #region Unity Methods
-    private void Start()
+    private void Awake()
     {
-        SetRaycastPositions();
+        if (moveByInputHandler)
+            moveCommand = GetComponent<InputHandler>().GetMovementCommand();
+
+        gravityController = GetComponent<GravityController>();
     }
 
     private void Update()
     {
-        print(HaveAnyRaycastHit());
-        if (!HaveAnyRaycastHit()) return;
+        // front raycasts
+        SetFrontRaycastPositions();
+        SetMovementBlock(HaveHitedObstacle());
+
+        // top raycasts
+        SetTopRaycastsPosition();
+        SetUpperVelocityBlock(HaveHitedCeiling());
+
     }
     #endregion
 
     #region Methods
-    private void SetRaycastPositions()
+    #region Front Raycasts
+    private void SetFrontRaycastPositions()
     {
-        raycastHits = new List<RaycastHit2D>();
-        raycastPositions = new List<Vector3>();
+        frontRaycastPositions = new List<Vector3>();
 
-        int quantityDivision = numberOfMidRaycasts + 1;
-        float sumOfMidPositions = (this.topRaycastPositionValue - this.bottomRaycastPositionValue) / quantityDivision;
-        float fixedSum = sumOfMidPositions;
+        int quantityDivision = numberOfFrontMidRaycasts + 1;
+        float sumOfMidPositions = 0; 
+        float fixedSum = 0;
+        var bottomRaycastPosition = Vector3.zero;
 
-        var bottomRaycastPosition = new Vector3(
+        if (gravityController.Velocity.y > 0)
+        {
+            bottomRaycastPosition = new Vector3(
             body.position.x + xOffset * DirectionMultiplier(),
-            body.position.y + this.bottomRaycastPositionValue,
+            body.position.y + this.bottomFrontAirRaycastPositionValue,
             body.position.z);
 
-        raycastPositions.Add(bottomRaycastPosition);
+            sumOfMidPositions = (this.topFrontRaycastPositionValue - this.bottomFrontAirRaycastPositionValue) / quantityDivision;
+        }
 
-        for (int i = 0; i < numberOfMidRaycasts; i++)
+        else
         {
-            raycastPositions.Add(new Vector3(
+            bottomRaycastPosition = new Vector3(
+            body.position.x + xOffset * DirectionMultiplier(),
+            body.position.y + this.bottomFrontRaycastPositionValue,
+            body.position.z);
+
+            sumOfMidPositions = (this.topFrontRaycastPositionValue - this.bottomFrontRaycastPositionValue) / quantityDivision;
+        }
+
+        fixedSum = sumOfMidPositions;
+        frontRaycastPositions.Add(bottomRaycastPosition);
+
+        for (int i = 0; i < numberOfFrontMidRaycasts; i++)
+        {
+            frontRaycastPositions.Add(new Vector3(
                 body.position.x + xOffset * DirectionMultiplier(),
-                body.position.y + this.bottomRaycastPositionValue + sumOfMidPositions,
+                body.position.y + this.bottomFrontRaycastPositionValue + sumOfMidPositions,
                 body.position.z));
 
             sumOfMidPositions += fixedSum;
         }
 
-        raycastPositions.Add(new Vector3(
+        frontRaycastPositions.Add(new Vector3(
             this.body.position.x + xOffset * DirectionMultiplier(),
-            this.body.position.y + topRaycastPositionValue,
+            this.body.position.y + topFrontRaycastPositionValue,
             this.body.position.z));
     }
 
-    private bool HaveAnyRaycastHit()
+    private bool HaveHitedObstacle()
     {
-        raycastHits.Clear();
-        var distance = bottomRaycastDistance;
-
-        foreach (Vector3 raycastPosition in raycastPositions)
+        foreach (Vector3 raycastPosition in frontRaycastPositions)
         {
-            RaycastHit2D hit = Physics2D.Raycast(raycastPosition, Vector2.right * DirectionMultiplier(), distance, obstacleLayers);
-            raycastHits.Add(hit);
-            distance += raycastsDistanceSum;
+            RaycastHit2D hit = Physics2D.Raycast(raycastPosition, Vector2.right * DirectionMultiplier(), frontRaycastsDistance, obstacleLayers);
+
+            if (!IsSlope(hit) && HitedObstacle(hit))
+            {
+                return true;
+            }
         }
 
-        return raycastHits.Any(hit => hit.collider != null && !hit.collider.isTrigger);
+        return false;
+    }
+
+    private void SetMovementBlock(bool isHit)
+    {
+        if (isHit)
+        {
+            moveCommand.CanMove = false;
+            return;
+        }
+
+        moveCommand.CanMove = true;
+    }
+
+    #region Front Aux
+    private bool IsSlope(RaycastHit2D hit)
+    {
+        float angle = Vector2.Angle(hit.normal, Vector2.up);
+
+        return angle <= maxSlopeAngle;
     }
 
     private int DirectionMultiplier()
@@ -134,13 +249,96 @@ public class ObstacleBlock : MonoBehaviour
         return this.transform.localScale.x > 0;
     }
     #endregion
+    #endregion
+
+    #region Top Raycasts
+    private void SetTopRaycastsPosition()
+    {
+        topRaycastPositions = new List<Vector3>();
+
+        int quantityDivision = numberOfTopMidRaycasts + 1;
+        float sumOfMidPositions = (this.trailingTopRaycastPositionValue - this.leadingTopRaycastPositionValue) / quantityDivision;
+        float fixedSum = sumOfMidPositions;
+
+        var trailingRaycastPosition = new Vector3(
+            body.position.x + this.leadingTopRaycastPositionValue,
+            body.position.y + yOffset,
+            body.position.z);
+
+        topRaycastPositions.Add(trailingRaycastPosition);
+
+        for (int i = 0; i < numberOfTopMidRaycasts; i++)
+        {
+            topRaycastPositions.Add(new Vector3(
+                body.position.x + this.leadingTopRaycastPositionValue + sumOfMidPositions,
+                body.position.y + yOffset,
+                body.position.z));
+
+            sumOfMidPositions += fixedSum;
+        }
+
+        frontRaycastPositions.Add(new Vector3(
+            this.body.position.x + trailingTopRaycastPositionValue,
+            this.body.position.y + yOffset,
+            this.body.position.z));
+    }
+
+    private bool HaveHitedCeiling()
+    {
+        foreach (Vector3 raycastPosition in topRaycastPositions)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(raycastPosition, Vector2.up, topRaycastsDistance, obstacleLayers);
+
+            if (HitedObstacle(hit))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void SetUpperVelocityBlock(bool isHit)
+    {
+        if (!isHit && gravityController.Velocity.y <= 0)
+        {
+            gravityController.SetCanJump(true);
+        }
+
+        else if (isHit && gravityController.Velocity.y <= 0)
+        {
+            gravityController.SetCanJump();
+            
+        }
+
+        else if (isHit && gravityController.Velocity.y > 0)
+        {
+            gravityController.SetYVelocity(0);
+        }
+    }
+    #endregion
+
+    private bool HitedObstacle(RaycastHit2D hit)
+    {
+        return hit.collider != null && !hit.collider.isTrigger;
+    }
+    #endregion
 
     private void OnDrawGizmos()
     {
         if (!showGizmo) return;
 
-        var bottomPos = new Vector3(this.body.position.x + xOffset * DirectionMultiplier(), this.body.position.y + bottomRaycastPositionValue, 0);
-        var topPos = new Vector3(this.body.position.x + xOffset * DirectionMultiplier(), this.body.position.y + topRaycastPositionValue, 0);
+        if (showBottomMidAirRaycastPosition)
+        {
+            Gizmos.color = Color.red;
+            var bottomMidAir = new Vector3(this.body.position.x + xOffset * DirectionMultiplier(), this.body.position.y + bottomFrontAirRaycastPositionValue, 0);
+            //top raycast position
+            Gizmos.DrawCube(bottomMidAir, new Vector3(0.1f, 0.1f, 0));
+        }
+
+        #region Front Raycasts
+        var bottomPos = new Vector3(this.body.position.x + xOffset * DirectionMultiplier(), this.body.position.y + bottomFrontRaycastPositionValue, 0);
+        var topPos = new Vector3(this.body.position.x + xOffset * DirectionMultiplier(), this.body.position.y + topFrontRaycastPositionValue, 0);
 
         Gizmos.color = Color.red;
         //top raycast position
@@ -149,26 +347,57 @@ public class ObstacleBlock : MonoBehaviour
         Gizmos.DrawCube(bottomPos, new Vector3(0.1f, 0.1f, 0));
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawLine(bottomPos, new Vector3(bottomPos.x + bottomRaycastDistance * DirectionMultiplier(), bottomPos.y, bottomPos.z));
+        Gizmos.DrawLine(bottomPos, new Vector3(bottomPos.x + frontRaycastsDistance * DirectionMultiplier(), bottomPos.y, bottomPos.z));
 
-        int quantityDivision = numberOfMidRaycasts + 1;
-        float sumOfMidPositions = (this.topRaycastPositionValue - this.bottomRaycastPositionValue) / quantityDivision;
+        int quantityDivision = numberOfFrontMidRaycasts + 1;
+        float sumOfMidPositions = (this.topFrontRaycastPositionValue - this.bottomFrontRaycastPositionValue) / quantityDivision;
         float fixedSum = sumOfMidPositions;
-        var distance = bottomRaycastDistance + raycastsDistanceSum;
 
-        for (int i = 0; i < numberOfMidRaycasts; i++)
+        for (int i = 0; i < numberOfFrontMidRaycasts; i++)
         {
             var newPosition = new Vector3(
                 body.position.x + xOffset * DirectionMultiplier(),
-                body.position.y + this.bottomRaycastPositionValue + sumOfMidPositions,
+                body.position.y + this.bottomFrontRaycastPositionValue + sumOfMidPositions,
                 body.position.z);
 
-            Gizmos.DrawLine(newPosition, new Vector3(newPosition.x + distance * DirectionMultiplier(), newPosition.y, newPosition.z));
+            Gizmos.DrawLine(newPosition, new Vector3(newPosition.x + frontRaycastsDistance * DirectionMultiplier(), newPosition.y, newPosition.z));
 
             sumOfMidPositions += fixedSum;
-            distance += raycastsDistanceSum;
         }
 
-        Gizmos.DrawLine(topPos, new Vector3(topPos.x + distance * DirectionMultiplier(), topPos.y, topPos.z));
+        Gizmos.DrawLine(topPos, new Vector3(topPos.x + frontRaycastsDistance * DirectionMultiplier(), topPos.y, topPos.z));
+        #endregion
+
+        #region Top Raycasts
+        var leadingPos = new Vector3(this.body.position.x + leadingTopRaycastPositionValue, this.body.position.y + yOffset, 0);
+        var trailingPos = new Vector3(this.body.position.x + trailingTopRaycastPositionValue, this.body.position.y + yOffset, 0);
+
+        Gizmos.color = Color.yellow;
+        //top raycast position
+        Gizmos.DrawCube(leadingPos, new Vector3(0.1f, 0.1f, 0));
+        // bottom raycast position
+        Gizmos.DrawCube(trailingPos, new Vector3(0.1f, 0.1f, 0));
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawLine(leadingPos, new Vector3(leadingPos.x, leadingPos.y + topRaycastsDistance, leadingPos.z));
+
+        int quantityTopDivision = numberOfTopMidRaycasts + 1;
+        float sumOfMidTopPositions = (this.trailingTopRaycastPositionValue - this.leadingTopRaycastPositionValue) / quantityTopDivision;
+        float fixedTopSum = sumOfMidTopPositions;
+
+        for (int i = 0; i < numberOfTopMidRaycasts; i++)
+        {
+            var newPosition = new Vector3(
+                body.position.x + this.leadingTopRaycastPositionValue + sumOfMidTopPositions,
+                body.position.y + yOffset,
+                body.position.z);
+
+            Gizmos.DrawLine(newPosition, new Vector3(newPosition.x, newPosition.y + topRaycastsDistance, newPosition.z));
+
+            sumOfMidTopPositions += fixedTopSum;
+        }
+
+        Gizmos.DrawLine(trailingPos, new Vector3(trailingPos.x, trailingPos.y + topRaycastsDistance, trailingPos.z));
+        #endregion
     }
 }

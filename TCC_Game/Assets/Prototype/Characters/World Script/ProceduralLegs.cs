@@ -166,7 +166,7 @@ public class ProceduralLegs : MonoBehaviour
 
         foreach (var target in targets)
         {
-            if (gravityController.GetIsOn())
+            if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, targetsDetections) && gravityController.GetIsOn())
             {
                 target.TargetsGoToFoot();
                 target.effectorTarget.position = target.bodyTarget.position;
