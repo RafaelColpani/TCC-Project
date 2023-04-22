@@ -3,7 +3,7 @@
     {
       "id": 0,
       "character": "NPC",
-      "text": "Olá viajante, quanto tempo faz, muita coisa mudou enquanto você esteve fora",
+      "text": "Olá, viajante! Quanto tempo faz... Muita coisa mudou enquanto você esteve fora.",
         "condition": [
             {
                 "type": "firstTime",
@@ -14,7 +14,7 @@
     {
       "id": 1,
       "character": "NPC",
-      "text": "A aldeia mudou muito no passar dos tempos",
+      "text": "A aldeia mudou muito no passar dos tempos...",
       "condition": [
         {
           "type": "firstTime",
@@ -34,22 +34,22 @@
         },
         {
           "choiceId": 2,
-          "text": "E como estão os artefatos?",
+          "text": "E os artefatos?",
           "nextId": 4
         },
         {
           "choiceId": 3,
-          "text": "about area",
+          "text": "A região a frente está bem?",
           "nextId": 12
         },
         {
           "choiceId": 4,
-          "text": "about you",
+          "text": "Me conte sobre você.",
           "nextId": 16
         },
         {
           "choiceId": 5,
-          "text": "finish dialogue",
+          "text": "Estou de saída.",
           "nextId": 17
         }
       ]
@@ -57,18 +57,18 @@
     {
       "id": 3,
       "character": "NPC",
-      "text": "goddess blablabla",
+      "text": "A deusa está morrendo... Sem os artefatos, ela está perdendo a sua energia vital!",
       "nextId": 2
     },
     {
       "id": 4,
       "character": "NPC",
-      "text": "Ah, about artifacts"
+      "text": "Ah... Sobre os artefatos..."
     },
     {
       "id": 5,
       "character": "NPC",
-      "text": "no artifacts",
+      "text": "Você não tem nenhum artefato. Por favor, procure nas regiões. Todos nós precisamos da nossa salvação!",
       "condition": [
         {
           "type": "hasSummer",
@@ -88,7 +88,7 @@
     {
       "id": 6,
       "character": "NPC",
-      "text": "all artifacts",
+      "text": "Você tem todos os artefato! Parabéns!!",
       "condition": [
         {
           "type": "hasSummer",
@@ -108,12 +108,12 @@
     {
       "id": 7,
       "character": "NPC",
-      "text": "you have a few artifacts"
+      "text": "Aaa! Você tem alguns artefatos, continue procurando"
     },
     {
       "id": 8,
       "character": "NPC",
-      "text": "artifact of summer",
+      "text": "Falta o artefato do verão.",
       "condition": [
         {
           "type": "hasSummer",
@@ -124,7 +124,7 @@
     {
       "id": 9,
       "character": "NPC",
-      "text": "artifact of autumn",
+      "text": "Falta o artefato do outono.",
       "condition": [
         {
           "type": "hasAutumn",
@@ -135,7 +135,7 @@
     {
       "id": 10,
       "character": "NPC",
-      "text": "artifact of winter",
+      "text": "Falta o artefato do inverno.",
       "condition": [
         {
           "type": "hasWinter",
@@ -146,18 +146,18 @@
     {
       "id": 11,
       "character": "NPC",
-      "text": "gotta get more artifacts",
+      "text": "Pegue mais artefatos estamos confiando em você",
       "nextId": 2
     },
     {
       "id": 12,
       "character": "NPC",
-      "text": "wanna check area situation?"
+      "text": "A situação dos biomas?"
     },
     {
       "id": 13,
       "character": "NPC",
-      "text": "summer good",
+      "text": "A região do verão está normal por agora.",
       "condition": [
         {
           "type": "summerCondition",
@@ -169,7 +169,7 @@
     {
       "id": 14,
       "character": "NPC",
-      "text": "summer medium",
+      "text": "A região do verão está sumindo... Tome cuidado.",
       "condition": [
         {
           "type": "summerCondition",
@@ -181,7 +181,7 @@
     {
       "id": 15,
       "character": "NPC",
-      "text": "summer bad",
+      "text": "O verão... Que tragédia. Tente ir para outro lugar, rápido!",
       "condition": [
         {
           "type": "summerCondition",
@@ -193,13 +193,13 @@
     {
       "id": 16,
       "character": "NPC",
-      "text": "I am blabla",
+      "text": "Eu sou o mensageiro da nossa Deusa. Estou aqui para te ajudar!",
       "nextId": 2
     },
     {
       "id": 17,
       "character": "NPC",
-      "text": "going? bye!"
+      "text": "Você já vai? Boa sorte na sua jornada!"
     }
   ]
 }
