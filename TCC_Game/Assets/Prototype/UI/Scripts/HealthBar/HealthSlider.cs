@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class HealthSlider : MonoBehaviour
 {
-    [Tooltip("Componente \"Status\" do player, que provavelmente está em \"Body\"")]
+    [Tooltip("Componente \"Status\" do player, que provavelmente estï¿½ em \"Body\"")]
     [SerializeField] Status status;
     [SerializeField] Slider sld;
     [SerializeField] Image fill;
-    [SerializeField] Color[] fillColors = {Color.green, Color.yellow, Color.red};
+    [SerializeField] Color[] fillColors = { Color.green, Color.yellow, Color.red };
 
     private void Start()
     {
@@ -19,13 +19,33 @@ public class HealthSlider : MonoBehaviour
 
         sld.minValue = 0;
         sld.maxValue = status.maxHp;
+
+        GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject po in playerObjects)
+        {
+            if (po.GetComponent<Status>() != null)
+            {
+                status = po.GetComponent<Status>();
+            }
+        }
     }
 
     private void Update()
     {
 
+        if (status == null)
+        {
+            GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject po in playerObjects)
+            {
+                if (po.GetComponent<Status>() != null)
+                {
+                    status = po.GetComponent<Status>();
+                }
+            }
+        }
         sld.value = status.hp;
-        print("life: "+status.hp);
+        print("life: " + status.hp);
 
         if (status.hp <= 2)
             fill.color = fillColors[2]; //red
