@@ -28,6 +28,7 @@ public class DialogueReader : MonoBehaviour
     #region internal variables
     private DialogueData dialogueData;
     private int id;
+    private int trueId;
 
     [HideInInspector]
     public NpcInteractable npcInteract;
@@ -122,7 +123,12 @@ public class DialogueReader : MonoBehaviour
             }
             else //if there is a nextId and there is no false condition, it gets the next id
             {
-                id = dialogueData.dialogue[id].nextId;
+                //id = dialogueData.dialogue[id].nextId;
+                foreach(Dialogue talk in dialogueData.dialogue){
+                    if(talk.id == dialogueData.dialogue[id].nextId){
+                        id = talk.id;
+                    }
+                }
             }
             if (!metConditions)
             {
