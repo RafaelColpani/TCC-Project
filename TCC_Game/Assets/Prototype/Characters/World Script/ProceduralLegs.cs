@@ -175,10 +175,10 @@ public class ProceduralLegs : MonoBehaviour
                 continue;
             }
 
-            localHit = Physics2D.Raycast(target.bodyTarget.position, -Vector2.up, gravityController.GetIsOn() ? Mathf.Infinity : groundRaycastDistance, targetsDetections);
-            finalHit = Physics2D.Raycast(target.finalTarget.position, -Vector2.up, gravityController.GetIsOn() ? Mathf.Infinity : groundRaycastDistance, targetsDetections);
+            localHit = Physics2D.Raycast(target.bodyTarget.position, -Vector2.up, groundRaycastDistance, targetsDetections);
+            finalHit = Physics2D.Raycast(target.finalTarget.position, -Vector2.up, groundRaycastDistance, targetsDetections);
 
-            if (localHit.collider == null)
+            if (localHit.collider == null || finalHit.collider == null)
                 continue;
 
             Vector3 localRayPoint = localHit.point;
