@@ -74,7 +74,7 @@ public class DialogueReader : MonoBehaviour
     public void StartAll()
     {
         //finds path to the json file to be read
-        string filePath = Path.Combine(Application.dataPath, "JSON", fileName);
+        string filePath = Path.Combine(Application.streamingAssetsPath, "JSON", fileName);
 
         //if filepath exists, it is read and assimilated to the DialogueData script
         if (File.Exists(filePath))
