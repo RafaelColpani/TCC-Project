@@ -81,10 +81,10 @@ public class IASpider : MonoBehaviour
 
     public void Attacked()
     {
-        //if (!pursuit) return;
+        if (!pursuit) return;
 
-        //pursuit = false;
-        //StartCoroutine(WaitAttack());
+        pursuit = false;
+        StartCoroutine(WaitAttack());
     }
     #endregion
 
