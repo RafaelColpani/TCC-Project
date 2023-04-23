@@ -2505,6 +2505,11 @@ Transform:
   m_Father: {fileID: 1670789331359323077}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1236448614 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7800544200988138842, guid: 4eb1b4d6178ef2748848c510982a787b, type: 3}
+  m_PrefabInstance: {fileID: 1448113623}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1276385554
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3080,7 +3085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7800544200602205297, guid: 4eb1b4d6178ef2748848c510982a787b, type: 3}
       propertyPath: bellyMaxTimer
-      value: 20
+      value: 99999
       objectReference: {fileID: 0}
     - target: {fileID: 7800544200602205297, guid: 4eb1b4d6178ef2748848c510982a787b, type: 3}
       propertyPath: hpGainFromBelly
@@ -3265,6 +3270,10 @@ PrefabInstance:
     - target: {fileID: 8842716940588131642, guid: 4eb1b4d6178ef2748848c510982a787b, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8894274550367496294, guid: 4eb1b4d6178ef2748848c510982a787b, type: 3}
+      propertyPath: walkSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8917792789607306640, guid: 4eb1b4d6178ef2748848c510982a787b, type: 3}
       propertyPath: m_Layer
@@ -4666,11 +4675,6 @@ Transform:
   m_Father: {fileID: 417624037}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &2117037450 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3028456867877620487, guid: f333b7f77de76aa4da507d42ea96f16b, type: 3}
-  m_PrefabInstance: {fileID: 1276385554}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2127980731
 GameObject:
   m_ObjectHideFlags: 0
@@ -5354,7 +5358,7 @@ PrefabInstance:
     - target: {fileID: 3089469228900348206, guid: 42a6f231babe2ca4cb549787959550e1, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 2117037450}
+      objectReference: {fileID: 1236448614}
     - target: {fileID: 3089469228900348206, guid: 42a6f231babe2ca4cb549787959550e1, type: 3}
       propertyPath: colorGizmo.b
       value: 0.9715789
@@ -5527,7 +5531,7 @@ PrefabInstance:
     - target: {fileID: 8218276045666266506, guid: 70e8c7d765d5cd64180a218d06e8ccf4, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 2117037450}
+      objectReference: {fileID: 1236448614}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70e8c7d765d5cd64180a218d06e8ccf4, type: 3}
 --- !u!1 &1485101527949411306
@@ -6074,7 +6078,7 @@ PrefabInstance:
     - target: {fileID: 2471950032333113673, guid: f0c1065da64449f4dae57a8b5a633f07, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 2117037450}
+      objectReference: {fileID: 1236448614}
     - target: {fileID: 2471950032333113679, guid: f0c1065da64449f4dae57a8b5a633f07, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -6589,7 +6593,7 @@ PrefabInstance:
     - target: {fileID: 1434395883989161380, guid: df18e14a906273244a8022e1501c0572, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 2117037450}
+      objectReference: {fileID: 1236448614}
     - target: {fileID: 1434395883989161380, guid: df18e14a906273244a8022e1501c0572, type: 3}
       propertyPath: colorGizmo.b
       value: 0.0047169924
@@ -6928,7 +6932,7 @@ PrefabInstance:
     - target: {fileID: 5290019338368319573, guid: d6bbebec4c1b35140ae35f670b965c8f, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 2117037450}
+      objectReference: {fileID: 1236448614}
     - target: {fileID: 5290019338368319575, guid: d6bbebec4c1b35140ae35f670b965c8f, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -7529,7 +7533,7 @@ PrefabInstance:
     - target: {fileID: 7130675686252087095, guid: 66a0f12e2fe6d45459911f19bb50d484, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 2117037450}
+      objectReference: {fileID: 1236448614}
     - target: {fileID: 8568077209743989181, guid: 66a0f12e2fe6d45459911f19bb50d484, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -8035,7 +8039,7 @@ PrefabInstance:
     - target: {fileID: 305271648916621128, guid: d87d2500cfb379e40bc8b0c5a8d0bc73, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 2117037450}
+      objectReference: {fileID: 1236448614}
     - target: {fileID: 305271648916621128, guid: d87d2500cfb379e40bc8b0c5a8d0bc73, type: 3}
       propertyPath: colorGizmo.b
       value: 0
