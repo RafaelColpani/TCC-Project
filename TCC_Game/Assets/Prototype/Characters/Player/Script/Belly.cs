@@ -17,6 +17,11 @@ public class Belly : MonoBehaviour
     [SerializeField] int hpLossFromBelly = 2;
     [SerializeField] int hpGainFromBelly = 1;
 
+    public float BellyMaxTimer
+    {
+        get { return bellyMaxTimer; }
+    }
+
     Status stats;
 
     private void Awake()
@@ -99,5 +104,10 @@ public class Belly : MonoBehaviour
             stats.belly = stats.maxBelly;
 
         
+    }
+
+    public void ResetBellyTimer()
+    {
+        bellyTimer = 0;
     }
 }

@@ -38,6 +38,7 @@ public class IsDamagedAndDead : MonoBehaviour
     Vector2 damageOrigin;
     [SerializeField] bool isAlive = true;
     Status stats;
+    Belly belly;
     GameObject instantiatedDeathIcon;
     float fixedInvincibilityTime;
 
@@ -58,12 +59,22 @@ public class IsDamagedAndDead : MonoBehaviour
         List<float> ordenedDropRates = new List<float>(dropRate);
         ordenedDropRates.Sort();
         stats = GetComponent<Status>();
+        belly = GetComponent<Belly>();
         fixedInvincibilityTime = invincibilityTime;
         invincibilityTime = 0;
     }
 
     private void Update()
     {
+        if (isAlive)
+        {
+            if (stats.hp <= 0)
+            {
+                isAlive = false;
+                Death();
+            }
+        }
+
         if (invincibilityTime <= 0) return;
         invincibilityTime -= Time.deltaTime;
     }
@@ -72,7 +83,6 @@ public class IsDamagedAndDead : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (!this.CompareTag("Player")) return;
-        print("xsax");
         if (collision.CompareTag("damage") && isAlive && invincibilityTime <= 0 && collision.GetComponent<IsDamagedAndDead>().IsAlive)
         {
             invincibilityTime = fixedInvincibilityTime;
@@ -140,15 +150,6 @@ public class IsDamagedAndDead : MonoBehaviour
         }
 
         stats.hp -= lifeLoss;
-
-        if (isAlive)
-        {
-            if (stats.hp <= 0)
-            {
-                isAlive = false;
-                Death();
-            }
-        }
     }
     #endregion
 
@@ -280,8 +281,10 @@ public class IsDamagedAndDead : MonoBehaviour
 
         stats.hp = stats.maxHp;
         stats.life -= 1;
-        isAlive = true;
+        stats.belly = stats.maxBelly;
+        belly.ResetBellyTimer();
         proceduralLegs.ProceduralIsOn = false;
+        isAlive = true;
 
         inputHandler.gameObject.transform.position = respawnPosition;
         this.transform.position = respawnPosition;
