@@ -147,6 +147,7 @@ public class DialogueReader : MonoBehaviour
             dialogueGrp.SetActive(false);
             id = 0;
             gameObject.SetActive(false);
+            PauseController.SetPause(false);
         }
     }
     #endregion

@@ -20,6 +20,7 @@ public class NpcInteractable : MonoBehaviour, IInteractable
     public void Interact()
     {
         Debug.Log("Into Interact void");
+        PauseController.SetPause();
 
         if (canTalk)
         {
