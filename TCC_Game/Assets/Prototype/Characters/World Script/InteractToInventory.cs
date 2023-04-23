@@ -9,7 +9,7 @@ public class InteractToInventory : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        switch (this.gameObject.name)
+        switch (item.name)
         {
             case "item_artifactSummer":
                 DialogueConditions.hasSummer = true;
