@@ -5,21 +5,22 @@ using UnityEngine.UI;
 
 public class HealthSlider : MonoBehaviour
 {
+    [Header("HEALTH - HP")]
     [Tooltip("Componente \"Status\" do player, que provavelmente est� em \"Body\"")]
     [SerializeField] Status status;
     [SerializeField] Slider sld;
     [SerializeField] Image fill;
     [SerializeField] Color[] fillColors = { Color.green, Color.yellow, Color.red };
 
+    [Header("BELLY - HUNGER")]
+    [SerializeField] Color hungerColor;
+    public bool isBelly = false;
+
     private void Start()
     {
         sld = GetComponent<Slider>();
-
         fill = FindGameObjectByNameInChildren(gameObject, "Fill").GetComponent<Image>();
-
-        sld.minValue = 0;
-        sld.maxValue = status.maxHp;
-
+        
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject po in playerObjects)
         {
@@ -27,6 +28,17 @@ public class HealthSlider : MonoBehaviour
             {
                 status = po.GetComponent<Status>();
             }
+        }
+
+        if (!isBelly)
+        {
+            sld.minValue = 0;
+            sld.maxValue = status.maxHp;
+        }
+        else
+        {
+            sld.minValue = 0;
+            sld.maxValue = status.maxBelly;
         }
     }
 
@@ -44,15 +56,31 @@ public class HealthSlider : MonoBehaviour
                 }
             }
         }
-        sld.value = status.hp;
-        print("life: " + status.hp);
 
-        if (status.hp <= 2)
-            fill.color = fillColors[2]; //red
-        else if (status.hp <= (status.maxHp * 0.6))
-            fill.color = fillColors[1]; //yellow
+        if (!isBelly)
+        {
+            sld.value = status.hp;
+
+            if (status.hp <= 2)
+                fill.color = fillColors[2]; //red
+            else if (status.hp <= (status.maxHp * 0.6))
+                fill.color = fillColors[1]; //yellow
+            else
+                fill.color = fillColors[0]; //ok
+        }
         else
-            fill.color = fillColors[0]; //ok
+        {
+            sld.value = status.belly;
+            print("belly: " + status.belly);
+
+            if (status.belly <= status.maxBelly * 0.2f)
+                fill.color = hungerColor + new Color(1,0,0,0.4f);
+            else if (status.hp <= (status.maxBelly * 0.6f))
+                fill.color = hungerColor + new Color(1, 0, 0, 0.2f);
+            else
+                fill.color = hungerColor;
+        }
+        
 
     }
 
