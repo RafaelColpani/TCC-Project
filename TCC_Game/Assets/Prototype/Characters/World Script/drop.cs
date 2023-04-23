@@ -59,7 +59,7 @@ public class drop : MonoBehaviour
     }
 
     public void launch() {
-        //se loot vai na direção oposta do tiro
+        //se loot vai na direï¿½ï¿½o oposta do tiro
         /*float distSize = Mathf.Abs(distDamage.x) + Mathf.Abs(distDamage.y);
         Vector2 angle = new Vector2(distDamage.x / distSize * 1.5f, distDamage.y / distSize * 1.5f);
 
@@ -72,4 +72,12 @@ public class drop : MonoBehaviour
         rb.AddForce(new Vector2(angle, 1 - Mathf.Abs(angle)) * launchForce, ForceMode2D.Impulse);
     }
     #endregion
+
+    public void destroy(int secondsAfterDrop){
+        StartCoroutine(destroyOnTime(secondsAfterDrop));
+    }
+    IEnumerator destroyOnTime(int secondsAfterDrop){
+        yield return new WaitForSeconds(secondsAfterDrop);
+        Destroy(this.gameObject);
+    }
 }

@@ -14,8 +14,16 @@ public class InventoryManager : MonoBehaviour
 
     int selectedSlot = -1;
 
+    IsDamagedAndDead playerDrop;
+
     private void Start()
     {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in players)
+        {
+            if (player.GetComponent<IsDamagedAndDead>() != null)
+                playerDrop = player.GetComponent<IsDamagedAndDead>();
+        }
         // first slot selected by default
         ChangeSelectedSlot(0);
     }
@@ -105,7 +113,7 @@ public class InventoryManager : MonoBehaviour
     {
         InventorySlot slot = inventorySlots[selectedSlot];
         InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-        
+
         if (itemInSlot != null)
         {
             Item item = itemInSlot.item;
@@ -199,6 +207,7 @@ public class InventoryManager : MonoBehaviour
                     item.type != Item.ItemType.Artifact)
                 {
                     SpawnNewItem(item, slot);
+                    playerDrop.AddDrop(item.PrefabReference);
                     return true;
                 }
                 // se o item for artefato e o slot for pra ele
@@ -230,7 +239,7 @@ public class InventoryManager : MonoBehaviour
 
     public void RemoveAllArtifacts()
     {
-        for(int i = 0; i < inventorySlots.Length; i++)
+        for (int i = 0; i < inventorySlots.Length; i++)
         {
             if (inventorySlots[i].GetComponentInChildren<InventoryItem>() != null &&
                 inventorySlots[i].isArtifactSlot)
@@ -255,19 +264,20 @@ public class InventoryManager : MonoBehaviour
     {
         if (inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>().gameObject == null) yield return null;
 
-        GameObject drop = Instantiate
+        int secondsAfterDrop = 12;
+
+        playerDrop.DropSelected(inventorySlots[i].GetComponentInChildren<InventoryItem>().item.PrefabReference, secondsAfterDrop);
+        /*GameObject drop = Instantiate
                     (inventorySlots[i].GetComponentInChildren<InventoryItem>().item.PrefabReference,
                     GameObject.FindGameObjectWithTag("Player").transform.position,
-                    Quaternion.identity);
+                    Quaternion.identity);*/
 
         //drop.GetComponent<SuckedByPlayer>().enabled = false;
 
-        drop.GetComponent<drop>().launch();
+        //drop.GetComponent<drop>().launch();
 
-        int secondsAfterDrop = 12;
         Destroy(inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>().gameObject);
-        yield return new WaitForSeconds(secondsAfterDrop);
 
-        Destroy(drop);
+        yield return new WaitForSeconds(secondsAfterDrop);
     }
 }

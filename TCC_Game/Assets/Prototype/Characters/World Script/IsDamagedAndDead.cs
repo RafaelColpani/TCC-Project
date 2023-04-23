@@ -255,6 +255,19 @@ public class IsDamagedAndDead : MonoBehaviour
         Destroy(this.transform.root.gameObject);
     }
 
+    public void DropSelected(GameObject item, int secondsAfterDrop)
+    {
+        GameObject loot = Instantiate(item, this.transform.position, Quaternion.identity);
+        drop lootDrop = loot.GetComponent<drop>();
+        lootDrop.launch();
+        lootDrop.destroy(secondsAfterDrop);
+        RemoveDrop(item);
+
+        // reminder: destroi este objeto, não o loot
+        Destroy(instantiatedDeathIcon);
+        //Destroy(this.transform.root.gameObject);
+    }
+
     /// <summary>
     /// Se o player morrer, dropa os itens do player para fora do inventário 
     /// </summary>
