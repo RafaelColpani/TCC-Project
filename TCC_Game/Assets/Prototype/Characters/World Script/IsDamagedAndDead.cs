@@ -287,6 +287,7 @@ public class IsDamagedAndDead : MonoBehaviour
         var respawnPosition = new Vector3(0f, 5f, 0);
 
         inventoryManager.RemoveAllArtifacts();
+        inventoryManager.InstaDestroyAllItems();
         DialogueConditions.RemoveAllArtifacts();
         var inputHandler = GetComponentInParent<InputHandler>();
         var proceduralLegs = GetComponentInParent<ProceduralLegs>();

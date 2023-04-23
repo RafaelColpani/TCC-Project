@@ -238,6 +238,18 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public void InstaDestroyAllItems()
+    {
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            if (inventorySlots[i].GetComponentInChildren<InventoryItem>() != null &&
+                !inventorySlots[i].isArtifactSlot)
+            {
+                Destroy(inventorySlots[i].GetComponentInChildren<InventoryItem>().gameObject);
+            }
+        }
+    }
+
     public void RemoveAllArtifacts()
     {
         for (int i = 0; i < inventorySlots.Length; i++)
