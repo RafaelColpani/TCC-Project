@@ -27,6 +27,7 @@ public class IsDamagedAndDead : MonoBehaviour
 
     [HeaderPlus(" ", "DROP", (int)HeaderPlusColor.green)]
     [SerializeField] GameObject interactable; // raio de interação
+    [SerializeField] GameObject parentObject;
 
     //[SerializeField] bool isPlayer = false;
 
@@ -252,7 +253,7 @@ public class IsDamagedAndDead : MonoBehaviour
 
         // reminder: destroi este objeto, não o loot
         Destroy(instantiatedDeathIcon);
-        Destroy(this.transform.root.gameObject);
+        Destroy(this.parentObject);
     }
 
     public void DropSelected(GameObject item, int secondsAfterDrop)
