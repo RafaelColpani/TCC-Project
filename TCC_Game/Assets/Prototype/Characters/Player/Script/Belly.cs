@@ -31,6 +31,7 @@ public class Belly : MonoBehaviour
     }
     private void Update()
     {
+        if (PauseController.isPaused) return;
         //gives time before hunger starts
         if (bellyTimer < bellyMaxTimer)
         {

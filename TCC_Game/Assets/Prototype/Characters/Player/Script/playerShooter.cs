@@ -29,6 +29,7 @@ public class playerShooter : MonoBehaviour
 
     void Update()
     {
+        if (PauseController.isPaused) return;
         TurnObject();
 
         if (physBullet != null)
