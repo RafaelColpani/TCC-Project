@@ -41,6 +41,7 @@ public class IsDamagedAndDead : MonoBehaviour
     Status stats;
     Belly belly;
     GameObject instantiatedDeathIcon;
+    InventoryManager inventoryManager;
     float fixedInvincibilityTime;
 
     public bool IsAlive
@@ -63,6 +64,11 @@ public class IsDamagedAndDead : MonoBehaviour
         belly = GetComponent<Belly>();
         fixedInvincibilityTime = invincibilityTime;
         invincibilityTime = 0;
+    }
+
+    private void Start()
+    {
+        inventoryManager = GameObject.Find("_InventoryManager").GetComponent<InventoryManager>();
     }
 
     private void Update()
@@ -266,6 +272,8 @@ public class IsDamagedAndDead : MonoBehaviour
     {
         var respawnPosition = new Vector3(0f, 5f, 0);
 
+        inventoryManager.RemoveAllArtifacts();
+        DialogueConditions.RemoveAllArtifacts();
         var inputHandler = GetComponentInParent<InputHandler>();
         var proceduralLegs = GetComponentInParent<ProceduralLegs>();
         inputHandler.SetCanWalk();

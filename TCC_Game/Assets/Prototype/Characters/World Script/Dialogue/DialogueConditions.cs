@@ -49,4 +49,11 @@ public class DialogueConditions
     {
         return (converted != 0);
     }
+
+    public static void RemoveAllArtifacts()
+    {
+        hasSummer = false;
+        hasAutumn = false;
+        hasWinter = false;
+    }
 }
