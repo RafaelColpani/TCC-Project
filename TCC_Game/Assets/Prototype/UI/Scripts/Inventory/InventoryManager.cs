@@ -57,6 +57,7 @@ public class InventoryManager : MonoBehaviour
                             {
                                 po.GetComponent<Belly>().Eat(itemInSlot.item.bellyFiller);
                                 UseSelectedItem(true);
+                                return;
                             }
                         }
                     }
