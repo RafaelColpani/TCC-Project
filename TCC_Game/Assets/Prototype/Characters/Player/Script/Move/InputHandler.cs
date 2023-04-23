@@ -60,7 +60,7 @@ public class InputHandler : MonoBehaviour
 
     private void FixedUpdate() 
     {
-        if (PauseController.isPaused) return;
+        if (PauseController.GetIsPaused()) return;
         if (!canWalk) return;
         var readedMoveValue = playerActions.Movement.Move.ReadValue<float>();
         moveCommand.ChangeMoveDirection(proceduralLegs.GetMeanLegsDirection());

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseController : MonoBehaviour
 {
-    public static bool isPaused = false;
+    private static bool isPaused = false;
 
     [SerializeField] GameObject pause;
     [SerializeField] GameObject settings;
@@ -56,5 +56,26 @@ public class PauseController : MonoBehaviour
         settings.SetActive(false);
         settings.GetComponentInChildren<TabGroup>().SelectFirstTab();
         Pause();
+    }
+
+    public static bool GetIsPaused()
+    {
+        return isPaused;
+    }
+
+    public static void SetPauseAndTime(bool pause = true)
+    {
+        isPaused = pause;
+
+        if (pause)
+            Time.timeScale = 0;
+
+        else
+            Time.timeScale = 1;
+    }
+
+    public static void SetPause(bool value = true)
+    {
+        isPaused = value;
     }
 }
