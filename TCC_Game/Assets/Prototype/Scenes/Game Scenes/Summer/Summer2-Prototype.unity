@@ -182,11 +182,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1.0000001}
-      - {x: -1.0095508, y: 0.9914495}
-      - {x: -0.9777466, y: -0.9747508}
-      - {x: 0.997245, y: -1.0039978}
-      - {x: 0.9900528, y: 1.0011988}
+    - - {x: -1, y: -1}
+      - {x: -1, y: 1}
+      - {x: 1, y: 1}
+      - {x: 1, y: -1}
+      - {x: -0.6034986, y: -1}
+      - {x: -0.88921285, y: -1}
+      - {x: -1, y: -1}
 --- !u!114 &18385391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,13 +468,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1, y: -1}
-      - {x: -1, y: 1}
-      - {x: 1, y: 1}
-      - {x: 1, y: -1}
-      - {x: -0.6034986, y: -1}
-      - {x: -0.88921285, y: -1}
-      - {x: -1, y: -1}
+    - - {x: -0.9999501, y: -0.99995005}
+      - {x: -0.99995005, y: 0.9999502}
+      - {x: 0.9999501, y: 0.99995005}
+      - {x: 0.99995005, y: -0.9999502}
+      - {x: -0.8669826, y: -0.99995005}
+      - {x: -0.975, y: -0.99995005}
+      - {x: -0.9999501, y: -0.99995005}
 --- !u!114 &152133565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,43 +494,43 @@ MonoBehaviour:
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: -1, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: -1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
-  m_SpriteShape: {fileID: 0}
+  m_SpriteShape: {fileID: 11400000, guid: 380c339e7ae55b84aae8361d914af82f, type: 2}
   m_FillPixelPerUnit: 100
   m_StretchTiling: 1
   m_SplineDetail: 8
@@ -588,11 +590,20 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 0}
-  m_Sprites: []
+  m_ShapeTexture: {fileID: 2800000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
+  m_Sprites:
+  - {fileID: 21300000, guid: 0ae2b74b1edd14bb18dd7b65ae916a54, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 1.0000001, y: 1.0000001, z: 0}
+    m_Extent: {x: 1.0250001, y: 1.0250002, z: 0}
 --- !u!1 &424671328
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,13 +701,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1, y: -1}
-      - {x: -1, y: 1}
-      - {x: 1, y: 1}
-      - {x: 1, y: -1}
-      - {x: -0.6034986, y: -1}
-      - {x: -0.88921285, y: -1}
-      - {x: -1, y: -1}
+    - - {x: -0.9999501, y: -0.99995005}
+      - {x: -0.99995005, y: 0.9999502}
+      - {x: 0.9999501, y: 0.99995005}
+      - {x: 0.99995005, y: -0.9999502}
+      - {x: -0.8669826, y: -0.99995005}
+      - {x: -0.975, y: -0.99995005}
+      - {x: -0.9999501, y: -0.99995005}
 --- !u!114 &443419766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -716,43 +727,43 @@ MonoBehaviour:
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: -1, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: -1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
-  m_SpriteShape: {fileID: 0}
+  m_SpriteShape: {fileID: 11400000, guid: 380c339e7ae55b84aae8361d914af82f, type: 2}
   m_FillPixelPerUnit: 100
   m_StretchTiling: 1
   m_SplineDetail: 8
@@ -812,11 +823,20 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 0}
-  m_Sprites: []
+  m_ShapeTexture: {fileID: 2800000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
+  m_Sprites:
+  - {fileID: 21300000, guid: 0ae2b74b1edd14bb18dd7b65ae916a54, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 1.0000001, y: 1.0000001, z: 0}
+    m_Extent: {x: 1.0250001, y: 1.0250002, z: 0}
 --- !u!1 &448960129
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,13 +927,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1, y: -1}
-      - {x: -1, y: 1}
-      - {x: 1, y: 1}
-      - {x: 1, y: -1}
-      - {x: -0.6034986, y: -1}
-      - {x: -0.88921285, y: -1}
-      - {x: -1, y: -1}
+    - - {x: -0.9999501, y: -0.99995005}
+      - {x: -0.99995005, y: 0.9999502}
+      - {x: 0.9999501, y: 0.99995005}
+      - {x: 0.99995005, y: -0.9999502}
+      - {x: -0.8669826, y: -0.99995005}
+      - {x: -0.975, y: -0.99995005}
+      - {x: -0.9999501, y: -0.99995005}
 --- !u!114 &458551510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -933,43 +953,43 @@ MonoBehaviour:
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: -1, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: -1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
-  m_SpriteShape: {fileID: 0}
+  m_SpriteShape: {fileID: 11400000, guid: 380c339e7ae55b84aae8361d914af82f, type: 2}
   m_FillPixelPerUnit: 100
   m_StretchTiling: 1
   m_SplineDetail: 8
@@ -1029,11 +1049,20 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 0}
-  m_Sprites: []
+  m_ShapeTexture: {fileID: 2800000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
+  m_Sprites:
+  - {fileID: 21300000, guid: 0ae2b74b1edd14bb18dd7b65ae916a54, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 1.0000001, y: 1.0000001, z: 0}
+    m_Extent: {x: 1.0250001, y: 1.0250002, z: 0}
 --- !u!1 &478552572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,13 +1644,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1, y: -1}
-      - {x: -1, y: 1}
-      - {x: 1, y: 1}
-      - {x: 1, y: -1}
-      - {x: -0.6034986, y: -1}
-      - {x: -0.88921285, y: -1}
-      - {x: -1, y: -1}
+    - - {x: -0.9999501, y: -0.99995005}
+      - {x: -0.99995005, y: 0.9999502}
+      - {x: 0.9999501, y: 0.99995005}
+      - {x: 0.99995005, y: -0.9999502}
+      - {x: -0.8669826, y: -0.99995005}
+      - {x: -0.975, y: -0.99995005}
+      - {x: -0.9999501, y: -0.99995005}
 --- !u!114 &996821434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1641,43 +1670,43 @@ MonoBehaviour:
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: -1, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: -1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
-  m_SpriteShape: {fileID: 0}
+  m_SpriteShape: {fileID: 11400000, guid: 380c339e7ae55b84aae8361d914af82f, type: 2}
   m_FillPixelPerUnit: 100
   m_StretchTiling: 1
   m_SplineDetail: 8
@@ -1737,11 +1766,20 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 0}
-  m_Sprites: []
+  m_ShapeTexture: {fileID: 2800000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
+  m_Sprites:
+  - {fileID: 21300000, guid: 0ae2b74b1edd14bb18dd7b65ae916a54, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 1.0000001, y: 1.0000001, z: 0}
+    m_Extent: {x: 1.0250001, y: 1.0250002, z: 0}
 --- !u!1 &1005923468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1902,13 +1940,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1, y: -1}
-      - {x: -1, y: 1}
-      - {x: 1, y: 1}
-      - {x: 1, y: -1}
-      - {x: -0.6034986, y: -1}
-      - {x: -0.88921285, y: -1}
-      - {x: -1, y: -1}
+    - - {x: -0.9999501, y: -0.99995005}
+      - {x: -0.99995005, y: 0.9999502}
+      - {x: 0.9999501, y: 0.99995005}
+      - {x: 0.99995005, y: -0.9999502}
+      - {x: -0.8669826, y: -0.99995005}
+      - {x: -0.975, y: -0.99995005}
+      - {x: -0.9999501, y: -0.99995005}
 --- !u!114 &1341241521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1928,43 +1966,43 @@ MonoBehaviour:
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: -1, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: -1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
-  m_SpriteShape: {fileID: 0}
+  m_SpriteShape: {fileID: 11400000, guid: 380c339e7ae55b84aae8361d914af82f, type: 2}
   m_FillPixelPerUnit: 100
   m_StretchTiling: 1
   m_SplineDetail: 8
@@ -2024,11 +2062,20 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 0}
-  m_Sprites: []
+  m_ShapeTexture: {fileID: 2800000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
+  m_Sprites:
+  - {fileID: 21300000, guid: 0ae2b74b1edd14bb18dd7b65ae916a54, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 1.0000001, y: 1.0000001, z: 0}
+    m_Extent: {x: 1.0250001, y: 1.0250002, z: 0}
 --- !u!1 &1400393974
 GameObject:
   m_ObjectHideFlags: 0
@@ -2181,13 +2228,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1, y: -1}
-      - {x: -1, y: 1}
-      - {x: 1, y: 1}
-      - {x: 1, y: -1}
-      - {x: -0.6034986, y: -1}
-      - {x: -0.88921285, y: -1}
-      - {x: -1, y: -1}
+    - - {x: -0.9999501, y: -0.99995005}
+      - {x: -0.99995005, y: 0.9999502}
+      - {x: 0.9999501, y: 0.99995005}
+      - {x: 0.99995005, y: -0.9999502}
+      - {x: -0.8669826, y: -0.99995005}
+      - {x: -0.975, y: -0.99995005}
+      - {x: -0.9999501, y: -0.99995005}
 --- !u!114 &1741134516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2207,43 +2254,43 @@ MonoBehaviour:
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: -1, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: -1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
-  m_SpriteShape: {fileID: 0}
+  m_SpriteShape: {fileID: 11400000, guid: 380c339e7ae55b84aae8361d914af82f, type: 2}
   m_FillPixelPerUnit: 100
   m_StretchTiling: 1
   m_SplineDetail: 8
@@ -2303,11 +2350,20 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 0}
-  m_Sprites: []
+  m_ShapeTexture: {fileID: 2800000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
+  m_Sprites:
+  - {fileID: 21300000, guid: 0ae2b74b1edd14bb18dd7b65ae916a54, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 1.0000001, y: 1.0000001, z: 0}
+    m_Extent: {x: 1.0250001, y: 1.0250002, z: 0}
 --- !u!1 &1743970698
 GameObject:
   m_ObjectHideFlags: 0
@@ -2491,13 +2547,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1, y: -1}
-      - {x: -1, y: 1}
-      - {x: 1, y: 1}
-      - {x: 1, y: -1}
-      - {x: -0.6034986, y: -1}
-      - {x: -0.88921285, y: -1}
-      - {x: -1, y: -1}
+    - - {x: -0.9999501, y: -0.99995005}
+      - {x: -0.99995005, y: 0.9999502}
+      - {x: 0.9999501, y: 0.99995005}
+      - {x: 0.99995005, y: -0.9999502}
+      - {x: -0.8669826, y: -0.99995005}
+      - {x: -0.975, y: -0.99995005}
+      - {x: -0.9999501, y: -0.99995005}
 --- !u!114 &2028460069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2517,43 +2573,43 @@ MonoBehaviour:
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: -1, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: 1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
     - position: {x: 1, y: -1, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
-      height: 1
+      height: 0.1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
-      corner: 0
+      corner: 1
       m_CornerMode: 1
-  m_SpriteShape: {fileID: 0}
+  m_SpriteShape: {fileID: 11400000, guid: 380c339e7ae55b84aae8361d914af82f, type: 2}
   m_FillPixelPerUnit: 100
   m_StretchTiling: 1
   m_SplineDetail: 8
@@ -2613,11 +2669,20 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 0}
-  m_Sprites: []
+  m_ShapeTexture: {fileID: 2800000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
+  m_Sprites:
+  - {fileID: 21300000, guid: 0ae2b74b1edd14bb18dd7b65ae916a54, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 1.0000001, y: 1.0000001, z: 0}
+    m_Extent: {x: 1.0250001, y: 1.0250002, z: 0}
 --- !u!1 &2041479298
 GameObject:
   m_ObjectHideFlags: 0
