@@ -10145,6 +10145,7 @@ Transform:
   - {fileID: 1313003526}
   - {fileID: 302051222}
   - {fileID: 366760547}
+  - {fileID: 904605260}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13322,7 +13323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timesTalked: 0
-  fileName: LoreNPC Dialogue.json
+  fileName: playtest Dialogue.json
   dialogueManager: {fileID: 1328148429}
   dialogueGrp: {fileID: 127083077}
   canTalk: 1
@@ -13398,6 +13399,64 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1.1504323, y: 2.1331673}
+  m_EdgeRadius: 0
+--- !u!1 &904605259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 904605260}
+  - component: {fileID: 904605261}
+  m_Layer: 9
+  m_Name: LeftExtremity
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &904605260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904605259}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -40.96, y: 1.49, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 671900592}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &904605261
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904605259}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3, y: 23.8}
   m_EdgeRadius: 0
 --- !u!1 &909916016
 GameObject:
@@ -15592,7 +15651,7 @@ PolygonCollider2D:
       - {x: -0.4225855, y: 1.5010905}
       - {x: -0.35172036, y: 1.5575097}
       - {x: -0.28456607, y: 1.7432234}
-      - {x: -0.14602548, y: 2.187843}
+      - {x: -0.14602546, y: 2.187843}
       - {x: -0.07316602, y: 2.3036172}
       - {x: 0.00458772, y: 2.341959}
       - {x: 0.08188844, y: 2.294515}
@@ -15600,7 +15659,7 @@ PolygonCollider2D:
       - {x: 0.38698402, y: 1.3647677}
       - {x: 0.5015548, y: 1.1658257}
       - {x: 0.6282914, y: 1.2693582}
-      - {x: 0.80293775, y: 1.5323619}
+      - {x: 0.80293775, y: 1.5323617}
       - {x: 0.9775595, y: 1.5124123}
       - {x: 1.0088992, y: -0.9998886}
       - {x: -0.88921285, y: -1.0089}

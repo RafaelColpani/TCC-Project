@@ -42,6 +42,7 @@ public class PlayerInteract : MonoBehaviour
 
             Debug.Log("Interact button" + " " + " [PlayerInteract.cs] ");
             interactable.Interact();
+            interactable = null;
         }
     }
 }
