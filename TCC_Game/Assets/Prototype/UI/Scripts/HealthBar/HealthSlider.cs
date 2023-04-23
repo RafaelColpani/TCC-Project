@@ -5,31 +5,34 @@ using UnityEngine.UI;
 
 public class HealthSlider : MonoBehaviour
 {
+    [Tooltip("Componente \"Status\" do player, que provavelmente está em \"Body\"")]
     [SerializeField] Status status;
     [SerializeField] Slider sld;
     [SerializeField] Image fill;
-    [SerializeField] Color[] fillColors = {Color.white, Color.yellow, Color.red};
+    [SerializeField] Color[] fillColors = {Color.green, Color.yellow, Color.red};
 
     private void Start()
     {
-        status = FindObjectOfType<Status>();
         sld = GetComponent<Slider>();
 
         fill = FindGameObjectByNameInChildren(gameObject, "Fill").GetComponent<Image>();
 
+        sld.minValue = 0;
+        sld.maxValue = status.maxHp;
     }
 
     private void Update()
     {
-        sld.value = status.life;
-        print("life: "+status.life);
 
-        if (status.life <= 1)
-            fill.color = fillColors[2];
-        else if (status.life <= (status.maxLife * 0.75))
-            fill.color = fillColors[1];
+        sld.value = status.hp;
+        print("life: "+status.hp);
+
+        if (status.hp <= 2)
+            fill.color = fillColors[2]; //red
+        else if (status.hp <= (status.maxHp * 0.6))
+            fill.color = fillColors[1]; //yellow
         else
-            fill.color = fillColors[0];
+            fill.color = fillColors[0]; //ok
 
     }
 
