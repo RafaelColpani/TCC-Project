@@ -95,20 +95,6 @@ public class IsDamagedAndDead : MonoBehaviour
 
             if (collision.GetComponentInParent<IASpider>() == null) return;
             collision.GetComponentInParent<IASpider>().Attacked();
-
-            //se dano for do player, mas o alvo nao for player, ou se dano nao for gerado pelo player, o alvo deve perder vida
-            /*if (
-                (dmgScript.isPlayer && !this.gameObject.CompareTag("Player"))
-                ||
-                (!dmgScript.isPlayer)
-                )
-            {
-                loseLife(dmgScript.dmg, dmgScript.dmgType);
-            }*/
-
-            //se o dano for criado pelo ataque do objeto X, o mesmo não deverá levar o dano
-
-            //dmgScript.creator = this.gameObject;
         }
     }
 
