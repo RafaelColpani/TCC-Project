@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DialogueConditions
 {
-    static int foodType = 1;
-    static bool confirmation = false;
+    public static int foodType = 1, summerCondition = 1, autumnCondition = 1, winterCondition = 1;
+    public static bool confirmation = false, hasSummer = false, hasAutumn = false, hasWinter = false;
 
     public List<Condition> conditions = new List<Condition>();
 
@@ -14,15 +14,15 @@ public class DialogueConditions
         conditions.Clear();
         Dictionary<string, bool> conditionBool = new Dictionary<string, bool>() {
             {nameof(firstTime), firstTime},
-            {"hasSummer", ToBoolean(PlayerPrefs.GetInt("hasSummer"))},
-            {"hasAutumn", ToBoolean(PlayerPrefs.GetInt("hasAutumn"))},
-            {"hasWinter", ToBoolean(PlayerPrefs.GetInt("hasWinter"))},
+            {nameof(hasSummer), hasSummer},
+            {nameof(hasAutumn), hasAutumn},
+            {nameof(hasWinter), hasWinter},
             {nameof(confirmation), confirmation}
         };
         Dictionary<string, int> conditionInt = new Dictionary<string, int>() {
-            {"summerCondition", PlayerPrefs.GetInt("summerCondition")},
-            {"autumnCondition", PlayerPrefs.GetInt("autumnCondition")},
-            {"winterCondition", PlayerPrefs.GetInt("winterCondition")},
+            {"summerCondition", summerCondition},
+            {"autumnCondition", autumnCondition},
+            {"winterCondition", winterCondition},
             {nameof(foodType), foodType}
         };
 

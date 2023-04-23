@@ -27,19 +27,6 @@ public class Status : MonoBehaviour
             PlayerPrefs.SetInt("Player_MagDefense", magDefense);
         }
 
-        if(PlayerPrefs.HasKey("hasSummer")){
-            PlayerPrefs.SetInt("hasSummer", 0);
-            PlayerPrefs.SetInt("hasAutumn", 0);
-            PlayerPrefs.SetInt("hasWinter", 0);
-        }
-
-        if (PlayerPrefs.HasKey("summerCondition"))
-        {
-            PlayerPrefs.SetInt("summerCondition", 1);
-            PlayerPrefs.SetInt("autumnCondition", 1);
-            PlayerPrefs.SetInt("winterCondition", 1);
-        }
-
         life = maxLife;
         hp = maxHp;
         belly = maxBelly;
