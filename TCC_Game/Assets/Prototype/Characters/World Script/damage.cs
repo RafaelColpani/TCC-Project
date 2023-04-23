@@ -29,7 +29,10 @@ public class damage : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!isBullet) return;
+        if (!isBullet
+        /*||
+        collision.gameObject.layer.Equals("default")*/) 
+        return;
 
         //se o colisor não for o criador da bala, ela n será destroída
         if (!creator.Contains(collision.gameObject))
