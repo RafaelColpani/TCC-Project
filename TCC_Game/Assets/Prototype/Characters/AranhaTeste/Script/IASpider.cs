@@ -44,6 +44,7 @@ public class IASpider : MonoBehaviour
 
     void Update()
     {
+        if (PauseController.isPaused) return;
         if (_debugPlayerVariables)
         {
             DebugZone();
@@ -53,6 +54,7 @@ public class IASpider : MonoBehaviour
     #region IA
     private void OnTriggerStay2D(Collider2D collider)
     {
+        if (PauseController.isPaused) return;
         if (collider.CompareTag("Player") && damagedAndDead.IsAlive) 
         {
             SimpleIA();

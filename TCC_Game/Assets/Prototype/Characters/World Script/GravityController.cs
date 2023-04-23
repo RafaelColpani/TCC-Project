@@ -41,6 +41,7 @@ public class GravityController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(PauseController.isPaused) return;
         if (!isOn)
         {
             velocity.y = 0;

@@ -143,7 +143,7 @@ public class ProceduralLegs : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        if (PauseController.isPaused) return;
         TargetsGroundHeight();
 
         if (!proceduralIsOn) return;

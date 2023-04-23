@@ -66,6 +66,7 @@ public class IsDamagedAndDead : MonoBehaviour
 
     private void Update()
     {
+        if (PauseController.isPaused) return;
         if (isAlive)
         {
             if (stats.hp <= 0)
@@ -82,6 +83,7 @@ public class IsDamagedAndDead : MonoBehaviour
     #region damage
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (PauseController.isPaused) return;
         if (!this.CompareTag("Player")) return;
         if (collision.CompareTag("damage") && isAlive && invincibilityTime <= 0 && collision.GetComponent<IsDamagedAndDead>().IsAlive)
         {

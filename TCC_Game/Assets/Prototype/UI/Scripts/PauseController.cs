@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseController : MonoBehaviour
 {
+    public static bool isPaused = false;
+
     [SerializeField] GameObject pause;
     [SerializeField] GameObject settings;
 
@@ -19,9 +21,19 @@ public class PauseController : MonoBehaviour
     public void Pause()
     {
         if (pause.activeSelf)
+        {
+            print("despausou");
             pause.SetActive(false);
+            Time.timeScale = 1;
+            PauseController.isPaused = false;
+        }
         else
+        {
+            print("pausoug");
             pause.SetActive(true);
+            Time.timeScale = 0;
+            PauseController.isPaused = true;
+        }
     }
 
     public void Settings()
@@ -34,13 +46,15 @@ public class PauseController : MonoBehaviour
 
     public void MainMenu()
     {
+        PauseController.isPaused = false;
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     public void Resume()
     {
-        pause.SetActive(false);
         settings.SetActive(false);
         settings.GetComponentInChildren<TabGroup>().SelectFirstTab();
+        Pause();
     }
 }
