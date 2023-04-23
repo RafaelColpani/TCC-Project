@@ -20,6 +20,7 @@ public class IsDamagedAndDead : MonoBehaviour
     [SerializeField] ParticleSystem deathParticles;
     [SerializeField] GameObject deathIcon;
     [SerializeField] Vector3 deathIconOffset;
+    [SerializeField] Transform iconFollowsThis;
 
     [HeaderPlus(" ", "INVINCIBILITY", (int)HeaderPlusColor.yellow)]
     [SerializeField] float invincibilityTime = 0;
@@ -155,7 +156,9 @@ public class IsDamagedAndDead : MonoBehaviour
             interactable.SetActive(true);
             //mostra ícone de morte acima da criatura
             instantiatedDeathIcon = Instantiate(deathIcon);
-            instantiatedDeathIcon.GetComponent<FollowObject>().obj = this.gameObject.transform;
+            if (iconFollowsThis == null)
+                instantiatedDeathIcon.GetComponent<FollowObject>().obj = this.gameObject.transform;
+            else instantiatedDeathIcon.GetComponent<FollowObject>().obj = iconFollowsThis;
             instantiatedDeathIcon.GetComponent<FollowObject>().offset = deathIconOffset;
 
             //obtem componente do gameobject "morto"
