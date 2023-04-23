@@ -40,7 +40,6 @@ public class MoveCommand : ICommand
         if (characterController != null)
         {
             characterController.Move(movement * Time.fixedDeltaTime);
-            Debug.Log(movement);
         }
     }
 

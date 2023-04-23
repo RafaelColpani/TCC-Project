@@ -134,7 +134,7 @@ public class ObstacleBlock : MonoBehaviour
     #endregion
 
     #region Unity Methods
-    private void Awake()
+    private void Start()
     {
         if (moveByInputHandler)
             moveCommand = GetComponent<InputHandler>().GetMovementCommand();
