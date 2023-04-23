@@ -5,6 +5,7 @@ using UnityEngine;
 //using Random = UnityEngine.Random;
 using KevinCastejon.MoreAttributes;
 
+[RequireComponent(typeof(Status))]
 public class IsDamagedAndDead : MonoBehaviour
 {
     #region calibration
@@ -19,6 +20,9 @@ public class IsDamagedAndDead : MonoBehaviour
     [SerializeField] ParticleSystem deathParticles;
     [SerializeField] GameObject deathIcon;
     [SerializeField] Vector3 deathIconOffset;
+
+    [HeaderPlus(" ", "INVINCIBILITY", (int)HeaderPlusColor.yellow)]
+    [SerializeField] float invincibilityTime = 0;
 
     [HeaderPlus(" ", "DROP", (int)HeaderPlusColor.green)]
     [SerializeField] GameObject interactable; // raio de interação
@@ -35,6 +39,12 @@ public class IsDamagedAndDead : MonoBehaviour
     [SerializeField] bool isAlive = true;
     Status stats;
     GameObject instantiatedDeathIcon;
+    float fixedInvincibilityTime;
+
+    public bool IsAlive
+    {
+        get { return isAlive; }
+    }
     #endregion
 
     private void Awake()
@@ -48,26 +58,33 @@ public class IsDamagedAndDead : MonoBehaviour
         List<float> ordenedDropRates = new List<float>(dropRate);
         ordenedDropRates.Sort();
         stats = GetComponent<Status>();
+        fixedInvincibilityTime = invincibilityTime;
+        invincibilityTime = 0;
     }
 
     private void Update()
     {
-        if (isAlive)
-        {
-            if (stats.hp <= 0)
-            {
-                Death();
-                isAlive = false;
-            }
-        }
+        if (invincibilityTime <= 0) return;
+        invincibilityTime -= Time.deltaTime;
     }
 
     #region damage
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("damage") && isAlive)
+        if (!this.CompareTag("Player")) return;
+        print("xsax");
+        if (collision.CompareTag("damage") && isAlive && invincibilityTime <= 0 && collision.GetComponent<IsDamagedAndDead>().IsAlive)
         {
+            invincibilityTime = fixedInvincibilityTime;
             damage dmgScript = collision.gameObject.GetComponent<damage>();
+
+            if (!dmgScript.creator.Contains(collision.gameObject))
+            {
+                LoseLife(dmgScript.dmg, dmgScript.dmgType);
+            }
+
+            if (collision.GetComponentInParent<IASpider>() == null) return;
+            collision.GetComponentInParent<IASpider>().Attacked();
 
             //se dano for do player, mas o alvo nao for player, ou se dano nao for gerado pelo player, o alvo deve perder vida
             /*if (
@@ -82,14 +99,26 @@ public class IsDamagedAndDead : MonoBehaviour
             //se o dano for criado pelo ataque do objeto X, o mesmo não deverá levar o dano
 
             //dmgScript.creator = this.gameObject;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (this.CompareTag("Player")) return;
+
+        if (collision.CompareTag("damage") && isAlive && invincibilityTime <= 0)
+        {
+            invincibilityTime = fixedInvincibilityTime;
+            damage dmgScript = collision.gameObject.GetComponent<damage>();
+
             if (!dmgScript.creator.Contains(collision.gameObject))
             {
-                loseLife(dmgScript.dmg, dmgScript.dmgType);
+                LoseLife(dmgScript.dmg, dmgScript.dmgType);
             }
         }
     }
 
-    private void loseLife(int damage, damage.DmgType dmgType)
+    private void LoseLife(int damage, damage.DmgType dmgType)
     {
         int lifeLoss;
 
@@ -109,9 +138,16 @@ public class IsDamagedAndDead : MonoBehaviour
         {
             PlayerPrefs.SetInt("Player_HP", PlayerPrefs.GetInt("Player_HP") - lifeLoss);
         }
-        else
+
+        stats.hp -= lifeLoss;
+
+        if (isAlive)
         {
-            stats.hp -= lifeLoss;
+            if (stats.hp <= 0)
+            {
+                isAlive = false;
+                Death();
+            }
         }
     }
     #endregion
@@ -140,9 +176,9 @@ public class IsDamagedAndDead : MonoBehaviour
         // SE FOR O PLAYER
         else
         {
-            //DropInventory();
+            DropInventory();
             FindObjectOfType<InventoryManager>()?.RemoveAllItems();
-            Destroy(this.gameObject);
+            RespawnPlayer();
         }
     }
     #endregion
@@ -175,6 +211,7 @@ public class IsDamagedAndDead : MonoBehaviour
     /// </summary>
     public void Drop()
     {
+        print("drop");
         GameObject chosenDrop = null;
         float lootDrop = Random.Range(0f, 100f);
 
@@ -217,20 +254,40 @@ public class IsDamagedAndDead : MonoBehaviour
 
         // reminder: destroi este objeto, não o loot
         Destroy(instantiatedDeathIcon);
-        Destroy(this.gameObject);
+        Destroy(this.transform.root.gameObject);
     }
 
     /// <summary>
     /// Se o player morrer, dropa os itens do player para fora do inventário 
     /// </summary>
     /// 
-    //private void DropInventory()
-    //{
-    //    for (int i = 0; i < droppableItem.Count; i++)
-    //    {
-    //        GameObject loot = Instantiate(droppableItem[i], this.transform.position, Quaternion.identity);
-    //        loot.GetComponent<drop>().launch();
-    //    }
-    //}
+    private void DropInventory()
+    {
+        for (int i = 0; i < droppableItem.Count; i++)
+        {
+            GameObject loot = Instantiate(droppableItem[i], this.transform.position, Quaternion.identity);
+            loot.GetComponent<drop>().launch();
+        }
+    }
+
+    private void RespawnPlayer()
+    {
+        var respawnPosition = new Vector3(0f, 5f, 0);
+
+        var inputHandler = GetComponentInParent<InputHandler>();
+        var proceduralLegs = GetComponentInParent<ProceduralLegs>();
+        inputHandler.SetCanWalk();
+
+        stats.hp = stats.maxHp;
+        stats.life -= 1;
+        isAlive = true;
+        proceduralLegs.ProceduralIsOn = false;
+
+        inputHandler.gameObject.transform.position = respawnPosition;
+        this.transform.position = respawnPosition;
+
+        proceduralLegs.ProceduralIsOn = true;
+        inputHandler.SetCanWalk(true);
+    }
     #endregion
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class damage : MonoBehaviour
 {
     public bool isPlayer = false;
+    [SerializeField] bool isBullet;
 
     [HideInInspector] public enum DmgType { PHY, MAG }
     public DmgType dmgType = new DmgType();
@@ -15,6 +16,8 @@ public class damage : MonoBehaviour
 
     private void Awake()
     {
+        if (!isBullet) return;
+
         rb = this.GetComponent<Rigidbody2D>();
 
         rb.velocity = Vector3.zero;
@@ -26,6 +29,8 @@ public class damage : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!isBullet) return;
+
         //se o colisor não for o criador da bala, ela n será destroída
         if (!creator.Contains(collision.gameObject))
         {
@@ -35,6 +40,8 @@ public class damage : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!isBullet) return;
+
         //se o colisor não for o criador da bala, ela n será destroída
         if (!creator.Contains(collision.gameObject))
         {

@@ -12,8 +12,11 @@ public class GravityController : MonoBehaviour
     [SerializeField] AnimationCurve gravityCurve;
 
     Vector3 velocity = Vector3.zero;
+
     private bool isOn = false;
     private bool jumped = false;
+    private bool canJump = true;
+
     float timer = 0f;
     private float maxTimer = 2f;
 
@@ -22,6 +25,8 @@ public class GravityController : MonoBehaviour
         get { return velocity; }
         set 
         {
+            if (!canJump) return;
+
             isOn = true;
             jumped = true;
             velocity = value; 
@@ -66,6 +71,18 @@ public class GravityController : MonoBehaviour
     public void SetIsOn(bool value)
     {
         isOn = value;
+    }
+    #endregion
+
+    #region Velocity Aux
+    public void SetYVelocity(float value)
+    {
+        velocity = new Vector3(velocity.x, value, velocity.z);
+    }
+
+    public void SetCanJump(bool value = false)
+    {
+        canJump = value;
     }
     #endregion
 }

@@ -15,23 +15,21 @@ public class ObjectTargets
     public Transform finalTarget;
     [Tooltip("The GameObject acting as the effector. Must be a child of the final bone of a leg.")]
     public Transform effector;
+    [Tooltip("An empty GameObject that will represent the position of the players foot, following the body.")]
+    public Transform foot;
     [Tooltip("The legs will move accordingly to its timing. Even legs will not walk while Odds legs are walking, and vice versa.")]
     public bool isEven;
-
-    public Transform foot;
 
     private float stepTime;
     private bool isMoving;
 
     #region Getters & Setters
-    [HideInInspector]
     public bool IsMoving
     {
         get { return isMoving; }
         set { isMoving = value; }
     }
 
-    [HideInInspector]
     public float StepTime
     {
         get { return stepTime; }
@@ -59,7 +57,6 @@ public class ObjectTargets
         bodyTarget.position = foot.position;
         finalTarget.position = foot.position;
     }
-
     #endregion
 }
 
@@ -146,8 +143,10 @@ public class ProceduralLegs : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         TargetsGroundHeight();
 
+        if (!proceduralIsOn) return;
         if (!CanMoveLegs()) return;
 
         MoveLegs();
@@ -169,7 +168,7 @@ public class ProceduralLegs : MonoBehaviour
 
         foreach (var target in targets)
         {
-            if (gravityController.GetIsOn())
+            if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, targetsDetections) && gravityController.GetIsOn())
             {
                 target.TargetsGoToFoot();
                 target.effectorTarget.position = target.bodyTarget.position;
@@ -248,6 +247,7 @@ public class ProceduralLegs : MonoBehaviour
                 target.SetIsMoving(false);
                 target.ResetStepTime();
                 target.effectorTarget.position = target.finalTarget.position;
+                //TODO: Footstep Sound
 
                 if (this.evenIsWalking)
                     this.evenIsWalking = false;
@@ -303,7 +303,7 @@ public class ProceduralLegs : MonoBehaviour
             return (objectTarget.bodyTarget.position - objectTarget.effectorTarget.position).sqrMagnitude;
     }
 
-    private Vector3 GetMeanLegsPosition()
+    public Vector3 GetMeanLegsPosition()
     {
         float x = 0f, y = 0f, z = 0f;
         int numberOfPositions = targets.Count;
@@ -318,13 +318,15 @@ public class ProceduralLegs : MonoBehaviour
         return new Vector3(x / numberOfPositions, y / numberOfPositions, z / numberOfPositions);
     }
 
-    private Vector3 GetMeanLegsDirection()
+    public Vector3 GetMeanLegsDirection()
     {
         Vector3 centerPoint = GetMeanLegsPosition();
         Vector3 legPoint = targets[1].effectorTarget.position;
         Vector3 legVector = legPoint - centerPoint;
+        if (legVector.x < 0)
+            legVector *= -1;
 
-        Debug.DrawRay(centerPoint, new Vector3(-legVector.y, legVector.x, 0).normalized, Color.red);
+        Debug.DrawRay(centerPoint, new Vector3(-legVector.y, legVector.x, 0).normalized, Color.yellow);
         return new Vector3(-legVector.y, legVector.x, 0).normalized;
     }
     #endregion

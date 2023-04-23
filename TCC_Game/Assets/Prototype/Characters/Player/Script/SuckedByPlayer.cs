@@ -31,7 +31,7 @@ public class SuckedByPlayer : MonoBehaviour
 
     private void Awake()
     {
-        rb =  this.GetComponent<Rigidbody2D>();
+        rb = this.GetComponent<Rigidbody2D>();
 
         GetComponent<SpriteRenderer>().color = Color.white;
         GetComponent<SpriteRenderer>().sprite = item.sprite;
@@ -49,7 +49,7 @@ public class SuckedByPlayer : MonoBehaviour
 
     private void Update()
     {
-        if (timer < maxTimer) 
+        if (timer < maxTimer)
         {
             timer += Time.deltaTime;
         }
@@ -60,18 +60,20 @@ public class SuckedByPlayer : MonoBehaviour
         {
             Debug.DrawLine(transform.position, hit.point, Color.red);
 
-                GameObject player = hit.collider.gameObject;
+            GameObject player = hit.collider.gameObject;
 
-                if (timer >= maxTimer)
-                {
-                    GoToPlayer(player.GetComponent<IsDamagedAndDead>(), player.GetComponent<Transform>().position);
-                }
+            print("WAWAWA drop sugado por: "+player.name);
+
+            if (timer >= maxTimer)
+            {
+                GoToPlayer(player.GetComponent<IsDamagedAndDead>(), player.GetComponent<Transform>().position);
+            }
         }
         if (hits.Length == 0) rb.gravityScale = 1;
     }
 
-    // Item é atraído ao player
-    private void GoToPlayer(IsDamagedAndDead playerInventory, Vector3 playerPos) 
+    // Item ï¿½ atraï¿½do ao player
+    private void GoToPlayer(IsDamagedAndDead playerInventory, Vector3 playerPos)
     {
         rb.gravityScale = 0;
         Vector2 direction = playerPos - transform.position;
@@ -84,12 +86,12 @@ public class SuckedByPlayer : MonoBehaviour
         float speedMultiplier = velocityCurve.Evaluate(distance);
 
         Vector2 velocity = direction.normalized * speed * speedMultiplier;
-        
-        
+
+
         transform.Translate(velocity * Time.deltaTime);
     }
 
-    private void GetToInventory(IsDamagedAndDead playerInventory) 
+    private void GetToInventory(IsDamagedAndDead playerInventory)
     {
         // makes object get to the inventory and then destroys the one on scene
 

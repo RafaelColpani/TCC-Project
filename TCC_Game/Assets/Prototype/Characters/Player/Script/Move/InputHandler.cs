@@ -7,13 +7,16 @@ using KevinCastejon.MoreAttributes;
 
 [RequireComponent(typeof(GravityController))]
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(ProceduralLegs))]
 public class InputHandler : MonoBehaviour
 {
     #region VARs
     private PlayerActions playerActions;
     private CharacterController characterController;
-    private GravityController gc;
+    private GravityController gravityController;
+    private ProceduralLegs proceduralLegs;
 
+    public bool canWalk = true;
     #region Inspector VARs
     [HeaderPlus(" ", "- GENERAL -", (int)HeaderPlusColor.green)]
     [Tooltip("The Transform of the player's body.")]
@@ -47,7 +50,8 @@ public class InputHandler : MonoBehaviour
     {
         playerActions = new PlayerActions();
         characterController = GetComponent<CharacterController>();
-        gc = GetComponent<GravityController>();
+        gravityController = GetComponent<GravityController>();
+        proceduralLegs = GetComponent<ProceduralLegs>();
 
         LoadInputBindings();
         InitializeCommands();
@@ -56,7 +60,9 @@ public class InputHandler : MonoBehaviour
 
     private void FixedUpdate() 
     {
+        if (!canWalk) return;
         var readedMoveValue = playerActions.Movement.Move.ReadValue<float>();
+        moveCommand.ChangeMoveDirection(proceduralLegs.GetMeanLegsDirection());
         moveCommand.Execute(this.gameObject.transform, characterController, readedMoveValue);
     }
     #endregion
@@ -76,7 +82,7 @@ public class InputHandler : MonoBehaviour
     private void InitializeCommands()
     {
         moveCommand = new MoveCommand(walkSpeed);
-        pressJumpCommand = new PressJumpCommand(jumpForce, groundCheck, groundCheckRadius, groundLayer, gc);
+        pressJumpCommand = new PressJumpCommand(jumpForce, groundCheck, groundCheckRadius, groundLayer, gravityController);
         releaseJumpCommand = new ReleaseJumpCommand();
     }
 
@@ -84,6 +90,32 @@ public class InputHandler : MonoBehaviour
     {
         playerActions.Movement.Jump.performed += ctx => pressJumpCommand.Execute(body);
         playerActions.Movement.Jump.canceled += ctx => releaseJumpCommand.Execute(body);
+    }
+
+    public void SetCanWalk(bool value = false)
+    {
+        if (value)
+        {
+            StartCoroutine(DelayedCanWalk());
+        }
+
+        else
+        {
+            canWalk = value;
+        }
+
+        moveCommand.SetCanWalk(value);
+    }
+
+    IEnumerator DelayedCanWalk()
+    {
+        yield return new WaitForSeconds(1);
+        canWalk = true;
+    }
+
+    public MoveCommand GetMovementCommand()
+    {
+        return this.moveCommand;
     }
     #endregion
 
