@@ -16,8 +16,6 @@ public class ShaderInteractive : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.FindWithTag("TargetPlayer") == null) return;
-
         playerTarget = GameObject.FindWithTag("TargetPlayer");
         print("Tag:" + playerTarget);
 
