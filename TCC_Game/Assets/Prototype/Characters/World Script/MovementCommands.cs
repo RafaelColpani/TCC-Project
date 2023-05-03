@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class MoveCommand : ICommand
 {
     private float walkSpeed;
-    private Vector3 moveDirection;
+    private Vector3 velocity;
     private bool isFacingRight;
     private bool canWalk;
     private bool canMove;
@@ -22,7 +22,7 @@ public class MoveCommand : ICommand
     public MoveCommand(float walkSpeed)
     {
         this.walkSpeed = walkSpeed;
-        this.moveDirection = Vector3.zero;
+        this.velocity = Vector3.zero;
         this.isFacingRight = true;
         this.canWalk = true;
         this.canMove = true;
@@ -41,17 +41,6 @@ public class MoveCommand : ICommand
         {
             characterController.Move(movement * Time.fixedDeltaTime);
         }
-    }
-
-    public void ChangeMoveDirection(Vector3 value)
-    {
-        // rotate 90 degress (counter clock-wise), looking to the left
-        this.moveDirection = new Vector3(-value.y, value.x, 0);
-        this.moveDirection *= -1;
-
-        //inverts if is looking to the right
-        //if (isFacingRight)
-            //this.moveDirection *= -1;
     }
 
     private void ChangeDirection(Transform actor, Vector3 movement)
