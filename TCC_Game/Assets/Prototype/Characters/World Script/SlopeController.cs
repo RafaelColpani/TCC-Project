@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using KevinCastejon.MoreAttributes;
 using UnityEngine;
 
@@ -40,8 +38,8 @@ public class SlopeController : MonoBehaviour
     #endregion
 
     #region Private Vars
+    [SerializeField][ReadOnly] SlopeState slopeState = SlopeState.noSlope;
     private MoveCommand moveCommand;
-    private SlopeState slopeState = SlopeState.noSlope;
     #endregion
 
     #region Unity Methods
@@ -53,20 +51,82 @@ public class SlopeController : MonoBehaviour
 
     private void Update()
     {
-        CheckAscendingSlope();
-        CheckDescendingSlope();
+        SetSlopeState();
+        SlopeStateCommand();
     }
     #endregion
 
     #region Methods
-    private void CheckAscendingSlope()
+    private void SetSlopeState()
     {
-        RaycastHit2D hit = Physics2D.Raycast(GetRaycastsPosition(), Vector2.right * DirectionMultiplier(), ascendingRaycastDistance, slopeLayers);
+        var slopeAngle = 0f;
+
+        // check asending first
+        RaycastHit2D ascendingHit = Physics2D.Raycast(GetRaycastsPosition(), Vector2.right * DirectionMultiplier(), ascendingRaycastDistance, slopeLayers);
+        if (ascendingHit.collider != null)
+        {
+            slopeAngle = Vector2.Angle(ascendingHit.normal, Vector2.up);
+            if (slopeAngle <= slopeMaxAngle)
+            {
+                slopeState = SlopeState.ascending;
+                return;
+            }
+        }
+
+        // check descending next
+        RaycastHit2D descendingHit = Physics2D.Raycast(GetRaycastsPosition(), -Vector2.up, descendingRaycastDistance, slopeLayers);
+        if (descendingHit.collider != null)
+        {
+            slopeAngle = Vector2.Angle(descendingHit.normal, Vector2.right * DirectionMultiplier());
+            if (slopeAngle <= slopeMaxAngle)
+            {
+                slopeState = SlopeState.descending;
+                return;
+            }
+        }
+
+        // it is not on a slope
+        slopeState = SlopeState.noSlope;
     }
 
-    private void CheckDescendingSlope()
+    private void SlopeStateCommand()
+    {
+        switch (slopeState)
+        {
+            case SlopeState.noSlope:
+                moveCommand.ModifySlopeVelocity();
+                break;
+
+            case SlopeState.ascending:
+                AscendingSlopeVelocity();
+                break;
+
+            case SlopeState.descending:
+                DescendingSlopeVelocity();
+                break;
+        }
+    }
+
+    private void AscendingSlopeVelocity()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(GetRaycastsPosition(), Vector2.right * DirectionMultiplier(), ascendingRaycastDistance, slopeLayers);
+        var slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+
+        var xValue = Mathf.Cos(slopeAngle * Mathf.Deg2Rad);
+        var yValue = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * DirectionMultiplier();
+
+        moveCommand.ModifySlopeVelocity(true, xValue, yValue);
+    }
+
+    private void DescendingSlopeVelocity()
     {
         RaycastHit2D hit = Physics2D.Raycast(GetRaycastsPosition(), -Vector2.up, descendingRaycastDistance, slopeLayers);
+        var slopeAngle = Vector2.Angle(hit.normal, Vector2.right * DirectionMultiplier());
+
+        var xValue = Mathf.Sin(slopeAngle * Mathf.Deg2Rad);
+        var yValue = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * -DirectionMultiplier();
+
+        moveCommand.ModifySlopeVelocity(true, xValue, yValue);
     }
     #endregion
 

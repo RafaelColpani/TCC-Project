@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem.Interactions;
 
 #region COMMANDS
 /// <summary>Perform the walk movement, given the actors Transform who will execute it.</summary>
@@ -12,6 +13,7 @@ public class MoveCommand : ICommand
     private bool isFacingRight;
     private bool canWalk;
     private bool canMove;
+    private bool isInSlope;
 
     public bool CanMove
     {
@@ -26,35 +28,60 @@ public class MoveCommand : ICommand
         this.isFacingRight = true;
         this.canWalk = true;
         this.canMove = true;
+        this.isInSlope = false;
     }
 
     public void Execute(Transform actor, CharacterController characterController = null, float value = 1)
     {
-        Vector3 movement = actor.right * (value * walkSpeed);
-        ChangeDirection(actor, movement);
-        if (!canWalk) return;
+        if (!isInSlope)
+            velocity = actor.right;
 
-        // moving by character controller
+        ChangeDirection(actor, value);
+
+        if (!canWalk) return;
         if (!canMove) return;
 
         if (characterController != null)
         {
-            characterController.Move(movement * Time.fixedDeltaTime);
+            characterController.Move((velocity * (value * walkSpeed)) * Time.fixedDeltaTime);
+            Debug.Log(velocity);
         }
     }
 
-    private void ChangeDirection(Transform actor, Vector3 movement)
+    private void ChangeDirection(Transform actor, float value)
     {
-        if ((isFacingRight && movement.x < 0) || (!isFacingRight && movement.x > 0))
+        if ((isFacingRight && value < 0) || (!isFacingRight && value > 0))
         {
             isFacingRight = !isFacingRight;
             actor.localScale = new Vector3(actor.localScale.x * -1, actor.localScale.y, actor.localScale.z);
         }
     }
 
+    public void ModifySlopeVelocity(bool modify = false, float xValue = 0, float yValue = 0)
+    {
+        if (!modify) 
+        {
+            this.isInSlope = false;
+            return; 
+        }
+
+        this.isInSlope = true;
+        velocity = new Vector3(xValue, yValue, 0);
+    }
+
     public void SetCanWalk(bool value = false)
     {
         this.canWalk = value;
+    }
+
+    public float GetXVelocity()
+    {
+        return this.velocity.x;
+    }
+
+    public float GetYVelocity()
+    {
+        return this.velocity.y;
     }
 }
 
