@@ -13,7 +13,7 @@ public class MoveCommand : ICommand
     private bool isFacingRight;
     private bool canWalk;
     private bool canMove;
-    private bool isInSlope;
+    private bool isOnSlope;
 
     public bool CanMove
     {
@@ -28,12 +28,12 @@ public class MoveCommand : ICommand
         this.isFacingRight = true;
         this.canWalk = true;
         this.canMove = true;
-        this.isInSlope = false;
+        this.isOnSlope = false;
     }
 
     public void Execute(Transform actor, CharacterController characterController = null, float value = 1)
     {
-        if (!isInSlope)
+        if (!isOnSlope)
             velocity = actor.right;
 
         ChangeDirection(actor, value);
@@ -61,11 +61,11 @@ public class MoveCommand : ICommand
     {
         if (!modify) 
         {
-            this.isInSlope = false;
+            this.isOnSlope = false;
             return; 
         }
 
-        this.isInSlope = true;
+        this.isOnSlope = true;
         velocity = new Vector3(xValue, yValue, 0);
     }
 

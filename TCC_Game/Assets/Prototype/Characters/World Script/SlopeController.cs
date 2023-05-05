@@ -8,6 +8,7 @@ public enum SlopeState
     descending
 }
 
+[RequireComponent(typeof(GravityController))]
 public class SlopeController : MonoBehaviour
 {
     #region Inspector Var
@@ -41,6 +42,7 @@ public class SlopeController : MonoBehaviour
 
     #region Private Vars
     private MoveCommand moveCommand;
+    private GravityController gravityController;
     #endregion
 
     #region Unity Methods
@@ -48,6 +50,8 @@ public class SlopeController : MonoBehaviour
     {
         if (moveByInputHandler)
             moveCommand = GetComponent<InputHandler>().GetMovementCommand();
+
+        gravityController = GetComponent<GravityController>();
     }
 
     private void Update()
@@ -62,9 +66,16 @@ public class SlopeController : MonoBehaviour
     {
         var slopeAngle = 0f;
 
+        // apply no slope statement if player is jumping
+        if (gravityController.Velocity.y > 0)
+        {
+            slopeState = SlopeState.noSlope;
+            return;
+        }
+
         // check asending first
         RaycastHit2D ascendingHit = Physics2D.Raycast(GetRaycastsPosition(), Vector2.right * DirectionMultiplier(), ascendingRaycastDistance, slopeLayers);
-        if (ascendingHit.collider != null)
+        if (ascendingHit.collider != null && !ascendingHit.collider.isTrigger)
         {
             slopeAngle = Vector2.Angle(ascendingHit.normal, Vector2.up);
             if (slopeAngle <= slopeMaxAngle)
@@ -76,7 +87,7 @@ public class SlopeController : MonoBehaviour
 
         // check descending next
         RaycastHit2D descendingHit = Physics2D.Raycast(GetRaycastsPosition(), -Vector2.up, descendingRaycastDistance, slopeLayers);
-        if (descendingHit.collider != null)
+        if (descendingHit.collider != null && !descendingHit.collider.isTrigger)
         {
             slopeAngle = Vector2.Angle(descendingHit.normal, Vector2.right * DirectionMultiplier());
             if (slopeAngle <= slopeMaxAngle)
