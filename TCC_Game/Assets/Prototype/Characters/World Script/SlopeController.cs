@@ -24,6 +24,8 @@ public class SlopeController : MonoBehaviour
     [Range(0f, 90f)] [SerializeField] float slopeMaxAngle;
     [Tooltip("The layers that will be considered as slope.")]
     [SerializeField] LayerMask slopeLayers;
+    [Tooltip("The state of the current slope status.")]
+    [SerializeField][ReadOnly] SlopeState slopeState = SlopeState.noSlope;
 
     [HeaderPlus(" ", "- MOVE COMMAND -", (int)HeaderPlusColor.cyan)]
     [Tooltip("If the move command in this character is in an Input Handler, check this box.")]
@@ -38,7 +40,6 @@ public class SlopeController : MonoBehaviour
     #endregion
 
     #region Private Vars
-    [SerializeField][ReadOnly] SlopeState slopeState = SlopeState.noSlope;
     private MoveCommand moveCommand;
     #endregion
 
