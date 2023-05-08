@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    public static InventoryManager instance;
+
     public InventorySlot[] inventorySlots;
 
-    //public Item[] allItemsList;
-
     public GameObject InventoryItemPrefab;
-
     public int maxStackedItems = 4;
-
     int selectedSlot = -1;
-
     IsDamagedAndDead playerDrop;
 
+    [Header("SFX")]
+    public AudioSource addItemSfx;
+    public AudioSource removeItemSfx;
+    public AudioSource artifactSfx;
     private void Start()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -144,7 +145,7 @@ public class InventoryManager : MonoBehaviour
                     StartCoroutine(TimedDrop(selectedSlot));
                     itemInSlot.RefreshCount();
                 }
-
+                removeItemSfx.Play();
                 //Destroy(itemInSlot.gameObject);
 
             }
@@ -191,6 +192,7 @@ public class InventoryManager : MonoBehaviour
             {
                 itemInSlot.count++;
                 itemInSlot.RefreshCount();
+                addItemSfx.Play();
                 return true;
             }
         }
@@ -209,6 +211,7 @@ public class InventoryManager : MonoBehaviour
                 {
                     SpawnNewItem(item, slot);
                     playerDrop.AddDrop(item.PrefabReference);
+                    addItemSfx.Play();
                     return true;
                 }
                 // se o item for artefato e o slot for pra ele
@@ -216,6 +219,7 @@ public class InventoryManager : MonoBehaviour
                     item.type == Item.ItemType.Artifact)
                 {
                     SpawnNewItem(item, slot);
+                    artifactSfx.Play();
                     return true;
                 }
             }

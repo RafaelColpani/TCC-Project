@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D.IK;
 using KevinCastejon.MoreAttributes;
+using UnityEditor.Experimental.GraphView;
 
 [System.Serializable]
 public class ObjectTargets
@@ -103,6 +104,10 @@ public class ProceduralLegs : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [Tooltip("The radius of the circle that will detect the ground from the checkGround Transform position.")]
     [SerializeField] private float groundCheckRadius;
+
+    [HeaderPlus(" ", "- SFX -", (int)HeaderPlusColor.green)]
+    [SerializeField] private AudioSource[] footstepGrass;
+    [SerializeField] private AudioSource[] footstepSnow;
     #endregion
 
     #region private VARs
@@ -247,7 +252,16 @@ public class ProceduralLegs : MonoBehaviour
                 target.SetIsMoving(false);
                 target.ResetStepTime();
                 target.effectorTarget.position = target.finalTarget.position;
-                //TODO: Footstep Sound
+
+                // Footstep Sound
+                footstepGrass[Random.Range(0, 3)].Play();
+
+                //if (targets[0]. == perna atual)
+                //    footstep[Random.Range(0, 1)].Play();
+
+                // else if (perna direita){
+                //    footstep[Random.Range(2, 3)].Play();
+
 
                 if (this.evenIsWalking)
                     this.evenIsWalking = false;
