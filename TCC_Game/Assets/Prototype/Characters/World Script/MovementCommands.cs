@@ -44,7 +44,6 @@ public class MoveCommand : ICommand
         if (characterController != null)
         {
             characterController.Move((velocity * (value * walkSpeed)) * Time.fixedDeltaTime);
-            Debug.Log(velocity);
         }
     }
 

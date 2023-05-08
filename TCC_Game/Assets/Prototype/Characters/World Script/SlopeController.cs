@@ -9,6 +9,7 @@ public enum SlopeState
 }
 
 [RequireComponent(typeof(GravityController))]
+[RequireComponent(typeof(CharacterManager))]
 public class SlopeController : MonoBehaviour
 {
     #region Inspector Var
@@ -23,18 +24,8 @@ public class SlopeController : MonoBehaviour
     [HeaderPlus(" ", "- SLOPE -", (int)HeaderPlusColor.yellow)]
     [Tooltip("The max angle that character can climb and/or descend a slope.")]
     [Range(0f, 90f)] [SerializeField] float slopeMaxAngle;
-    [Tooltip("The layers that will be considered as slope.")]
-    [SerializeField] LayerMask slopeLayers;
     [Tooltip("The state of the current slope status.")]
     [SerializeField][ReadOnly] SlopeState slopeState = SlopeState.noSlope;
-
-    [HeaderPlus(" ", "- MOVE COMMAND -", (int)HeaderPlusColor.cyan)]
-    [Tooltip("If the move command in this character is in an Input Handler, check this box.")]
-    [SerializeField] bool moveByInputHandler;
-
-    [HeaderPlus(" ", "- BODY -", (int)HeaderPlusColor.magenta)]
-    [Tooltip("The parent object that contains all the bones of the character.")]
-    [SerializeField] Transform body;
 
     [HeaderPlus(" ", "- GIZMOS -", (int)HeaderPlusColor.white)]
     [SerializeField] bool showGizmos;
@@ -43,11 +34,24 @@ public class SlopeController : MonoBehaviour
     #region Private Vars
     private MoveCommand moveCommand;
     private GravityController gravityController;
+    private CharacterManager characterManager;
+
+    private Transform body;
+
+    private LayerMask slopeLayers;
+
+    private bool moveByInputHandler;
     #endregion
 
     #region Unity Methods
     private void Start()
     {
+        characterManager = GetComponent<CharacterManager>();
+
+        this.body = characterManager.Body;
+        this.slopeLayers = characterManager.GroundLayers;
+        this.moveByInputHandler = characterManager.CommandsByInputHandler;
+
         if (moveByInputHandler)
             moveCommand = GetComponent<InputHandler>().GetMovementCommand();
 
@@ -167,8 +171,10 @@ public class SlopeController : MonoBehaviour
     {
         if (!showGizmos) return;
 
+        var gizmoBody = GetComponent<CharacterManager>().Body;
+
         Gizmos.color = Color.red;
-        var cubePosition = new Vector2(body.position.x + raycastsPosition.x * DirectionMultiplier(), body.position.y + raycastsPosition.y);
+        var cubePosition = new Vector2(gizmoBody.position.x + raycastsPosition.x * DirectionMultiplier(), gizmoBody.position.y + raycastsPosition.y);
         Gizmos.DrawCube(cubePosition, new Vector3(0.02f, 0.02f, 0));
 
         Gizmos.color = Color.red;
