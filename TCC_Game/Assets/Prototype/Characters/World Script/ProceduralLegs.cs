@@ -142,7 +142,7 @@ public class ProceduralLegs : MonoBehaviour
             target.SetIsMoving(false);
         }
 
-        previousXBodyPosition = body.position.x;
+        previousXBodyPosition = this.transform.position.x;
     }
 
     private void FixedUpdate()
@@ -267,10 +267,10 @@ public class ProceduralLegs : MonoBehaviour
         var offset = xFinalTargetOffest;
 
         // body is moving left
-        if (previousXBodyPosition > body.position.x)
+        if (previousXBodyPosition > this.transform.position.x)
             offset *= -1;
 
-        if (previousXBodyPosition == body.position.x)
+        if (previousXBodyPosition == this.transform.position.x)
             return;
 
         foreach (var target in targets)
@@ -279,7 +279,7 @@ public class ProceduralLegs : MonoBehaviour
             target.finalTarget.position = new Vector3(pos.x + offset, target.bodyTarget.position.y, pos.z);
         }
 
-        previousXBodyPosition = body.position.x;
+        previousXBodyPosition = this.transform.position.x;
     }
 
     private void CalculateBodyPosition()
