@@ -109,7 +109,7 @@ public class ProceduralLegs : MonoBehaviour
     private bool oddIsWalking = false;
     private bool proceduralIsOn = true;
 
-    private float groundCheckRadius;
+    private float groundCheckDistance;
     private float previousXBodyPosition;
     private float lerpLeg = 0;
     #endregion
@@ -129,9 +129,9 @@ public class ProceduralLegs : MonoBehaviour
         characterManager = GetComponent<CharacterManager>();
 
         this.body = characterManager.Body;
-        this.groundCheck = characterManager.GroundCheck;
+        this.groundCheck = characterManager.GroundCheckParent;
         this.targetsDetections = characterManager.GroundLayers;
-        this.groundCheckRadius = characterManager.GroundCheckRadius;
+        this.groundCheckDistance = characterManager.GroundCheckDistance;
     }
 
     private void Start()
@@ -172,7 +172,7 @@ public class ProceduralLegs : MonoBehaviour
 
         foreach (var target in targets)
         {
-            if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, targetsDetections) && gravityController.GetIsOn())
+            if (!JumpUtils.IsGrounded(groundCheck, groundCheckDistance, targetsDetections) && gravityController.GetIsOn())
             {
                 target.TargetsGoToFoot();
                 target.effectorTarget.position = target.bodyTarget.position;
@@ -198,7 +198,7 @@ public class ProceduralLegs : MonoBehaviour
 
     private bool CanMoveLegs()
     {
-        if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, targetsDetections))
+        if (!JumpUtils.IsGrounded(groundCheck, groundCheckDistance, targetsDetections))
         {
             gravityController.SetIsOn(true);
             gravityController.Jumped = false;

@@ -52,9 +52,9 @@ public class InputHandler : MonoBehaviour
         characterManager = GetComponent<CharacterManager>();
 
         this.body = characterManager.Body;
-        this.groundCheck = characterManager.GroundCheck;
+        this.groundCheck = characterManager.GroundCheckParent;
         this.groundLayer = characterManager.GroundLayers;
-        this.groundCheckRadius = characterManager.GroundCheckRadius;
+        this.groundCheckRadius = characterManager.GroundCheckDistance;
 
         LoadInputBindings();
         InitializeCommands();

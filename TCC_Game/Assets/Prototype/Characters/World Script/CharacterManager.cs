@@ -13,10 +13,10 @@ public class CharacterManager : MonoBehaviour
     [HeaderPlus(" ", "- Ground -", (int)HeaderPlusColor.yellow)]
     [Tooltip("Says what layers the targets will raycast to.")]
     [SerializeField] private LayerMask groundLayers;
-    [Tooltip("The transform in the position that will check if the object is grounded.")]
-    [SerializeField] private Transform groundCheck;
-    [Tooltip("The radius of the circle that will detect the ground from the checkGround Transform position.")]
-    [SerializeField] private float groundCheckRadius;
+    [Tooltip("The parent transform that contains all the ground checks Transofrms.")]
+    [SerializeField] private Transform groundCheckParent;
+    [Tooltip("The distance of the raycasts that will detect the ground from the children of GroundCheckParent Transform positions.")]
+    [SerializeField] private float groundCheckDistance;
 
     [HeaderPlus(" ", "- Ground -", (int)HeaderPlusColor.cyan)]
     [Tooltip("Tells if this character moves with Input Handler (player).")]
@@ -29,8 +29,8 @@ public class CharacterManager : MonoBehaviour
 
     // GROUND
     public LayerMask GroundLayers { get { return groundLayers; } }
-    public Transform GroundCheck { get { return groundCheck; } }
-    public float GroundCheckRadius { get { return groundCheckRadius; } }
+    public Transform GroundCheckParent { get { return groundCheckParent; } }
+    public float GroundCheckDistance { get { return groundCheckDistance; } }
 
     // INPUT
     public bool CommandsByInputHandler { get { return commandsByInputHandler; } }

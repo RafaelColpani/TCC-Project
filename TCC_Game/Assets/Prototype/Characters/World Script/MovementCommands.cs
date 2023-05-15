@@ -125,10 +125,19 @@ public class ReleaseJumpCommand : ICommand
 #region UTILS
 public class JumpUtils
 {
-    public static bool IsGrounded(Transform groundCheck, float groundCheckRadius, LayerMask groundLayer)
+    public static bool IsGrounded(Transform groundCheckParent, float groundCheckDistance, LayerMask groundLayer)
     {
-        RaycastHit2D hit = Physics2D.CircleCast(groundCheck.position, groundCheckRadius, Vector2.zero, Mathf.Infinity, groundLayer);
-        return hit.collider != null;
+        var groundChecks = groundCheckParent.GetComponentsInChildren<Transform>();
+
+        foreach (var groundCheck in groundChecks)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
+
+            if (hit.collider != null && !hit.collider.isTrigger)
+                return true;
+        }
+
+        return false;
     }
 }
 #endregion
