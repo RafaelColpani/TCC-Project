@@ -71,7 +71,7 @@ public class GravityController : MonoBehaviour
         }
         
         velocity.y -= gravityCurve.Evaluate(gravity * timer);
-        body.transform.Translate(velocity * Time.fixedDeltaTime);
+        body.transform.Translate(velocity * Time.fixedDeltaTime, Space.World);
     }
     #endregion
 
