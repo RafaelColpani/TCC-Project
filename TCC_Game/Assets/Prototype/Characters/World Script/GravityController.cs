@@ -65,6 +65,7 @@ public class GravityController : MonoBehaviour
             return;
         }
 
+        // if gravity isOn
         if (timer < maxTimer)
         {
             timer += Time.fixedDeltaTime;
@@ -72,6 +73,12 @@ public class GravityController : MonoBehaviour
         
         velocity.y -= gravityCurve.Evaluate(gravity * timer);
         body.transform.Translate(velocity * Time.fixedDeltaTime, Space.World);
+
+        if (velocity.y <= 0 && jumped)
+        {
+            isOn = false;
+            jumped = false;
+        }
     }
     #endregion
 
