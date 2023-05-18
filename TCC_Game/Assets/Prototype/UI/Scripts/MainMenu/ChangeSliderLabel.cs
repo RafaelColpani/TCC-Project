@@ -10,6 +10,7 @@ public class ChangeSliderLabel : MonoBehaviour
 
     TextMeshProUGUI inputLabel;
     Slider sld;
+    public string unit = "%";
 
     private void Start()
     {
@@ -20,7 +21,7 @@ public class ChangeSliderLabel : MonoBehaviour
 
     public void ChangeValue()
     {
-        inputLabel.text = $"{sld.value}%";
+        inputLabel.text = $"{sld.value}{unit}";
     }
 
 }
