@@ -2,24 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterManager))]
 public class GravityController : MonoBehaviour
 {
+    #region Inspector
     [Tooltip("Sets the value of gravity. Standard is 9.81.")]
     [SerializeField] float gravity = 9.81f;
-    [Tooltip("The body to be affected by gravity.")]
-    [SerializeField] Transform body;
     [Tooltip("The curve of gravity calculation.")]
     [SerializeField] AnimationCurve gravityCurve;
+    #endregion
+
+    #region VARs
+    private CharacterManager characterManager;
 
     Vector3 velocity = Vector3.zero;
+
+    private Transform body;
 
     private bool isOn = false;
     private bool jumped = false;
     private bool canJump = true;
 
-    float timer = 0f;
+    private float timer = 0f;
     private float maxTimer = 2f;
+    #endregion
 
+    #region Getters Setters
     public Vector3 Velocity
     {
         get { return velocity; }
@@ -38,6 +46,14 @@ public class GravityController : MonoBehaviour
         get { return jumped; }
         set { jumped = value; }
     }
+    #endregion
+
+    #region Unity Methods
+    private void Awake()
+    {
+        characterManager = GetComponent<CharacterManager>();
+        this.body = characterManager.Body;
+    }
 
     private void FixedUpdate()
     {
@@ -55,8 +71,9 @@ public class GravityController : MonoBehaviour
         }
         
         velocity.y -= gravityCurve.Evaluate(gravity * timer);
-        body.transform.Translate(velocity * Time.fixedDeltaTime);
+        body.transform.Translate(velocity * Time.fixedDeltaTime, Space.World);
     }
+    #endregion
 
     #region isOn Aux
     public bool GetIsOn()

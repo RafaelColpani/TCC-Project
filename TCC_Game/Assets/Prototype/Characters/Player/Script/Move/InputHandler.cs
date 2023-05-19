@@ -7,21 +7,10 @@ using KevinCastejon.MoreAttributes;
 
 [RequireComponent(typeof(GravityController))]
 [RequireComponent(typeof(CharacterController))]
-[RequireComponent(typeof(ProceduralLegs))]
+[RequireComponent(typeof(CharacterManager))]
 public class InputHandler : MonoBehaviour
 {
-    #region VARs
-    private PlayerActions playerActions;
-    private CharacterController characterController;
-    private GravityController gravityController;
-    private ProceduralLegs proceduralLegs;
-
-    public bool canWalk = true;
     #region Inspector VARs
-    [HeaderPlus(" ", "- GENERAL -", (int)HeaderPlusColor.green)]
-    [Tooltip("The Transform of the player's body.")]
-    [SerializeField] private Transform body;
-
     [HeaderPlus(" ", "- MOVE COMMAND -", (int)HeaderPlusColor.yellow)]
     [Tooltip("Controls the speed of player walk.")]
     [SerializeField] private float walkSpeed;
@@ -29,13 +18,22 @@ public class InputHandler : MonoBehaviour
     [HeaderPlus(" ", "- JUMP COMMAND -", (int)HeaderPlusColor.cyan)]
     [Tooltip("Controls the force (aka height) of player jump.")]
     [SerializeField] private float jumpForce;
-    [Tooltip("The transform in the position that will check if the object is grounded.")]
-    [SerializeField] private Transform groundCheck;
-    [Tooltip("The radius of the circle that will detect the ground from the checkGround Transform position.")]
-    [SerializeField] private float groundCheckRadius;
-    [Tooltip("The layer(s) that will be considered ground to perform a jump.")]
-    [SerializeField] private LayerMask groundLayer;
     #endregion
+
+    #region VARs
+    private PlayerActions playerActions;
+    private CharacterController characterController;
+    private GravityController gravityController;
+    private CharacterManager characterManager;
+
+    private Transform body;
+    private Transform groundCheck;
+
+    private LayerMask groundLayer;
+
+    private float groundCheckRadius;
+
+    [HideInInspector] public bool canWalk = true;
 
     #region Commands
     private MoveCommand moveCommand;
@@ -51,7 +49,12 @@ public class InputHandler : MonoBehaviour
         playerActions = new PlayerActions();
         characterController = GetComponent<CharacterController>();
         gravityController = GetComponent<GravityController>();
-        proceduralLegs = GetComponent<ProceduralLegs>();
+        characterManager = GetComponent<CharacterManager>();
+
+        this.body = characterManager.Body;
+        this.groundCheck = characterManager.GroundCheckParent;
+        this.groundLayer = characterManager.GroundLayers;
+        this.groundCheckRadius = characterManager.GroundCheckDistance;
 
         LoadInputBindings();
         InitializeCommands();
@@ -63,7 +66,6 @@ public class InputHandler : MonoBehaviour
         if (PauseController.GetIsPaused()) return;
         if (!canWalk) return;
         var readedMoveValue = playerActions.Movement.Move.ReadValue<float>();
-        moveCommand.ChangeMoveDirection(proceduralLegs.GetMeanLegsDirection());
         moveCommand.Execute(this.gameObject.transform, characterController, readedMoveValue);
     }
     #endregion
