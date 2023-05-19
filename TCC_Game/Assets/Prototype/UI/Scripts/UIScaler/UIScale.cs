@@ -8,7 +8,7 @@ public class UIScale : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     RectTransform defaultPosition;
     Transform defaultParent;
-    RectTransform outTransform;
+    [SerializeField] RectTransform outTransform;
 
     bool isScaling = false;
     void Start()
@@ -18,15 +18,18 @@ public class UIScale : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     }
 
 
-    void Update()
+    void LateUpdate()
     {
         if (isScaling)
         {
-            transform.SetParent(outTransform.parent);
+            transform.SetParent(outTransform);
+            //transform.position = outTransform.position;
+            //GetComponent<RectTransform>().anchoredPosition = 
         }
         else
         {
             transform.SetParent(defaultParent);
+            //transform.position = defaultPosition.position;
         }
     }
 
