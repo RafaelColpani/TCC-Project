@@ -7,6 +7,7 @@ using System.Linq;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(GravityController))]
+[RequireComponent(typeof(CharacterManager))]
 public class ObstacleBlock : MonoBehaviour
 {
     #region Inspector Vars
@@ -46,13 +47,6 @@ public class ObstacleBlock : MonoBehaviour
     [Foldout("Front Block")]
     [Tooltip("The maximum angle allowed for the character walk in a slope, in degrees.")]
     [SerializeField] float maxSlopeAngle;
-
-    // -------------
-
-    [Foldout("Front Block")]
-    [HeaderPlus(" ", "- MOVE COMMAND -", (int)HeaderPlusColor.cyan)]
-    [Tooltip("If the move command in this character is in an Input Handler, check this box.")]
-    [SerializeField] bool moveByInputHandler;
     #endregion
 
     // -------------
@@ -93,10 +87,6 @@ public class ObstacleBlock : MonoBehaviour
     [Tooltip("The layers that will be considered as obstacle.")]
     [SerializeField] LayerMask obstacleLayers;
 
-    [HeaderPlus(" ", "- BODY -", (int)HeaderPlusColor.white)]
-    [Tooltip("The parent object that contains all the bones of the character.")]
-    [SerializeField] Transform body;
-
     [HeaderPlus(" ", "- GIZMO -", (int)HeaderPlusColor.white)]
     [SerializeField] bool showGizmo;
     [SerializeField] bool showBottomMidAirRaycastPosition;
@@ -109,6 +99,11 @@ public class ObstacleBlock : MonoBehaviour
 
     private MoveCommand moveCommand;
     private GravityController gravityController;
+    private CharacterManager characterManager;
+
+    private Transform body;
+
+    private bool moveByInputHandler;
     #endregion
 
     #region Naughty Attributes Validators
@@ -136,6 +131,11 @@ public class ObstacleBlock : MonoBehaviour
     #region Unity Methods
     private void Start()
     {
+        characterManager = GetComponent<CharacterManager>();
+
+        this.body = characterManager.Body;
+        this.moveByInputHandler = characterManager.CommandsByInputHandler;
+
         if (moveByInputHandler)
             moveCommand = GetComponent<InputHandler>().GetMovementCommand();
 
@@ -332,17 +332,19 @@ public class ObstacleBlock : MonoBehaviour
     {
         if (!showGizmo) return;
 
+        var gizmoBody = GetComponent<CharacterManager>().Body;
+
         if (showBottomMidAirRaycastPosition)
         {
             Gizmos.color = Color.red;
-            var bottomMidAir = new Vector3(this.body.position.x + xOffset * DirectionMultiplier(), this.body.position.y + bottomFrontAirRaycastPositionValue, 0);
+            var bottomMidAir = new Vector3(gizmoBody.position.x + xOffset * DirectionMultiplier(), gizmoBody.position.y + bottomFrontAirRaycastPositionValue, 0);
             //top raycast position
             Gizmos.DrawCube(bottomMidAir, new Vector3(0.1f, 0.1f, 0));
         }
 
         #region Front Raycasts
-        var bottomPos = new Vector3(this.body.position.x + xOffset * DirectionMultiplier(), this.body.position.y + bottomFrontRaycastPositionValue, 0);
-        var topPos = new Vector3(this.body.position.x + xOffset * DirectionMultiplier(), this.body.position.y + topFrontRaycastPositionValue, 0);
+        var bottomPos = new Vector3(gizmoBody.position.x + xOffset * DirectionMultiplier(), gizmoBody.position.y + bottomFrontRaycastPositionValue, 0);
+        var topPos = new Vector3(gizmoBody.position.x + xOffset * DirectionMultiplier(), gizmoBody.position.y + topFrontRaycastPositionValue, 0);
 
         Gizmos.color = Color.red;
         //top raycast position
@@ -360,9 +362,9 @@ public class ObstacleBlock : MonoBehaviour
         for (int i = 0; i < numberOfFrontMidRaycasts; i++)
         {
             var newPosition = new Vector3(
-                body.position.x + xOffset * DirectionMultiplier(),
-                body.position.y + this.bottomFrontRaycastPositionValue + sumOfMidPositions,
-                body.position.z);
+                gizmoBody.position.x + xOffset * DirectionMultiplier(),
+                gizmoBody.position.y + this.bottomFrontRaycastPositionValue + sumOfMidPositions,
+                gizmoBody.position.z);
 
             Gizmos.DrawLine(newPosition, new Vector3(newPosition.x + frontRaycastsDistance * DirectionMultiplier(), newPosition.y, newPosition.z));
 
@@ -373,8 +375,8 @@ public class ObstacleBlock : MonoBehaviour
         #endregion
 
         #region Top Raycasts
-        var leadingPos = new Vector3(this.body.position.x + leadingTopRaycastPositionValue, this.body.position.y + yOffset, 0);
-        var trailingPos = new Vector3(this.body.position.x + trailingTopRaycastPositionValue, this.body.position.y + yOffset, 0);
+        var leadingPos = new Vector3(gizmoBody.position.x + leadingTopRaycastPositionValue, gizmoBody.position.y + yOffset, 0);
+        var trailingPos = new Vector3(gizmoBody.position.x + trailingTopRaycastPositionValue, gizmoBody.position.y + yOffset, 0);
 
         Gizmos.color = Color.yellow;
         //top raycast position
@@ -392,9 +394,9 @@ public class ObstacleBlock : MonoBehaviour
         for (int i = 0; i < numberOfTopMidRaycasts; i++)
         {
             var newPosition = new Vector3(
-                body.position.x + this.leadingTopRaycastPositionValue + sumOfMidTopPositions,
-                body.position.y + yOffset,
-                body.position.z);
+                gizmoBody.position.x + this.leadingTopRaycastPositionValue + sumOfMidTopPositions,
+                gizmoBody.position.y + yOffset,
+                gizmoBody.position.z);
 
             Gizmos.DrawLine(newPosition, new Vector3(newPosition.x, newPosition.y + topRaycastsDistance, newPosition.z));
 

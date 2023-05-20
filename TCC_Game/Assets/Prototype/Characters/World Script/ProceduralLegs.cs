@@ -63,6 +63,7 @@ public class ObjectTargets
 
 [RequireComponent(typeof(GravityController))]
 [RequireComponent(typeof(IKManager2D))]
+[RequireComponent(typeof(CharacterManager))]
 public class ProceduralLegs : MonoBehaviour
 {
     #region Inspector VARs
@@ -88,22 +89,12 @@ public class ProceduralLegs : MonoBehaviour
     [SerializeField] private float xFinalTargetOffest;
 
     [HeaderPlus(" ", "- BODY -", (int)HeaderPlusColor.magenta)]
-    [Tooltip("The object that parents all bones objects. Must be an empty object holding the bones objects as a parent.")]
-    [SerializeField] private Transform body;
     [Tooltip("The offset that the body makes in the y axis.")]
     [SerializeField] private float bodyPositionOffset;
 
     [HeaderPlus(" ", "- ROTATION -", (int)HeaderPlusColor.red)]
     [Tooltip("Tells if the body will rotate accordingly to the position of the legs. Better used with a spider like animal for example.")]
     [SerializeField] private bool makeRotation;
-
-    [HeaderPlus(" ", "- GROUND -", (int)HeaderPlusColor.white)]
-    [Tooltip("Says what layers the targets will raycast to.")]
-    [SerializeField] private LayerMask targetsDetections;
-    [Tooltip("The transform in the position that will check if the object is grounded.")]
-    [SerializeField] private Transform groundCheck;
-    [Tooltip("The radius of the circle that will detect the ground from the checkGround Transform position.")]
-    [SerializeField] private float groundCheckRadius;
 
     [HeaderPlus(" ", "- SFX -", (int)HeaderPlusColor.green)]
     [SerializeField] private AudioSource[] footstepGrass;
@@ -112,11 +103,18 @@ public class ProceduralLegs : MonoBehaviour
 
     #region private VARs
     private GravityController gravityController;
+    private CharacterManager characterManager;
+
+    private Transform body;
+    private Transform groundCheck;
+
+    private LayerMask targetsDetections;
 
     private bool evenIsWalking = false;
     private bool oddIsWalking = false;
     private bool proceduralIsOn = true;
 
+    private float groundCheckDistance;
     private float previousXBodyPosition;
     private float lerpLeg = 0;
     #endregion
@@ -133,6 +131,12 @@ public class ProceduralLegs : MonoBehaviour
     private void Awake()
     {
         gravityController = GetComponent<GravityController>();
+        characterManager = GetComponent<CharacterManager>();
+
+        this.body = characterManager.Body;
+        this.groundCheck = characterManager.GroundCheckParent;
+        this.targetsDetections = characterManager.GroundLayers;
+        this.groundCheckDistance = characterManager.GroundCheckDistance;
     }
 
     private void Start()
@@ -143,7 +147,7 @@ public class ProceduralLegs : MonoBehaviour
             target.SetIsMoving(false);
         }
 
-        previousXBodyPosition = body.position.x;
+        previousXBodyPosition = this.transform.position.x;
     }
 
     private void FixedUpdate()
@@ -173,7 +177,7 @@ public class ProceduralLegs : MonoBehaviour
 
         foreach (var target in targets)
         {
-            if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, targetsDetections) && gravityController.GetIsOn())
+            if (!JumpUtils.IsGrounded(groundCheck, groundCheckDistance, targetsDetections) && gravityController.GetIsOn())
             {
                 target.TargetsGoToFoot();
                 target.effectorTarget.position = target.bodyTarget.position;
@@ -199,7 +203,7 @@ public class ProceduralLegs : MonoBehaviour
 
     private bool CanMoveLegs()
     {
-        if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, targetsDetections))
+        if (!JumpUtils.IsGrounded(groundCheck, groundCheckDistance, targetsDetections))
         {
             gravityController.SetIsOn(true);
             gravityController.Jumped = false;
@@ -277,10 +281,10 @@ public class ProceduralLegs : MonoBehaviour
         var offset = xFinalTargetOffest;
 
         // body is moving left
-        if (previousXBodyPosition > body.position.x)
+        if (previousXBodyPosition > this.transform.position.x)
             offset *= -1;
 
-        if (previousXBodyPosition == body.position.x)
+        if (previousXBodyPosition == this.transform.position.x)
             return;
 
         foreach (var target in targets)
@@ -289,7 +293,7 @@ public class ProceduralLegs : MonoBehaviour
             target.finalTarget.position = new Vector3(pos.x + offset, target.bodyTarget.position.y, pos.z);
         }
 
-        previousXBodyPosition = body.position.x;
+        previousXBodyPosition = this.transform.position.x;
     }
 
     private void CalculateBodyPosition()

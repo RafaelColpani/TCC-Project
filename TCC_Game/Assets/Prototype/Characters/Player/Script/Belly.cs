@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Belly : MonoBehaviour
 {
+    #region Inspector VARs
     [Header("BELLY TIMER")]
     [SerializeField] float bellyMaxTimer = 10;
     [SerializeField] float bellyTimer = 0;
@@ -16,11 +17,18 @@ public class Belly : MonoBehaviour
     [Header("HP LOSS AND GAIN")]
     [SerializeField] int hpLossFromBelly = 2;
     [SerializeField] int hpGainFromBelly = 1;
+    #endregion
 
+    #region Debug VARs
+    private bool calculateBelly;
+    #endregion
+
+    #region Public VARs
     public float BellyMaxTimer
     {
         get { return bellyMaxTimer; }
     }
+    #endregion
 
     Status stats;
 
@@ -28,10 +36,11 @@ public class Belly : MonoBehaviour
     {
         stats = this.GetComponent<Status>();
         hpRecoverTimer = hpRecoverMaxTimer;
+        calculateBelly = true;
     }
     private void Update()
     {
-        if (PauseController.GetIsPaused()) return;
+        if (PauseController.GetIsPaused() || !calculateBelly) return;
         //gives time before hunger starts
         if (bellyTimer < bellyMaxTimer)
         {
@@ -110,5 +119,10 @@ public class Belly : MonoBehaviour
     public void ResetBellyTimer()
     {
         bellyTimer = 0;
+    }
+
+    public void ToggleCalculateBelly()
+    {
+        this.calculateBelly = !this.calculateBelly;
     }
 }

@@ -43,11 +43,19 @@ public class IsDamagedAndDead : MonoBehaviour
     Belly belly;
     GameObject instantiatedDeathIcon;
     InventoryManager inventoryManager;
+
     float fixedInvincibilityTime;
+    bool isDamageable;
 
     public bool IsAlive
     {
         get { return isAlive; }
+    }
+
+    public bool IsDamageable
+    {
+        get { return isDamageable; }
+        set { isDamageable = value; }
     }
     #endregion
 
@@ -65,6 +73,7 @@ public class IsDamagedAndDead : MonoBehaviour
         belly = GetComponent<Belly>();
         fixedInvincibilityTime = invincibilityTime;
         invincibilityTime = 0;
+        isDamageable = true;
     }
 
     private void Start()
@@ -91,7 +100,7 @@ public class IsDamagedAndDead : MonoBehaviour
     #region damage
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (PauseController.GetIsPaused()) return;
+        if (PauseController.GetIsPaused() || !isDamageable) return;
         if (!this.CompareTag("Player")) return;
         if (collision.CompareTag("damage") && isAlive && invincibilityTime <= 0 && collision.GetComponent<IsDamagedAndDead>().IsAlive)
         {
@@ -307,4 +316,9 @@ public class IsDamagedAndDead : MonoBehaviour
         inputHandler.SetCanWalk(true);
     }
     #endregion
+
+    public void ToggleIsDamageable()
+    {
+        this.isDamageable = !this.isDamageable;
+    }
 }

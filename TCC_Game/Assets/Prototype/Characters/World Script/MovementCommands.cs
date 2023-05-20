@@ -2,16 +2,18 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem.Interactions;
 
 #region COMMANDS
 /// <summary>Perform the walk movement, given the actors Transform who will execute it.</summary>
 public class MoveCommand : ICommand
 {
     private float walkSpeed;
-    private Vector3 moveDirection;
+    private Vector3 velocity;
     private bool isFacingRight;
     private bool canWalk;
     private bool canMove;
+    private bool isOnSlope;
 
     public bool CanMove
     {
@@ -22,50 +24,63 @@ public class MoveCommand : ICommand
     public MoveCommand(float walkSpeed)
     {
         this.walkSpeed = walkSpeed;
-        this.moveDirection = Vector3.zero;
+        this.velocity = Vector3.zero;
         this.isFacingRight = true;
         this.canWalk = true;
         this.canMove = true;
+        this.isOnSlope = false;
     }
 
     public void Execute(Transform actor, CharacterController characterController = null, float value = 1)
     {
-        Vector3 movement = actor.right * (value * walkSpeed);
-        ChangeDirection(actor, movement);
-        if (!canWalk) return;
+        if (!isOnSlope)
+            velocity = actor.right;
 
-        // moving by character controller
+        ChangeDirection(actor, value);
+
+        if (!canWalk) return;
         if (!canMove) return;
 
         if (characterController != null)
         {
-            characterController.Move(movement * Time.fixedDeltaTime);
+            characterController.Move((velocity * (value * walkSpeed)) * Time.fixedDeltaTime);
         }
     }
 
-    public void ChangeMoveDirection(Vector3 value)
+    private void ChangeDirection(Transform actor, float value)
     {
-        // rotate 90 degress (counter clock-wise), looking to the left
-        this.moveDirection = new Vector3(-value.y, value.x, 0);
-        this.moveDirection *= -1;
-
-        //inverts if is looking to the right
-        //if (isFacingRight)
-            //this.moveDirection *= -1;
-    }
-
-    private void ChangeDirection(Transform actor, Vector3 movement)
-    {
-        if ((isFacingRight && movement.x < 0) || (!isFacingRight && movement.x > 0))
+        if ((isFacingRight && value < 0) || (!isFacingRight && value > 0))
         {
             isFacingRight = !isFacingRight;
             actor.localScale = new Vector3(actor.localScale.x * -1, actor.localScale.y, actor.localScale.z);
         }
     }
 
+    public void ModifySlopeVelocity(bool modify = false, float xValue = 0, float yValue = 0)
+    {
+        if (!modify) 
+        {
+            this.isOnSlope = false;
+            return; 
+        }
+
+        this.isOnSlope = true;
+        velocity = new Vector3(xValue, yValue, 0);
+    }
+
     public void SetCanWalk(bool value = false)
     {
         this.canWalk = value;
+    }
+
+    public float GetXVelocity()
+    {
+        return this.velocity.x;
+    }
+
+    public float GetYVelocity()
+    {
+        return this.velocity.y;
     }
 }
 
@@ -110,10 +125,19 @@ public class ReleaseJumpCommand : ICommand
 #region UTILS
 public class JumpUtils
 {
-    public static bool IsGrounded(Transform groundCheck, float groundCheckRadius, LayerMask groundLayer)
+    public static bool IsGrounded(Transform groundCheckParent, float groundCheckDistance, LayerMask groundLayer)
     {
-        RaycastHit2D hit = Physics2D.CircleCast(groundCheck.position, groundCheckRadius, Vector2.zero, Mathf.Infinity, groundLayer);
-        return hit.collider != null;
+        var groundChecks = groundCheckParent.GetComponentsInChildren<Transform>();
+
+        foreach (var groundCheck in groundChecks)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
+
+            if (hit.collider != null && !hit.collider.isTrigger)
+                return true;
+        }
+
+        return false;
     }
 }
 #endregion
