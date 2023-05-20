@@ -36,15 +36,15 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -273,7 +273,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_icons_MenuIcon
+      name: spr_menu_frame
       rect:
         serializedVersion: 2
         x: 0
@@ -345,7 +345,7 @@ TextureImporter:
         height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 30, y: 30, z: 30, w: 30}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -357,16 +357,16 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_UI_button_corner
+      name: spr_UI_textBg
       rect:
         serializedVersion: 2
         x: 0
         y: 1024
-        width: 768
+        width: 256
         height: 256
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 37, y: 62, z: 37, w: 65}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -399,7 +399,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_icons_16
+      name: spr_slider_in
       rect:
         serializedVersion: 2
         x: 0
@@ -408,7 +408,7 @@ TextureImporter:
         height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 144, y: 128, z: 144, w: 128}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -420,7 +420,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_icons_18
+      name: spr_slider_fill1
       rect:
         serializedVersion: 2
         x: 512
@@ -429,13 +429,223 @@ TextureImporter:
         height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 203, y: 128, z: 203, w: 128}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: d1840cbe805fbd046bc6b6c4b8928c9b
       internalID: -1461801340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_UI_menuGraphics
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 1024
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 059b2bbafcbf32449afef48eae6cf8f3
+      internalID: -934905896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_UI_menuSound
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1024
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f454c805bdba5d740a42256725cd55f5
+      internalID: 1564772010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_artifact_summer
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1792
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acb8653824a9f73478d237b641407067
+      internalID: 1184999503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_menu_option
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 243e04806f1fc0c458e51de7c72b6fb2
+      internalID: -1660857831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_menu_return
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05304dab45e55104cbc33c427da2d3ed
+      internalID: 1404090111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_slider_fill2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 768
+        width: 512
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 203, y: 128, z: 203, w: 128}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3d1e5fbb261691449e2c2409ef4ebb0
+      internalID: 1530319690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_mask_textBg
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1280
+        width: 512
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 256, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6748929340e5dc243ba9e7d0625a2284
+      internalID: 517390251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_menu_credits
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f23c1371cf639b2439af9f78d5ef062b
+      internalID: 181696477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_menu_newGame
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc4afcef38afb5e488918aab6ecd1431
+      internalID: 223615993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_menu_loadGame
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 512
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fd0aecffbcef3442807f2d185067d42
+      internalID: 868434248
       vertices: []
       indices: 
       edges: []
@@ -454,22 +664,32 @@ TextureImporter:
       spr_UI_health: 1286151584
       spr_icons_14: -1620932907
       spr_icons_19: -912898602
-      spr_icons_18: -1461801340
+      spr_menu_loadGame: 868434248
+      spr_mask_textBg: 517390251
+      spr_menu_newGame: 223615993
       spr_UI_handleAlt: -1423285084
       spr_food_grass: 524658652
       spr_icons_17: -775780829
       spr_food_meatP: 1757018198
-      spr_UI_button_corner: 1571284002
-      spr_icons_MenuIcon: -238752434
+      spr_slider_in: 867565037
+      spr_slider_fill1: -1461801340
       spr_UI_toggleOff: -506766287
       spr_UI_toggleOn: -1209620991
+      spr_menu_frame: -238752434
       spr_UI_button_center: 601646891
       spr_UI_handleDefault: 745290068
+      spr_menu_credits: 181696477
       spr_food_meatG: -1283348091
+      spr_artifact_summer: 1184999503
       spr_UI_handleSelected: 1909583522
+      spr_menu_option: -1660857831
+      spr_UI_menuGraphics: -934905896
       spr_food_meatM: -778187149
+      spr_UI_textBg: 1571284002
+      spr_slider_fill2: 1530319690
+      spr_UI_menuSound: 1564772010
       spr_icons_13: 1514508099
-      spr_icons_16: 867565037
+      spr_menu_return: 1404090111
       spr_UI_hunger: -1996761507
   spritePackingTag: 
   pSDRemoveMatte: 0
