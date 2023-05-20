@@ -8,8 +8,12 @@ using UnityEngine.InputSystem.Interactions;
 /// <summary>Perform the walk movement, given the actors Transform who will execute it.</summary>
 public class MoveCommand : ICommand
 {
+    private ProceduralLegs proceduralLegs;
+
     private float walkSpeed;
+
     private Vector3 velocity;
+
     private bool isFacingRight;
     private bool canWalk;
     private bool canMove;
@@ -21,8 +25,9 @@ public class MoveCommand : ICommand
         set { this.canMove = value; }
     }
 
-    public MoveCommand(float walkSpeed)
+    public MoveCommand(ProceduralLegs proceduralLegs, float walkSpeed)
     {
+        this.proceduralLegs = proceduralLegs;
         this.walkSpeed = walkSpeed;
         this.velocity = Vector3.zero;
         this.isFacingRight = true;
@@ -45,14 +50,30 @@ public class MoveCommand : ICommand
         {
             characterController.Move((velocity * (value * walkSpeed)) * Time.fixedDeltaTime);
         }
+
+        else
+        {
+            actor.Translate(velocity * (value * walkSpeed) * Time.fixedDeltaTime);
+        }
     }
 
     private void ChangeDirection(Transform actor, float value)
     {
+        bool proceduralWasOff = false;
+
         if ((isFacingRight && value < 0) || (!isFacingRight && value > 0))
         {
+            if (proceduralLegs.ProceduralIsOn)
+            {
+                proceduralWasOff = true;
+                proceduralLegs.ProceduralIsOn = false;
+            }
+
             isFacingRight = !isFacingRight;
             actor.localScale = new Vector3(actor.localScale.x * -1, actor.localScale.y, actor.localScale.z);
+
+            if (proceduralWasOff) { }
+                proceduralLegs.ProceduralIsOn = true;
         }
     }
 
