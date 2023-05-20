@@ -60,6 +60,4 @@ public class ChangeSliderLabel : MonoBehaviour, IPointerDownHandler, IPointerUpH
         if (unit == "x")
             SetScaleValue();
     }
-
-
 }
