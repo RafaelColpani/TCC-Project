@@ -6,5 +6,5 @@ interface ICommand
     /// <param name="actor"></param>
     /// <param name="characterController"></param>
     /// <param name="value"></param>
-    public void Execute(Transform actor, CharacterController characterController = null, float value = 1);
+    public void Execute(Transform actor, float value = 1, CharacterController characterController = null);
 }

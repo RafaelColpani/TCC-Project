@@ -258,7 +258,7 @@ public class ProceduralLegs : MonoBehaviour
                 target.effectorTarget.position = target.finalTarget.position;
 
                 // Footstep Sound
-                footstepGrass[Random.Range(0, 3)].Play();
+                //footstepGrass[Random.Range(0, 3)].Play();
 
                 //if (targets[0]. == perna atual)
                 //    footstep[Random.Range(0, 1)].Play();

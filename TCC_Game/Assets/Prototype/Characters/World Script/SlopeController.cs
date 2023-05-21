@@ -55,6 +55,9 @@ public class SlopeController : MonoBehaviour
         if (moveByInputHandler)
             moveCommand = GetComponent<InputHandler>().GetMovementCommand();
 
+        else
+            moveCommand = GetComponent<EnemyCommands>().MoveCommand;
+
         gravityController = GetComponent<GravityController>();
     }
 
@@ -78,7 +81,7 @@ public class SlopeController : MonoBehaviour
         }
 
         // check asending first
-        RaycastHit2D ascendingHit = Physics2D.Raycast(GetRaycastsPosition(), Vector2.right * DirectionMultiplier(), ascendingRaycastDistance, slopeLayers);
+        RaycastHit2D ascendingHit = Physics2D.Raycast(GetRaycastsPosition(), Vector2.right * characterManager.DirectionMultiplier(), ascendingRaycastDistance, slopeLayers);
         if (ascendingHit.collider != null && !ascendingHit.collider.isTrigger)
         {
             slopeAngle = Vector2.Angle(ascendingHit.normal, Vector2.up);
@@ -93,7 +96,7 @@ public class SlopeController : MonoBehaviour
         RaycastHit2D descendingHit = Physics2D.Raycast(GetRaycastsPosition(), -Vector2.up, descendingRaycastDistance, slopeLayers);
         if (descendingHit.collider != null && !descendingHit.collider.isTrigger)
         {
-            slopeAngle = Vector2.Angle(descendingHit.normal, Vector2.right * DirectionMultiplier());
+            slopeAngle = Vector2.Angle(descendingHit.normal, Vector2.right * characterManager.DirectionMultiplier());
             if (slopeAngle <= slopeMaxAngle)
             {
                 slopeState = SlopeState.descending;
@@ -125,11 +128,11 @@ public class SlopeController : MonoBehaviour
 
     private void AscendingSlopeVelocity()
     {
-        RaycastHit2D hit = Physics2D.Raycast(GetRaycastsPosition(), Vector2.right * DirectionMultiplier(), ascendingRaycastDistance, slopeLayers);
+        RaycastHit2D hit = Physics2D.Raycast(GetRaycastsPosition(), Vector2.right * characterManager.DirectionMultiplier(), ascendingRaycastDistance, slopeLayers);
         var slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
 
         var xValue = Mathf.Cos(slopeAngle * Mathf.Deg2Rad);
-        var yValue = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * DirectionMultiplier();
+        var yValue = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * characterManager.DirectionMultiplier();
 
         moveCommand.ModifySlopeVelocity(true, xValue, yValue);
     }
@@ -137,10 +140,10 @@ public class SlopeController : MonoBehaviour
     private void DescendingSlopeVelocity()
     {
         RaycastHit2D hit = Physics2D.Raycast(GetRaycastsPosition(), -Vector2.up, descendingRaycastDistance, slopeLayers);
-        var slopeAngle = Vector2.Angle(hit.normal, Vector2.right * DirectionMultiplier());
+        var slopeAngle = Vector2.Angle(hit.normal, Vector2.right * characterManager.DirectionMultiplier());
 
         var xValue = Mathf.Sin(slopeAngle * Mathf.Deg2Rad);
-        var yValue = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * -DirectionMultiplier();
+        var yValue = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * -characterManager.DirectionMultiplier();
 
         moveCommand.ModifySlopeVelocity(true, xValue, yValue);
     }
@@ -149,21 +152,7 @@ public class SlopeController : MonoBehaviour
     #region Aux
     private Vector2 GetRaycastsPosition()
     {
-        return new Vector2(body.position.x + raycastsPosition.x * DirectionMultiplier(), body.position.y + raycastsPosition.y);
-    }
-
-    private int DirectionMultiplier()
-    {
-        if (IsFacingRight())
-            return 1;
-
-        else
-            return -1;
-    }
-
-    private bool IsFacingRight()
-    {
-        return this.transform.localScale.x > 0;
+        return new Vector2(body.position.x + raycastsPosition.x * characterManager.DirectionMultiplier(), body.position.y + raycastsPosition.y);
     }
     #endregion
 
@@ -174,11 +163,11 @@ public class SlopeController : MonoBehaviour
         var gizmoBody = GetComponent<CharacterManager>().Body;
 
         Gizmos.color = Color.red;
-        var cubePosition = new Vector2(gizmoBody.position.x + raycastsPosition.x * DirectionMultiplier(), gizmoBody.position.y + raycastsPosition.y);
+        var cubePosition = new Vector2(gizmoBody.position.x + raycastsPosition.x * GetComponent<CharacterManager>().DirectionMultiplier(), gizmoBody.position.y + raycastsPosition.y);
         Gizmos.DrawCube(cubePosition, new Vector3(0.02f, 0.02f, 0));
 
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(cubePosition, new Vector3(cubePosition.x + ascendingRaycastDistance * DirectionMultiplier(), cubePosition.y, 0));
+        Gizmos.DrawLine(cubePosition, new Vector3(cubePosition.x + ascendingRaycastDistance * GetComponent<CharacterManager>().DirectionMultiplier(), cubePosition.y, 0));
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(cubePosition, new Vector3(cubePosition.x, cubePosition.y - descendingRaycastDistance, 0));
     }
