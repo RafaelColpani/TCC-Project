@@ -80,8 +80,6 @@ public class HealthSlider : MonoBehaviour
             else
                 fill.color = hungerColor;
         }
-        
-
     }
 
     GameObject FindGameObjectByNameInChildren(GameObject go, string name)

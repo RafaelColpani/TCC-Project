@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UISounds : MonoBehaviour
 {
-    public AudioSource click, hover, close;
+    public AudioSource click, hover, close, save;
 
     Button[] buttons;
 
