@@ -8,6 +8,7 @@ using KevinCastejon.MoreAttributes;
 [RequireComponent(typeof(GravityController))]
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(CharacterManager))]
+[RequireComponent(typeof(ProceduralLegs))]
 public class InputHandler : MonoBehaviour
 {
     #region Inspector VARs
@@ -25,6 +26,7 @@ public class InputHandler : MonoBehaviour
     private CharacterController characterController;
     private GravityController gravityController;
     private CharacterManager characterManager;
+    private ProceduralLegs proceduralLegs;
 
     private Transform body;
     private Transform groundCheck;
@@ -50,6 +52,7 @@ public class InputHandler : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         gravityController = GetComponent<GravityController>();
         characterManager = GetComponent<CharacterManager>();
+        proceduralLegs = GetComponent<ProceduralLegs>();
 
         this.body = characterManager.Body;
         this.groundCheck = characterManager.GroundCheckParent;
@@ -84,7 +87,7 @@ public class InputHandler : MonoBehaviour
 
     private void InitializeCommands()
     {
-        moveCommand = new MoveCommand(walkSpeed);
+        moveCommand = new MoveCommand(proceduralLegs, walkSpeed);
         pressJumpCommand = new PressJumpCommand(jumpForce, groundCheck, groundCheckRadius, groundLayer, gravityController);
         releaseJumpCommand = new ReleaseJumpCommand();
     }
