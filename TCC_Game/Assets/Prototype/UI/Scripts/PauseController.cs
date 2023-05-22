@@ -10,6 +10,8 @@ public class PauseController : MonoBehaviour
     [SerializeField] GameObject pause;
     [SerializeField] GameObject settings;
 
+    private static bool wasPaused = false;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -25,6 +27,8 @@ public class PauseController : MonoBehaviour
             print("despausou");
             pause.SetActive(false);
             Time.timeScale = 1;
+
+            if (wasPaused) return;
             PauseController.isPaused = false;
         }
         else
@@ -77,5 +81,6 @@ public class PauseController : MonoBehaviour
     public static void SetPause(bool value = true)
     {
         isPaused = value;
+        wasPaused = value;
     }
 }
