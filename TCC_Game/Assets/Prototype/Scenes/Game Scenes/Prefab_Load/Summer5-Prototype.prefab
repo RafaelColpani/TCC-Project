@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 1291825158202519781}
   - component: {fileID: 305271648916621128}
   - component: {fileID: 3619595324875359900}
-  m_Layer: 0
+  - component: {fileID: 8691139239632735507}
+  m_Layer: 11
   m_Name: Summer5-Prototype
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -50,10 +51,36 @@ MonoBehaviour:
   loadRange: 5
   isLoaded: 0
   shouldLoad: 0
-  colorGizmo: {r: 0.22574759, g: 0.8396226, b: 0.766347, a: 1}
+  colorGizmo: {r: 1, g: 0.022335561, b: 0, a: 1}
   box: {fileID: 3619595324875359900}
 --- !u!61 &3619595324875359900
 BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3872549729569533694}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -8.451691, y: -12.023258}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 125.48749, y: 59.728592}
+  m_EdgeRadius: 0
+--- !u!60 &8691139239632735507
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -65,7 +92,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -20.072685, y: 2.2593422}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -75,6 +102,11 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 112.95128, y: 23.505493}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -25.064651, y: 21.934679}
+      - {x: -71.302986, y: 17.256138}
+      - {x: -71.08212, y: -35.84256}
+      - {x: 54.704666, y: -39.972527}
+      - {x: 47.40831, y: -3.4750595}
+      - {x: 33.232613, y: 5.960903}

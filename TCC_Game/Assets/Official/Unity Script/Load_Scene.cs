@@ -22,14 +22,14 @@ public class Load_Scene : MonoBehaviour
     [Space(5)]
     [Header("Gizmo")]
     [SerializeField] Color colorGizmo = Color.black;
-    [SerializeField] BoxCollider2D box;
+    [SerializeField] PolygonCollider2D box;
 
 
     // Start is called before the first frame update
     void Start()
     {
         //Debug
-        box = gameObject.GetComponent<BoxCollider2D>();
+        box = gameObject.GetComponent<PolygonCollider2D>();
 
         //Load Scene
         if (SceneManager.sceneCount > 0)
@@ -119,6 +119,7 @@ public class Load_Scene : MonoBehaviour
         }
     }
 
+    /*
     private void OnDrawGizmos()
     {
         //Player
@@ -127,7 +128,8 @@ public class Load_Scene : MonoBehaviour
 
         //BoxArea
         Gizmos.color = colorGizmo;
-        box = gameObject.GetComponent<BoxCollider2D>();
-        Gizmos.DrawWireCube(new Vector3(box.offset.x + transform.position.x, box.offset.y + transform.position.y, 1), new Vector3(box.size.x, box.size.y, 1));
+        box = gameObject.GetComponent<PolygonCollider2D>();
+        Gizmos.DrawWireCube(new Vector3(box.offset.x + transform.position.x, box.offset.y + transform.position.y, 1), new Vector3(box..x, box.size.y, 1));
     }
+    */
 }
