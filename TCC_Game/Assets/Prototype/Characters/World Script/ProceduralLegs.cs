@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D.IK;
 using KevinCastejon.MoreAttributes;
-using UnityEditor.Experimental.GraphView;
+//using UnityEditor.Experimental.GraphView;
 
 [System.Serializable]
 public class ObjectTargets
@@ -258,7 +258,7 @@ public class ProceduralLegs : MonoBehaviour
                 target.effectorTarget.position = target.finalTarget.position;
 
                 // Footstep Sound
-                footstepGrass[Random.Range(0, 3)].Play();
+                //footstepGrass[Random.Range(0, 3)].Play();
 
                 //if (targets[0]. == perna atual)
                 //    footstep[Random.Range(0, 1)].Play();

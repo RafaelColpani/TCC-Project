@@ -46,6 +46,7 @@ public class DialogueReader : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0) return;
         //if it is clicked, it checks whether the text in the dialogue box is the same as what is expected to be written
         //if it is, it goes to the next line. if not, it completes the dialogue and checks if it must show choices
         if (Input.GetMouseButtonDown(0))
@@ -88,7 +89,7 @@ public class DialogueReader : MonoBehaviour
         }
 
         //pega a lista de condi��es
-        conditions = dialogueConditions.TurnToConditions(npcInteract.timesTalked <= 1);
+        conditions = dialogueConditions.TurnToConditions(NpcInteractable.timesTalked <= 1);
         //Starts dialogue
         StartDialogue();
     }
@@ -97,7 +98,7 @@ public class DialogueReader : MonoBehaviour
     {
         id = 0;
         //if it is not the first time player interacts with npc, it gets right to the choices
-        if (npcInteract.timesTalked > 1)
+        if (NpcInteractable.timesTalked > 1)
         {
             NextLine();
         }
@@ -246,7 +247,7 @@ public class DialogueReader : MonoBehaviour
 
     public void Chose(int choiceNextId)
     {
-        conditions = dialogueConditions.TurnToConditions(npcInteract.timesTalked <= 1);
+        conditions = dialogueConditions.TurnToConditions(NpcInteractable.timesTalked <= 1);
         //gets id of the next dialogue accordingly to the choice
         id = choiceNextId;
 

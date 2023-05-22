@@ -69,7 +69,7 @@ public class InputHandler : MonoBehaviour
         if (PauseController.GetIsPaused()) return;
         if (!canWalk) return;
         var readedMoveValue = playerActions.Movement.Move.ReadValue<float>();
-        moveCommand.Execute(this.gameObject.transform, characterController, readedMoveValue);
+        moveCommand.Execute(this.gameObject.transform, readedMoveValue, characterController);
     }
     #endregion
 

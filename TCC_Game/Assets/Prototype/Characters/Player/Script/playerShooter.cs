@@ -7,7 +7,10 @@ public class playerShooter : MonoBehaviour
     Quaternion rot;
     [SerializeField] GameObject physBullet, magBullet;
     [SerializeField] Transform obj;
+    [SerializeField] float fireRate;
     List<GameObject> objList;
+
+    private float fireRateCount;
 
     private void Start()
     {
@@ -36,14 +39,15 @@ public class playerShooter : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
+                if (fireRateCount < fireRate) return;
+
+                fireRateCount = 0f;
                 Shoot(physBullet);
             }
         }
-        if (magBullet != null)
-        {
-            if (Input.GetMouseButtonDown(1))
-                Shoot(magBullet);
-        }
+
+        if (fireRateCount < fireRate)
+            fireRateCount += Time.deltaTime;
     }
 
     private void TurnObject()

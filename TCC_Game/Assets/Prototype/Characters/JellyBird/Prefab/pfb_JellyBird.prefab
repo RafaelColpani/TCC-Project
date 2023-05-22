@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &232936762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 232936763}
+  - component: {fileID: 232936765}
+  - component: {fileID: 232936764}
+  m_Layer: 6
+  m_Name: hurt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &232936763
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232936762}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.77, z: 10.08526}
+  m_LocalScale: {x: -2.60704, y: 2.1567473, z: 6.371797}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8858033237223302733}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &232936765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232936762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8c47858045783d42ae077ef61452121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: {fileID: 1775972834}
+--- !u!58 &232936764
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232936762}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.44
 --- !u!1 &50269651783700909
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +73,7 @@ GameObject:
   - component: {fileID: 6452898354075650040}
   - component: {fileID: 2145300142651355103}
   - component: {fileID: 8133933905824228341}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,8 +133,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 8
   m_Sprite: {fileID: 8239847961488857225, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -101,8 +163,8 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 496785033932135223}
   m_Bounds:
-    m_Center: {x: -0.00000047683716, y: 0.000625968, z: 0.0000000035350922}
-    m_Extent: {x: 0.63000005, y: 0.8543749, z: 0}
+    m_Center: {x: -0.00000059604645, y: 0.0006259084, z: 0.0000000035349785}
+    m_Extent: {x: 0.6300001, y: 0.85437477, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -115,7 +177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1284202256740960868}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: reed9_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8333999379289470785}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: reed6_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +243,7 @@ GameObject:
   - component: {fileID: 3943146552914646665}
   - component: {fileID: 7926212228658522292}
   - component: {fileID: 7921128642205814893}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,8 +303,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 18
   m_Sprite: {fileID: -4595921423898260404, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -275,8 +337,8 @@ MonoBehaviour:
   - {fileID: 2461409788545618204}
   - {fileID: 5696284688629286910}
   m_Bounds:
-    m_Center: {x: -0.00084781647, y: -0.0021297932, z: 0.0000000035350922}
-    m_Extent: {x: 1.2023315, y: 2.5078695, z: 0}
+    m_Center: {x: -0.0008480549, y: -0.0021300316, z: 0.0000000035349785}
+    m_Extent: {x: 1.2023317, y: 2.5078692, z: 1.110223e-16}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -289,7 +351,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8774042084369143731}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: reed7_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +385,7 @@ GameObject:
   - component: {fileID: 6861794139828934416}
   - component: {fileID: 6666822047263745030}
   - component: {fileID: 2854748169189024808}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Headfluff1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,8 +445,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 21
   m_Sprite: {fileID: 8659004575948855848, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -417,8 +479,8 @@ MonoBehaviour:
   - {fileID: 2883195894589260676}
   - {fileID: 1424862621770262276}
   m_Bounds:
-    m_Center: {x: -0.0019954443, y: 0.00013875961, z: 0.0000000035350922}
-    m_Extent: {x: 1.2478751, y: 1.0362298, z: 0}
+    m_Center: {x: -0.0019959211, y: 0.0001385212, z: 0.0000000035349785}
+    m_Extent: {x: 1.2478752, y: 1.0362298, z: 1.110223e-16}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -433,7 +495,7 @@ GameObject:
   - component: {fileID: 1679624686714180825}
   - component: {fileID: 6172649440039391855}
   - component: {fileID: 735868618331304636}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: B_Beak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,8 +555,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 22
   m_Sprite: {fileID: 7348790009673534349, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -524,8 +586,8 @@ MonoBehaviour:
   - {fileID: 3851383815390275901}
   - {fileID: 7075344484742493889}
   m_Bounds:
-    m_Center: {x: 0, y: 0.0024997294, z: 0.0000000035350922}
-    m_Extent: {x: 0.61499995, y: 0.37750018, z: 0}
+    m_Center: {x: -0.00000047683716, y: 0.002499491, z: 0.0000000035349785}
+    m_Extent: {x: 0.615, y: 0.37750012, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -540,7 +602,7 @@ GameObject:
   - component: {fileID: 8426166123209967731}
   - component: {fileID: 2115318090868123073}
   - component: {fileID: 1290557624748468123}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -600,8 +662,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 9
   m_Sprite: {fileID: -3819460490943566342, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -630,8 +692,8 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 4504694537488718610}
   m_Bounds:
-    m_Center: {x: -0.00038471818, y: -0.02846992, z: 0.0000000035350922}
-    m_Extent: {x: 0.444615, y: 1.02653, z: 0}
+    m_Center: {x: -0.0003849864, y: -0.02846992, z: 0.0000000035349785}
+    m_Extent: {x: 0.444615, y: 1.0265299, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -644,7 +706,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3853633545714413535}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: tail2_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -676,7 +738,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6236357410368864420}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: reed7_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -709,7 +771,7 @@ GameObject:
   - component: {fileID: 8583203627241530260}
   - component: {fileID: 7000675060558606254}
   - component: {fileID: 8544336956996297747}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: skirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -769,8 +831,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 12
   m_Sprite: {fileID: 81321819326368218, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -805,8 +867,8 @@ MonoBehaviour:
   - {fileID: 5587807295079578456}
   - {fileID: 1737995424783552694}
   m_Bounds:
-    m_Center: {x: -0.00000011920929, y: 0.00030493736, z: 0.0000000035350922}
-    m_Extent: {x: 1.6299999, y: 0.88707525, z: 0}
+    m_Center: {x: -0.00000035762787, y: 0.00030493736, z: 0.0000000035349785}
+    m_Extent: {x: 1.6300001, y: 0.8870752, z: 1.110223e-16}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -819,7 +881,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1300033314783833502}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: body5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -859,7 +921,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1854065852937034433}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed4_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -891,7 +953,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1424862621770262276}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: headfluff_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -922,7 +984,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4492885655489904375}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed12_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -954,7 +1016,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4901084535300752935}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed11_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -985,7 +1047,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6798002783977052116}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Wing_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1017,7 +1079,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6651824644316051960}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: head_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1048,7 +1110,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3804813883541188572}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: B_Leg_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1062,7 +1124,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1292220510622688666}
-  m_LocalRotation: {x: -0.000000002804864, y: 0.0000000052462354, z: 0.36885318, w: 0.9294877}
+  m_LocalRotation: {x: -0.000000002804834, y: 0.0000000052462124, z: 0.36885622, w: 0.9294865}
   m_LocalPosition: {x: 0.9235485, y: 0.00000020994321, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1080,7 +1142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7075344484742493889}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: B_beak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1113,7 +1175,7 @@ GameObject:
   - component: {fileID: 374203924461538693}
   - component: {fileID: 243774769112672145}
   - component: {fileID: 3299132588956941966}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: wing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1173,8 +1235,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 15
   m_Sprite: {fileID: 1083411422366331372, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1206,8 +1268,8 @@ MonoBehaviour:
   - {fileID: 6972286063070823996}
   - {fileID: 1222045637899442309}
   m_Bounds:
-    m_Center: {x: -0.0010297298, y: 0.0017703772, z: 0.0000000035350922}
-    m_Extent: {x: 1.1869898, y: 0.9232302, z: 2.220446e-16}
+    m_Center: {x: -0.0010302067, y: 0.0017701983, z: 0.0000000035349785}
+    m_Extent: {x: 1.18699, y: 0.9232302, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -1220,7 +1282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8013085857267042550}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: reed9_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1251,7 +1313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1222045637899442309}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: body2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1285,7 +1347,7 @@ GameObject:
   - component: {fileID: 7751944794075337065}
   - component: {fileID: 3713842509803601676}
   - component: {fileID: 5739809514247837030}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1345,8 +1407,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 17
   m_Sprite: {fileID: 6278444821423660003, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1379,8 +1441,8 @@ MonoBehaviour:
   - {fileID: 904295017709360865}
   - {fileID: 2754666429382072335}
   m_Bounds:
-    m_Center: {x: -0.00000011920929, y: 0.00000023841858, z: 0.0000000035350922}
-    m_Extent: {x: 1.9799995, y: 1.5949999, z: 1.110223e-16}
+    m_Center: {x: -0.00000035762787, y: 0, z: 0.0000000035349785}
+    m_Extent: {x: 1.9799998, y: 1.5949996, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -1393,7 +1455,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3654437241256513665}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed3_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1425,7 +1487,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2706619063204136384}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: tail2_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1459,7 +1521,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 406476001221757915}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: B_Leg_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1473,7 +1535,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1997891343230682853}
-  m_LocalRotation: {x: 0.0000000018919135, y: 0.0000000051141, z: -0.5048635, w: 0.86319923}
+  m_LocalRotation: {x: 0.000000001891897, y: 0.0000000051140883, z: -0.5048648, w: 0.86319846}
   m_LocalPosition: {x: 0.618511, y: -0.00000007439985, z: 0}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1491,7 +1553,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5587807295079578456}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: skirt_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1522,7 +1584,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8736935826004860505}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: reed1_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1553,7 +1615,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2131101601029863029}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: reed1_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1585,7 +1647,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8475663934877016844}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed5_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1617,7 +1679,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 997201623207427747}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: body1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1661,7 +1723,10 @@ GameObject:
   - component: {fileID: 2706118935982296957}
   - component: {fileID: 2706118935982296956}
   - component: {fileID: 2706118935982296832}
-  m_Layer: 12
+  - component: {fileID: 1816589083}
+  - component: {fileID: 1816589084}
+  - component: {fileID: 1816589085}
+  m_Layer: 6
   m_Name: spr_JellyBird
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1705,7 +1770,7 @@ MonoBehaviour:
     m_Bits: 512
   groundCheckParent: {fileID: 8858033238284851755}
   groundCheckDistance: 0.3
-  commandsByInputHandler: 1
+  commandsByInputHandler: 0
 --- !u!114 &2706118935982296834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1798,6 +1863,8 @@ MonoBehaviour:
   xFinalTargetOffest: 0.2
   bodyPositionOffset: -0.19
   makeRotation: 0
+  footstepGrass: []
+  footstepSnow: []
 --- !u!114 &2706118935982296832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1816,6 +1883,66 @@ MonoBehaviour:
   slopeMaxAngle: 0
   slopeState: 0
   showGizmos: 1
+--- !u!114 &1816589083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2706118935982296959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b03651ba24f74ca5af6ca1f2b1ff367, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyBehaviour: 0
+  minSqrPlayerDistance: 20
+  maxSqrPlayerDistance: 100
+  attackedWaitTime: 2
+--- !u!114 &1816589084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2706118935982296959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d2d4c659a8f542e784ab6040aedd035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wanderingWalkSpeed: 2
+  chasingWalkSpeed: 3
+--- !u!114 &1816589085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2706118935982296959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0171d515b75d456786510ed2c3641f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topFrontRaycastPositionValue: 2.38
+  bottomFrontRaycastPositionValue: 0.4
+  bottomFrontAirRaycastPositionValue: 0
+  xOffset: 0.31
+  numberOfFrontMidRaycasts: 1
+  frontRaycastsDistance: 0.52
+  maxSlopeAngle: 90
+  leadingTopRaycastPositionValue: 0
+  trailingTopRaycastPositionValue: 0
+  yOffset: 1.43
+  numberOfTopMidRaycasts: 0
+  topRaycastsDistance: 0
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  isEnemy: 1
+  showGizmo: 1
+  showBottomMidAirRaycastPosition: 0
 --- !u!1 &2941781591025896726
 GameObject:
   m_ObjectHideFlags: 0
@@ -1825,7 +1952,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2214418600676889474}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: reed9_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1857,7 +1984,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6686544930196281111}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed3_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1889,7 +2016,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1643918717621552482}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: F_leg_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1903,7 +2030,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3060567163599561757}
-  m_LocalRotation: {x: 9.2302854e-10, y: 0.0000000025753528, z: -0.3086389, w: 0.9511793}
+  m_LocalRotation: {x: 0.0000000027381744, y: 0.000000008202373, z: -0.3086408, w: 0.95117867}
   m_LocalPosition: {x: 0.6830559, y: -0.00000021400838, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1921,7 +2048,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5424702595402293699}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed3_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1953,7 +2080,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5070157199370598295}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: tail1_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1987,7 +2114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2754666429382072335}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed4_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2018,7 +2145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6040033360503199201}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: body4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2058,7 +2185,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7578696858526735885}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed10_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2089,7 +2216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2304696984455359254}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed11_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2121,7 +2248,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 402854163108095772}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: tail1_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2152,7 +2279,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4931978762236378012}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: headfluff_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2183,7 +2310,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 904295017709360865}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed4_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2215,7 +2342,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 783589900612408245}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed10_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2249,7 +2376,7 @@ GameObject:
   - component: {fileID: 3457962117455607215}
   - component: {fileID: 3302378846112846636}
   - component: {fileID: 4371361071744980369}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2309,8 +2436,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 24
   m_Sprite: {fileID: 850373044931817921, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2343,8 +2470,8 @@ MonoBehaviour:
   - {fileID: 6651824644316051960}
   - {fileID: 5415538252834473773}
   m_Bounds:
-    m_Center: {x: -0.010445118, y: 0.0061602592, z: 0.0000000035350922}
-    m_Extent: {x: 1.2715139, y: 0.8382008, z: 2.220446e-16}
+    m_Center: {x: -0.010445476, y: 0.0061599016, z: 0.0000000035349785}
+    m_Extent: {x: 1.2715142, y: 0.8382008, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -2357,7 +2484,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8989282003066920859}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed10_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2389,7 +2516,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8751869399823438971}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: skirt_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2420,7 +2547,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3055476341967597502}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: reed6_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2454,7 +2581,7 @@ GameObject:
   - component: {fileID: 4785928190645573307}
   - component: {fileID: 547787911456175178}
   - component: {fileID: 5170247454642562206}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: F_Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2514,8 +2641,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 6
   m_Sprite: {fileID: -1539694451720042691, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2546,8 +2673,8 @@ MonoBehaviour:
   - {fileID: 1952611370043691207}
   - {fileID: 1643918717621552482}
   m_Bounds:
-    m_Center: {x: -0.011444211, y: -0.026884317, z: 0.000000010365972}
-    m_Extent: {x: 0.6835561, y: 2.0992293, z: 0.000000007017516}
+    m_Center: {x: -0.01144588, y: -0.026883125, z: 0.000000012168718}
+    m_Extent: {x: 0.68355477, y: 2.0992284, z: 0.00000000899755}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -2560,7 +2687,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1384816877273041212}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed13_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2591,7 +2718,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5180437477457857538}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: skirt_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2624,7 +2751,7 @@ GameObject:
   - component: {fileID: 3415048708369991319}
   - component: {fileID: 6866906778145798060}
   - component: {fileID: 4908149532427590949}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Headfluff2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2684,8 +2811,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 20
   m_Sprite: {fileID: 84203452451337978, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2716,8 +2843,8 @@ MonoBehaviour:
   - {fileID: 6119579286120599140}
   - {fileID: 4175069605327517109}
   m_Bounds:
-    m_Center: {x: -0.00000023841858, y: 0.00017470121, z: 0.0000000035350922}
-    m_Extent: {x: 1.0549998, y: 0.69585484, z: 0}
+    m_Center: {x: -0.00000059604645, y: 0.00017434359, z: 0.0000000035349785}
+    m_Extent: {x: 1.0549997, y: 0.69585484, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -2732,7 +2859,7 @@ GameObject:
   - component: {fileID: 6528505405959746320}
   - component: {fileID: 4863944869078484199}
   - component: {fileID: 7500245886930257629}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: B_Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2792,8 +2919,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 5
   m_Sprite: {fileID: -1478827438257122825, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2825,8 +2952,8 @@ MonoBehaviour:
   - {fileID: 3804813883541188572}
   - {fileID: 406476001221757915}
   m_Bounds:
-    m_Center: {x: 0.047897577, y: 0.05894506, z: 0.000000009572812}
-    m_Extent: {x: 0.6150266, y: 1.9655205, z: 0.000000010530936}
+    m_Center: {x: 0.04789388, y: 0.0589453, z: 0.000000009572604}
+    m_Extent: {x: 0.6150243, y: 1.9655195, z: 0.000000010531016}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -2839,7 +2966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8539731923252210865}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: head_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2872,7 +2999,7 @@ GameObject:
   - component: {fileID: 5946025802008558680}
   - component: {fileID: 8375605106047282738}
   - component: {fileID: 6565070285288758807}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2932,8 +3059,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 10
   m_Sprite: {fileID: -88510283399035365, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2965,8 +3092,8 @@ MonoBehaviour:
   - {fileID: 3055476341967597502}
   - {fileID: 240371964663739590}
   m_Bounds:
-    m_Center: {x: 0.012338102, y: 0.0074428916, z: 0.0000000035350922}
-    m_Extent: {x: 0.40829128, y: 0.64691764, z: 1.110223e-16}
+    m_Center: {x: 0.012337625, y: 0.0074422956, z: 0.0000000035349785}
+    m_Extent: {x: 0.40829122, y: 0.64691746, z: 1.110223e-16}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -2979,7 +3106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1457732470048873839}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: B_Leg_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2993,7 +3120,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4503946927482351200}
-  m_LocalRotation: {x: -5.470756e-10, y: -0.0000000080489695, z: -0.07479359, w: 0.997199}
+  m_LocalRotation: {x: -5.470494e-10, y: -0.00000000804896, z: -0.074796736, w: 0.99719876}
   m_LocalPosition: {x: 0.04633616, y: -0.1392758, z: 0}
   m_LocalScale: {x: 0.99999976, y: 0.99999976, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3013,7 +3140,7 @@ GameObject:
   - component: {fileID: 1307785368057099952}
   - component: {fileID: 4887596011494599737}
   - component: {fileID: 5026612060217361785}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3073,8 +3200,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 1
   m_Sprite: {fileID: 6432842384142481571, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3105,8 +3232,8 @@ MonoBehaviour:
   - {fileID: 2411978192003429609}
   - {fileID: 6019314776832185785}
   m_Bounds:
-    m_Center: {x: -0.0013694763, y: 0.0000011622906, z: 0.0000000035350922}
-    m_Extent: {x: 0.37796026, y: 0.29000074, z: 0}
+    m_Center: {x: -0.0013695955, y: 0.0000014007092, z: 0.0000000035349785}
+    m_Extent: {x: 0.37796032, y: 0.29000092, z: 1.110223e-16}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -3119,7 +3246,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2177962726386498433}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: reed1_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3151,7 +3278,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4504694537488718610}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: reed7_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3183,7 +3310,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6972286063070823996}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Wing_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3214,7 +3341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8127426566288736347}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: tail1_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3245,7 +3372,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3913244527969716230}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: reed8_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3276,7 +3403,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 726575095192758666}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: body3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3309,7 +3436,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8542317430394678420}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Bodyfluff_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3342,7 +3469,7 @@ GameObject:
   - component: {fileID: 2859707469118961557}
   - component: {fileID: 5494361896715997623}
   - component: {fileID: 7400350975075099832}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3402,8 +3529,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 4
   m_Sprite: {fileID: 8778349268552855898, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3434,8 +3561,8 @@ MonoBehaviour:
   - {fileID: 783589900612408245}
   - {fileID: 7578696858526735885}
   m_Bounds:
-    m_Center: {x: 0.0045040846, y: 0.00000059604645, z: 0.0000000035350922}
-    m_Extent: {x: 0.79049504, y: 0.64500034, z: 0}
+    m_Center: {x: 0.0045040846, y: 0.0000016093254, z: 0.0000000035349785}
+    m_Extent: {x: 0.79049516, y: 0.64500034, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -3448,7 +3575,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2682552613500669668}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Wing_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3480,7 +3607,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1737995424783552694}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: skirt_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3513,7 +3640,7 @@ GameObject:
   - component: {fileID: 6877885792285729511}
   - component: {fileID: 8589156536021060925}
   - component: {fileID: 8067379299585348809}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: T_Beak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3573,8 +3700,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 23
   m_Sprite: {fileID: -1953020461906470379, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3604,8 +3731,8 @@ MonoBehaviour:
   - {fileID: 3851383815390275901}
   - {fileID: 2362505225630457453}
   m_Bounds:
-    m_Center: {x: 0.0000005364418, y: 0, z: 0.0000000035350922}
-    m_Extent: {x: 0.7049999, y: 0.49500006, z: 0}
+    m_Center: {x: 0.000000059604645, y: -0.00000023841858, z: 0.0000000035349785}
+    m_Extent: {x: 0.7049999, y: 0.495, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -3618,7 +3745,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7705576863960066569}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed5_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3649,7 +3776,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2362505225630457453}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: T_beak
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3682,7 +3809,7 @@ GameObject:
   - component: {fileID: 8241502841015462157}
   - component: {fileID: 7462256371086995641}
   - component: {fileID: 2374956099445182672}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: tail2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3742,8 +3869,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 11
   m_Sprite: {fileID: 8592027528453435383, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3775,8 +3902,8 @@ MonoBehaviour:
   - {fileID: 5263917873316714974}
   - {fileID: 2706619063204136384}
   m_Bounds:
-    m_Center: {x: -0.0009353161, y: 0.0017850399, z: 0.0000000035350922}
-    m_Extent: {x: 1.7340646, y: 2.123215, z: 0}
+    m_Center: {x: -0.0009356737, y: 0.0017850399, z: 0.0000000035349785}
+    m_Extent: {x: 1.7340646, y: 2.1232147, z: 1.110223e-16}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -3789,7 +3916,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 754649565764402977}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed4_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3821,7 +3948,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5696284688629286910}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed3_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3854,7 +3981,7 @@ GameObject:
   - component: {fileID: 6775846581268117030}
   - component: {fileID: 3711745325334453816}
   - component: {fileID: 8196149331655601797}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3914,8 +4041,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 2
   m_Sprite: {fileID: 5252159059083158097, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3945,8 +4072,8 @@ MonoBehaviour:
   - {fileID: 4492885655489904375}
   - {fileID: 8592893691478304256}
   m_Bounds:
-    m_Center: {x: -0.0000004172325, y: 0.0014259815, z: 0.0000000035350922}
-    m_Extent: {x: 0.4449999, y: 0.34178495, z: 0}
+    m_Center: {x: -0.0000005066395, y: 0.0014264286, z: 0.0000000035349785}
+    m_Extent: {x: 0.44499996, y: 0.34178492, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -3959,7 +4086,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 496785033932135223}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: reed8_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3991,7 +4118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2411978192003429609}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed13_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4023,7 +4150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1503130285696215116}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: F_leg_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4056,7 +4183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3345314074782727546}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: skirt_main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4092,7 +4219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6800413349197545600}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: headfluff_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4123,7 +4250,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6019314776832185785}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: tail2_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4157,7 +4284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2883195894589260676}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: headfluff_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4190,7 +4317,7 @@ GameObject:
   - component: {fileID: 1641918790298078174}
   - component: {fileID: 8773266907037544336}
   - component: {fileID: 9085941999242189814}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4250,8 +4377,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 16
   m_Sprite: {fileID: -3318339164494001989, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4283,8 +4410,8 @@ MonoBehaviour:
   - {fileID: 8475663934877016844}
   - {fileID: 7705576863960066569}
   m_Bounds:
-    m_Center: {x: -0.0013748407, y: -0.00000029802322, z: 0.0000000035350922}
-    m_Extent: {x: 1.7886246, y: 0.9549999, z: 2.220446e-16}
+    m_Center: {x: -0.00137496, y: -0.0000005364418, z: 0.0000000035349785}
+    m_Extent: {x: 1.788625, y: 0.95499986, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -4299,7 +4426,7 @@ GameObject:
   - component: {fileID: 3242473742138353511}
   - component: {fileID: 3452112232704444770}
   - component: {fileID: 2560740199333811806}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4359,8 +4486,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 14
   m_Sprite: {fileID: 7809287980521520654, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4395,8 +4522,8 @@ MonoBehaviour:
   - {fileID: 726575095192758666}
   - {fileID: 6040033360503199201}
   m_Bounds:
-    m_Center: {x: 0.0022500753, y: -0.0015048981, z: 0.0000000035350924}
-    m_Extent: {x: 1.8577503, y: 1.4034951, z: 2.220446e-16}
+    m_Center: {x: 0.0022497177, y: -0.0015051365, z: 0.0000000035349785}
+    m_Extent: {x: 1.8577504, y: 1.4034948, z: 2.220446e-16}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -4409,7 +4536,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5415538252834473773}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: head_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4440,7 +4567,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 875566647838684946}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Bodyfluff_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4471,7 +4598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3609230128391639851}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: skirt_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4502,7 +4629,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 992426873155668764}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed4_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4534,7 +4661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3851383815390275901}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4566,7 +4693,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1074070742145823035}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: reed8_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4598,7 +4725,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8592893691478304256}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed12_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4629,7 +4756,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5831659736242935272}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed2_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4661,7 +4788,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 329122859227426612}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed5_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4693,7 +4820,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 240371964663739590}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: reed6_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4724,7 +4851,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7923264076624179350}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: reed6_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4756,7 +4883,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224109349548715552}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Bodyfluff_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4789,7 +4916,7 @@ GameObject:
   - component: {fileID: 7501364244466231638}
   - component: {fileID: 723049789232162997}
   - component: {fileID: 9079995482865767741}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4849,8 +4976,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 3
   m_Sprite: {fileID: -6836629708272881884, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4880,8 +5007,8 @@ MonoBehaviour:
   - {fileID: 2304696984455359254}
   - {fileID: 4901084535300752935}
   m_Bounds:
-    m_Center: {x: 0.0005593896, y: -0.000169307, z: 0.0000000035350922}
-    m_Extent: {x: 0.5463699, y: 0.2698299, z: 0}
+    m_Center: {x: 0.0005591512, y: -0.000169307, z: 0.0000000035349785}
+    m_Extent: {x: 0.5463699, y: 0.26982987, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -4896,7 +5023,7 @@ GameObject:
   - component: {fileID: 3759060048847016700}
   - component: {fileID: 6913543945634715424}
   - component: {fileID: 6399823888053488248}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4956,8 +5083,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 7
   m_Sprite: {fileID: -4200065860838634080, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4986,8 +5113,8 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 2214418600676889474}
   m_Bounds:
-    m_Center: {x: -0.00000047683716, y: -0.017170072, z: 0.0000000035350922}
-    m_Extent: {x: 1.0700002, y: 0.5312899, z: 0}
+    m_Center: {x: -0.00000047683716, y: -0.017169118, z: 0.0000000035349785}
+    m_Extent: {x: 1.0700003, y: 0.5312898, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -5000,7 +5127,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1952611370043691207}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: F_leg_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5014,7 +5141,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7600998658781378889}
-  m_LocalRotation: {x: 0.0000000012537037, y: -0.0000000053130185, z: 0.17504351, w: 0.9845607}
+  m_LocalRotation: {x: 0.0000000021973339, y: -0.000000010681169, z: 0.1750444, w: 0.9845606}
   m_LocalPosition: {x: 0.99863434, y: 0.000000016721241, z: 0}
   m_LocalScale: {x: 0.99999976, y: 0.99999976, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5032,7 +5159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2461409788545618204}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed3_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5064,7 +5191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6119579286120599140}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: head_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5097,7 +5224,7 @@ GameObject:
   - component: {fileID: 1202738838584675692}
   - component: {fileID: 4787652292717560642}
   - component: {fileID: 518756011039906561}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5157,8 +5284,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 19
   m_Sprite: {fileID: -5077199545227066833, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5190,8 +5317,8 @@ MonoBehaviour:
   - {fileID: 6043912385594330930}
   - {fileID: 7293719314659048387}
   m_Bounds:
-    m_Center: {x: -0.0019450188, y: -0.0013645887, z: 0.0000000035350922}
-    m_Extent: {x: 0.3580051, y: 1.5636353, z: 1.110223e-16}
+    m_Center: {x: -0.001944691, y: -0.0013650656, z: 0.0000000035349785}
+    m_Extent: {x: 0.35800546, y: 1.5636353, z: 1.110223e-16}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -5206,7 +5333,7 @@ GameObject:
   - component: {fileID: 2224062380754320279}
   - component: {fileID: 7386427124369383518}
   - component: {fileID: 8722020072135806381}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5266,8 +5393,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 25
   m_Sprite: {fileID: -1625176169832717638, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5303,8 +5430,8 @@ MonoBehaviour:
   - {fileID: 8736935826004860505}
   - {fileID: 2362505225630457453}
   m_Bounds:
-    m_Center: {x: -0.04834941, y: 0.00000059604645, z: 0.0000000035350922}
-    m_Extent: {x: 0.41665012, y: 0.7000004, z: 2.220446e-16}
+    m_Center: {x: -0.048349917, y: 0.00000029802322, z: 0.0000000035349785}
+    m_Extent: {x: 0.41665018, y: 0.7000003, z: 2.220446e-16}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -5317,7 +5444,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7604606887483518183}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: reed1_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5349,7 +5476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7986400538413841342}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed2_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5383,7 +5510,7 @@ GameObject:
   - component: {fileID: 4213112853693835082}
   - component: {fileID: 3403210460912468715}
   - component: {fileID: 7930707117884347693}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: tail1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5443,8 +5570,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2005471153
+  m_SortingLayer: -4
   m_SortingOrder: 13
   m_Sprite: {fileID: -968032278108345854, guid: fa3cc2d538396ed4bacb3f80ff221ed8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5476,8 +5603,8 @@ MonoBehaviour:
   - {fileID: 6290623699846036172}
   - {fileID: 402854163108095772}
   m_Bounds:
-    m_Center: {x: -0.0005700588, y: -0.0009698272, z: 0.0000000035350922}
-    m_Extent: {x: 1.3362, y: 0.96624005, z: 0}
+    m_Center: {x: -0.0005700588, y: -0.0009698868, z: 0.0000000035349785}
+    m_Extent: {x: 1.3362001, y: 0.9662399, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -5490,7 +5617,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5263917873316714974}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: tail2_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5524,7 +5651,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7293719314659048387}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed2_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5555,7 +5682,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5636550228652914941}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed5_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5587,7 +5714,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033236668335633}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: left_bodyTarget
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -5618,7 +5745,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033236907218705}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: right_foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5650,7 +5777,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8858033236989092412}
   - component: {fileID: 8858033236989092413}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: right_solver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5718,7 +5845,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033237045661148}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: right_effector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5732,7 +5859,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8858033237045661151}
-  m_LocalRotation: {x: 0.0000000015619264, y: -0.0000000035021956, z: -0.68143076, w: -0.73188263}
+  m_LocalRotation: {x: 0.0000000049086, y: -0.000000004576488, z: -0.68143165, w: -0.73188186}
   m_LocalPosition: {x: 2.489, y: -0.001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5749,7 +5876,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033237067033149}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: BodyTargets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5784,9 +5911,13 @@ GameObject:
   - component: {fileID: 8858033237223302733}
   - component: {fileID: 8858033237223302739}
   - component: {fileID: 8858033237223302738}
-  m_Layer: 12
+  - component: {fileID: 1775972834}
+  - component: {fileID: 1775972835}
+  - component: {fileID: 1775972836}
+  - component: {fileID: 1775972837}
+  m_Layer: 6
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: damage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5807,6 +5938,7 @@ Transform:
   - {fileID: 8858033238284851755}
   - {fileID: 8858033238211222330}
   - {fileID: 8858033238463873796}
+  - {fileID: 232936763}
   m_Father: {fileID: 3838765634421102364}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5841,7 +5973,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5895,6 +6027,80 @@ PolygonCollider2D:
       - {x: 0.4316681, y: 2.1543083}
       - {x: 0.103977025, y: 2.7511303}
       - {x: 0.10793373, y: 1.1815999}
+--- !u!114 &1775972834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858033237223302732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595f6cdf4342e0044a1026965322a369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathParticles: {fileID: 0}
+  deathIcon: {fileID: 4901086461453483306, guid: 396e2d38370dd4a98ad6330ec1914c58, type: 3}
+  deathIconOffset: {x: 0, y: 2.8, z: 0}
+  iconFollowsThis: {fileID: 8858033237223302733}
+  invincibilityTime: 0
+  interactable: {fileID: 232936762}
+  parentObject: {fileID: 8858033237283096176}
+  droppableItem:
+  - {fileID: 331157449500458617, guid: 37420ad60a960124196c19192c035bc3, type: 3}
+  dropRate:
+  - 100
+  isAlive: 1
+--- !u!114 &1775972835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858033237223302732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b597869efe1ac4f42a2b5cf00ef308eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLife: 3
+  life: 1
+  maxHp: 8
+  hp: 0
+  maxBelly: 10
+  belly: 0
+  phyDefense: 0
+  magDefense: 0
+--- !u!114 &1775972836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858033237223302732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a61610c87f588e46b72f06ad6d3cf29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayer: 0
+  isBullet: 0
+  dmgType: 0
+  dmg: 2
+  lifeTime: 5
+  creator: []
+--- !u!114 &1775972837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858033237223302732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c1e2a18797b341af8a3ba4f7ba30483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8858033237245279419
 GameObject:
   m_ObjectHideFlags: 0
@@ -5904,7 +6110,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033237245279416}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: left_effectorTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5935,7 +6141,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033237250433729}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: right_effectorTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5966,9 +6172,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033237283096177}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: pfb_JellyBird
-  m_TagString: Enemy
+  m_TagString: creature
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6000,7 +6206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8858033237393116001}
   - component: {fileID: 8858033237393116006}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: left_solver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6068,7 +6274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033237398184283}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: right_finalTarget
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -6099,7 +6305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033237582636687}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: FinalTargets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6132,7 +6338,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033237695720066}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Targets_Body&Final
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6165,7 +6371,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033237704569574}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: EffectorTargets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6198,7 +6404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033237938101158}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: right_bodyTarget
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -6229,7 +6435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033238211222330}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Foots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6262,7 +6468,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033238228942074}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: left_GC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6293,7 +6499,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033238284851755}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: GroundChecks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6326,7 +6532,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033238293508431}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: left_foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6357,7 +6563,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033238333643614}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: left_effector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6371,7 +6577,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8858033238333643609}
-  m_LocalRotation: {x: -0.0000000026562292, y: 0.0000000029503195, z: -0.74345154, w: -0.6687899}
+  m_LocalRotation: {x: -0.000000002656198, y: 0.0000000029502933, z: -0.7434525, w: -0.66878885}
   m_LocalPosition: {x: 2.435, y: 0.001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6388,7 +6594,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033238365135635}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Sprites
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6444,7 +6650,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033238463873796}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: TargetTag
   m_TagString: TargetPlayer
   m_Icon: {fileID: 0}
@@ -6475,7 +6681,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033238597728597}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: left_finalTarget
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -6506,7 +6712,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033238644552393}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: right_GC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6537,7 +6743,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858033238773659625}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Solvers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6570,7 +6776,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6043912385594330930}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: Reed2_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6602,7 +6808,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4175069605327517109}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: head_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6633,7 +6839,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6290623699846036172}
-  m_Layer: 12
+  m_Layer: 6
   m_Name: tail1_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
