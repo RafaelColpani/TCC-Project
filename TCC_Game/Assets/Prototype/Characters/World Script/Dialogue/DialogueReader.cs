@@ -46,6 +46,7 @@ public class DialogueReader : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0) return;
         //if it is clicked, it checks whether the text in the dialogue box is the same as what is expected to be written
         //if it is, it goes to the next line. if not, it completes the dialogue and checks if it must show choices
         if (Input.GetMouseButtonDown(0))
