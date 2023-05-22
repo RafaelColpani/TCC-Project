@@ -39,11 +39,14 @@ public class playerShooter : MonoBehaviour
                 Shoot(physBullet);
             }
         }
+        
+        /*
         if (magBullet != null)
         {
             if (Input.GetMouseButtonDown(1))
                 Shoot(magBullet);
         }
+        */
     }
 
     private void TurnObject()
