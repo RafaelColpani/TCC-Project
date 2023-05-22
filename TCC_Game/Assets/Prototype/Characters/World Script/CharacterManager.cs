@@ -35,4 +35,20 @@ public class CharacterManager : MonoBehaviour
     // INPUT
     public bool CommandsByInputHandler { get { return commandsByInputHandler; } }
     #endregion
+
+    #region Public Methods
+    public int DirectionMultiplier()
+    {
+        if (IsFacingRight())
+            return 1;
+
+        else
+            return -1;
+    }
+
+    public bool IsFacingRight()
+    {
+        return this.transform.localScale.x > 0;
+    }
+    #endregion
 }

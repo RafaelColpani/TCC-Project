@@ -86,6 +86,8 @@ public class ObstacleBlock : MonoBehaviour
     [HeaderPlus(" ", "- GENERAL DETECTION -", (int)HeaderPlusColor.white)]
     [Tooltip("The layers that will be considered as obstacle.")]
     [SerializeField] LayerMask obstacleLayers;
+    [Tooltip("Tells if this object is a player or an enemy.")]
+    [SerializeField] bool isEnemy;
 
     [HeaderPlus(" ", "- GIZMO -", (int)HeaderPlusColor.white)]
     [SerializeField] bool showGizmo;
@@ -205,7 +207,7 @@ public class ObstacleBlock : MonoBehaviour
             this.body.position.z));
     }
 
-    private bool HaveHitedObstacle()
+    public bool HaveHitedObstacle()
     {
         foreach (Vector3 raycastPosition in frontRaycastPositions)
         {
@@ -222,6 +224,8 @@ public class ObstacleBlock : MonoBehaviour
 
     private void SetMovementBlock(bool isHit)
     {
+        if (isEnemy) return;
+
         if (isHit)
         {
             moveCommand.CanMove = false;

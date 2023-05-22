@@ -36,7 +36,7 @@ public class MoveCommand : ICommand
         this.isOnSlope = false;
     }
 
-    public void Execute(Transform actor, CharacterController characterController = null, float value = 1)
+    public void Execute(Transform actor, float value = 1, CharacterController characterController = null)
     {
         if (!isOnSlope)
             velocity = actor.right;
@@ -53,7 +53,7 @@ public class MoveCommand : ICommand
 
         else
         {
-            actor.Translate(velocity * (value * walkSpeed) * Time.fixedDeltaTime);
+            actor.Translate(velocity * (value * walkSpeed) * Time.fixedDeltaTime, Space.World);
         }
     }
 
@@ -103,6 +103,11 @@ public class MoveCommand : ICommand
     {
         return this.velocity.y;
     }
+
+    public void SetWalkSpeed(float value)
+    {
+        this.walkSpeed = value;
+    }
 }
 
 /// <summary>Perform the jump movement, given the actors Transform and its GravityController who will execute it</summary>
@@ -124,7 +129,7 @@ public class PressJumpCommand : ICommand
         this.gc = gc;
     }
 
-    public void Execute(Transform actor, CharacterController characterController = null, float value = 1)
+    public void Execute(Transform actor, float value = 1, CharacterController characterController = null)
     {
         if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, groundLayer)) return;
 
@@ -135,7 +140,7 @@ public class PressJumpCommand : ICommand
 /// <summary>Perform the released jump button movement, given the actors Transform and its GravityController who will execute it</summary>
 public class ReleaseJumpCommand : ICommand
 {
-    public void Execute(Transform actor, CharacterController characterController = null, float value = 1)
+    public void Execute(Transform actor, float value = 1, CharacterController characterController = null)
     {
         //TODO: Jump Released
         Debug.Log($"Released Jump");
@@ -159,6 +164,24 @@ public class JumpUtils
         }
 
         return false;
+    }
+
+    public static bool MoreThenHalfLegsIsGrounded(Transform groundCheckParent, float groundCheckDistance, LayerMask groundLayer)
+    {
+        var groundChecks = groundCheckParent.GetComponentsInChildren<Transform>();
+        int legsCount = groundChecks.Length;
+
+        int groundedLegsCount = 0;
+
+        foreach (var groundCheck in groundChecks)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
+
+            if (hit.collider != null && !hit.collider.isTrigger)
+                groundedLegsCount++;
+        }
+
+        return groundedLegsCount > legsCount / 2;
     }
 }
 #endregion
