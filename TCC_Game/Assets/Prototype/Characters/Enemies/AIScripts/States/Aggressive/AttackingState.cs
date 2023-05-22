@@ -7,6 +7,7 @@ public class AttackingState : IEnemyState
     #region Contructor VARs
     EnemyCommands enemyCommands;
     List<IEnemyState> stateMachine;
+    IsDamagedAndDead isDamagedAndDead;
 
     float maxWaitTime;
     #endregion
@@ -15,12 +16,14 @@ public class AttackingState : IEnemyState
     float waitTimer = 0f;
 
     readonly string chasingStateName = "Chasing";
+    readonly string deadStateName = "Dead";
     #endregion
 
-    public AttackingState(EnemyCommands enemyCommands, List<IEnemyState> stateMachine, float maxWaitTime)
+    public AttackingState(EnemyCommands enemyCommands, List<IEnemyState> stateMachine, IsDamagedAndDead isDamagedAndDead, float maxWaitTime)
     {
         this.enemyCommands = enemyCommands;
         this.stateMachine = stateMachine;
+        this.isDamagedAndDead = isDamagedAndDead;
         this.maxWaitTime = maxWaitTime;
     }
 
@@ -49,7 +52,11 @@ public class AttackingState : IEnemyState
     {
         if (waitTimer < maxWaitTime) return null;
 
-        return GetState(chasingStateName);
+        if (!isDamagedAndDead.IsAlive)
+            return GetState(deadStateName);
+
+        else
+            return GetState(chasingStateName);
     }
 
     private IEnemyState GetState(string stateName)

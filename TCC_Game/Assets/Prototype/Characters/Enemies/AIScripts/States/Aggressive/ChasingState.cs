@@ -9,6 +9,7 @@ public class ChasingState : IEnemyState
     EnemyBehaviour behaviour;
     List<IEnemyState> stateMachine;
     EnemyCollisionController enemyCollisionController;
+    IsDamagedAndDead isDamagedAndDead;
 
     Transform body;
     Transform player;
@@ -18,15 +19,16 @@ public class ChasingState : IEnemyState
 
     #region Private VARs
     readonly string wanderingStateName = "Wandering";
-    readonly string chasingStateName = "Chasing";
     readonly string attackingStateName = "Attacking";
+    readonly string deadStateName = "Dead";
     #endregion
 
-    public ChasingState(EnemyCommands enemyCommands, EnemyBehaviour behaviour, List<IEnemyState> stateMachine, EnemyCollisionController enemyCollisionController, Transform body, Transform player, float maxPlayerDistance)
+    public ChasingState(EnemyCommands enemyCommands, EnemyBehaviour behaviour, List<IEnemyState> stateMachine, IsDamagedAndDead isDamagedAndDead, EnemyCollisionController enemyCollisionController, Transform body, Transform player, float maxPlayerDistance)
     {
         this.enemyCommands = enemyCommands;
         this.behaviour = behaviour;
         this.stateMachine = stateMachine;
+        this.isDamagedAndDead = isDamagedAndDead;
         this.enemyCollisionController = enemyCollisionController;
         this.player = player;
         this.body = body;
@@ -64,7 +66,10 @@ public class ChasingState : IEnemyState
 
     public IEnemyState ChangeState()
     {
-        if (enemyCommands.IsInEdge() || (body.position - player.position).sqrMagnitude >= maxPlayerDistance)
+        if (!isDamagedAndDead.IsAlive)
+            return GetState(deadStateName);
+
+        else if (enemyCommands.IsInEdge() || (body.position - player.position).sqrMagnitude >= maxPlayerDistance)
             return GetState(wanderingStateName);
 
         else if (enemyCollisionController.TouchedPlayer)
