@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NpcInteractable : MonoBehaviour, IInteractable
 {
-    [HideInInspector] public int timesTalked = 0;
+    [HideInInspector] public static int timesTalked = 0;
     [SerializeField] string fileName = "dialogue.json";
     [SerializeField] GameObject dialogueManager, dialogueGrp;
     DialogueReader dialogueReader;
