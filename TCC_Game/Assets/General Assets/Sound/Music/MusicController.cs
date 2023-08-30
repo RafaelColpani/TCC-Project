@@ -14,36 +14,61 @@ public class MusicController : MonoBehaviour
     [SerializeField] string[] scenesNames;
     [SerializeField] AudioSource[] music;
     [SerializeField] int currentMusicIndex = 0;
+    [SerializeField] float maxVolume;
 
+    Transform playerTransform;
     void Start()
     {
+        playerTransform = GameObject.FindGameObjectWithTag("TargetPlayer").transform;
+        music[currentMusicIndex].Play();
+        for (int i = 0; i < music.Length; i++)
+        {
+            music[i].volume = 0f;
+        }
+        music[currentMusicIndex].volume = 1f;
         music[currentMusicIndex].Play();
         ChangeMusic();
     }
 
+    void Update()
+    {   
+        transform.parent.position = playerTransform.position;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "Player")
         {
             for (int i = 0; i < scenesNames.Length; i++)
             {
-                
-
-                if(collision.tag == "musicChange")
+                if (collision.name.Contains("Music"))
                 {
-                    // vai servir mais para o futuro
-                    string[] splitArray = scenesNames[i].Split(" ");
-                    if (collision.transform.name.Contains(splitArray[0]) /*||
-                    collision.GetComponent<Load_Scene>()._nextScene.Contains(splitArray[1])*/)
+                    if (collision.transform.name.Contains( i.ToString() ))
                     {
                         currentMusicIndex = i;
-                        print($"currentMusicIndex: {currentMusicIndex}");
+                        print($"--- currentMusicIndex: {currentMusicIndex}");
                         ChangeMusic();
                     }
                 }
-                
+
             }
-        }
+
+        //if(collision.tag == "Player")
+        //{
+        //    for (int i = 0; i < scenesNames.Length; i++)
+        //    {
+        //        if(collision.tag == "musicChange")
+        //        {
+        //            // vai servir mais para o futuro
+        //            string[] splitArray = scenesNames[i].Split(" ");
+        //            if (collision.transform.name.Contains(splitArray[0]) /*||
+        //            collision.GetComponent<Load_Scene>()._nextScene.Contains(splitArray[1])*/)
+        //            {
+        //                currentMusicIndex = i;
+        //                print($"currentMusicIndex: {currentMusicIndex}");
+        //                ChangeMusic();
+        //            }
+        //        }
+        //    }
+        //}
     }
 
     void ChangeMusic()
@@ -52,8 +77,10 @@ public class MusicController : MonoBehaviour
         {
             if (i != currentMusicIndex)
             {
-                music[i].mute = true;
+                music[i].volume = 0f;
             }
+            //music[currentMusicIndex].volume = 1f;
+            music[currentMusicIndex].volume = 1f;
         }
     }
 }
