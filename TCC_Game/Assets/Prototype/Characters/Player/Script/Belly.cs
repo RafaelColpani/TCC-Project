@@ -121,6 +121,11 @@ public class Belly : MonoBehaviour
         bellyTimer = 0;
     }
 
+    public void MaxedBellyTimer()
+    {
+        bellyTimer = bellyMaxTimer;
+    }
+
     public void ToggleCalculateBelly()
     {
         this.calculateBelly = !this.calculateBelly;

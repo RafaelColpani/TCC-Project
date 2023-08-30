@@ -2,120 +2,108 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-public enum enumMethod
-{
-    Distance,
-    Trigger
-}
+using UnityEngine.UI;
 
 public class Load_Scene : MonoBehaviour
 {
-    [SerializeField] Transform player;
-    [SerializeField] enumMethod _enumMethod;
-    [SerializeField] float loadRange = 5f;
+    /// <summary> Pr�ximao cena a ser carregada. A vari�vel est� exposta publicamente pois est� sendo usada pelo MusicController.</summary>
+    [SerializeField] public string _nextScene;
+    [SerializeField] string lastScene;
+    public static bool load;
+
+    private GameObject player;
+    [SerializeField] Vector3 playerPos;
+
 
     //States
-    [SerializeField] bool isLoaded;
-    [SerializeField] bool shouldLoad;
+    //[SerializeField] bool _normalScene = false;
+    [SerializeField] bool _additiveScene = false;
 
+    /*
     [Space(5)]
     [Header("Gizmo")]
     [SerializeField] Color colorGizmo = Color.black;
     [SerializeField] PolygonCollider2D box;
+    */
 
+    [Header("UI")]
+    private GameObject colliderScene;
+    private Slider sliderUI;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Debug
-        box = gameObject.GetComponent<PolygonCollider2D>();
-
-        //Load Scene
-        if (SceneManager.sceneCount > 0)
-        {
-            for (int i = 0; i < SceneManager.sceneCount; i++)
-            {
-                Scene scene = SceneManager.GetSceneAt(i);
-                if (scene.name == gameObject.name)
-                {
-                    isLoaded = true;
-                }
-            }
-        }
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if (_enumMethod == enumMethod.Distance)
-        {
-            DistanceCheck();
-        }
+        colliderScene = GameObject.Find("--- UI/Canvas_UI/sld_loadScene");
+        sliderUI = colliderScene.GetComponentInChildren<Slider>();
+        
+        colliderScene.SetActive(false);
 
-        if (_enumMethod == enumMethod.Trigger)
-        {
-            TriggerCheck();
-        }
+        player = GameObject.FindGameObjectWithTag("TargetPlayer");
+
+        playerPos = player.GetComponent<Transform>().position;
     }
 
-    void DistanceCheck()
+    private void OnTriggerEnter2D(Collider2D collision) 
     {
-        if (Vector2.Distance(player.position, transform.position) < loadRange)
+        /*
+        if (_normalScene == true)
         {
-            LoadScene();
+            
+                print("normal scene ok");
+                //SceneManager.UnloadScene(lastScene);
+                //SceneManager.LoadScene("LoadRoom", LoadSceneMode.Additive);
+                SceneManager.LoadScene(_nextScene, LoadSceneMode.Additive);
+            
+        }
+        */
+
+        if (_additiveScene == true)
+        {
+            if(collision.gameObject.name == "Scene Collider" && !SceneManager.GetSceneByName(_nextScene).isLoaded) 
+            {
+                print("_additiveScene ok");
+                
+                /*
+                if (load) 
+                {
+                    load = false;
+                    print("cu azul");
+                    return;
+                }
+                */
+
+                CustomLoad(_nextScene);
+                //AsyncOperation loadScene =  SceneManager.LoadSceneAsync(_nextScene, LoadSceneMode.Additive);
+                load = true;
+            }
         }
 
-        else
+        void CustomLoad(string _nextScene)
         {
-            UnloadScene();
-        }
-    }
-
-    void TriggerCheck()
-    {
-        if (shouldLoad)
-        {
-            LoadScene();
+            StartCoroutine(LoadAsynScene(_nextScene));
         }
 
-        else
+        IEnumerator LoadAsynScene(string _nextScene)
         {
-            UnloadScene();
-        }
-    }
+            AsyncOperation loadScene =  SceneManager.LoadSceneAsync(_nextScene, LoadSceneMode.Additive);
 
-    void LoadScene()
-    {
-        if (!isLoaded)
-        {
-            SceneManager.LoadSceneAsync(gameObject.name, LoadSceneMode.Additive);
-            isLoaded = true;
-        }
-    }
+            colliderScene.SetActive(true);
+            //print("colliderScene Active:" + " " + colliderScene);
 
-    void UnloadScene()
-    {
-        if (isLoaded)
-        {
-            SceneManager.UnloadSceneAsync(gameObject.name);
-            isLoaded = false;
-        }
-    }
+            while(!loadScene.isDone){
+                float progress = Mathf.Clamp01(loadScene.progress / .9f);
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            shouldLoad = true;
-        }
-    }
+                sliderUI.value = progress;
+              
+                //print(progress);
+                //print("Slider Active:" + " " + sliderUI);
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            shouldLoad = false;
+                if(progress == 1)
+                {
+                    colliderScene.SetActive(false);
+                }
+
+                yield return null;
+            }  
         }
     }
 

@@ -9,13 +9,13 @@ public class PlayerInteract : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         var mb = collision.GetComponents<MonoBehaviour>();
-        print("Interact is start" + " " + " [PlayerInteract.cs] ");
+        //print("Interact is start" + " " + " [PlayerInteract.cs] ");
 
         foreach (MonoBehaviour mono in mb)
         {
             if (mono is IInteractable)
             {
-                print("entering interactable do " + collision.gameObject.name + " " + " [PlayerInteract.cs] ");
+                //print("entering interactable do " + collision.gameObject.name + " " + " [PlayerInteract.cs] ");
                 interactable = mono as IInteractable;
             }
         }
@@ -40,7 +40,7 @@ public class PlayerInteract : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && interactable != null)
         {
 
-            Debug.Log("Interact button" + " " + " [PlayerInteract.cs] ");
+            //Debug.Log("Interact button" + " " + " [PlayerInteract.cs] ");
             interactable.Interact();
             interactable = null;
         }

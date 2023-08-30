@@ -18,27 +18,34 @@ public class InteractToInventory : MonoBehaviour, IInteractable
         {
             case "item_artifactSummer":
                 DialogueConditions.hasSummer = true;
+                print(DialogueConditions.hasSummer);
                 break;
             case "item_artifactAutumn":
                 DialogueConditions.hasAutumn = true;
+                print(DialogueConditions.hasAutumn);
                 break;
             case "item_artifactWinter":
                 DialogueConditions.hasWinter = true;
+                print(DialogueConditions.hasWinter);
                 break;
             default:
                 break;
         }
-        playtestLeveParaNPC();
+
+        //playtestLeveParaNPC();
+        
         inventoryM = GameObject.Find("_InventoryManager").GetComponent<InventoryManager>();
         inventoryM.AddItem(item);
+        
         Destroy(this.gameObject);
     }
-
+    
+    /*
     void playtestLeveParaNPC(){
-        aviso = GameObject.Find("Canvas_UI").transform.Find("txt_playtestLeveParaNPC").gameObject;
+        aviso = GameObject.Find("Canvas_UI").transform.Find("grp_leveParaNpc").gameObject;
         print(aviso.name);
         aviso.SetActive(true);
         aviso.GetComponent<disableAfterSeconds>().startDisabling(5);
     }
-
+    */
 }

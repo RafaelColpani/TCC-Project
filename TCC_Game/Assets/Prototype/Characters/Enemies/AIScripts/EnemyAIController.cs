@@ -56,7 +56,7 @@ public class EnemyAIController : MonoBehaviour
         enemyCommands = GetComponent<EnemyCommands>();
         enemyCollisionController = GetComponentInChildren<EnemyCollisionController>();
         isDamagedAndDead = GetComponentInChildren<IsDamagedAndDead>();
-        var player = GameObject.Find("pfb_playerOficial");
+        var player = GameObject.Find("pfb_playerEntregaFinal");
         var playerRb = player.GetComponentInChildren<Rigidbody2D>();
         playerBody = playerRb.GetComponent<Transform>();
 
@@ -69,7 +69,6 @@ public class EnemyAIController : MonoBehaviour
         if (PauseController.GetIsPaused()) return;
 
         StatesFlow();
-        CheckTouch();
     }
     #endregion
 
@@ -109,11 +108,6 @@ public class EnemyAIController : MonoBehaviour
         }
 
         currentState.Update();
-    }
-
-    private void CheckTouch()
-    {
-        var collider = characterManager.Body.GetComponent<Collider2D>();
     }
     #endregion
 

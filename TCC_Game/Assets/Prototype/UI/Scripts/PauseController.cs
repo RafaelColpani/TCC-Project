@@ -9,7 +9,7 @@ public class PauseController : MonoBehaviour
 
     [SerializeField] GameObject pause;
     [SerializeField] GameObject settings;
-
+    [SerializeField] GameObject dimBackground;
     private static bool wasPaused = false;
 
     private void Update()
@@ -26,15 +26,16 @@ public class PauseController : MonoBehaviour
         {
             print("despausou");
             pause.SetActive(false);
+            dimBackground.SetActive(false);
             Time.timeScale = 1;
-
             if (wasPaused) return;
             PauseController.isPaused = false;
         }
         else
         {
-            print("pausoug");
+            print("pausou");
             pause.SetActive(true);
+            dimBackground.SetActive(true);
             Time.timeScale = 0;
             PauseController.isPaused = true;
         }

@@ -16,11 +16,23 @@ public class HealthSlider : MonoBehaviour
     [SerializeField] Color hungerColor;
     public bool isBelly = false;
 
+    public enum Type { Player, Enemy };
+    
+    [Space(10)]
+    public Type type = Type.Player;
+
     private void Start()
     {
         sld = GetComponent<Slider>();
         fill = FindGameObjectByNameInChildren(gameObject, "Fill").GetComponent<Image>();
         
+        if(type == Type.Player)
+        {
+
+        }
+
+
+
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject po in playerObjects)
         {
@@ -44,42 +56,37 @@ public class HealthSlider : MonoBehaviour
 
     private void Update()
     {
-
-        if (status == null)
+        if(type == Type.Player)
         {
-            GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject po in playerObjects)
+            if (status == null)
             {
-                if (po.GetComponent<Status>() != null)
+                GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+                foreach (GameObject po in playerObjects)
                 {
-                    status = po.GetComponent<Status>();
+                    if (po.GetComponent<Status>() != null)
+                    {
+                        status = po.GetComponent<Status>();
+                    }
                 }
             }
-        }
 
-        if (!isBelly)
-        {
-            sld.value = status.hp;
+            if (!isBelly)
+            {
+                sld.value = status.hp;
 
-            if (status.hp <= 2)
-                fill.color = fillColors[2]; //red
-            else if (status.hp <= (status.maxHp * 0.6))
-                fill.color = fillColors[1]; //yellow
+                if (status.hp <= 2)
+                    fill.color = fillColors[2]; //red
+                else if (status.hp <= (status.maxHp * 0.6))
+                    fill.color = fillColors[1]; //yellow
+                else
+                    fill.color = fillColors[0]; //ok
+            }
             else
-                fill.color = fillColors[0]; //ok
+            {
+                sld.value = status.belly;
+            }
         }
-        else
-        {
-            sld.value = status.belly;
-            print("belly: " + status.belly);
-
-            if (status.belly <= status.maxBelly * 0.2f)
-                fill.color = hungerColor + new Color(1,0,0,0.4f);
-            else if (status.hp <= (status.maxBelly * 0.6f))
-                fill.color = hungerColor + new Color(1, 0, 0, 0.2f);
-            else
-                fill.color = hungerColor;
-        }
+        
     }
 
     GameObject FindGameObjectByNameInChildren(GameObject go, string name)

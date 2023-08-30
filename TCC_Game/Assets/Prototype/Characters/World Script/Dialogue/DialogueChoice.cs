@@ -13,7 +13,7 @@ public class DialogueChoice : MonoBehaviour
         this.GetComponent<Button>().onClick.AddListener(OnClick);
     }
 
-    void OnClick() 
+    public void OnClick() 
     {
         dialogueReader.Chose(nextId);
     }    

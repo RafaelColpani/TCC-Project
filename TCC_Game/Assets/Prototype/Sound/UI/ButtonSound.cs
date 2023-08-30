@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ButtonSound : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerUpHandler
+public class ButtonSound : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler //, IPointerUpHandler
 {
     public UISounds soundManager;
     public AudioSource click, hover, close;
@@ -33,8 +33,8 @@ public class ButtonSound : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
         hover.Play();
     }
 
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
+    //public void OnPointerUp(PointerEventData eventData)
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 }

@@ -7,7 +7,14 @@ public class ButtonsMainMenu : MonoBehaviour
 {
     public void NewGame()
     {
+        DialogueConditions.hasSummer = false;
+        DialogueConditions.hasAutumn = false;
+        DialogueConditions.hasWinter = false;
+
+        NpcInteractable.timesTalked = 0;
+        
         SceneManager.LoadScene("LoadRoom");
+
     }
 
     public void LoadGame()
@@ -15,7 +22,7 @@ public class ButtonsMainMenu : MonoBehaviour
 
     }
 
-     public void MainMenu()
+    public void MainMenu()
     {
         SceneManager.LoadScene("Main Menu");
     }
