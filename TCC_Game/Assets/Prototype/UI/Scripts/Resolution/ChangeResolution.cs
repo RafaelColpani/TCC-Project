@@ -10,13 +10,14 @@ public class ChangeResolution : MonoBehaviour
 
     [SerializeField] TMP_Dropdown resolutionDropdown;
     public bool fullscreen;
+    [SerializeField] Toggle toggle;
 
     int filteredIndexDistance = 0;
     private void Start()
     {
         fullscreen = Screen.fullScreen;
         resolutionDropdown.ClearOptions();
-
+        toggle.isOn = fullscreen;
         resolutions = Screen.resolutions;
         List<string> _options = new();
 
@@ -55,7 +56,7 @@ public class ChangeResolution : MonoBehaviour
 
     public void ToggleFullscreen(bool f)
     {
-        f = !f;
         Screen.fullScreen = f;
+        f = !f;
     }
 }

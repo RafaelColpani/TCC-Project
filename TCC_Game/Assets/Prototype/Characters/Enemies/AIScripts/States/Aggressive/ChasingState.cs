@@ -69,7 +69,7 @@ public class ChasingState : IEnemyState
         if (!isDamagedAndDead.IsAlive)
             return GetState(deadStateName);
 
-        else if (enemyCommands.IsInEdge() || (body.position - player.position).sqrMagnitude >= maxPlayerDistance)
+        else if (ReachedMaxDistance())
             return GetState(wanderingStateName);
 
         else if (enemyCollisionController.TouchedPlayer)
@@ -92,6 +92,13 @@ public class ChasingState : IEnemyState
 
         // player is same x position
         return 0;
+    }
+
+    private bool ReachedMaxDistance()
+    {
+        return enemyCommands.IsInEdge() ||
+               enemyCommands.GetExitPatrolRegion() ||
+               (body.position - player.position).sqrMagnitude >= maxPlayerDistance;
     }
 
     private IEnemyState GetState(string stateName)

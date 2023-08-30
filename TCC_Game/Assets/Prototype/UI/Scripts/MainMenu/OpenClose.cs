@@ -5,16 +5,18 @@ using UnityEngine;
 public class OpenClose : MonoBehaviour
 {
     public GameObject panel;
-
+    [SerializeField] GameObject dimBG;
     public void Switch()
     {
         if (panel.activeSelf)
         {
             panel.SetActive(false);
+            if (dimBG) dimBG.SetActive(false);
         }
         else
         {
             panel.SetActive(true);
+            if (dimBG) dimBG.SetActive(true);
         }
         //KeepThisActive();
     }

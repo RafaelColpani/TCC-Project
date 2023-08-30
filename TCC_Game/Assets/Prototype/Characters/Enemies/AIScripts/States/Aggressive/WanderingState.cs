@@ -31,6 +31,7 @@ public class WanderingState : IEnemyState
     public void Enter()
     {
         enemyCommands.ContinueWalkRight();
+
         enemyCommands.WalkSpeedWandering();
     }
 

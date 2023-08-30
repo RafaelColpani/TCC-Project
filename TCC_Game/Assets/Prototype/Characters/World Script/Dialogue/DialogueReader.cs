@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using TMPro;
-using System.Linq;
+using RotaryHeart.Lib.SerializableDictionary;
+
+[System.Serializable]
+public class NameColor : SerializableDictionaryBase<string, Color> { }
 
 public class DialogueReader : MonoBehaviour
 {
@@ -11,18 +14,20 @@ public class DialogueReader : MonoBehaviour
     public float speed = 0.5f;
 
     [SerializeField]
-    GameObject dialogueGrp;
+    GameObject dialogueGrp, nameGrp, gameOverGrp;
     public string fileName = "dialogue.json";
 
     [SerializeField]
-    TMP_Text name,
-        dialogue;
+    TMP_Text name, dialogue;
 
     [SerializeField]
     GameObject choicesBox;
 
     [SerializeField]
     GameObject choicesButton;
+
+    [SerializeField] NameColor nameBoxTextColor;
+    [SerializeField] NameColor dialogueBoxTextColor;
     #endregion
 
     #region internal variables
@@ -72,6 +77,17 @@ public class DialogueReader : MonoBehaviour
         }
     }
     #region lines
+    int checkId(int nextId)
+    {
+        foreach (Dialogue dia in dialogueData.dialogue)
+        {
+            if (nextId == dia.id)
+            {
+                return dialogueData.dialogue.FindIndex(a => a.Equals(dia));
+            }
+        }
+        return -1;
+    }
     public void StartAll()
     {
         //finds path to the json file to be read
@@ -88,7 +104,7 @@ public class DialogueReader : MonoBehaviour
             Debug.LogError($"File not found: {filePath}");
         }
 
-        //pega a lista de condi��es
+        //gets list of conditions
         conditions = dialogueConditions.TurnToConditions(NpcInteractable.timesTalked <= 1);
         //Starts dialogue
         StartDialogue();
@@ -124,19 +140,20 @@ public class DialogueReader : MonoBehaviour
             }
             else //if there is a nextId and there is no false condition, it gets the next id
             {
-                //id = dialogueData.dialogue[id].nextId;
-                foreach(Dialogue talk in dialogueData.dialogue){
-                    if(talk.id == dialogueData.dialogue[id].nextId){
-                        id = talk.id;
-                    }
-                }
+                id = checkId(dialogueData.dialogue[id].nextId);
             }
             if (!metConditions)
             {
                 metConditions = true;
             }
 
-
+            if(dialogueData.dialogue[id].id == 60 && gameOverGrp != null && 
+            DialogueConditions.hasSummer && 
+            DialogueConditions.hasAutumn && 
+            DialogueConditions.hasWinter){
+                gameOverGrp.SetActive(true);
+                PauseController.SetPauseAndTime(true);
+            }
 
             if (dialogueData.dialogue[id].condition.Count > 0) //checks if there is any need to check the condition at all
             {
@@ -164,14 +181,29 @@ public class DialogueReader : MonoBehaviour
     {
         if (!alreadyTyping)
         {
-            name.text = dialogueData.dialogue[id].character;
+            //if the dialogue was said by a character, show the name box
+            if (dialogueData.dialogue[id].character != null)
+            {
+                name.text = dialogueData.dialogue[id].character;
+                nameGrp.SetActive(true);
+            }
+            else //hides name box
+            {
+                nameGrp.SetActive(false);
+            }
+
             dialogue.text = string.Empty;
+
+            //color of name and text change accordingly to the name
+            dialogue.color = dialogueBoxTextColor[name.text];
+            if (nameGrp.activeSelf)
+                this.name.color = nameBoxTextColor[name.text];
+
             StartCoroutine(TypeLine(dialogueData.dialogue[id].text)); //types the text of the id's line}
         }
     }
 
     IEnumerator TypeLine(string txt)
-
     {
         if (!alreadyTyping)
         {
@@ -249,7 +281,7 @@ public class DialogueReader : MonoBehaviour
     {
         conditions = dialogueConditions.TurnToConditions(NpcInteractable.timesTalked <= 1);
         //gets id of the next dialogue accordingly to the choice
-        id = choiceNextId;
+        id = checkId(choiceNextId);
 
         if (dialogueData.dialogue[id].condition.Count > 0) //if there is any need to check the condition, it does so
             ChecksCondition();

@@ -20,9 +20,9 @@ public class DialogueConditions
             {nameof(confirmation), confirmation}
         };
         Dictionary<string, int> conditionInt = new Dictionary<string, int>() {
-            {"summerCondition", summerCondition},
-            {"autumnCondition", autumnCondition},
-            {"winterCondition", winterCondition},
+            {nameof(summerCondition), summerCondition},
+            {nameof(autumnCondition), autumnCondition},
+            {nameof(winterCondition), winterCondition},
             {nameof(foodType), foodType}
         };
 

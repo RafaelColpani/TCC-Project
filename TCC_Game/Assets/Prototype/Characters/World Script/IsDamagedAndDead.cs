@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 //using System;
 //using Random = UnityEngine.Random;
 using KevinCastejon.MoreAttributes;
@@ -46,7 +47,7 @@ public class IsDamagedAndDead : MonoBehaviour
 
     float fixedInvincibilityTime;
     bool isDamageable;
-
+    
     public bool IsAlive
     {
         get { return isAlive; }
@@ -57,6 +58,17 @@ public class IsDamagedAndDead : MonoBehaviour
         get { return isDamageable; }
         set { isDamageable = value; }
     }
+
+    public float InvincibilityTime
+    {
+        get { return invincibilityTime; }
+    }
+
+    public float FixedInvincibilityTime
+    {
+        get { return fixedInvincibilityTime;  }
+    }
+
     #endregion
 
     private void Awake()
@@ -104,7 +116,9 @@ public class IsDamagedAndDead : MonoBehaviour
         if (!this.CompareTag("Player")) return;
         if (collision.CompareTag("damage") && isAlive && invincibilityTime <= 0 && collision.GetComponent<IsDamagedAndDead>().IsAlive)
         {
+            //print("damaging");
             invincibilityTime = fixedInvincibilityTime;
+            belly.MaxedBellyTimer();
             damage dmgScript = collision.gameObject.GetComponent<damage>();
 
             if (!dmgScript.creator.Contains(collision.gameObject))
@@ -293,6 +307,15 @@ public class IsDamagedAndDead : MonoBehaviour
 
     private void RespawnPlayer()
     {
+        DialogueConditions.hasSummer = false;
+        DialogueConditions.hasAutumn = false;
+        DialogueConditions.hasWinter = false;
+
+        NpcInteractable.timesTalked = 0;
+        
+        SceneManager.LoadScene("LoadRoom");
+
+        /*
         var respawnPosition = new Vector3(0f, 5f, 0);
 
         inventoryManager.RemoveAllArtifacts();
@@ -314,6 +337,7 @@ public class IsDamagedAndDead : MonoBehaviour
 
         proceduralLegs.ProceduralIsOn = true;
         inputHandler.SetCanWalk(true);
+        */
     }
     #endregion
 

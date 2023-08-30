@@ -8,6 +8,7 @@ public class DialogueData
     public List<Dialogue> dialogue;
 }
 
+
 [System.Serializable]
 public class Dialogue
 {

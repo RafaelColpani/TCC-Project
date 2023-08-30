@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D.IK;
 using KevinCastejon.MoreAttributes;
-//using UnityEditor.Experimental.GraphView;
+using System.Linq;
 
 [System.Serializable]
 public class ObjectTargets
@@ -23,12 +23,19 @@ public class ObjectTargets
 
     private float stepTime;
     private bool isMoving;
+    private bool wasOnFoot;
 
     #region Getters & Setters
     public bool IsMoving
     {
         get { return isMoving; }
         set { isMoving = value; }
+    }
+
+    public bool WasOnFoot
+    {
+        get { return wasOnFoot; }
+        set { wasOnFoot = value; }
     }
 
     public float StepTime
@@ -181,6 +188,7 @@ public class ProceduralLegs : MonoBehaviour
             {
                 target.TargetsGoToFoot();
                 target.effectorTarget.position = target.bodyTarget.position;
+                target.WasOnFoot = true;
                 continue;
             }
 
@@ -198,6 +206,12 @@ public class ProceduralLegs : MonoBehaviour
 
             target.bodyTarget.position = localRayPoint;
             target.finalTarget.position = finalRayPoint;
+
+            if (target.WasOnFoot)
+            {
+                target.WasOnFoot = false;
+                target.effectorTarget.position = target.bodyTarget.position;
+            }
         }
     }
 
@@ -257,8 +271,13 @@ public class ProceduralLegs : MonoBehaviour
                 target.ResetStepTime();
                 target.effectorTarget.position = target.finalTarget.position;
 
-                // Footstep Sound
-                //footstepGrass[Random.Range(0, 3)].Play();
+                //Footstep Sound
+                if (footstepGrass != null && footstepGrass.Length <= 4 && footstepGrass.Length > 0)
+                {
+                    footstepGrass[Random.Range(0, 3)].Play();
+                }
+
+
 
                 //if (targets[0]. == perna atual)
                 //    footstep[Random.Range(0, 1)].Play();

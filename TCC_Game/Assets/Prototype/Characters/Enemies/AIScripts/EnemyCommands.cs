@@ -27,6 +27,7 @@ public class EnemyCommands : MonoBehaviour
     private CharacterManager characterManager;
     private EnemyAIController enemyAIController;
     private ObstacleBlock obstacleBlock;
+    private EnemyCollisionController enemyCollisionController;
 
     private float walkSpeed;
     private float walkValue;
@@ -64,7 +65,8 @@ public class EnemyCommands : MonoBehaviour
     #endregion
 
     #region Unity Methods
-    private void Start()
+
+    private void Awake()
     {
         AssingVariables();
         AssignCommands();
@@ -76,12 +78,7 @@ public class EnemyCommands : MonoBehaviour
         if (!canWalk) return;
 
         moveCommand.Execute(this.transform, walkValue);
-
-        if (IsInEdge() || obstacleBlock.HaveHitedObstacle())
-        {
-            walkValue *= -1;
-            cameToEdge = true;
-        }
+        FlipWalkDirection();
     }
     #endregion
 
@@ -92,6 +89,8 @@ public class EnemyCommands : MonoBehaviour
         characterManager = GetComponent<CharacterManager>();
         enemyAIController = GetComponent<EnemyAIController>();
         obstacleBlock = GetComponent<ObstacleBlock>();
+        enemyCollisionController = GetComponentInChildren<EnemyCollisionController>();
+
         walkSpeed = wanderingWalkSpeed;
         walkValue = 1;
         canWalk = true;
@@ -101,6 +100,21 @@ public class EnemyCommands : MonoBehaviour
     private void AssignCommands()
     {
         moveCommand = new MoveCommand(proceduralLegs, walkSpeed * characterManager.DirectionMultiplier());
+    }
+
+    private void FlipWalkDirection()
+    {
+        if (IsInEdge() || obstacleBlock.HaveHitedObstacle())
+        {
+            walkValue *= -1;
+            cameToEdge = true;
+        }
+
+        if (enemyCollisionController.ExitPatrolRegion)
+        {
+            enemyCollisionController.OffExitPatrolRegion();
+            walkValue *= -1;
+        }
     }
     #endregion
 
@@ -141,6 +155,16 @@ public class EnemyCommands : MonoBehaviour
     public void SetCameToEdge()
     {
         cameToEdge = false;
+    }
+
+    public MoveCommand GetMovementCommand()
+    {
+        return this.moveCommand;
+    }
+
+    public bool GetExitPatrolRegion()
+    {
+        return this.enemyCollisionController.ExitPatrolRegion;
     }
 
     /// <summary>Gets if the enemy is in a platform edge.</summary>
