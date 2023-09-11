@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerShooter : MonoBehaviour
+public class PlayerShooter : MonoBehaviour
 {
     Quaternion rot;
     [SerializeField] GameObject physBullet, magBullet;
@@ -18,9 +18,9 @@ public class playerShooter : MonoBehaviour
         ObtainChildren(obj.transform);
     }
 
-    void ObtainChildren(Transform children) 
+    void ObtainChildren(Transform children)
     {
-        foreach (Transform objChild in children) 
+        foreach (Transform objChild in children)
         {
             objList.Add(objChild.gameObject);
             if (objChild.childCount > 0)
@@ -35,19 +35,30 @@ public class playerShooter : MonoBehaviour
         if (PauseController.GetIsPaused()) return;
         TurnObject();
 
-        if (physBullet != null)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (fireRateCount < fireRate) return;
+        //if (physBullet != null)
+        //{
+        //    if (Input.GetMouseButtonDown(0))
+        //    {
+        //        if (fireRateCount < fireRate) return;
 
-                fireRateCount = 0f;
-                Shoot(physBullet);
-            }
-        }
+        //        fireRateCount = 0f;
+        //        Shoot(physBullet);
+        //    }
+        //}
 
         if (fireRateCount < fireRate)
             fireRateCount += Time.deltaTime;
+    }
+
+    public void ExecuteShootCommand()
+    {
+        if (physBullet != null)
+        {
+            if (fireRateCount < fireRate) return;
+
+            fireRateCount = 0f;
+            Shoot(physBullet);
+        }
     }
 
     private void TurnObject()
@@ -64,7 +75,7 @@ public class playerShooter : MonoBehaviour
         var blt = Instantiate(bullet, transform.position, rot);
         blt.GetComponent<damage>().creator = objList;
 
-        print($"bullet: {blt!=null} " + " " + "[ playerShooter.cs ]");
+        print($"bullet: {blt != null} " + " " + "[ playerShooter.cs ]");
     }
 
     public void ChangeBullet(GameObject newBullet)

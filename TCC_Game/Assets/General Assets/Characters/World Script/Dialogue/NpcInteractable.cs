@@ -5,10 +5,11 @@ using UnityEngine;
 public class NpcInteractable : MonoBehaviour, IInteractable
 {
     [HideInInspector] public static int timesTalked = 0;
+    [HideInInspector] public bool canTalk = true;
+
     [SerializeField] string fileName = "dialogue.json";
     [SerializeField] GameObject dialogueManager, dialogueGrp;
     DialogueReader dialogueReader;
-    [HideInInspector] public bool canTalk = true;
 
     /*
      private void Awake()
@@ -16,7 +17,7 @@ public class NpcInteractable : MonoBehaviour, IInteractable
         dialogueReader = GameObject.Find("dialogueManager").GetComponent<DialogueReader>();
      }
     */
-    
+
     public void Interact()
     {
         Debug.Log("Into Interact void");
