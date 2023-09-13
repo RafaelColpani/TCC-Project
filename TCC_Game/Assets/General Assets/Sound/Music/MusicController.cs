@@ -4,12 +4,22 @@ using System.Linq;
 using NaughtyAttributes;
 using UnityEditor;
 using UnityEngine;
-
+using UnityEngine.Audio;
 
 public class MusicController : MonoBehaviour
 {
     [TextArea]
     public string aviso = "Por favor, mantenha a correspondência entre a cena e as músicas.";
+
+    [SerializeField] AudioMixer mixer;
+    [SerializeField] float[] weights;
+    [SerializeField] AudioMixerSnapshot paused;
+    [SerializeField] AudioMixerSnapshot unpaused;
+    [SerializeField] AudioMixerSnapshot cave;
+    [SerializeField] AudioMixerSnapshot @default;
+    [SerializeField] GameObject pauseMenu;
+
+    [SerializeField] float transitionTime = 5f;
 
     [SerializeField] string[] scenesNames;
     [SerializeField] AudioSource[] music;
@@ -20,19 +30,24 @@ public class MusicController : MonoBehaviour
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("TargetPlayer").transform;
-        music[currentMusicIndex].Play();
+        
         for (int i = 0; i < music.Length; i++)
         {
             music[i].volume = 0f;
+            music[i].Play();
         }
         music[currentMusicIndex].volume = 1f;
-        music[currentMusicIndex].Play();
         ChangeMusic();
     }
 
     void Update()
     {   
         transform.parent.position = playerTransform.position;
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseSnapshot();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -48,27 +63,7 @@ public class MusicController : MonoBehaviour
                         ChangeMusic();
                     }
                 }
-
             }
-
-        //if(collision.tag == "Player")
-        //{
-        //    for (int i = 0; i < scenesNames.Length; i++)
-        //    {
-        //        if(collision.tag == "musicChange")
-        //        {
-        //            // vai servir mais para o futuro
-        //            string[] splitArray = scenesNames[i].Split(" ");
-        //            if (collision.transform.name.Contains(splitArray[0]) /*||
-        //            collision.GetComponent<Load_Scene>()._nextScene.Contains(splitArray[1])*/)
-        //            {
-        //                currentMusicIndex = i;
-        //                print($"currentMusicIndex: {currentMusicIndex}");
-        //                ChangeMusic();
-        //            }
-        //        }
-        //    }
-        //}
     }
 
     void ChangeMusic()
@@ -79,8 +74,32 @@ public class MusicController : MonoBehaviour
             {
                 music[i].volume = 0f;
             }
-            //music[currentMusicIndex].volume = 1f;
+            
+            if (currentMusicIndex == 2)
+                CaveReverbSnapshot();
+            else
+                DefaultSnapshot();
+
             music[currentMusicIndex].volume = 1f;
         }
+    }
+
+    //SFX
+    void DefaultSnapshot()
+    {
+        @default.TransitionTo(transitionTime);
+    }
+
+    void CaveReverbSnapshot()
+    {
+        cave.TransitionTo(transitionTime);
+    }
+    
+    void PauseSnapshot()
+    {
+        if(pauseMenu.activeSelf)
+            @default.TransitionTo(transitionTime);
+        else
+            paused.TransitionTo(transitionTime);
     }
 }
