@@ -53,7 +53,7 @@ public class ProceduralArms : MonoBehaviour
 
         foreach(var armTarget in armsTargets)
         {
-            armTarget.target.position = new Vector3(armTarget.target.position.x, bodyPosition.y + armTarget.targetHeightOffset, armTarget.target.position.z);
+            armTarget.target.localPosition = new Vector3(armTarget.target.localPosition.x, armTarget.targetHeightOffset, armTarget.target.position.z);
         }
     }
     #endregion
