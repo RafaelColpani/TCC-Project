@@ -12,11 +12,9 @@ public class MusicController : MonoBehaviour
     public string aviso = "Por favor, mantenha a correspondência entre a cena e as músicas.";
 
     [SerializeField] AudioMixer mixer;
-    [SerializeField] float[] weights;
-    [SerializeField] AudioMixerSnapshot paused;
-    [SerializeField] AudioMixerSnapshot unpaused;
-    [SerializeField] AudioMixerSnapshot cave;
     [SerializeField] AudioMixerSnapshot @default;
+    [SerializeField] AudioMixerSnapshot cave;
+    [SerializeField] AudioMixerSnapshot paused;
     [SerializeField] GameObject pauseMenu;
 
     [SerializeField] float transitionTime = 5f;
@@ -84,7 +82,8 @@ public class MusicController : MonoBehaviour
         }
     }
 
-    //SFX
+    #region SFX Functions
+
     void DefaultSnapshot()
     {
         @default.TransitionTo(transitionTime);
@@ -102,4 +101,6 @@ public class MusicController : MonoBehaviour
         else
             paused.TransitionTo(transitionTime);
     }
+
+    #endregion
 }
