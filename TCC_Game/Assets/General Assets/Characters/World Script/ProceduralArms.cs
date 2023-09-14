@@ -24,10 +24,15 @@ public class ProceduralArms : MonoBehaviour
     #region Inspector VARs
     [HeaderPlus(" ", "- ARMS TARGETS -", (int)HeaderPlusColor.green)]
     [SerializeField] private List<ArmsTargets> armsTargets;
+
+    [HeaderPlus(" ", "- ARMS -", (int)HeaderPlusColor.yellow)]
+    [Tooltip("The value of the arc movement that the arm will realize")]
+    [SerializeField] private float arcValue;
     #endregion
 
     #region Private VARs
     private CharacterManager characterManager;
+    private ProceduralLegs proceduralLegs;
 
     private Transform body;
     #endregion
@@ -36,13 +41,17 @@ public class ProceduralArms : MonoBehaviour
     private void Start()
     {
         characterManager = GetComponent<CharacterManager>();
+        proceduralLegs = GetComponent<ProceduralLegs>();
 
         body = characterManager.Body;
     }
 
     private void FixedUpdate()
     {
-        CalculateTargetsHeight();
+        if (PauseController.GetIsPaused()) return;
+
+        //CalculateTargetsHeight();
+
     }
     #endregion
 
@@ -53,8 +62,16 @@ public class ProceduralArms : MonoBehaviour
 
         foreach(var armTarget in armsTargets)
         {
-            armTarget.target.localPosition = new Vector3(armTarget.target.localPosition.x, armTarget.targetHeightOffset, armTarget.target.position.z);
+            //armTarget.target.localPosition = new Vector3(armTarget.target.localPosition.x, armTarget.targetHeightOffset, armTarget.target.position.z);
         }
+    }
+
+    private void MoveArms()
+    {
+        // is not moving any leg
+        if (!proceduralLegs.GetIsWalking()) return;
+
+
     }
     #endregion
 }
