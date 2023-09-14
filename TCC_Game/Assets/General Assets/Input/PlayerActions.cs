@@ -44,6 +44,69 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""fcecd834-f0d9-4939-afe8-265ba466c268"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interaction"",
+                    ""type"": ""Button"",
+                    ""id"": ""728e2858-5e43-4e66-aef3-7a82fb83dc43"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkipDialogue"",
+                    ""type"": ""Button"",
+                    ""id"": ""cf6920b7-c372-49f5-a181-8b749277cf2f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DropItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d133e0a-26d9-4887-a56c-7ad5bb212099"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InventorySlot_1"",
+                    ""type"": ""Button"",
+                    ""id"": ""d4bb142b-72e3-49b1-83ad-378a4ae920f8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InventorySlot_2"",
+                    ""type"": ""Button"",
+                    ""id"": ""1e2f3585-2df6-4a81-8d85-b0ccb78c7a2e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InventorySlot_3"",
+                    ""type"": ""Button"",
+                    ""id"": ""0dd4e8b0-e092-4540-9028-9b8a52d5c331"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -123,6 +186,83 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6333e346-0f32-4a21-9c2d-474ce4490c18"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8157f3af-8e06-46c6-b693-9659868c920e"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a42ca7bb-1253-4db6-96b5-3fcd03527c08"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SkipDialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f75417b4-6013-4045-a600-0d9621e4c1e7"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""DropItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9e0a7b01-d3cf-441f-aa71-59aa8c2ae61b"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""InventorySlot_1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dd2a25fe-3d47-4c37-9b9c-8c6a9f947aa9"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""InventorySlot_2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c57fd30-9fe0-4fbf-916d-d26132bf5b41"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""InventorySlot_3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -156,6 +296,13 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
         m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
+        m_Movement_Shoot = m_Movement.FindAction("Shoot", throwIfNotFound: true);
+        m_Movement_Interaction = m_Movement.FindAction("Interaction", throwIfNotFound: true);
+        m_Movement_SkipDialogue = m_Movement.FindAction("SkipDialogue", throwIfNotFound: true);
+        m_Movement_DropItem = m_Movement.FindAction("DropItem", throwIfNotFound: true);
+        m_Movement_InventorySlot_1 = m_Movement.FindAction("InventorySlot_1", throwIfNotFound: true);
+        m_Movement_InventorySlot_2 = m_Movement.FindAction("InventorySlot_2", throwIfNotFound: true);
+        m_Movement_InventorySlot_3 = m_Movement.FindAction("InventorySlot_3", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
     }
@@ -219,12 +366,26 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private IMovementActions m_MovementActionsCallbackInterface;
     private readonly InputAction m_Movement_Move;
     private readonly InputAction m_Movement_Jump;
+    private readonly InputAction m_Movement_Shoot;
+    private readonly InputAction m_Movement_Interaction;
+    private readonly InputAction m_Movement_SkipDialogue;
+    private readonly InputAction m_Movement_DropItem;
+    private readonly InputAction m_Movement_InventorySlot_1;
+    private readonly InputAction m_Movement_InventorySlot_2;
+    private readonly InputAction m_Movement_InventorySlot_3;
     public struct MovementActions
     {
         private @PlayerActions m_Wrapper;
         public MovementActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Movement_Move;
         public InputAction @Jump => m_Wrapper.m_Movement_Jump;
+        public InputAction @Shoot => m_Wrapper.m_Movement_Shoot;
+        public InputAction @Interaction => m_Wrapper.m_Movement_Interaction;
+        public InputAction @SkipDialogue => m_Wrapper.m_Movement_SkipDialogue;
+        public InputAction @DropItem => m_Wrapper.m_Movement_DropItem;
+        public InputAction @InventorySlot_1 => m_Wrapper.m_Movement_InventorySlot_1;
+        public InputAction @InventorySlot_2 => m_Wrapper.m_Movement_InventorySlot_2;
+        public InputAction @InventorySlot_3 => m_Wrapper.m_Movement_InventorySlot_3;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -240,6 +401,27 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnJump;
+                @Shoot.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnShoot;
+                @Interaction.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnInteraction;
+                @Interaction.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnInteraction;
+                @Interaction.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnInteraction;
+                @SkipDialogue.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnSkipDialogue;
+                @SkipDialogue.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnSkipDialogue;
+                @SkipDialogue.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnSkipDialogue;
+                @DropItem.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnDropItem;
+                @DropItem.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnDropItem;
+                @DropItem.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnDropItem;
+                @InventorySlot_1.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnInventorySlot_1;
+                @InventorySlot_1.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnInventorySlot_1;
+                @InventorySlot_1.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnInventorySlot_1;
+                @InventorySlot_2.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnInventorySlot_2;
+                @InventorySlot_2.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnInventorySlot_2;
+                @InventorySlot_2.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnInventorySlot_2;
+                @InventorySlot_3.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnInventorySlot_3;
+                @InventorySlot_3.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnInventorySlot_3;
+                @InventorySlot_3.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnInventorySlot_3;
             }
             m_Wrapper.m_MovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -250,6 +432,27 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
+                @Interaction.started += instance.OnInteraction;
+                @Interaction.performed += instance.OnInteraction;
+                @Interaction.canceled += instance.OnInteraction;
+                @SkipDialogue.started += instance.OnSkipDialogue;
+                @SkipDialogue.performed += instance.OnSkipDialogue;
+                @SkipDialogue.canceled += instance.OnSkipDialogue;
+                @DropItem.started += instance.OnDropItem;
+                @DropItem.performed += instance.OnDropItem;
+                @DropItem.canceled += instance.OnDropItem;
+                @InventorySlot_1.started += instance.OnInventorySlot_1;
+                @InventorySlot_1.performed += instance.OnInventorySlot_1;
+                @InventorySlot_1.canceled += instance.OnInventorySlot_1;
+                @InventorySlot_2.started += instance.OnInventorySlot_2;
+                @InventorySlot_2.performed += instance.OnInventorySlot_2;
+                @InventorySlot_2.canceled += instance.OnInventorySlot_2;
+                @InventorySlot_3.started += instance.OnInventorySlot_3;
+                @InventorySlot_3.performed += instance.OnInventorySlot_3;
+                @InventorySlot_3.canceled += instance.OnInventorySlot_3;
             }
         }
     }
@@ -292,6 +495,13 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
+        void OnInteraction(InputAction.CallbackContext context);
+        void OnSkipDialogue(InputAction.CallbackContext context);
+        void OnDropItem(InputAction.CallbackContext context);
+        void OnInventorySlot_1(InputAction.CallbackContext context);
+        void OnInventorySlot_2(InputAction.CallbackContext context);
+        void OnInventorySlot_3(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

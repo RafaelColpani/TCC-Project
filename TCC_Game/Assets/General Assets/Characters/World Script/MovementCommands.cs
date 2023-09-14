@@ -73,16 +73,16 @@ public class MoveCommand : ICommand
             actor.localScale = new Vector3(actor.localScale.x * -1, actor.localScale.y, actor.localScale.z);
 
             if (proceduralWasOff) { }
-                proceduralLegs.ProceduralIsOn = true;
+            proceduralLegs.ProceduralIsOn = true;
         }
     }
 
     public void ModifySlopeVelocity(bool modify = false, float xValue = 0, float yValue = 0)
     {
-        if (!modify) 
+        if (!modify)
         {
             this.isOnSlope = false;
-            return; 
+            return;
         }
 
         this.isOnSlope = true;
@@ -144,6 +144,23 @@ public class ReleaseJumpCommand : ICommand
     {
         //TODO: Jump Released
         Debug.Log($"Released Jump");
+    }
+}
+
+/// <summary>Perform the released shoot projectile movement, given the PlayerShooter script.</summary>
+public class ShootCommand : ICommand
+{
+    private PlayerShooter playerShooter;
+
+    public ShootCommand(PlayerShooter playerShooter)
+    {
+        this.playerShooter = playerShooter;
+    }
+
+    public void Execute(Transform actor, float value = 1, CharacterController characterController = null)
+    {
+        Debug.Log($"{playerShooter.gameObject.name}");
+        this.playerShooter.ExecuteShootCommand();
     }
 }
 #endregion

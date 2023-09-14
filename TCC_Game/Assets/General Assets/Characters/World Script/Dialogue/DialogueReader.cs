@@ -49,33 +49,32 @@ public class DialogueReader : MonoBehaviour
 
     private int teste = 0;
 
-    private void Update()
+    /// <summary>The function called when player execute the command to read dialogue.</summary>
+    public void ExecuteCommmand()
     {
         if (Time.timeScale == 0) return;
         //if it is clicked, it checks whether the text in the dialogue box is the same as what is expected to be written
         //if it is, it goes to the next line. if not, it completes the dialogue and checks if it must show choices
-        if (Input.GetMouseButtonDown(0))
+        if (dialogue.text.Equals(dialogueData.dialogue[id].text))
         {
-            if (dialogue.text.Equals(dialogueData.dialogue[id].text))
+            if (choicesBox.activeSelf == false) //player can only skip if there isn't any choice box
             {
-                if (choicesBox.activeSelf == false) //player can only skip if there isn't any choice box
-                {
-                    NextLine();
-                }
+                NextLine();
             }
-            else
-            {
-                StopAllCoroutines();
-                alreadyTyping = false;
-                dialogue.text = dialogueData.dialogue[id].text;
+        }
+        else
+        {
+            StopAllCoroutines();
+            alreadyTyping = false;
+            dialogue.text = dialogueData.dialogue[id].text;
 
-                if (dialogueData.dialogue[id].choices.Count > 0 && choicesBox.activeSelf == false)
-                {
-                    ShowChoices();
-                }
+            if (dialogueData.dialogue[id].choices.Count > 0 && choicesBox.activeSelf == false)
+            {
+                ShowChoices();
             }
         }
     }
+
     #region lines
     int checkId(int nextId)
     {
@@ -147,10 +146,11 @@ public class DialogueReader : MonoBehaviour
                 metConditions = true;
             }
 
-            if(dialogueData.dialogue[id].id == 60 && gameOverGrp != null && 
-            DialogueConditions.hasSummer && 
-            DialogueConditions.hasAutumn && 
-            DialogueConditions.hasWinter){
+            if (dialogueData.dialogue[id].id == 60 && gameOverGrp != null &&
+            DialogueConditions.hasSummer &&
+            DialogueConditions.hasAutumn &&
+            DialogueConditions.hasWinter)
+            {
                 gameOverGrp.SetActive(true);
                 PauseController.SetPauseAndTime(true);
             }

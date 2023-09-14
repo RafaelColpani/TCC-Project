@@ -35,14 +35,12 @@ public class PlayerInteract : MonoBehaviour
         }
     }
 
-    private void Update()
+    /// <summary>The function called when player execute the command to interact with something</summary>
+    public void ExecuteInteractionCommand()
     {
-        if (Input.GetKeyDown(KeyCode.F) && interactable != null)
-        {
+        if (interactable == null) return;
 
-            //Debug.Log("Interact button" + " " + " [PlayerInteract.cs] ");
-            interactable.Interact();
-            interactable = null;
-        }
+        interactable.Interact();
+        interactable = null;
     }
 }
