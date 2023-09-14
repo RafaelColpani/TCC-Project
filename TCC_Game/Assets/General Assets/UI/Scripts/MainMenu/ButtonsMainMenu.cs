@@ -13,7 +13,7 @@ public class ButtonsMainMenu : MonoBehaviour
 
         NpcInteractable.timesTalked = 0;
         
-        SceneManager.LoadScene("LoadRoom");
+        SceneManager.LoadScene("CInematic_Init");
 
     }
 
