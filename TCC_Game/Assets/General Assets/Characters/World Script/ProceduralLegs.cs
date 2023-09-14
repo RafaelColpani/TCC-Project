@@ -132,6 +132,16 @@ public class ProceduralLegs : MonoBehaviour
         get { return this.proceduralIsOn; }
         set { this.proceduralIsOn = value; }
     }
+
+    public bool EvenIsWalking
+    {
+        get { return this.evenIsWalking; }
+    }
+
+    public bool OddIsWalking
+    {
+        get { return this.oddIsWalking; }
+    }
     #endregion
 
     #region Unity Methods
@@ -252,7 +262,7 @@ public class ProceduralLegs : MonoBehaviour
             target.SetIsMoving(true);
             float height = legArcHeight;
             float arc = Mathf.Sin(lerpLeg * Mathf.PI) * height;
-            lerpLeg += Time.deltaTime * legArcSpeed;
+            lerpLeg += Time.fixedDeltaTime * legArcSpeed;
 
             var newPosition = Vector3.Lerp(target.effectorTarget.position, target.finalTarget.position, legStepSpeed * Time.deltaTime);
 
@@ -368,5 +378,12 @@ public class ProceduralLegs : MonoBehaviour
     }
     #endregion
 
+    #endregion
+
+    #region Public Methods
+    public bool GetIsWalking()
+    {
+        return evenIsWalking || oddIsWalking;
+    }
     #endregion
 }
