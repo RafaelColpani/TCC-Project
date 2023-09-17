@@ -17,6 +17,7 @@ public class InventoryManager : MonoBehaviour
     public AudioSource addItemSfx;
     public AudioSource removeItemSfx;
     public AudioSource artifactSfx;
+
     private void Start()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -48,7 +49,6 @@ public class InventoryManager : MonoBehaviour
             {
                 if (itemInSlot?.item.type == Item.ItemType.Food)
                 {
-                    print("type: food"); // eat
                     GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
                     foreach (GameObject po in playerObjects)
                     {
@@ -64,33 +64,42 @@ public class InventoryManager : MonoBehaviour
                     }
                 }
 
-                else if (itemInSlot?.item.type == Item.ItemType.Ammo)
-                {
-                    print("type: ammo"); // shot
-                }
+                //else if (itemInSlot?.item.type == Item.ItemType.Ammo)
+                //{
+                //    print("type: ammo"); // shot
+                //}
 
                 else if (itemInSlot?.item.type == Item.ItemType.Artifact)
                 {
-                    print("type: artifact");
                     return;
                 }
 
                 UseSelectedItem(true);
-                print("usou o item");
-            }
-            else if (Input.GetKeyDown(KeyCode.Q)) // dropar
-            {
-                if (itemInSlot != null)
-                {
-                    UseSelectedItem(false);
-                    print("dropou o item");
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.R)) // remove all items
-            {
-                RemoveAllItems();
             }
 
+            //else if (Input.GetKeyDown(KeyCode.Q)) // dropar
+            //{
+            //    if (itemInSlot != null)
+            //    {
+            //        UseSelectedItem(false);
+            //    }
+            //}
+
+            //else if (Input.GetKeyDown(KeyCode.R)) // remove all items
+            //{
+            //    RemoveAllItems();
+            //}
+
+        }
+    }
+
+    public void ExecuteDropCommand()
+    {
+        InventoryItem itemInSlot = inventorySlots[selectedSlot].GetComponentInChildren<InventoryItem>();
+
+        if (itemInSlot != null)
+        {
+            UseSelectedItem(false);
         }
     }
 

@@ -4,6 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using KevinCastejon.MoreAttributes;
+using static UnityEditor.MaterialProperty;
+using static UnityEngine.Rendering.DebugUI;
+using System.Numerics;
+using UnityEngine.TextCore.Text;
 
 [RequireComponent(typeof(GravityController))]
 [RequireComponent(typeof(CharacterController))]
@@ -27,6 +31,9 @@ public class InputHandler : MonoBehaviour
     private GravityController gravityController;
     private CharacterManager characterManager;
     private ProceduralLegs proceduralLegs;
+    private PlayerShooter playerShooter;
+    private PlayerInteract playerInteract;
+    private InventoryManager inventoryManager;
 
     private Transform body;
     private Transform groundCheck;
@@ -41,33 +48,28 @@ public class InputHandler : MonoBehaviour
     private MoveCommand moveCommand;
     private PressJumpCommand pressJumpCommand;
     private ReleaseJumpCommand releaseJumpCommand;
+    private ShootCommand shootCommand;
+    private InteractionCommand interactionCommand;
+    private SkipDialogueCommand skipDialogueCommand;
+    private DropItemCommand dropItemCommand;
     #endregion
 
     #endregion
 
     #region Unity Methods
-    private void Awake() 
+    private void Awake()
     {
-        playerActions = new PlayerActions();
-        characterController = GetComponent<CharacterController>();
-        gravityController = GetComponent<GravityController>();
-        characterManager = GetComponent<CharacterManager>();
-        proceduralLegs = GetComponent<ProceduralLegs>();
-
-        this.body = characterManager.Body;
-        this.groundCheck = characterManager.GroundCheckParent;
-        this.groundLayer = characterManager.GroundLayers;
-        this.groundCheckRadius = characterManager.GroundCheckDistance;
-
+        InitializeInstantiations();
         LoadInputBindings();
         InitializeCommands();
         AssignCommands();
     }
 
-    private void FixedUpdate() 
+    private void FixedUpdate()
     {
         if (PauseController.GetIsPaused()) return;
         if (!canWalk) return;
+
         var readedMoveValue = playerActions.Movement.Move.ReadValue<float>();
         moveCommand.Execute(this.gameObject.transform, readedMoveValue, characterController);
     }
@@ -85,34 +87,59 @@ public class InputHandler : MonoBehaviour
         */
     }
 
+    private void InitializeInstantiations()
+    {
+        playerActions = new PlayerActions();
+
+        characterController = GetComponent<CharacterController>();
+        gravityController = GetComponent<GravityController>();
+        characterManager = GetComponent<CharacterManager>();
+        proceduralLegs = GetComponent<ProceduralLegs>();
+        playerShooter = GetComponentInChildren<PlayerShooter>();
+        playerInteract = GetComponentInChildren<PlayerInteract>();
+        inventoryManager = GameObject.Find("_InventoryManager").GetComponent<InventoryManager>();
+
+        this.body = characterManager.Body;
+        this.groundCheck = characterManager.GroundCheckParent;
+        this.groundLayer = characterManager.GroundLayers;
+        this.groundCheckRadius = characterManager.GroundCheckDistance;
+    }
+
     private void InitializeCommands()
     {
         moveCommand = new MoveCommand(proceduralLegs, walkSpeed);
         pressJumpCommand = new PressJumpCommand(jumpForce, groundCheck, groundCheckRadius, groundLayer, gravityController);
         releaseJumpCommand = new ReleaseJumpCommand();
+        shootCommand = new ShootCommand(playerShooter);
+        interactionCommand = new InteractionCommand(playerInteract);
+        skipDialogueCommand = new SkipDialogueCommand();
+        dropItemCommand = new DropItemCommand(inventoryManager);
     }
 
     private void AssignCommands()
     {
         playerActions.Movement.Jump.performed += ctx => pressJumpCommand.Execute(body);
         playerActions.Movement.Jump.canceled += ctx => releaseJumpCommand.Execute(body);
-    }
 
+        playerActions.Movement.Shoot.performed += ctx => shootCommand.Execute(body);
+        playerActions.Movement.Interaction.performed += ctx => interactionCommand.Execute(body);
+
+        playerActions.Movement.SkipDialogue.performed += ctx => skipDialogueCommand.Execute(body);
+
+        playerActions.Movement.DropItem.performed += ctx => dropItemCommand.Execute(body);
+    }
     public void SetCanWalk(bool value = false)
     {
         if (value)
         {
             StartCoroutine(DelayedCanWalk());
         }
-
         else
         {
             canWalk = value;
         }
-
         moveCommand.SetCanWalk(value);
     }
-
     IEnumerator DelayedCanWalk()
     {
         yield return new WaitForSeconds(1);
@@ -126,12 +153,12 @@ public class InputHandler : MonoBehaviour
     #endregion
 
     #region Enable & Disable
-    private void OnEnable() 
+    private void OnEnable()
     {
         playerActions.Enable();
     }
 
-    private void OnDisable() 
+    private void OnDisable()
     {
         playerActions.Disable();
     }
