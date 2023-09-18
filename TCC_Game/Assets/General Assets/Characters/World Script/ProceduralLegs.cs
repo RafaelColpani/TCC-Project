@@ -287,15 +287,6 @@ public class ProceduralLegs : MonoBehaviour
                     footstepGrass[Random.Range(0, 3)].Play();
                 }
 
-
-
-                //if (targets[0]. == perna atual)
-                //    footstep[Random.Range(0, 1)].Play();
-
-                // else if (perna direita){
-                //    footstep[Random.Range(2, 3)].Play();
-
-
                 if (this.evenIsWalking)
                     this.evenIsWalking = false;
 
