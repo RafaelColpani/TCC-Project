@@ -119,6 +119,7 @@ public class ProceduralLegs : MonoBehaviour
 
     private bool evenIsWalking = false;
     private bool oddIsWalking = false;
+    private bool waitingNextWalk = false;
     private bool proceduralIsOn = true;
 
     private float groundCheckDistance;
@@ -249,7 +250,7 @@ public class ProceduralLegs : MonoBehaviour
     {
         foreach (var target in targets)
         {
-            if (TargetsDistance(target, false) < maxSqrTargetDistance && !target.IsMoving) continue;
+            if (TargetsDistance(target, false) < maxSqrTargetDistance && !target.IsMoving) { waitingNextWalk = false; continue; }
             if (target.isEven && oddIsWalking || !target.isEven && evenIsWalking) continue;
 
             if (!target.IsMoving)
@@ -260,6 +261,7 @@ public class ProceduralLegs : MonoBehaviour
                 else
                     this.oddIsWalking = true;
 
+                waitingNextWalk = false;
                 lerpLeg = 0;
             }
 
@@ -296,6 +298,8 @@ public class ProceduralLegs : MonoBehaviour
 
                 else
                     this.oddIsWalking = false;
+
+                waitingNextWalk = true;
             }
         }
     }
@@ -384,7 +388,7 @@ public class ProceduralLegs : MonoBehaviour
     #region Public Methods
     public bool GetIsWalking()
     {
-        return evenIsWalking || oddIsWalking;
+        return evenIsWalking || oddIsWalking || waitingNextWalk;
     }
     #endregion
 }

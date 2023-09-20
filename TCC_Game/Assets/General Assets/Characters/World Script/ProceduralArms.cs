@@ -17,6 +17,8 @@ public class ArmsTargets
     public Transform aheadTarget;
     [Tooltip("The position that the arm will aim while moving behind the body")]
     public Transform behindTarget;
+    //[Tooltip("The position that the arm will aim while in idle position.")]
+    //public Transform idlePosition;
     [Tooltip("The height that the target will be, based on body position")]
     public float targetHeightOffset;
     [Tooltip("Each arm will move in a different direction, problably accordingly to the oposite leg, so it's " +
@@ -81,6 +83,8 @@ public class ProceduralArms : MonoBehaviour
     [SerializeField] private float armArcSpeed;
     [Tooltip("The overall speed that the arm will realize its walking movement.")]
     [SerializeField] private float armMoveSpeed;
+    [Tooltip("The speed that the arms will go back to the idle position.")]
+    [SerializeField] private float backToIdleSpeed;
     #endregion
 
     #region Private VARs
@@ -134,10 +138,21 @@ public class ProceduralArms : MonoBehaviour
     #region Private Methods
     private void ArmsIdlePosition()
     {
-        print("idle");
         foreach (var arm in armsTargets)
         {
-            arm.effectorTarget.localPosition = arm.IdlePosition;
+            if (arm.effectorTarget.localPosition == arm.IdlePosition) continue;
+
+            var targetsDistance = (arm.effectorTarget.localPosition - arm.IdlePosition).sqrMagnitude;
+            var newPosition = Vector3.Slerp(arm.effectorTarget.localPosition,
+                                                            arm.IdlePosition,
+                                                            backToIdleSpeed * Time.fixedDeltaTime);
+            
+            arm.effectorTarget.localPosition = newPosition;
+
+            if (targetsDistance < 0.01f)
+            {
+                arm.effectorTarget.localPosition = arm.IdlePosition;
+            }
         }
     }
 
