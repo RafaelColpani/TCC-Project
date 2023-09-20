@@ -25,11 +25,18 @@ public class ArmsTargets
     #endregion
 
     #region Private Vars
+    private Vector3 idlePosition;
+
     private bool isMovingAhead;
     private bool isMovingBehind;
     #endregion
 
     #region Getters
+    public Vector3 IdlePosition
+    {
+        get { return this.idlePosition; }
+    }
+
     public bool IsMovingAhead
     {
         get { return this.isMovingAhead; }
@@ -42,6 +49,11 @@ public class ArmsTargets
     #endregion
 
     #region Setters
+    public void SetIdlePositionByEffectorTarget()
+    {
+        this.idlePosition = effectorTarget.localPosition;
+    }
+
     public void SetIsMovingAhead(bool value = true)
     {
         this.isMovingAhead = value;
@@ -55,6 +67,7 @@ public class ArmsTargets
 }
 
 [RequireComponent(typeof(ProceduralLegs))]
+[RequireComponent(typeof(CharacterMovementState))]
 public class ProceduralArms : MonoBehaviour
 {
     #region Inspector VARs
@@ -73,6 +86,7 @@ public class ProceduralArms : MonoBehaviour
     #region Private VARs
     private CharacterManager characterManager;
     private ProceduralLegs proceduralLegs;
+    private CharacterMovementState characterMovementState;
 
     private Transform body;
 
@@ -84,20 +98,50 @@ public class ProceduralArms : MonoBehaviour
     {
         characterManager = GetComponent<CharacterManager>();
         proceduralLegs = GetComponent<ProceduralLegs>();
+        characterMovementState = GetComponent<CharacterMovementState>();
 
         body = characterManager.Body;
+
+        foreach (var arm in armsTargets)
+            arm.SetIdlePositionByEffectorTarget();
     }
 
     private void FixedUpdate()
     {
         if (PauseController.GetIsPaused()) return;
 
-        MoveArms();
+        var moveState = characterMovementState.MoveState;
+
+        switch (moveState)
+        {
+            case CharacterMovementState.MovementState.IDLE:
+                ArmsIdlePosition();
+                break;
+
+            case CharacterMovementState.MovementState.WALKING:
+                MoveWalkingArms();
+                break;
+
+            case CharacterMovementState.MovementState.ASCENDING:
+                break;
+
+            case CharacterMovementState.MovementState.DESCENDING:
+                break;
+        }
     }
     #endregion
 
     #region Private Methods
-   private void MoveArms()
+    private void ArmsIdlePosition()
+    {
+        print("idle");
+        foreach (var arm in armsTargets)
+        {
+            arm.effectorTarget.localPosition = arm.IdlePosition;
+        }
+    }
+
+    private void MoveWalkingArms()
     {
         // is not moving any leg
         if (!proceduralLegs.GetIsWalking()) return;
