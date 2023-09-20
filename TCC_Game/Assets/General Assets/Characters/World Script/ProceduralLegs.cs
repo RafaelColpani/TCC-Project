@@ -231,11 +231,15 @@ public class ProceduralLegs : MonoBehaviour
         {
             gravityController.SetIsOn(true);
             gravityController.Jumped = false;
+            DisableWalkingFlags();
             return false;
         }
 
         if (gravityController.Jumped)
+        {
+            DisableWalkingFlags();
             return false;
+        }
 
         gravityController.SetIsOn(false);
         return true;
@@ -328,6 +332,12 @@ public class ProceduralLegs : MonoBehaviour
         Vector3 meanDirection = GetMeanLegsDirection();
         float angle = (Mathf.Atan2(meanDirection.y, meanDirection.x) * Mathf.Rad2Deg) - 90;
         body.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    private void DisableWalkingFlags()
+    {
+        oddIsWalking = false;
+        evenIsWalking = false;
     }
     #endregion
 

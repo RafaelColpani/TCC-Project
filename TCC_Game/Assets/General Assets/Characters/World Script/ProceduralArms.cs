@@ -25,11 +25,18 @@ public class ArmsTargets
     #endregion
 
     #region Private Vars
+    private Vector3 idlePosition;
+
     private bool isMovingAhead;
     private bool isMovingBehind;
     #endregion
 
     #region Getters
+    public Vector3 IdlePosition
+    {
+        get { return this.idlePosition; }
+    }
+
     public bool IsMovingAhead
     {
         get { return this.isMovingAhead; }
@@ -42,6 +49,11 @@ public class ArmsTargets
     #endregion
 
     #region Setters
+    public void SetIdlePositionByEffectorTarget()
+    {
+        this.idlePosition = effectorTarget.localPosition;
+    }
+
     public void SetIsMovingAhead(bool value = true)
     {
         this.isMovingAhead = value;
@@ -55,6 +67,7 @@ public class ArmsTargets
 }
 
 [RequireComponent(typeof(ProceduralLegs))]
+[RequireComponent(typeof(CharacterMovementState))]
 public class ProceduralArms : MonoBehaviour
 {
     #region Inspector VARs
@@ -62,16 +75,18 @@ public class ProceduralArms : MonoBehaviour
     [SerializeField] private List<ArmsTargets> armsTargets;
 
     [HeaderPlus(" ", "- ARMS -", (int)HeaderPlusColor.yellow)]
-    [Tooltip("The value of the arc movement that the arm will realize")]
-    [SerializeField] private float arcValue;
+    [Tooltip("The height the arc will realize when walking.")]
     [SerializeField] private float armArcHeight;
+    [Tooltip("The speed the arc will realize when walking.")]
     [SerializeField] private float armArcSpeed;
+    [Tooltip("The overall speed that the arm will realize its walking movement.")]
     [SerializeField] private float armMoveSpeed;
     #endregion
 
     #region Private VARs
     private CharacterManager characterManager;
     private ProceduralLegs proceduralLegs;
+    private CharacterMovementState characterMovementState;
 
     private Transform body;
 
@@ -83,31 +98,50 @@ public class ProceduralArms : MonoBehaviour
     {
         characterManager = GetComponent<CharacterManager>();
         proceduralLegs = GetComponent<ProceduralLegs>();
+        characterMovementState = GetComponent<CharacterMovementState>();
 
         body = characterManager.Body;
+
+        foreach (var arm in armsTargets)
+            arm.SetIdlePositionByEffectorTarget();
     }
 
     private void FixedUpdate()
     {
         if (PauseController.GetIsPaused()) return;
 
-        //CalculateTargetsHeight();
-        MoveArms();
+        var moveState = characterMovementState.MoveState;
+
+        switch (moveState)
+        {
+            case CharacterMovementState.MovementState.IDLE:
+                ArmsIdlePosition();
+                break;
+
+            case CharacterMovementState.MovementState.WALKING:
+                MoveWalkingArms();
+                break;
+
+            case CharacterMovementState.MovementState.ASCENDING:
+                break;
+
+            case CharacterMovementState.MovementState.DESCENDING:
+                break;
+        }
     }
     #endregion
 
     #region Private Methods
-    private void CalculateTargetsHeight()
+    private void ArmsIdlePosition()
     {
-        var bodyPosition = body.position;
-
-        foreach(var armTarget in armsTargets)
+        print("idle");
+        foreach (var arm in armsTargets)
         {
-            //armTarget.target.localPosition = new Vector3(armTarget.target.localPosition.x, armTarget.targetHeightOffset, armTarget.target.position.z);
+            arm.effectorTarget.localPosition = arm.IdlePosition;
         }
     }
 
-    private void MoveArms()
+    private void MoveWalkingArms()
     {
         // is not moving any leg
         if (!proceduralLegs.GetIsWalking()) return;
@@ -145,13 +179,12 @@ public class ProceduralArms : MonoBehaviour
                                             moveAhead ? arm.aheadTarget.position : arm.behindTarget.position,
                                             armMoveSpeed * Time.deltaTime);
 
-            print(lerpArm);
             if (lerpArm < 1)
             {
                 if (moveAhead)
                     newPosition.y += arc;
                 else
-                    newPosition.y += arc;
+                    newPosition.y -= arc;
             }
 
             else
