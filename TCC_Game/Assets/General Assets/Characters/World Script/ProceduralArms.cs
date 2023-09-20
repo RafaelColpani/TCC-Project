@@ -62,10 +62,11 @@ public class ProceduralArms : MonoBehaviour
     [SerializeField] private List<ArmsTargets> armsTargets;
 
     [HeaderPlus(" ", "- ARMS -", (int)HeaderPlusColor.yellow)]
-    [Tooltip("The value of the arc movement that the arm will realize")]
-    [SerializeField] private float arcValue;
+    [Tooltip("The height the arc will realize when walking.")]
     [SerializeField] private float armArcHeight;
+    [Tooltip("The speed the arc will realize when walking.")]
     [SerializeField] private float armArcSpeed;
+    [Tooltip("The overall speed that the arm will realize its walking movement.")]
     [SerializeField] private float armMoveSpeed;
     #endregion
 
@@ -91,23 +92,12 @@ public class ProceduralArms : MonoBehaviour
     {
         if (PauseController.GetIsPaused()) return;
 
-        //CalculateTargetsHeight();
         MoveArms();
     }
     #endregion
 
     #region Private Methods
-    private void CalculateTargetsHeight()
-    {
-        var bodyPosition = body.position;
-
-        foreach(var armTarget in armsTargets)
-        {
-            //armTarget.target.localPosition = new Vector3(armTarget.target.localPosition.x, armTarget.targetHeightOffset, armTarget.target.position.z);
-        }
-    }
-
-    private void MoveArms()
+   private void MoveArms()
     {
         // is not moving any leg
         if (!proceduralLegs.GetIsWalking()) return;
@@ -145,13 +135,12 @@ public class ProceduralArms : MonoBehaviour
                                             moveAhead ? arm.aheadTarget.position : arm.behindTarget.position,
                                             armMoveSpeed * Time.deltaTime);
 
-            print(lerpArm);
             if (lerpArm < 1)
             {
                 if (moveAhead)
                     newPosition.y += arc;
                 else
-                    newPosition.y += arc;
+                    newPosition.y -= arc;
             }
 
             else
