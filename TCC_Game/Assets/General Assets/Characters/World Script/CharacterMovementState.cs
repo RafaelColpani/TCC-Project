@@ -33,6 +33,7 @@ public class CharacterMovementState : MonoBehaviour
 
     private void Update()
     {
+        if (PauseController.GetIsPaused()) return;
         this.moveState = SetMovementState();
     }
     #endregion
