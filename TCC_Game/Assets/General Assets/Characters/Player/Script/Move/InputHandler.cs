@@ -148,6 +148,7 @@ public class InputHandler : MonoBehaviour
         }
         moveCommand.SetCanWalk(value);
     }
+
     IEnumerator DelayedCanWalk()
     {
         yield return new WaitForSeconds(1);

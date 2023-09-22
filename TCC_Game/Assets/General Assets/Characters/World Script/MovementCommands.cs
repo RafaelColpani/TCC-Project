@@ -55,6 +55,7 @@ public class MoveCommand : ICommand
         {
             actor.Translate(velocity * (value * walkSpeed) * Time.fixedDeltaTime, Space.World);
         }
+        Debug.Log(GetXVelocity());
     }
 
     private void ChangeDirection(Transform actor, float value)
