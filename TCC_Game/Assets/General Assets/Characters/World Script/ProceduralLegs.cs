@@ -119,6 +119,7 @@ public class ProceduralLegs : MonoBehaviour
 
     private bool evenIsWalking = false;
     private bool oddIsWalking = false;
+    private bool waitingNextWalk = false;
     private bool proceduralIsOn = true;
 
     private float groundCheckDistance;
@@ -131,6 +132,16 @@ public class ProceduralLegs : MonoBehaviour
     {
         get { return this.proceduralIsOn; }
         set { this.proceduralIsOn = value; }
+    }
+
+    public bool EvenIsWalking
+    {
+        get { return this.evenIsWalking; }
+    }
+
+    public bool OddIsWalking
+    {
+        get { return this.oddIsWalking; }
     }
     #endregion
 
@@ -221,11 +232,15 @@ public class ProceduralLegs : MonoBehaviour
         {
             gravityController.SetIsOn(true);
             gravityController.Jumped = false;
+            DisableWalkingFlags();
             return false;
         }
 
         if (gravityController.Jumped)
+        {
+            DisableWalkingFlags();
             return false;
+        }
 
         gravityController.SetIsOn(false);
         return true;
@@ -235,7 +250,7 @@ public class ProceduralLegs : MonoBehaviour
     {
         foreach (var target in targets)
         {
-            if (TargetsDistance(target, false) < maxSqrTargetDistance && !target.IsMoving) continue;
+            if (TargetsDistance(target, false) < maxSqrTargetDistance && !target.IsMoving) { waitingNextWalk = false; continue; }
             if (target.isEven && oddIsWalking || !target.isEven && evenIsWalking) continue;
 
             if (!target.IsMoving)
@@ -246,13 +261,14 @@ public class ProceduralLegs : MonoBehaviour
                 else
                     this.oddIsWalking = true;
 
+                waitingNextWalk = false;
                 lerpLeg = 0;
             }
 
             target.SetIsMoving(true);
             float height = legArcHeight;
             float arc = Mathf.Sin(lerpLeg * Mathf.PI) * height;
-            lerpLeg += Time.deltaTime * legArcSpeed;
+            lerpLeg += Time.fixedDeltaTime * legArcSpeed;
 
             var newPosition = Vector3.Lerp(target.effectorTarget.position, target.finalTarget.position, legStepSpeed * Time.deltaTime);
 
@@ -277,20 +293,13 @@ public class ProceduralLegs : MonoBehaviour
                     footstepGrass[Random.Range(0, 3)].Play();
                 }
 
-
-
-                //if (targets[0]. == perna atual)
-                //    footstep[Random.Range(0, 1)].Play();
-
-                // else if (perna direita){
-                //    footstep[Random.Range(2, 3)].Play();
-
-
                 if (this.evenIsWalking)
                     this.evenIsWalking = false;
 
                 else
                     this.oddIsWalking = false;
+
+                waitingNextWalk = true;
             }
         }
     }
@@ -327,6 +336,12 @@ public class ProceduralLegs : MonoBehaviour
         Vector3 meanDirection = GetMeanLegsDirection();
         float angle = (Mathf.Atan2(meanDirection.y, meanDirection.x) * Mathf.Rad2Deg) - 90;
         body.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    private void DisableWalkingFlags()
+    {
+        oddIsWalking = false;
+        evenIsWalking = false;
     }
     #endregion
 
@@ -368,5 +383,12 @@ public class ProceduralLegs : MonoBehaviour
     }
     #endregion
 
+    #endregion
+
+    #region Public Methods
+    public bool GetIsWalking()
+    {
+        return evenIsWalking || oddIsWalking || waitingNextWalk;
+    }
     #endregion
 }

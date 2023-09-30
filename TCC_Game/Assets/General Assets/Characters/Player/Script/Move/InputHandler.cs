@@ -42,6 +42,8 @@ public class InputHandler : MonoBehaviour
 
     private float groundCheckRadius;
 
+    private bool hasInventoryManager;
+
     [HideInInspector] public bool canWalk = true;
 
     #region Commands
@@ -97,7 +99,10 @@ public class InputHandler : MonoBehaviour
         proceduralLegs = GetComponent<ProceduralLegs>();
         playerShooter = GetComponentInChildren<PlayerShooter>();
         playerInteract = GetComponentInChildren<PlayerInteract>();
-        inventoryManager = GameObject.Find("_InventoryManager").GetComponent<InventoryManager>();
+
+        hasInventoryManager = GameObject.Find("_InventoryManager");
+        if (hasInventoryManager)
+            inventoryManager = GameObject.Find("_InventoryManager").GetComponent<InventoryManager>();
 
         this.body = characterManager.Body;
         this.groundCheck = characterManager.GroundCheckParent;
@@ -113,7 +118,9 @@ public class InputHandler : MonoBehaviour
         shootCommand = new ShootCommand(playerShooter);
         interactionCommand = new InteractionCommand(playerInteract);
         skipDialogueCommand = new SkipDialogueCommand();
-        dropItemCommand = new DropItemCommand(inventoryManager);
+
+        if (hasInventoryManager)
+            dropItemCommand = new DropItemCommand(inventoryManager);
     }
 
     private void AssignCommands()
@@ -126,7 +133,8 @@ public class InputHandler : MonoBehaviour
 
         playerActions.Movement.SkipDialogue.performed += ctx => skipDialogueCommand.Execute(body);
 
-        playerActions.Movement.DropItem.performed += ctx => dropItemCommand.Execute(body);
+        if (hasInventoryManager)
+            playerActions.Movement.DropItem.performed += ctx => dropItemCommand.Execute(body);
     }
     public void SetCanWalk(bool value = false)
     {
@@ -140,6 +148,7 @@ public class InputHandler : MonoBehaviour
         }
         moveCommand.SetCanWalk(value);
     }
+
     IEnumerator DelayedCanWalk()
     {
         yield return new WaitForSeconds(1);
