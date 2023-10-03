@@ -1,28 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    
+    public GameObject playerForTest; // Referência ao objeto "Player_for_test".
+
+    /*
     [Header("FPS Display")]
     [SerializeField] TMP_Text fpsText;
     [SerializeField] TMP_Text fpsNameFrame;
     private int lastFPS;
     private float[] frameDeltaTime;
+    */
 
-   
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         //FPS Log
-        frameDeltaTime = new float[50];
+        //frameDeltaTime = new float[50];
+
+        // Obtenha o índice da cena atual.
+        int cenaAtualIndex = SceneManager.GetActiveScene().buildIndex;
+
+        // Verifique se o índice da cena está após o índice 3.
+        if (cenaAtualIndex > 6)
+        {
+            // Habilite o script "Bullet" no objeto "Player_for_test".
+            Bullet bulletScript = playerForTest.GetComponent<Bullet>();
+            if (bulletScript != null)
+            {
+                bulletScript.enabled = true;
+            }
+            else
+            {
+                Debug.LogWarning("O script 'Bullet' não foi encontrado no objeto 'Player_for_test'. Certifique-se de que o objeto e o script estejam configurados corretamente.");
+            }
+        }
     }
 
-    // Update is called once per frame
+    /*
     void Update()
     {
         //FPS Log
@@ -49,4 +64,5 @@ public class GameManager : MonoBehaviour
         fpsNameFrame.transform.parent.gameObject.SetActive(condition);
         
     }
+    */
 }
