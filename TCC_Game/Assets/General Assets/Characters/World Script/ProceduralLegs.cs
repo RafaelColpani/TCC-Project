@@ -60,12 +60,12 @@ public class ObjectTargets
         stepTime = 0;
     }
 
-    public void TargetsGoToFoot()
+    public void AirLegs(float speed)
     {
-        var newBodyTargetPosition = Vector3.Lerp(bodyTarget.position, foot.position, 7 * Time.fixedDeltaTime);
-        var newFinalTargetPosition = Vector3.Lerp(finalTarget.position, foot.position, 7 * Time.fixedDeltaTime);
-        bodyTarget.position = newBodyTargetPosition;
-        finalTarget.position = newFinalTargetPosition;
+        var newBodyTargetPosition = Vector3.Lerp(bodyTarget.position, foot.position, speed * Time.fixedDeltaTime);
+        var newFinalTargetPosition = Vector3.Lerp(finalTarget.position, foot.position, 15 * Time.fixedDeltaTime);
+        bodyTarget.position = foot.position;
+        finalTarget.position = foot.position;
     }
     #endregion
 }
@@ -73,6 +73,7 @@ public class ObjectTargets
 [RequireComponent(typeof(GravityController))]
 [RequireComponent(typeof(IKManager2D))]
 [RequireComponent(typeof(CharacterManager))]
+[RequireComponent(typeof(CharacterMovementState))]
 public class ProceduralLegs : MonoBehaviour
 {
     #region Inspector VARs
@@ -96,6 +97,8 @@ public class ProceduralLegs : MonoBehaviour
     [SerializeField] private float legArcSpeed;
     [Tooltip("The offset in the x axis that the finalTarget makes from the position of the bodyTarget.")]
     [SerializeField] private float xFinalTargetOffest;
+    [SerializeField] private float ascendingLegSpeed;
+    [SerializeField] private float descendingLegSpeed;
 
     [HeaderPlus(" ", "- BODY -", (int)HeaderPlusColor.magenta)]
     [Tooltip("The offset that the body makes in the y axis.")]
@@ -113,6 +116,7 @@ public class ProceduralLegs : MonoBehaviour
     #region private VARs
     private GravityController gravityController;
     private CharacterManager characterManager;
+    private CharacterMovementState characterMovementState;
 
     private Transform body;
     private Transform groundCheck;
@@ -152,6 +156,7 @@ public class ProceduralLegs : MonoBehaviour
     {
         gravityController = GetComponent<GravityController>();
         characterManager = GetComponent<CharacterManager>();
+        characterMovementState = GetComponent<CharacterMovementState>();
 
         this.body = characterManager.Body;
         this.groundCheck = characterManager.GroundCheckParent;
@@ -199,9 +204,18 @@ public class ProceduralLegs : MonoBehaviour
         {
             if (!JumpUtils.IsGrounded(groundCheck, groundCheckDistance, targetsDetections) && gravityController.GetIsOn())
             {
-                target.TargetsGoToFoot();
-                target.effectorTarget.position = target.bodyTarget.position;
+                var newPosition = Vector3.zero;
+                target.AirLegs(ascendingLegSpeed);
+                
+                if (characterMovementState.MoveState == CharacterMovementState.MovementState.ASCENDING)
+                    newPosition = Vector3.Lerp(target.effectorTarget.position, target.foot.position, ascendingLegSpeed * Time.fixedDeltaTime);
+                   
+                else if (characterMovementState.MoveState == CharacterMovementState.MovementState.DESCENDING)
+                    newPosition = Vector3.Lerp(target.effectorTarget.position, target.foot.position, descendingLegSpeed * Time.fixedDeltaTime);
+                
+                target.effectorTarget.position = newPosition;
                 target.WasOnFoot = true;
+                
                 continue;
             }
 
