@@ -25,6 +25,8 @@ public class MoveCommand : ICommand
         set { this.canMove = value; }
     }
 
+    public float CurrentSpeed = 0f;
+
     public MoveCommand(ProceduralLegs proceduralLegs, float walkSpeed)
     {
         this.proceduralLegs = proceduralLegs;
@@ -55,9 +57,11 @@ public class MoveCommand : ICommand
         {
             actor.Translate(velocity * (value * walkSpeed) * Time.fixedDeltaTime, Space.World);
         }
-        Debug.Log(GetXVelocity());
+
+        this.CurrentSpeed = walkSpeed * value;
     }
 
+    #region Metohds
     private void ChangeDirection(Transform actor, float value)
     {
         bool proceduralWasOff = false;
@@ -94,7 +98,9 @@ public class MoveCommand : ICommand
     {
         this.canWalk = value;
     }
+    #endregion
 
+    #region Getters
     public float GetXVelocity()
     {
         return this.velocity.x;
@@ -109,6 +115,7 @@ public class MoveCommand : ICommand
     {
         this.walkSpeed = value;
     }
+    #endregion
 }
 
 /// <summary>Perform the jump movement, given the actors Transform and its GravityController who will execute it</summary>

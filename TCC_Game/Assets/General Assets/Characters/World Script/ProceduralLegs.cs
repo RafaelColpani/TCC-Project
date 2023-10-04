@@ -62,8 +62,10 @@ public class ObjectTargets
 
     public void TargetsGoToFoot()
     {
-        bodyTarget.position = foot.position;
-        finalTarget.position = foot.position;
+        var newBodyTargetPosition = Vector3.Lerp(bodyTarget.position, foot.position, 7 * Time.fixedDeltaTime);
+        var newFinalTargetPosition = Vector3.Lerp(finalTarget.position, foot.position, 7 * Time.fixedDeltaTime);
+        bodyTarget.position = newBodyTargetPosition;
+        finalTarget.position = newFinalTargetPosition;
     }
     #endregion
 }

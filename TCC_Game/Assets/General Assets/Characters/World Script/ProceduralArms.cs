@@ -212,15 +212,10 @@ public class ProceduralArms : MonoBehaviour
     private bool ArmIsMovingInRightDirection(ArmsTargets arm, bool moveAhead)
     {
         if (moveAhead)
-        {
             return arm.IsMovingAhead == true;
-        }
 
         else
-        {
             return arm.IsMovingBehind == true;
-        }
-        
     }
     #endregion
 }
