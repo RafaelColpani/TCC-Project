@@ -27,5 +27,10 @@ public class FallObject : MonoBehaviour
         {
             deveCair = true; // Quando o jogador colidir com o trigger, definimos deveCair como verdadeiro
         }
+
+        if (other.CompareTag("Bullet"))
+        {
+            deveCair = true; // Quando o jogador colidir com o trigger, definimos deveCair como verdadeiro
+        }
     }
 }
