@@ -204,16 +204,28 @@ public class ProceduralLegs : MonoBehaviour
         {
             if (!JumpUtils.IsGrounded(groundCheck, groundCheckDistance, targetsDetections) && gravityController.GetIsOn())
             {
+                var fromHeight = false;
                 var newPosition = Vector3.zero;
                 target.AirLegs(ascendingLegSpeed);
-                
+
+                // jumping
                 if (characterMovementState.MoveState == CharacterMovementState.MovementState.ASCENDING)
+                {
                     newPosition = Vector3.Lerp(target.effectorTarget.position, target.foot.position, ascendingLegSpeed * Time.fixedDeltaTime);
-                   
+                    fromHeight = true;
+                }
+
+                // falling
                 else if (characterMovementState.MoveState == CharacterMovementState.MovementState.DESCENDING)
+                {
                     newPosition = Vector3.Lerp(target.effectorTarget.position, target.foot.position, descendingLegSpeed * Time.fixedDeltaTime);
-                
-                target.effectorTarget.position = newPosition;
+                    fromHeight = true;
+                }
+
+                //target.effectorTarget.position = target.bodyTarget.position;
+                if (fromHeight)
+                    target.effectorTarget.position = newPosition;
+
                 target.WasOnFoot = true;
                 
                 continue;
@@ -236,7 +248,10 @@ public class ProceduralLegs : MonoBehaviour
 
             if (target.WasOnFoot)
             {
+                //if (TargetsDistance(target) <= 0.01f)
                 target.WasOnFoot = false;
+
+                //var newPosition = Vector3.Lerp(target.effectorTarget.position, target.bodyTarget.position, 50 * Time.fixedDeltaTime);
                 target.effectorTarget.position = target.bodyTarget.position;
             }
         }
@@ -322,14 +337,14 @@ public class ProceduralLegs : MonoBehaviour
 
     private void MoveFinalTargets()
     {
+        if (previousXBodyPosition == this.transform.position.x) return;
+
         var offset = xFinalTargetOffest;
 
         // body is moving left
         if (previousXBodyPosition > this.transform.position.x)
             offset *= -1;
 
-        if (previousXBodyPosition == this.transform.position.x)
-            return;
 
         foreach (var target in targets)
         {

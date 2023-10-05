@@ -61,18 +61,28 @@ public class ProceduralTorso : MonoBehaviour
         if (PauseController.GetIsPaused()) return;
 
         var walkValue = moveCommand.CurrentSpeed;
+        var state = characterMovementState.MoveState;
 
-        switch (walkValue)
+        if (state == CharacterMovementState.MovementState.ASCENDING || state == CharacterMovementState.MovementState.DESCENDING)
         {
-            case 0f:
-                MoveTarget(idleTargetLocalPosition);
-                RotateHead(idleHeadLocalRotation);
-                break;
+            MoveTarget(idleTargetLocalPosition);
+            RotateHead(idleHeadLocalRotation);
+        }
 
-            default:
-                MoveTarget(walkingTargetLocalPosition, proceduralLegs.GetIsWalking());
-                RotateHead(walkingHeadLocalRotation, proceduralLegs.GetIsWalking());
-                break;
+        else
+        {
+            switch (walkValue)
+            {
+                case 0f:
+                    MoveTarget(idleTargetLocalPosition);
+                    RotateHead(idleHeadLocalRotation);
+                    break;
+
+                default:
+                    MoveTarget(walkingTargetLocalPosition, proceduralLegs.GetIsWalking());
+                    RotateHead(walkingHeadLocalRotation, proceduralLegs.GetIsWalking());
+                    break;
+            }
         }
     }
     #endregion

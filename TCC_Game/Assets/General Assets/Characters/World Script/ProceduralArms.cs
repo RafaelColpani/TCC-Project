@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.U2D.IK;
 using KevinCastejon.MoreAttributes;
 using System.Linq;
+using Unity.Burst.Intrinsics;
 
 [System.Serializable]
 public class ArmsTargets
@@ -28,6 +29,8 @@ public class ArmsTargets
 
     #region Private Vars
     private Vector3 idlePosition;
+    private Vector3 descendingPosition;
+    private Vector3 ascendingPosition;
 
     private bool isMovingAhead;
     private bool isMovingBehind;
@@ -37,6 +40,16 @@ public class ArmsTargets
     public Vector3 IdlePosition
     {
         get { return this.idlePosition; }
+    }
+
+    public Vector3 DescendingPosition
+    {
+        get { return this.descendingPosition; }
+    }
+
+    public Vector3 AscendingPosition
+    {
+        get { return this.ascendingPosition; }
     }
 
     public bool IsMovingAhead
@@ -54,6 +67,20 @@ public class ArmsTargets
     public void SetIdlePositionByEffectorTarget()
     {
         this.idlePosition = effectorTarget.localPosition;
+    }
+
+    public void SetDescendingPosition(float value)
+    {
+        this.descendingPosition = new Vector3(effectorTarget.localPosition.x,
+                                              effectorTarget.localPosition.y + value,
+                                              effectorTarget.localPosition.z);
+    }
+
+    public void SetAscendingPosition(float value)
+    {
+        this.ascendingPosition = new Vector3(effectorTarget.localPosition.x,
+                                             effectorTarget.localPosition.y - value,
+                                             effectorTarget.localPosition.z);
     }
 
     public void SetIsMovingAhead(bool value = true)
@@ -76,7 +103,7 @@ public class ProceduralArms : MonoBehaviour
     [HeaderPlus(" ", "- ARMS TARGETS -", (int)HeaderPlusColor.green)]
     [SerializeField] private List<ArmsTargets> armsTargets;
 
-    [HeaderPlus(" ", "- ARMS -", (int)HeaderPlusColor.yellow)]
+    [HeaderPlus(" ", "- MOVE & IDLE -", (int)HeaderPlusColor.yellow)]
     [Tooltip("The height the arc will realize when walking.")]
     [SerializeField] private float armArcHeight;
     [Tooltip("The speed the arc will realize when walking.")]
@@ -85,6 +112,18 @@ public class ProceduralArms : MonoBehaviour
     [SerializeField] private float armMoveSpeed;
     [Tooltip("The speed that the arms will go back to the idle position.")]
     [SerializeField] private float backToIdleSpeed;
+
+    [HeaderPlus(" ", "- ASCENDING -", (int)HeaderPlusColor.cyan)]
+    [Tooltip("The value that will be decreased to the y position of the target.")]
+    [SerializeField] private float ascendingValue;
+    [Tooltip("The speed that arms will go to the ascending position.")]
+    [SerializeField] private float ascendingSpeed;
+
+    [HeaderPlus(" ", "- DESCENDING -", (int)HeaderPlusColor.magenta)]
+    [Tooltip("The value that will be added to the y position of the target.")]
+    [SerializeField] private float descendingValue;
+    [Tooltip("The speed that arms will go to the descending position.")]
+    [SerializeField] private float descendingSpeed;
     #endregion
 
     #region Private VARs
@@ -107,7 +146,11 @@ public class ProceduralArms : MonoBehaviour
         body = characterManager.Body;
 
         foreach (var arm in armsTargets)
+        {
             arm.SetIdlePositionByEffectorTarget();
+            arm.SetDescendingPosition(descendingValue);
+            arm.SetAscendingPosition(ascendingValue);
+        }
     }
 
     private void FixedUpdate()
@@ -127,9 +170,11 @@ public class ProceduralArms : MonoBehaviour
                 break;
 
             case CharacterMovementState.MovementState.ASCENDING:
+                ArmsAscendingPosition();
                 break;
 
             case CharacterMovementState.MovementState.DESCENDING:
+                ArmsDescendingPosition();
                 break;
         }
     }
@@ -206,6 +251,24 @@ public class ProceduralArms : MonoBehaviour
                 newPosition = moveAhead ? arm.aheadTarget.position : arm.behindTarget.position;
 
             arm.effectorTarget.position = newPosition;
+        }
+    }
+
+    private void ArmsAscendingPosition()
+    {
+        foreach (var arm in armsTargets)
+        {
+            var newPosition = Vector3.Lerp(arm.effectorTarget.localPosition, arm.AscendingPosition, ascendingSpeed * Time.deltaTime);
+            arm.effectorTarget.localPosition = newPosition;
+        }
+    }
+
+    private void ArmsDescendingPosition()
+    {
+        foreach (var arm in armsTargets)
+        {
+            var newPosition = Vector3.Lerp(arm.effectorTarget.localPosition, arm.DescendingPosition, descendingSpeed * Time.deltaTime);
+            arm.effectorTarget.localPosition = newPosition;
         }
     }
 
