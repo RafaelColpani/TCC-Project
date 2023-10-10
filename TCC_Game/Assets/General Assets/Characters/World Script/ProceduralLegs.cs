@@ -24,6 +24,7 @@ public class ObjectTargets
     private float stepTime;
     private bool isMoving;
     private bool wasOnFoot;
+    private bool isOnGround;
 
     #region Getters & Setters
     public bool IsMoving
@@ -36,6 +37,12 @@ public class ObjectTargets
     {
         get { return wasOnFoot; }
         set { wasOnFoot = value; }
+    }
+
+    public bool IsOnGround
+    {
+        get { return isOnGround; }
+        set { this.isOnGround = value; }
     }
 
     public float StepTime
@@ -60,12 +67,22 @@ public class ObjectTargets
         stepTime = 0;
     }
 
-    public void AirLegs(float speed)
+    public void AirLegs()
     {
-        var newBodyTargetPosition = Vector3.Lerp(bodyTarget.position, foot.position, speed * Time.fixedDeltaTime);
-        var newFinalTargetPosition = Vector3.Lerp(finalTarget.position, foot.position, 15 * Time.fixedDeltaTime);
         bodyTarget.position = foot.position;
         finalTarget.position = foot.position;
+    }
+
+    public void SetHeightFromOtherLeg(ObjectTargets leg)
+    {
+        this.bodyTarget.position = new Vector3(this.bodyTarget.position.x,
+                                                leg.bodyTarget.position.y,
+                                                this.bodyTarget.position.z);
+
+        this.effectorTarget.position = this.bodyTarget.position;
+        this.finalTarget.position = this.bodyTarget.position;
+
+        Debug.Log("setting pos");
     }
     #endregion
 }
@@ -119,7 +136,7 @@ public class ProceduralLegs : MonoBehaviour
     private CharacterMovementState characterMovementState;
 
     private Transform body;
-    private Transform groundCheck;
+    private Transform[] groundChecks;
 
     private LayerMask targetsDetections;
 
@@ -159,7 +176,7 @@ public class ProceduralLegs : MonoBehaviour
         characterMovementState = GetComponent<CharacterMovementState>();
 
         this.body = characterManager.Body;
-        this.groundCheck = characterManager.GroundCheckParent;
+        this.groundChecks = characterManager.GroundChecks;
         this.targetsDetections = characterManager.GroundLayers;
         this.groundCheckDistance = characterManager.GroundCheckDistance;
     }
@@ -202,11 +219,17 @@ public class ProceduralLegs : MonoBehaviour
 
         foreach (var target in targets)
         {
-            if (!JumpUtils.IsGrounded(groundCheck, groundCheckDistance, targetsDetections) && gravityController.GetIsOn())
+            if (gravityController.Jumped)
+                target.AirLegs();
+
+            // if the character itself if not on ground
+            if (!JumpUtils.IsGrounded(groundChecks, groundCheckDistance, targetsDetections) && gravityController.GetIsOn())
             {
+                print("is grounded");
+                target.IsOnGround = false;
                 var fromHeight = false;
                 var newPosition = Vector3.zero;
-                target.AirLegs(ascendingLegSpeed);
+                target.AirLegs();
 
                 // jumping
                 if (characterMovementState.MoveState == CharacterMovementState.MovementState.ASCENDING)
@@ -227,10 +250,30 @@ public class ProceduralLegs : MonoBehaviour
                     target.effectorTarget.position = newPosition;
 
                 target.WasOnFoot = true;
-                
+
                 continue;
             }
 
+            // if the unique target is not on ground
+            if (!JumpUtils.UniqueGroundCheckIsGrounded(target.effector, groundCheckDistance, targetsDetections) &&
+                characterMovementState.MoveState != CharacterMovementState.MovementState.WALKING)
+            {
+                target.IsOnGround = false;
+                target.WasOnFoot = true;
+
+                foreach (var otherTarget in targets)
+                {
+                    if (otherTarget != target && otherTarget.IsOnGround)
+                    {
+                        target.SetHeightFromOtherLeg(otherTarget);
+                        break;
+                    }
+                }
+
+                continue;
+            }
+
+            target.IsOnGround = true;
             localHit = Physics2D.Raycast(target.bodyTarget.position, -Vector2.up, groundRaycastDistance, targetsDetections);
             finalHit = Physics2D.Raycast(target.finalTarget.position, -Vector2.up, groundRaycastDistance, targetsDetections);
 
@@ -259,7 +302,7 @@ public class ProceduralLegs : MonoBehaviour
 
     private bool CanMoveLegs()
     {
-        if (!JumpUtils.IsGrounded(groundCheck, groundCheckDistance, targetsDetections))
+        if (!JumpUtils.IsGrounded(groundChecks, groundCheckDistance, targetsDetections))
         {
             gravityController.SetIsOn(true);
             gravityController.Jumped = false;

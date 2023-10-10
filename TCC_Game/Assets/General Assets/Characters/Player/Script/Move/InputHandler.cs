@@ -36,7 +36,7 @@ public class InputHandler : MonoBehaviour
     private InventoryManager inventoryManager;
 
     private Transform body;
-    private Transform groundCheck;
+    private Transform[] groundChecks;
 
     private LayerMask groundLayer;
 
@@ -105,7 +105,7 @@ public class InputHandler : MonoBehaviour
             inventoryManager = GameObject.Find("_InventoryManager").GetComponent<InventoryManager>();
 
         this.body = characterManager.Body;
-        this.groundCheck = characterManager.GroundCheckParent;
+        this.groundChecks = characterManager.GroundChecks;
         this.groundLayer = characterManager.GroundLayers;
         this.groundCheckRadius = characterManager.GroundCheckDistance;
     }
@@ -113,7 +113,7 @@ public class InputHandler : MonoBehaviour
     private void InitializeCommands()
     {
         moveCommand = new MoveCommand(proceduralLegs, walkSpeed);
-        pressJumpCommand = new PressJumpCommand(jumpForce, groundCheck, groundCheckRadius, groundLayer, gravityController);
+        pressJumpCommand = new PressJumpCommand(jumpForce, groundChecks, groundCheckRadius, groundLayer, gravityController);
         releaseJumpCommand = new ReleaseJumpCommand();
         shootCommand = new ShootCommand(playerShooter);
         interactionCommand = new InteractionCommand(playerInteract);

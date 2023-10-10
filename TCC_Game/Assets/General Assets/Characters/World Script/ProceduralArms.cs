@@ -18,8 +18,8 @@ public class ArmsTargets
     public Transform aheadTarget;
     [Tooltip("The position that the arm will aim while moving behind the body")]
     public Transform behindTarget;
-    //[Tooltip("The position that the arm will aim while in idle position.")]
-    //public Transform idlePosition;
+    [Tooltip("The position that the target will be reach when ascending (jumping).")]
+    public Vector3 ascendingLocalPosition;
     [Tooltip("The height that the target will be, based on body position")]
     public float targetHeightOffset;
     [Tooltip("Each arm will move in a different direction, problably accordingly to the oposite leg, so it's " +
@@ -30,7 +30,6 @@ public class ArmsTargets
     #region Private Vars
     private Vector3 idlePosition;
     private Vector3 descendingPosition;
-    private Vector3 ascendingPosition;
 
     private bool isMovingAhead;
     private bool isMovingBehind;
@@ -45,11 +44,6 @@ public class ArmsTargets
     public Vector3 DescendingPosition
     {
         get { return this.descendingPosition; }
-    }
-
-    public Vector3 AscendingPosition
-    {
-        get { return this.ascendingPosition; }
     }
 
     public bool IsMovingAhead
@@ -74,13 +68,6 @@ public class ArmsTargets
         this.descendingPosition = new Vector3(effectorTarget.localPosition.x,
                                               effectorTarget.localPosition.y + value,
                                               effectorTarget.localPosition.z);
-    }
-
-    public void SetAscendingPosition(float value)
-    {
-        this.ascendingPosition = new Vector3(effectorTarget.localPosition.x,
-                                             effectorTarget.localPosition.y - value,
-                                             effectorTarget.localPosition.z);
     }
 
     public void SetIsMovingAhead(bool value = true)
@@ -114,8 +101,6 @@ public class ProceduralArms : MonoBehaviour
     [SerializeField] private float backToIdleSpeed;
 
     [HeaderPlus(" ", "- ASCENDING -", (int)HeaderPlusColor.cyan)]
-    [Tooltip("The value that will be decreased to the y position of the target.")]
-    [SerializeField] private float ascendingValue;
     [Tooltip("The speed that arms will go to the ascending position.")]
     [SerializeField] private float ascendingSpeed;
 
@@ -149,7 +134,6 @@ public class ProceduralArms : MonoBehaviour
         {
             arm.SetIdlePositionByEffectorTarget();
             arm.SetDescendingPosition(descendingValue);
-            arm.SetAscendingPosition(ascendingValue);
         }
     }
 
@@ -258,7 +242,7 @@ public class ProceduralArms : MonoBehaviour
     {
         foreach (var arm in armsTargets)
         {
-            var newPosition = Vector3.Lerp(arm.effectorTarget.localPosition, arm.AscendingPosition, ascendingSpeed * Time.deltaTime);
+            var newPosition = Vector3.Lerp(arm.effectorTarget.localPosition, arm.ascendingLocalPosition, ascendingSpeed * Time.deltaTime);
             arm.effectorTarget.localPosition = newPosition;
         }
     }

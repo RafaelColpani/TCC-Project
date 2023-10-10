@@ -13,9 +13,9 @@ public class CharacterManager : MonoBehaviour
     [HeaderPlus(" ", "- Ground -", (int)HeaderPlusColor.yellow)]
     [Tooltip("Says what layers the targets will raycast to.")]
     [SerializeField] private LayerMask groundLayers;
-    [Tooltip("The parent transform that contains all the ground checks Transofrms.")]
-    [SerializeField] private Transform groundCheckParent;
-    [Tooltip("The distance of the raycasts that will detect the ground from the children of GroundCheckParent Transform positions.")]
+    [Tooltip("The the Transforms that will be used as ground checks (preferred to be the legs effector).")]
+    [SerializeField] private Transform[] groundChecks;
+    [Tooltip("The transform ground checks from the left part of the character.")]
     [SerializeField] private float groundCheckDistance;
 
     [HeaderPlus(" ", "- Ground -", (int)HeaderPlusColor.cyan)]
@@ -29,7 +29,7 @@ public class CharacterManager : MonoBehaviour
 
     // GROUND
     public LayerMask GroundLayers { get { return groundLayers; } }
-    public Transform GroundCheckParent { get { return groundCheckParent; } }
+    public Transform[] GroundChecks { get { return groundChecks; } }
     public float GroundCheckDistance { get { return groundCheckDistance; } }
 
     // INPUT

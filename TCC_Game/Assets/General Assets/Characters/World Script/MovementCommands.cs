@@ -123,15 +123,15 @@ public class PressJumpCommand : ICommand
 {
     private float jumpForce;
     private float groundCheckRadius;
-    private Transform groundCheck;
+    private Transform[] groundChecks;
     private LayerMask groundLayer;
     private GravityController gc;
 
 
-    public PressJumpCommand(float jumpForce, Transform groundCheck, float groundCheckRadius, LayerMask groundLayer, GravityController gc)
+    public PressJumpCommand(float jumpForce, Transform[] groundChecks, float groundCheckRadius, LayerMask groundLayer, GravityController gc)
     {
         this.jumpForce = jumpForce;
-        this.groundCheck = groundCheck;
+        this.groundChecks = groundChecks;
         this.groundCheckRadius = groundCheckRadius;
         this.groundLayer = groundLayer;
         this.gc = gc;
@@ -139,7 +139,7 @@ public class PressJumpCommand : ICommand
 
     public void Execute(Transform actor, float value = 1, CharacterController characterController = null)
     {
-        if (!JumpUtils.IsGrounded(groundCheck, groundCheckRadius, groundLayer)) return;
+        if (!JumpUtils.IsGrounded(groundChecks, groundCheckRadius, groundLayer)) return;
 
         gc.Velocity = new Vector3(gc.Velocity.x, jumpForce, gc.Velocity.z);
     }
@@ -176,10 +176,8 @@ public class ShootCommand : ICommand
 #region UTILS
 public class JumpUtils
 {
-    public static bool IsGrounded(Transform groundCheckParent, float groundCheckDistance, LayerMask groundLayer)
+    public static bool IsGrounded(Transform[] groundChecks, float groundCheckDistance, LayerMask groundLayer)
     {
-        var groundChecks = groundCheckParent.GetComponentsInChildren<Transform>();
-
         foreach (var groundCheck in groundChecks)
         {
             RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
@@ -191,9 +189,18 @@ public class JumpUtils
         return false;
     }
 
-    public static bool MoreThenHalfLegsIsGrounded(Transform groundCheckParent, float groundCheckDistance, LayerMask groundLayer)
+    public static bool UniqueGroundCheckIsGrounded(Transform groundCheck, float groundCheckDistance, LayerMask groundLayer)
     {
-        var groundChecks = groundCheckParent.GetComponentsInChildren<Transform>();
+        RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
+
+        if (hit.collider != null && !hit.collider.isTrigger)
+            return true;
+
+        return false;
+    }
+
+    public static bool MoreThenHalfLegsIsGrounded(Transform[] groundChecks, float groundCheckDistance, LayerMask groundLayer)
+    {
         int legsCount = groundChecks.Length;
 
         int groundedLegsCount = 0;
