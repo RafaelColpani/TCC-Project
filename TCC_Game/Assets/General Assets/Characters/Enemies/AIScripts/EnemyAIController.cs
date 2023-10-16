@@ -115,7 +115,7 @@ public class EnemyAIController : MonoBehaviour
     /// <summary>Gets if the enemy is in a platform edge.</summary>
     public bool IsInEdge()
     {
-        return !JumpUtils.MoreThenHalfLegsIsGrounded(characterManager.GroundCheckParent, characterManager.GroundCheckDistance, characterManager.GroundLayers);
+        return !JumpUtils.MoreThenHalfLegsIsGrounded(characterManager.GroundChecks, characterManager.GroundCheckDistance, characterManager.GroundLayers);
     }
     #endregion
 }

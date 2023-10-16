@@ -17,13 +17,17 @@ public class ProceduralTorso : MonoBehaviour
     [Tooltip("The Transform where is located the bone of the head of the character")]
     [SerializeField] private Transform headBone;
 
-    [HeaderPlus(" ", "- WALK POSITIONS -", (int)HeaderPlusColor.cyan)]
+    [HeaderPlus(" ", "- TORSO -", (int)HeaderPlusColor.cyan)]
     [Tooltip("The local position that the target will be when walking")]
     [SerializeField] private Vector3 walkingTargetLocalPosition;
     [Tooltip("The speed that the target of the torso will move to the desired position when transition from/to walk")]
     [SerializeField] private float targetMoveSpeed;
+
+    [HeaderPlus(" ", "- HEAD -", (int)HeaderPlusColor.yellow)]
     [Tooltip("The z rotation value that the head will perform while walking")]
-    [SerializeField] private float walkingHeadLocalRotationValue;
+    [SerializeField] private Quaternion walkingHeadLocalRotation;
+    [Tooltip("The speed that the head will rotate to the desired quaternion when transition from/to walk")]
+    [SerializeField] private float headRotationSpeed;
     #endregion
 
     #region Private Vars
@@ -35,7 +39,7 @@ public class ProceduralTorso : MonoBehaviour
 
     private Vector3 idleTargetLocalPosition;
 
-    private float idleHeadLocalRotationValue;
+    private Quaternion idleHeadLocalRotation;
     #endregion
 
     #region Unity Methods
@@ -49,27 +53,36 @@ public class ProceduralTorso : MonoBehaviour
             moveCommand = GetComponent<InputHandler>().GetMovementCommand();
 
         idleTargetLocalPosition = target.localPosition;
-        idleHeadLocalRotationValue = headBone.localRotation.z;
+        idleHeadLocalRotation = headBone.localRotation;
     }
 
     private void FixedUpdate()
     {
         if (PauseController.GetIsPaused()) return;
 
-        var walkValue = moveCommand.GetXVelocity();
+        var walkValue = moveCommand.CurrentSpeed;
+        var state = characterMovementState.MoveState;
 
-        switch (walkValue)
+        if (state == CharacterMovementState.MovementState.ASCENDING || state == CharacterMovementState.MovementState.DESCENDING)
         {
-            case 1f:
-                MoveTarget(idleTargetLocalPosition);
-                break;
+            MoveTarget(idleTargetLocalPosition);
+            RotateHead(idleHeadLocalRotation);
+        }
 
-            case > 1f:
-                MoveTarget(walkingTargetLocalPosition, proceduralLegs.GetIsWalking());
-                break;
+        else
+        {
+            switch (walkValue)
+            {
+                case 0f:
+                    MoveTarget(idleTargetLocalPosition);
+                    RotateHead(idleHeadLocalRotation);
+                    break;
 
-            default:
-                break;
+                default:
+                    MoveTarget(walkingTargetLocalPosition, proceduralLegs.GetIsWalking());
+                    RotateHead(walkingHeadLocalRotation, proceduralLegs.GetIsWalking());
+                    break;
+            }
         }
     }
     #endregion
@@ -82,6 +95,15 @@ public class ProceduralTorso : MonoBehaviour
 
         var newPosition = Vector3.Lerp(target.localPosition, finalPosition, targetMoveSpeed * Time.fixedDeltaTime);
         target.localPosition = newPosition;
+    }
+
+    private void RotateHead(Quaternion finalRotation, bool canMove = true)
+    {
+        // is not moving any leg
+        if (!canMove) return;
+
+        var newRotation = Quaternion.Slerp(headBone.localRotation, finalRotation, headRotationSpeed * Time.fixedDeltaTime);
+        headBone.localRotation = newRotation;
     }
     #endregion
 }
