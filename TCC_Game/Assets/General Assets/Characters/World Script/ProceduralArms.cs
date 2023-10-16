@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.U2D.IK;
 using KevinCastejon.MoreAttributes;
 using System.Linq;
-using Unity.Burst.Intrinsics;
 
 [System.Serializable]
 public class ArmsTargets
@@ -18,7 +17,9 @@ public class ArmsTargets
     public Transform aheadTarget;
     [Tooltip("The position that the arm will aim while moving behind the body")]
     public Transform behindTarget;
-    [Tooltip("The position that the target will be reach when ascending (jumping).")]
+    [Tooltip("The position that the arm will aim while in idle animation.")]
+    public Vector3[] idleMovementPositions;
+    [Tooltip("The position that the target will reach when ascending (jumping).")]
     public Vector3 ascendingLocalPosition;
     [Tooltip("The height that the target will be, based on body position")]
     public float targetHeightOffset;
@@ -33,6 +34,8 @@ public class ArmsTargets
 
     private bool isMovingAhead;
     private bool isMovingBehind;
+    private bool isResetIdle;
+    private bool[] movingToIdle;
     #endregion
 
     #region Getters
@@ -54,6 +57,16 @@ public class ArmsTargets
     public bool IsMovingBehind
     {
         get { return this.isMovingBehind; }
+    }
+
+    public bool IsResetIdle
+    {
+        get { return isResetIdle; }
+    }
+
+    public bool[] MovingToIdle
+    {
+        get { return movingToIdle; }
     }
     #endregion
 
@@ -79,6 +92,31 @@ public class ArmsTargets
     {
         this.isMovingBehind = value;
     }
+
+    public void SetIsResetIdle(bool value = true)
+    {
+        this.isResetIdle = value;
+    }
+
+    public void SetMovingToIdle(bool[] values)
+    {
+        this.movingToIdle = values;
+    }
+
+    public void ResetMovingToIdle()
+    {
+        for (int i = 0; i < this.movingToIdle.Length; i++)
+        {
+            if (this.isEven && i == this.movingToIdle.Length - 1)
+                movingToIdle[i] = true;
+
+            else if (!this.isEven && i == 0)
+                movingToIdle[i] = true;
+
+            else
+                movingToIdle[i] = false;
+        }
+    }
     #endregion
 }
 
@@ -90,15 +128,20 @@ public class ProceduralArms : MonoBehaviour
     [HeaderPlus(" ", "- ARMS TARGETS -", (int)HeaderPlusColor.green)]
     [SerializeField] private List<ArmsTargets> armsTargets;
 
-    [HeaderPlus(" ", "- MOVE & IDLE -", (int)HeaderPlusColor.yellow)]
+    [HeaderPlus(" ", "- IDLE -", (int)HeaderPlusColor.red)]
+    [Tooltip("The speed that the arms will go back to the idle position.")]
+    [SerializeField] private float backToIdleSpeed;
+    [Tooltip("The speed that the arms will move to perform the idle animation.")]
+    [SerializeField] private float idleAnimationSpeed;
+
+    [HeaderPlus(" ", "- WALKING -", (int)HeaderPlusColor.yellow)]
     [Tooltip("The height the arc will realize when walking.")]
     [SerializeField] private float armArcHeight;
     [Tooltip("The speed the arc will realize when walking.")]
     [SerializeField] private float armArcSpeed;
     [Tooltip("The overall speed that the arm will realize its walking movement.")]
     [SerializeField] private float armMoveSpeed;
-    [Tooltip("The speed that the arms will go back to the idle position.")]
-    [SerializeField] private float backToIdleSpeed;
+    
 
     [HeaderPlus(" ", "- ASCENDING -", (int)HeaderPlusColor.cyan)]
     [Tooltip("The speed that arms will go to the ascending position.")]
@@ -119,6 +162,8 @@ public class ProceduralArms : MonoBehaviour
     private Transform body;
 
     private float lerpArm = 0;
+
+    private bool startIdleAnimation = true;
     #endregion
 
     #region Unity Methods
@@ -134,6 +179,11 @@ public class ProceduralArms : MonoBehaviour
         {
             arm.SetIdlePositionByEffectorTarget();
             arm.SetDescendingPosition(descendingValue);
+
+            bool[] aux = new bool[armsTargets.Count()];
+            for (var i = 0; i < aux.Count(); i++)
+                aux[i] = false;
+            arm.SetMovingToIdle(aux);
         }
     }
 
@@ -141,30 +191,42 @@ public class ProceduralArms : MonoBehaviour
     {
         if (PauseController.GetIsPaused()) return;
 
+        SetArmsState();
+    }
+    #endregion
+
+    #region Private Methods
+    private void SetArmsState()
+    {
         var moveState = characterMovementState.MoveState;
 
         switch (moveState)
         {
             case CharacterMovementState.MovementState.IDLE:
-                ArmsIdlePosition();
+                if (!startIdleAnimation)
+                    ArmsIdlePosition();
+                else
+                    IdleAnimation();
                 break;
 
             case CharacterMovementState.MovementState.WALKING:
+                startIdleAnimation = false;
                 MoveWalkingArms();
                 break;
 
             case CharacterMovementState.MovementState.ASCENDING:
+                startIdleAnimation = false;
                 ArmsAscendingPosition();
                 break;
 
             case CharacterMovementState.MovementState.DESCENDING:
+                startIdleAnimation = false;
                 ArmsDescendingPosition();
                 break;
         }
     }
-    #endregion
 
-    #region Private Methods
+    #region IDLE
     private void ArmsIdlePosition()
     {
         foreach (var arm in armsTargets)
@@ -181,10 +243,30 @@ public class ProceduralArms : MonoBehaviour
             if (targetsDistance < 0.01f)
             {
                 arm.effectorTarget.localPosition = arm.IdlePosition;
+
+                // to reset the position of the idle animation
+                arm.SetIsResetIdle();
+                arm.ResetMovingToIdle();
+                startIdleAnimation = true;
             }
         }
     }
 
+    private void IdleAnimation()
+    {
+        var newPosition = Vector3.zero;
+
+        foreach (var arm in armsTargets)
+        {
+            if (arm.IsResetIdle)
+            {
+                //newPosition
+            }
+        }
+    }
+    #endregion
+
+    #region WALKING
     private void MoveWalkingArms()
     {
         // is not moving any leg
@@ -237,7 +319,9 @@ public class ProceduralArms : MonoBehaviour
             arm.effectorTarget.position = newPosition;
         }
     }
+    #endregion
 
+    #region JUMPING
     private void ArmsAscendingPosition()
     {
         foreach (var arm in armsTargets)
@@ -246,7 +330,9 @@ public class ProceduralArms : MonoBehaviour
             arm.effectorTarget.localPosition = newPosition;
         }
     }
+    #endregion
 
+    #region FALLING
     private void ArmsDescendingPosition()
     {
         foreach (var arm in armsTargets)
@@ -255,7 +341,9 @@ public class ProceduralArms : MonoBehaviour
             arm.effectorTarget.localPosition = newPosition;
         }
     }
+    #endregion
 
+    #region AUX
     private bool ArmIsMovingInRightDirection(ArmsTargets arm, bool moveAhead)
     {
         if (moveAhead)
@@ -264,5 +352,6 @@ public class ProceduralArms : MonoBehaviour
         else
             return arm.IsMovingBehind == true;
     }
+    #endregion
     #endregion
 }

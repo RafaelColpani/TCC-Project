@@ -81,8 +81,6 @@ public class ObjectTargets
 
         this.effectorTarget.position = this.bodyTarget.position;
         this.finalTarget.position = this.bodyTarget.position;
-
-        Debug.Log("setting pos");
     }
     #endregion
 }
@@ -225,7 +223,6 @@ public class ProceduralLegs : MonoBehaviour
             // if the character itself if not on ground
             if (!JumpUtils.IsGrounded(groundChecks, groundCheckDistance, targetsDetections) && gravityController.GetIsOn())
             {
-                print("is grounded");
                 target.IsOnGround = false;
                 var fromHeight = false;
                 var newPosition = Vector3.zero;
