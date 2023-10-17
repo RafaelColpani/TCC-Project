@@ -4,19 +4,51 @@ using UnityEngine;
 
 public class GoItens : MonoBehaviour
 {
-   public string tagFruit = "Test";
-    public float velocidadeMovimento = 2.0f; // Velocidade de movimento dos inimigos
-    public GameObject destinoPredefinido; // Objeto de destino predefinido
+    #region Variaveis
 
-    private Transform target; // O objeto "Fruit" como alvo
-    private bool emMovimento = false; // Para controlar o estado de movimento
+    [Header("Tags")]
+    [SerializeField] [Tooltip("Tag para o objeto que ira seguir")]        string tagFruit = "Test";
+    [SerializeField] [Tooltip("Tag para o local que vai levar o objeto")] string tagDest = "Test2";
+    [Space(10)]
+    
+    [Header("Configs Basicas")]
+    [SerializeField] float velocidadeMovimento = 2.0f; // Velocidade de movimento dos inimigos
+    [SerializeField] bool emMovimento = false;
+    [Space(10)]
 
+    [Header("Configs dos Objetos")]
+    [SerializeField] [Tooltip("Dist do objeto que ira virar filho")] float disObject = 0.2f;
+    [SerializeField] [Tooltip("Dist para destruir o obj filho")]     float distDestroy = 0.2f;
+    [Space(10)]
+
+    [Header("Target")]
+    [SerializeField] Transform target; // O objeto "Fruit" como alvo
+    [SerializeField] Rigidbody2D targetRigidbody; // Rigidbody2D do target
+    [SerializeField] bool reativarRigidbody = false; // Para controlar se o Rigidbody2D deve ser reativado
+
+    [Header("Destino")]
+    [SerializeField] GameObject destinoPredefinido; // Objeto de destino predefinido com base na tagFruit
+    #endregion
+  
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag(tagFruit))
         {
             target = other.transform;
+            targetRigidbody = other.GetComponent<Rigidbody2D>();
+            if (targetRigidbody != null)
+            {
+                // Desativar a simulação do Rigidbody2D
+                targetRigidbody.sharedMaterial = null;
+                targetRigidbody.simulated = false;
+                reativarRigidbody = true;
+            }
+
+            target = other.transform;
             emMovimento = true;
+
+            // Configura o destino predefinido com base na tagFruit
+            destinoPredefinido = GameObject.FindGameObjectWithTag(tagDest);
         }
     }
 
@@ -29,22 +61,62 @@ public class GoItens : MonoBehaviour
                 Vector3 direcao = target.position - transform.position;
                 direcao.Normalize();
                 transform.position += direcao * velocidadeMovimento * Time.deltaTime;
+
+                // Verifica a distância entre o objeto e o alvo
+                float distancia = Vector3.Distance(transform.position, target.position);
+                if (distancia < disObject) // Ajuste esse valor conforme necessário
+                {
+                    // Torna o objeto pai do target
+                    target.SetParent(transform, true);
+
+                    // Copia as propriedades do transform do pai (GoItens)
+                    target.localPosition = Vector3.zero;
+                    target.localRotation = Quaternion.identity;
+
+                    if (reativarRigidbody && targetRigidbody != null)
+                    {
+                        // Reativa a simulação do Rigidbody2D
+                        targetRigidbody.simulated = true;
+                        reativarRigidbody = false;
+                    }
+                }
             }
-            else
+
+            else if (destinoPredefinido != null)
             {
-                // Se o alvo (Fruit) não existe mais, mova para o destino predefinido
-                MoveToDestinoPredefinido();
+                // Move para o destino predefinido
+                Vector3 direcaoDestino = destinoPredefinido.transform.position - transform.position;
+                direcaoDestino.Normalize();
+                Debug.Log("Direcao Destino [ " + direcaoDestino + " ]");
+
+                transform.position += direcaoDestino * velocidadeMovimento * Time.deltaTime;
+
+                // Verifica a distância entre o objeto e o destino predefinido
+                float distanciaDestino = Vector3.Distance(transform.position, destinoPredefinido.transform.position);
+                Debug.Log("Dist Destino [ " + distanciaDestino + " ]");
+                
+                if (distanciaDestino < distDestroy) // Ajuste esse valor conforme necessário
+                {
+                    Debug.Log("a");
+                }
             }
         }
     }
 
-    private void MoveToDestinoPredefinido()
+    private void OnDrawGizmos()
     {
+        // Desenha um gizmo de linha do objeto para o alvo
+        if (target != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, target.position);
+        }
+
+        // Desenha um gizmo de linha do objeto para o destino predefinido
         if (destinoPredefinido != null)
         {
-            Vector3 direcaoDestino = destinoPredefinido.transform.position - transform.position;
-            direcaoDestino.Normalize();
-            transform.position += direcaoDestino * velocidadeMovimento * Time.deltaTime;
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, destinoPredefinido.transform.position);
         }
     }
 }
