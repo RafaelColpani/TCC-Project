@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,8 +35,9 @@ public class ArmsTargets
 
     private bool isMovingAhead;
     private bool isMovingBehind;
-    private bool isResetIdle;
+    //private bool isResetIdle;
     private bool[] movingToIdle;
+    private bool idleIsMovingForward;
     #endregion
 
     #region Getters
@@ -59,10 +61,10 @@ public class ArmsTargets
         get { return this.isMovingBehind; }
     }
 
-    public bool IsResetIdle
-    {
-        get { return isResetIdle; }
-    }
+    //public bool IsResetIdle
+    //{
+    //    get { return isResetIdle; }
+    //}
 
     public bool[] MovingToIdle
     {
@@ -93,10 +95,10 @@ public class ArmsTargets
         this.isMovingBehind = value;
     }
 
-    public void SetIsResetIdle(bool value = true)
-    {
-        this.isResetIdle = value;
-    }
+    //public void SetIsResetIdle(bool value = true)
+    //{
+    //    this.isResetIdle = value;
+    //}
 
     public void SetMovingToIdle(bool[] values)
     {
@@ -108,14 +110,48 @@ public class ArmsTargets
         for (int i = 0; i < this.movingToIdle.Length; i++)
         {
             if (this.isEven && i == this.movingToIdle.Length - 1)
+            {
                 movingToIdle[i] = true;
+                idleIsMovingForward = false;
+            }
 
             else if (!this.isEven && i == 0)
+            {
                 movingToIdle[i] = true;
+                idleIsMovingForward = true;
+            }
 
             else
                 movingToIdle[i] = false;
         }
+    }
+
+    public void SetNewIdleAnimationPosition()
+    {
+        for (var i = 0; i < movingToIdle.Length; i++)
+        {
+            if (!movingToIdle[i]) continue;
+
+            if (i == movingToIdle.Length - 1)
+                idleIsMovingForward = false;
+
+            else if (i == 0)
+                idleIsMovingForward = true;
+
+            SwapIdleAnimationPosition(i);
+            break;
+        }
+    }
+
+    private void SwapIdleAnimationPosition(int index)
+    {
+        movingToIdle[index] = false;
+
+        if (idleIsMovingForward)
+            movingToIdle[index + 1] = true;
+
+        else
+            movingToIdle[index - 1] = true;
     }
     #endregion
 }
@@ -133,6 +169,7 @@ public class ProceduralArms : MonoBehaviour
     [SerializeField] private float backToIdleSpeed;
     [Tooltip("The speed that the arms will move to perform the idle animation.")]
     [SerializeField] private float idleAnimationSpeed;
+    [SerializeField] private AnimationCurve idleAnimationCurve;
 
     [HeaderPlus(" ", "- WALKING -", (int)HeaderPlusColor.yellow)]
     [Tooltip("The height the arc will realize when walking.")]
@@ -184,6 +221,7 @@ public class ProceduralArms : MonoBehaviour
             for (var i = 0; i < aux.Count(); i++)
                 aux[i] = false;
             arm.SetMovingToIdle(aux);
+            arm.ResetMovingToIdle();
         }
     }
 
@@ -240,12 +278,9 @@ public class ProceduralArms : MonoBehaviour
             
             arm.effectorTarget.localPosition = newPosition;
 
-            if (targetsDistance < 0.01f)
+            if (targetsDistance < 0.001f)
             {
                 arm.effectorTarget.localPosition = arm.IdlePosition;
-
-                // to reset the position of the idle animation
-                arm.SetIsResetIdle();
                 arm.ResetMovingToIdle();
                 startIdleAnimation = true;
             }
@@ -254,13 +289,21 @@ public class ProceduralArms : MonoBehaviour
 
     private void IdleAnimation()
     {
-        var newPosition = Vector3.zero;
-
         foreach (var arm in armsTargets)
         {
-            if (arm.IsResetIdle)
+            var goToPositionIndex = Array.IndexOf(arm.MovingToIdle, true);
+            if (goToPositionIndex == -1) { Debug.LogError("GOT INDEX -1 IN ARMS IDLE ANIMATION"); continue; }
+
+            var targetsDistance = (arm.effectorTarget.localPosition - arm.idleMovementPositions[goToPositionIndex]).sqrMagnitude;
+            var time = idleAnimationSpeed * Time.fixedDeltaTime;
+            var newPosition = Vector3.Lerp(arm.effectorTarget.localPosition,
+                                                           arm.idleMovementPositions[goToPositionIndex],
+                                                           idleAnimationCurve.Evaluate(time));
+            arm.effectorTarget.localPosition = newPosition;
+
+            if (targetsDistance < 0.001f)
             {
-                //newPosition
+                arm.SetNewIdleAnimationPosition();
             }
         }
     }
