@@ -10,6 +10,9 @@ public class FruitPuzzle : MonoBehaviour
     public string[] sequenciaCorreta; // Sequência correta das alavancas a serem ativadas
     private int indiceSequencia = 0; // Índice atual na sequência
 
+    [Header("GameObject")]
+    public GameObject objetoParaAtivar;
+
     #endregion
 
     public  void AtivarProximaAlavanca() 
@@ -24,6 +27,7 @@ public class FruitPuzzle : MonoBehaviour
                 if (indiceSequencia == sequenciaCorreta.Length)
                 {
                     Debug.Log("Quebra-cabeça resolvido! As alavancas corretas foram ativadas.");
+                    objetoParaAtivar.SetActive(!objetoParaAtivar.activeSelf);
                 }
             }
 
