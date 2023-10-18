@@ -4,8 +4,41 @@ using UnityEngine;
 
 public class FruitPuzzle : MonoBehaviour
 {
-    void Start()
+    #region Variavel
+    [Header("Seq")]
+    public GameObject[] alavancas; // Array de GameObjects que representam as alavancas na cena
+    public string[] sequenciaCorreta; // Sequência correta das alavancas a serem ativadas
+    private int indiceSequencia = 0; // Índice atual na sequência
+
+    #endregion
+
+    public  void AtivarProximaAlavanca() 
     {
-        Debug.Log("Fazer a resolução do puzzle");
+        if (indiceSequencia < sequenciaCorreta.Length)
+        {
+            if (alavancas[indiceSequencia].name == sequenciaCorreta[indiceSequencia])
+            {
+                alavancas[indiceSequencia].SetActive(true);
+                indiceSequencia++;
+
+                if (indiceSequencia == sequenciaCorreta.Length)
+                {
+                    Debug.Log("Quebra-cabeça resolvido! As alavancas corretas foram ativadas.");
+                }
+            }
+
+            else
+            {
+                ReiniciarQuebraCabeca();
+            }
+        }
     }
+
+    void ReiniciarQuebraCabeca()
+    {
+        
+        indiceSequencia = 0;
+        Debug.Log("Sequência errada! Reiniciando o quebra-cabeça.");
+    }
+
 }

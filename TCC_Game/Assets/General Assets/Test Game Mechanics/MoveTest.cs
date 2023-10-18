@@ -11,6 +11,8 @@ public class MoveTest : MonoBehaviour
     private bool estaNoChao;
     private float larguraDoSprite;
 
+    public bool isOnRope = false;
+
     private void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -30,7 +32,8 @@ public class MoveTest : MonoBehaviour
         // Pulo.
         if (estaNoChao && Input.GetButtonDown("Jump"))
         {
-            rb2D.AddForce(Vector2.up * forcaPulo, ForceMode2D.Impulse);
+            if (!isOnRope)
+                rb2D.AddForce(Vector2.up * forcaPulo, ForceMode2D.Impulse);
         }
     }
 }
