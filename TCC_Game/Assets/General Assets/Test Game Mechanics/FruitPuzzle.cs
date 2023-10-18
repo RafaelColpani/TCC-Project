@@ -12,15 +12,33 @@ public class FruitPuzzle : MonoBehaviour
 
     #endregion
 
-    void Start()
+    public  void AtivarProximaAlavanca() 
     {
-        Debug.Log("Fazer a resolução do puzzle");
+        if (indiceSequencia < sequenciaCorreta.Length)
+        {
+            if (alavancas[indiceSequencia].name == sequenciaCorreta[indiceSequencia])
+            {
+                alavancas[indiceSequencia].SetActive(true);
+                indiceSequencia++;
+
+                if (indiceSequencia == sequenciaCorreta.Length)
+                {
+                    Debug.Log("Quebra-cabeça resolvido! As alavancas corretas foram ativadas.");
+                }
+            }
+
+            else
+            {
+                ReiniciarQuebraCabeca();
+            }
+        }
     }
 
-    void AtivarProximaAlavanca() 
+    void ReiniciarQuebraCabeca()
     {
         
+        indiceSequencia = 0;
+        Debug.Log("Sequência errada! Reiniciando o quebra-cabeça.");
     }
-
 
 }
