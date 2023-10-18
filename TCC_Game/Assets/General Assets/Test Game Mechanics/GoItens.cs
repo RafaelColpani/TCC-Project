@@ -78,11 +78,14 @@ public class GoItens : MonoBehaviour
                         // Reativa a simulação do Rigidbody2D
                         targetRigidbody.simulated = true;
                         reativarRigidbody = false;
+                        targetRigidbody.mass = 0;
+                        targetRigidbody.gravityScale = 0;
+
                     }
                 }
             }
 
-            else if (destinoPredefinido != null)
+             if (transform.childCount > 0)
             {
                 // Move para o destino predefinido
                 Vector3 direcaoDestino = destinoPredefinido.transform.position - transform.position;
@@ -97,7 +100,7 @@ public class GoItens : MonoBehaviour
                 
                 if (distanciaDestino < distDestroy) // Ajuste esse valor conforme necessário
                 {
-                    Debug.Log("a");
+                    Destroy(target.gameObject);
                 }
             }
         }
