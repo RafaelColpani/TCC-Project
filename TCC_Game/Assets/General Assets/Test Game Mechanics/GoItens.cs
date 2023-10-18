@@ -28,8 +28,11 @@ public class GoItens : MonoBehaviour
 
     [Header("Destino")]
     [SerializeField] GameObject destinoPredefinido; // Objeto de destino predefinido com base na tagFruit
+
+    //private FruitPuzzle fruitPuzzle;
+    public GameObject objectWithScriptA;
     #endregion
-  
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag(tagFruit))
@@ -46,9 +49,12 @@ public class GoItens : MonoBehaviour
 
             target = other.transform;
             emMovimento = true;
-
+        
             // Configura o destino predefinido com base na tagFruit
             destinoPredefinido = GameObject.FindGameObjectWithTag(tagDest);
+
+            //
+            //fruitPuzzle = destinoPredefinido.GetComponent<FruitPuzzle>();
         }
     }
 
@@ -78,26 +84,34 @@ public class GoItens : MonoBehaviour
                         // Reativa a simulação do Rigidbody2D
                         targetRigidbody.simulated = true;
                         reativarRigidbody = false;
+                        targetRigidbody.mass = 0;
+                        targetRigidbody.gravityScale = 0;
+
                     }
                 }
             }
 
-            else if (destinoPredefinido != null)
+             if (transform.childCount > 0)
             {
                 // Move para o destino predefinido
                 Vector3 direcaoDestino = destinoPredefinido.transform.position - transform.position;
                 direcaoDestino.Normalize();
-                Debug.Log("Direcao Destino [ " + direcaoDestino + " ]");
+                //Debug.Log("Direcao Destino [ " + direcaoDestino + " ]");
 
                 transform.position += direcaoDestino * velocidadeMovimento * Time.deltaTime;
 
                 // Verifica a distância entre o objeto e o destino predefinido
                 float distanciaDestino = Vector3.Distance(transform.position, destinoPredefinido.transform.position);
-                Debug.Log("Dist Destino [ " + distanciaDestino + " ]");
+                //Debug.Log("Dist Destino [ " + distanciaDestino + " ]");
                 
                 if (distanciaDestino < distDestroy) // Ajuste esse valor conforme necessário
                 {
-                    Debug.Log("a");
+                    //fruitPuzzle.AtivarProximaAlavanca(); 
+                    FruitPuzzle scriptA = objectWithScriptA.GetComponent<FruitPuzzle>();
+                    scriptA.AtivarProximaAlavanca();
+                    Destroy(target.gameObject);
+                    destinoPredefinido.SetActive(false);
+
                 }
             }
         }
