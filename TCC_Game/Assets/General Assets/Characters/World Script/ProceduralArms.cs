@@ -169,6 +169,7 @@ public class ProceduralArms : MonoBehaviour
     [SerializeField] private float backToIdleSpeed;
     [Tooltip("The speed that the arms will move to perform the idle animation.")]
     [SerializeField] private float idleAnimationSpeed;
+    [Tooltip("The curve that arm will move in the idle animaion between targets.")]
     [SerializeField] private AnimationCurve idleAnimationCurve;
 
     [HeaderPlus(" ", "- WALKING -", (int)HeaderPlusColor.yellow)]

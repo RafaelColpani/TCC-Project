@@ -200,6 +200,8 @@ public class ProceduralLegs : MonoBehaviour
 
         MoveLegs();
         MoveFinalTargets();
+
+        //TODO: CHANGE BODYOFFSET WITH IDLE (STANDARD: 1.16 TO 1.13 / 97.414%)
         CalculateBodyPosition();
 
         if (makeRotation)
