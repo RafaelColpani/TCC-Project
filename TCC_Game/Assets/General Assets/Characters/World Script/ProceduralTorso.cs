@@ -52,6 +52,7 @@ public class ProceduralTorso : MonoBehaviour
     private bool isInIdle = true;
     private bool idleIsMovingForward = true;
     private bool[] movingToIdle;
+    private bool armsIsFollowing = true;
     #endregion
 
     #region Unity Methods
@@ -67,17 +68,7 @@ public class ProceduralTorso : MonoBehaviour
         idleTargetLocalPosition = target.localPosition;
         idleHeadLocalRotation = headBone.localRotation;
 
-        bool[] aux = new bool[targetsIdleAnimation.Length];
-        for (var i = 0; i < aux.Length; i++)
-        {
-            if (i == aux.Length - 1)
-                { aux[i] = true; break; }
-
-            else
-                aux[i] = false;
-        }
-
-        movingToIdle = aux;
+        ResetIdleAnimationPosition();
     }
 
     private void FixedUpdate()
@@ -100,6 +91,7 @@ public class ProceduralTorso : MonoBehaviour
             isInIdle = true;
             MoveTarget(idleTargetLocalPosition, targetMoveSpeed);
             RotateHead(idleHeadLocalRotation);
+            ResetIdleAnimationPosition();
         }
 
         else
@@ -116,6 +108,7 @@ public class ProceduralTorso : MonoBehaviour
                     isInIdle = false;
                     MoveTarget(walkingTargetLocalPosition, targetMoveSpeed, proceduralLegs.GetIsWalking());
                     RotateHead(walkingHeadLocalRotation, proceduralLegs.GetIsWalking());
+                    ResetIdleAnimationPosition();
                     break;
             }
         }
@@ -163,7 +156,6 @@ public class ProceduralTorso : MonoBehaviour
             MoveTarget(targetsIdleAnimation[goToPositionIndex], idleAnimationSpeed);
             if (targetsDistance < 0.0001f)
             {
-                print("set carai");
                 SetNewIdleAnimationPosition();
             }
         }
@@ -186,6 +178,8 @@ public class ProceduralTorso : MonoBehaviour
             SwapIdleAnimationPosition(i);
             break;
         }
+
+        armsIsFollowing = false;
     }
 
     private void SwapIdleAnimationPosition(int index)
@@ -198,6 +192,33 @@ public class ProceduralTorso : MonoBehaviour
         else
             movingToIdle[index - 1] = true;
     }
+
+    private void ResetIdleAnimationPosition()
+    {
+        bool[] aux = new bool[targetsIdleAnimation.Length];
+        for (var i = 0; i < aux.Length; i++)
+        {
+            if (i == aux.Length - 1)
+            { aux[i] = true; break; }
+
+            else
+                aux[i] = false;
+        }
+
+        movingToIdle = aux;
+    }
     #endregion
+    #endregion
+
+    #region Public Methods
+    public bool GetArmsIsFollowing()
+    {
+        return armsIsFollowing;
+    }
+
+    public void EnableArmsIsFollowingFlag()
+    {
+        armsIsFollowing = true;
+    }
     #endregion
 }

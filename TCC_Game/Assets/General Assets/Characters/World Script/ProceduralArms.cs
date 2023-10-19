@@ -35,9 +35,9 @@ public class ArmsTargets
 
     private bool isMovingAhead;
     private bool isMovingBehind;
-    //private bool isResetIdle;
     private bool[] movingToIdle;
     private bool idleIsMovingForward;
+    private bool reachedMaxPosIdleAnim;
     #endregion
 
     #region Getters
@@ -61,14 +61,14 @@ public class ArmsTargets
         get { return this.isMovingBehind; }
     }
 
-    //public bool IsResetIdle
-    //{
-    //    get { return isResetIdle; }
-    //}
-
     public bool[] MovingToIdle
     {
         get { return movingToIdle; }
+    }
+
+    public bool ReachedMaxPosIdleAnim
+    {
+        get { return reachedMaxPosIdleAnim; }
     }
     #endregion
 
@@ -95,34 +95,52 @@ public class ArmsTargets
         this.isMovingBehind = value;
     }
 
-    //public void SetIsResetIdle(bool value = true)
-    //{
-    //    this.isResetIdle = value;
-    //}
-
     public void SetMovingToIdle(bool[] values)
     {
         this.movingToIdle = values;
     }
 
-    public void ResetMovingToIdle()
+    public void SetReachedMaxPosIdleAnim(bool value)
     {
-        for (int i = 0; i < this.movingToIdle.Length; i++)
+        this.reachedMaxPosIdleAnim = value;
+    }
+
+    public void ResetMovingToIdle(bool followTogether)
+    {
+        if (!followTogether)
         {
-            if (this.isEven && i == this.movingToIdle.Length - 1)
+            for (int i = 0; i < this.movingToIdle.Length; i++)
             {
-                movingToIdle[i] = true;
-                idleIsMovingForward = false;
-            }
+                if (this.isEven && i == this.movingToIdle.Length - 1)
+                {
+                    movingToIdle[i] = true;
+                    idleIsMovingForward = false;
+                }
 
-            else if (!this.isEven && i == 0)
+                else if (!this.isEven && i == 0)
+                {
+                    movingToIdle[i] = true;
+                    idleIsMovingForward = true;
+                }
+
+                else
+                    movingToIdle[i] = false;
+            }
+        }
+
+        else
+        {
+            for (int i = 0; i < this.movingToIdle.Length; i++)
             {
-                movingToIdle[i] = true;
-                idleIsMovingForward = true;
-            }
+                if (i == 0)
+                {
+                    movingToIdle[i] = true;
+                    idleIsMovingForward = true;
+                }
 
-            else
-                movingToIdle[i] = false;
+                else
+                    movingToIdle[i] = false;
+            }
         }
     }
 
@@ -171,6 +189,10 @@ public class ProceduralArms : MonoBehaviour
     [SerializeField] private float idleAnimationSpeed;
     [Tooltip("The curve that arm will move in the idle animaion between targets.")]
     [SerializeField] private AnimationCurve idleAnimationCurve;
+    [Tooltip("Tells if the arms will begun the idle animation in same direction.")]
+    [SerializeField] private bool idleAnimationFollowTogether;
+    [Tooltip("Tells if the arms will move accordingly with the torso.")]
+    [SerializeField] private bool followTorsoAnimation;
 
     [HeaderPlus(" ", "- WALKING -", (int)HeaderPlusColor.yellow)]
     [Tooltip("The height the arc will realize when walking.")]
@@ -196,6 +218,7 @@ public class ProceduralArms : MonoBehaviour
     private CharacterManager characterManager;
     private ProceduralLegs proceduralLegs;
     private CharacterMovementState characterMovementState;
+    private ProceduralTorso proceduralTorso;
 
     private Transform body;
 
@@ -222,8 +245,11 @@ public class ProceduralArms : MonoBehaviour
             for (var i = 0; i < aux.Count(); i++)
                 aux[i] = false;
             arm.SetMovingToIdle(aux);
-            arm.ResetMovingToIdle();
+            arm.ResetMovingToIdle(idleAnimationFollowTogether);
         }
+
+        if (followTorsoAnimation)
+            proceduralTorso = GetComponent<ProceduralTorso>();
     }
 
     private void FixedUpdate()
@@ -249,17 +275,17 @@ public class ProceduralArms : MonoBehaviour
                 break;
 
             case CharacterMovementState.MovementState.WALKING:
-                startIdleAnimation = false;
+                ResetIdleAnimation();
                 MoveWalkingArms();
                 break;
 
             case CharacterMovementState.MovementState.ASCENDING:
-                startIdleAnimation = false;
+                ResetIdleAnimation();
                 ArmsAscendingPosition();
                 break;
 
             case CharacterMovementState.MovementState.DESCENDING:
-                startIdleAnimation = false;
+                ResetIdleAnimation();
                 ArmsDescendingPosition();
                 break;
         }
@@ -272,6 +298,7 @@ public class ProceduralArms : MonoBehaviour
         {
             if (arm.effectorTarget.localPosition == arm.IdlePosition) continue;
 
+            arm.SetReachedMaxPosIdleAnim(false);
             var targetsDistance = (arm.effectorTarget.localPosition - arm.IdlePosition).sqrMagnitude;
             var newPosition = Vector3.Slerp(arm.effectorTarget.localPosition,
                                                             arm.IdlePosition,
@@ -282,7 +309,7 @@ public class ProceduralArms : MonoBehaviour
             if (targetsDistance < 0.001f)
             {
                 arm.effectorTarget.localPosition = arm.IdlePosition;
-                arm.ResetMovingToIdle();
+                arm.ResetMovingToIdle(idleAnimationFollowTogether);
                 startIdleAnimation = true;
             }
         }
@@ -290,6 +317,8 @@ public class ProceduralArms : MonoBehaviour
 
     private void IdleAnimation()
     {
+        int armsToTorsoCount = 0;
+
         foreach (var arm in armsTargets)
         {
             var goToPositionIndex = Array.IndexOf(arm.MovingToIdle, true);
@@ -302,9 +331,43 @@ public class ProceduralArms : MonoBehaviour
                                                            idleAnimationCurve.Evaluate(time));
             arm.effectorTarget.localPosition = newPosition;
 
-            if (targetsDistance < 0.001f)
+            // arms will change direction regardless of the torso animation
+            if (!followTorsoAnimation)
             {
+                if (targetsDistance < 0.001f)
+                {
+                    arm.SetReachedMaxPosIdleAnim(true);
+                    bool allArmsReached = false;
+
+                    for (int i = 0; i < armsTargets.Count(); i++)
+                    {
+                        if (armsTargets[i] == arm) continue;
+                        if (!armsTargets[i].ReachedMaxPosIdleAnim) break;
+
+                        allArmsReached = true;
+                    }
+
+                    if (!allArmsReached) continue;
+
+                    arm.SetNewIdleAnimationPosition();
+                    continue;
+                }
+
+                arm.SetReachedMaxPosIdleAnim(false);
+            }
+            
+            // arms will change direction along with the torso animation
+            else
+            {
+                if (proceduralTorso.GetArmsIsFollowing()) continue;
+
                 arm.SetNewIdleAnimationPosition();
+                armsToTorsoCount++;
+
+                if (armsToTorsoCount < armsTargets.Count()) continue;
+
+                proceduralTorso.EnableArmsIsFollowingFlag();
+                armsToTorsoCount = 0;
             }
         }
     }
@@ -395,6 +458,16 @@ public class ProceduralArms : MonoBehaviour
 
         else
             return arm.IsMovingBehind == true;
+    }
+
+    private void ResetIdleAnimation()
+    {
+        startIdleAnimation = false;
+        foreach (var arm in armsTargets)
+        {
+            arm.SetReachedMaxPosIdleAnim(false);
+            arm.ResetMovingToIdle(followTorsoAnimation);
+        }
     }
     #endregion
     #endregion
