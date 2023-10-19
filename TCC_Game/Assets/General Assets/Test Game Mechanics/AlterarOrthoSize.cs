@@ -7,8 +7,8 @@ public class AlterarOrthoSize : MonoBehaviour
 {
     public string tagDoJogador = "Player";
     public CinemachineVirtualCamera virtualCamera;
-    public float novoOrthoSize = 5.0f; // O novo valor de Lens Ortho Size
-    public float velocidadeTransicao = 2.0f; // Velocidade da transição (ajuste conforme necessário)
+    public float novoOrthoSize = 8.92f; // O novo valor de Lens Ortho Size
+    public float velocidadeTransicao = 0.8f; // Velocidade da transição (ajuste conforme necessário)
 
     private float orthoSizeOriginal; // O valor original de OrthographicSize
     private bool emTransicao = false; // Para controlar o estado de transição

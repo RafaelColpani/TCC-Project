@@ -7,35 +7,25 @@ using UnityEngine.Video;
 
 public class Load_Scene : MonoBehaviour
 {
-    [Header("Bools")]
-    [SerializeField] bool _cutScene;
-    [SerializeField] bool _transition;
+    [SerializeField] string sceneName; // Nome da cena de destino
 
-    [Header("Scenes Name")]
-    [SerializeField] string sceneName;
-    private string sceneNameButton = "Tutorial_1";
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(_transition == true) 
+        if (other.CompareTag("Player"))
         {
-            
+            TrocarParasceneName();
         }
     }
 
-    #region Cutscenes
-    void cutScene() 
+    private void TrocarParasceneName()
     {
-        if(_cutScene == true) 
+        if (!string.IsNullOrEmpty(sceneName))
         {
-            
+            SceneManager.LoadScene(sceneName);
+        }
+        else
+        {
+            Debug.LogWarning("Cena de destino não especificada no Inspector.");
         }
     }
-
-    public void cutSceneButton() 
-    {
-        SceneManager.LoadScene(sceneNameButton);
-    }
-    #endregion
 }

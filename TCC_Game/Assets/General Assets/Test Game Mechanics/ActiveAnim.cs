@@ -4,28 +4,34 @@ using UnityEngine;
 
 public class ActiveAnim : MonoBehaviour
 {
-   public GameObject objetoAlvo; // Arraste o objeto que você deseja afetar para esse campo no Inspector.
-    public string nomeDaAnimacao; // O nome da animação que você deseja ativar.
+   [SerializeField]  string tagDoPlayer = "Player"; // A tag do objeto do jogador
+    [SerializeField]  KeyCode teclaAtivacao = KeyCode.E; // A tecla para ativar a variável
+    [SerializeField]  MonoBehaviour scriptParaAtivar; // Arraste o script no Inspector que contém a variável booleana
 
-    private Animator animador;
-
-    private void Start()
-    {
-        animador = objetoAlvo.GetComponent<Animator>();
-    }
+    private bool ativado = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag(tagDoPlayer))
         {
-            // Ative o componente Animator no objeto alvo.
-            if (animador != null)
-            {
-                animador.enabled = true;
-            }
+            ativado = true;
+        }
+    }
 
-            // Ative a animação no objeto alvo.
-            animador.SetBool(nomeDaAnimacao, true);
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag(tagDoPlayer))
+        {
+            ativado = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (ativado && Input.GetKeyDown(teclaAtivacao) && scriptParaAtivar != null)
+        {
+            // Ative a variável booleana no script
+            scriptParaAtivar.enabled = true;
         }
     }
 }
