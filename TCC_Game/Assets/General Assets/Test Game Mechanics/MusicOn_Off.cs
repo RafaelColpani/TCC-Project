@@ -7,15 +7,27 @@ using TMPro;
 
 public class MusicOn_Off : MonoBehaviour
 {
-    public AudioClip musica;
-    public bool ativarMusica = true;
+    [Header("Music Config")]
+    [SerializeField] AudioClip musica;
+    [SerializeField] bool ativarMusica = true;
     private bool musicaTocada = false;
     private AudioSource audioSource;
-    public TextMeshProUGUI textoTMP; // Adicione a referência ao TextMeshPro
+    [Space(10)]
 
-    public bool _dicaOnOff = false;
-    public GameObject objetoDica;
-    public TextMeshProUGUI textoDica;
+    [Header("VFX Config")]
+    [SerializeField] bool _VFXOnOff = false;
+    [SerializeField] GameObject vfxMusic;
+    [Space(10)]
+
+    [Header("Text Config")]
+    [SerializeField] bool _TextOnOff = false;
+    [SerializeField] TextMeshProUGUI textoTMP; // Adicione a referência ao TextMeshPro
+    [Space(10)]
+
+    [Header("Dica Config")]
+    [SerializeField] bool _dicaOnOff = false;
+    [SerializeField] GameObject objetoDica;
+    [SerializeField] TextMeshProUGUI textoDica;
 
     private void Start()
     {
@@ -27,6 +39,7 @@ public class MusicOn_Off : MonoBehaviour
         {
             textoTMP.gameObject.SetActive(false);
         }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -44,10 +57,21 @@ public class MusicOn_Off : MonoBehaviour
                     
                 }
 
-                // Ative o texto TMP
-                if (textoTMP != null)
+                if(_TextOnOff == true)
                 {
-                    textoTMP.gameObject.SetActive(true);
+                    // Ative o texto TMP
+                    if (textoTMP != null)
+                    {
+                        textoTMP.gameObject.SetActive(true);
+                    }
+                }
+
+                if(_VFXOnOff == true)
+                {
+                    if(vfxMusic != null)
+                    {
+                        vfxMusic.SetActive(true);
+                    }
                 }
 
                 
@@ -59,7 +83,7 @@ public class MusicOn_Off : MonoBehaviour
                 }
             }
 
-            if(_dicaOnOff = true)
+            if(_dicaOnOff == true)
             {   
             
                 {
@@ -82,6 +106,11 @@ public class MusicOn_Off : MonoBehaviour
             if (textoTMP != null)
             {
                 textoTMP.gameObject.SetActive(false);
+            }
+
+            if(vfxMusic != null)
+            {
+                vfxMusic.SetActive(false);
             }
         }
     }
