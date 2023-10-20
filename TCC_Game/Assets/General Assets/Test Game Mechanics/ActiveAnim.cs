@@ -23,6 +23,7 @@ public class ActiveAnim : MonoBehaviour
         if (other.CompareTag(tagDoPlayer))
         {
             ativado = false;
+            scriptParaAtivar.enabled = false;
         }
     }
 
