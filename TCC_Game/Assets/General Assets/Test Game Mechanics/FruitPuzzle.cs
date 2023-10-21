@@ -81,11 +81,6 @@ public class FruitPuzzle : MonoBehaviour
     #region Private Methods
     private void VerifySequence()
     {
-        foreach (var i in catchedSequence)
-        {
-            print($"catchedSeq: {i}");
-        }
-        
         for (int i = 0; i < correctSequenceIndexes.Count(); i++)
         {
             if (catchedSequence[i] == correctSequenceIndexes[i]) continue;
