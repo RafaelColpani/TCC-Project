@@ -1067,7 +1067,7 @@ GameObject:
   - component: {fileID: 461771190}
   - component: {fileID: 461771189}
   m_Layer: 0
-  m_Name: 2
+  m_Name: pink-dest
   m_TagString: Test2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1141,7 +1141,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.89922166, g: 0.43614274, b: 0.9339623, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.9957261, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1229,9 +1229,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a117b5c15ef134eb1687662f86b885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alavancas: []
-  sequenciaCorreta: []
-  objetoParaAtivar: {fileID: 0}
+  fruitDestinations:
+  - fruit: {fileID: 1543649463}
+    destination: {fileID: 1630132050}
+    initialFruitPosition: {x: -63.89, y: -12.41, z: 0}
+  - fruit: {fileID: 1478378451}
+    destination: {fileID: 461771188}
+    initialFruitPosition: {x: -66.66, y: -12.41, z: 0}
+  - fruit: {fileID: 1941893845}
+    destination: {fileID: 2083723588}
+    initialFruitPosition: {x: -69.31, y: -12.47, z: 0}
+  - fruit: {fileID: 2088826237}
+    destination: {fileID: 1492164833}
+    initialFruitPosition: {x: -71.31, y: -12.42, z: 0}
+  correctSequenceIndexes: 01000000000000000200000003000000
 --- !u!82 &490692021
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2665,17 +2676,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a117b5c15ef134eb1687662f86b885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alavancas:
-  - {fileID: 1630132050}
-  - {fileID: 461771188}
-  - {fileID: 2083723588}
-  - {fileID: 1492164833}
-  sequenciaCorreta:
-  - 1
-  - 2
-  - 3
-  - 4
-  objetoParaAtivar: {fileID: 0}
+  fruitDestinations: []
+  correctSequenceIndexes: 
 --- !u!212 &1406480409
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2849,12 +2851,12 @@ GameObject:
   - component: {fileID: 1478378454}
   - component: {fileID: 1478378453}
   m_Layer: 0
-  m_Name: 4
+  m_Name: pink-fruit
   m_TagString: Test
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1478378452
 Transform:
   m_ObjectHideFlags: 0
@@ -2863,7 +2865,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1478378451}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -70, y: 10, z: 0}
+  m_LocalPosition: {x: -66.66, y: -12.41, z: 0}
   m_LocalScale: {x: 1.769, y: 1.769, z: 1.769}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2949,7 +2951,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.3537736, g: 0.8873423, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.9160185, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2971,7 +2973,7 @@ GameObject:
   - component: {fileID: 1492164835}
   - component: {fileID: 1492164834}
   m_Layer: 0
-  m_Name: 4
+  m_Name: green-dest
   m_TagString: Test2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3045,7 +3047,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.89922166, g: 0.43614274, b: 0.9339623, a: 1}
+  m_Color: {r: 0.05724919, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3063,7 +3065,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492164833}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -54.76, y: -7.21, z: 0}
+  m_LocalPosition: {x: -51.23, y: -4.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3098,7 +3100,7 @@ GameObject:
   - component: {fileID: 1543649466}
   - component: {fileID: 1543649465}
   m_Layer: 0
-  m_Name: 2
+  m_Name: red-fruit
   m_TagString: Test
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3112,7 +3114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1543649463}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -64.08, y: -12.4, z: 0}
+  m_LocalPosition: {x: -63.89, y: -12.4, z: 0}
   m_LocalScale: {x: 1.769, y: 1.769, z: 1.769}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3198,7 +3200,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.3537736, g: 0.8873423, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.009601355, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3368,7 +3370,7 @@ GameObject:
   - component: {fileID: 1630132052}
   - component: {fileID: 1630132051}
   m_Layer: 0
-  m_Name: 1
+  m_Name: red-dest
   m_TagString: Test2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3442,7 +3444,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.89922166, g: 0.43614274, b: 0.9339623, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.09565163, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3529,8 +3531,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1679587675}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.6, y: -1.45, z: 0}
-  m_LocalScale: {x: 6.1965237, y: 1, z: 1}
+  m_LocalPosition: {x: -12.48, y: -1.45, z: 0}
+  m_LocalScale: {x: 12.160678, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1698032265}
@@ -4061,12 +4063,12 @@ GameObject:
   - component: {fileID: 1941893848}
   - component: {fileID: 1941893847}
   m_Layer: 0
-  m_Name: 3
+  m_Name: blue-fruit
   m_TagString: Test
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1941893846
 Transform:
   m_ObjectHideFlags: 0
@@ -4075,7 +4077,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1941893845}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -60, y: 10, z: 0}
+  m_LocalPosition: {x: -69.31, y: -12.47, z: 0}
   m_LocalScale: {x: 1.769, y: 1.769, z: 1.769}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4161,7 +4163,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.3537736, g: 0.8873423, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.020182133, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4539,7 +4541,7 @@ GameObject:
   - component: {fileID: 2083723590}
   - component: {fileID: 2083723589}
   m_Layer: 0
-  m_Name: 3
+  m_Name: blue-dest
   m_TagString: Test2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4613,7 +4615,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.89922166, g: 0.43614274, b: 0.9339623, a: 1}
+  m_Color: {r: 0.14360619, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4631,7 +4633,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2083723588}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -51.19, y: -5.11, z: 0}
+  m_LocalPosition: {x: -54.72, y: -7.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4651,7 +4653,7 @@ GameObject:
   - component: {fileID: 2088826240}
   - component: {fileID: 2088826239}
   m_Layer: 0
-  m_Name: 1
+  m_Name: green-fruit
   m_TagString: Test
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4665,7 +4667,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2088826237}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -46.04, y: -15.71, z: 0}
+  m_LocalPosition: {x: -71.31, y: -12.42, z: 0}
   m_LocalScale: {x: 1.769, y: 1.769, z: 1.769}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4751,7 +4753,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.3537736, g: 0.8873423, b: 1, a: 1}
+  m_Color: {r: 0.048704147, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -10630,22 +10632,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 252137180135120734, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9999995
-      objectReference: {fileID: 0}
-    - target: {fileID: 252137180135120734, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.0009771509
-      objectReference: {fileID: 0}
-    - target: {fileID: 315460874377847231, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9999773
-      objectReference: {fileID: 0}
-    - target: {fileID: 315460874377847231, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.0067423945
-      objectReference: {fileID: 0}
+    - target: {fileID: 2023877032, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
+      propertyPath: fruitPuzzle
+      value: 
+      objectReference: {fileID: 490692020}
     - target: {fileID: 1783398407405763718, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
       propertyPath: m_Name
       value: pfb_Noodle
@@ -10693,98 +10683,6 @@ PrefabInstance:
     - target: {fileID: 1865624226137312112, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3695211795256521029, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.99999994
-      objectReference: {fileID: 0}
-    - target: {fileID: 3695211795256521029, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.0004393059
-      objectReference: {fileID: 0}
-    - target: {fileID: 4667100889992691894, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.99999076
-      objectReference: {fileID: 0}
-    - target: {fileID: 4667100889992691894, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.0043077553
-      objectReference: {fileID: 0}
-    - target: {fileID: 5666062322086222452, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7251291
-      objectReference: {fileID: 0}
-    - target: {fileID: 5666062322086222452, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.688613
-      objectReference: {fileID: 0}
-    - target: {fileID: 5909689044335245528, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7018889
-      objectReference: {fileID: 0}
-    - target: {fileID: 5909689044335245528, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.7122865
-      objectReference: {fileID: 0}
-    - target: {fileID: 8219905377840859223, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.999895
-      objectReference: {fileID: 0}
-    - target: {fileID: 8219905377840859223, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.014498551
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516365696331435611, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9999235
-      objectReference: {fileID: 0}
-    - target: {fileID: 8516365696331435611, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.012368019
-      objectReference: {fileID: 0}
-    - target: {fileID: 8807794063645522970, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9999445
-      objectReference: {fileID: 0}
-    - target: {fileID: 8807794063645522970, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.01053455
-      objectReference: {fileID: 0}
-    - target: {fileID: 8850339680624025684, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.99994195
-      objectReference: {fileID: 0}
-    - target: {fileID: 8850339680624025684, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.010780154
-      objectReference: {fileID: 0}
-    - target: {fileID: 8974556151044349743, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.8485
-      objectReference: {fileID: 0}
-    - target: {fileID: 8974556151044349743, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.8485
-      objectReference: {fileID: 0}
-    - target: {fileID: 8982356168448506456, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: followSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8982356168448506456, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: objectToFollowTags.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8982356168448506456, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: objectToFollowTags.Array.data[0]
-      value: Test
-      objectReference: {fileID: 0}
-    - target: {fileID: 8990008407464163434, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9999972
-      objectReference: {fileID: 0}
-    - target: {fileID: 8990008407464163434, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.0024033482
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}

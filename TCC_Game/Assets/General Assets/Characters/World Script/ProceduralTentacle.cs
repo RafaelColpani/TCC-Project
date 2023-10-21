@@ -36,22 +36,29 @@ public class ProceduralTentacle : MonoBehaviour
 
     private List<Transform> objectsInRange = new List<Transform>();
 
-    private float defaultXTargetPosition;
-
     private bool[] movingToIdle;
     private bool idleIsMovingForward = true;
+    private bool proceduralIsOn = true;
+    #endregion
+
+    #region Public VARS
+    public bool ProceduralIsOn
+    {
+        get { return proceduralIsOn; }
+        set { proceduralIsOn = value; }
+    }
     #endregion
 
     #region Unity Methods
     private void Start()
     {
-        defaultXTargetPosition = target.position.x;
         ResetIdleAnimationPosition();
     }
 
     private void FixedUpdate()
     {
         if (PauseController.GetIsPaused()) return;
+        if (!proceduralIsOn) return;
 
         switch (state)
         {
