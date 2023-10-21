@@ -87,7 +87,6 @@ public class TentaclePuzzle : MonoBehaviour
 
         objectRb.gravityScale = 0;
         objectRb.mass = 0;
-        objectRb.velocity = Vector2.zero;
         objectRb.isKinematic = true;
         destination = fruitPuzzle.GetCorrectDestination(objectCatched.gameObject);
     }
@@ -146,4 +145,3 @@ public class TentaclePuzzle : MonoBehaviour
     }
     #endregion
 }
-
