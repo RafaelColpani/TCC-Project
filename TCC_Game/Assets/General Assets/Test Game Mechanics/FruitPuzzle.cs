@@ -27,6 +27,13 @@ public class FruitPuzzle : MonoBehaviour
     [Tooltip("The sequence to complete the puzzle, accordingly with the fruitDestinations indexes. " +
         "Must start with 0 and successively until arrays length - 1.")]
     [SerializeField] List<int> correctSequenceIndexes;
+
+    [HeaderPlus(" ", "- CHALLENGE LOGIC -", (int)HeaderPlusColor.blue)]
+    [SerializeField] bool _isActiveOnOff = false;
+    [SerializeField] GameObject vfxObject;
+    [SerializeField] GameObject activeObj;
+    [SerializeField] GameObject desactiveObj;
+
     #endregion
 
     #region Private VARs
@@ -101,6 +108,18 @@ public class FruitPuzzle : MonoBehaviour
     private void CompletedChallenge()
     {
         hasCompletedChallenge = true;
+
+        if(_isActiveOnOff == true)
+        {
+            vfxObject.SetActive(true);
+            activeObj.SetActive(true);
+        }
+
+        if(_isActiveOnOff == false)
+        {
+            vfxObject.SetActive(true);
+            desactiveObj.SetActive(false);
+        }
     }
 
     void RestartChallenge()
