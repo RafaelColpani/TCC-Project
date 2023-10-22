@@ -117,7 +117,7 @@ public class ChickenFruitFollow : MonoBehaviour
         {
             Destroy(fruitObjs.Dequeue());
             isEatingFruit = false;
-            // TODO: VFX of eated fruit here
+            // TODO: VFX of eated fruit here //
 
             if (fruitObjs.Count() <= 0)
             {
