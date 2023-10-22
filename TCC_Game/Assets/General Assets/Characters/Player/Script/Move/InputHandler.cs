@@ -1,13 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.InputSystem;
 using KevinCastejon.MoreAttributes;
-using static UnityEditor.MaterialProperty;
-using static UnityEngine.Rendering.DebugUI;
-using System.Numerics;
-using UnityEngine.TextCore.Text;
 
 [RequireComponent(typeof(GravityController))]
 [RequireComponent(typeof(CharacterController))]
