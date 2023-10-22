@@ -16,7 +16,7 @@ public class shaderInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.FindGameObjectWithTag("TargetPlayer");
+        player = GameObject.FindGameObjectWithTag("Player");
         
         Vector3 playerPos = player.GetComponent<Transform>().position;
         material.SetVector("_Player", playerPos);
