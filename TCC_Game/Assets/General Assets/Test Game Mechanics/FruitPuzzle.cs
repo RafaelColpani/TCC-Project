@@ -34,6 +34,9 @@ public class FruitPuzzle : MonoBehaviour
     [SerializeField] GameObject activeObj;
     [SerializeField] GameObject desactiveObj;
 
+    [HeaderPlus(" ", "- VFX WIN -", (int)HeaderPlusColor.blue)]
+    [SerializeField] GameObject shaderVFX;
+
     #endregion
 
     #region Private VARs
@@ -106,8 +109,12 @@ public class FruitPuzzle : MonoBehaviour
 
         if(_isActiveOnOff == true)
         {
+            var spriteRenderVFX = shaderVFX.GetComponent<SpriteRenderer>();
+            spriteRenderVFX.material.SetFloat("_ActiveOnOff", 1);
+            
             vfxObject.SetActive(true);
             activeObj.SetActive(true);
+
         }
 
         if(_isActiveOnOff == false)

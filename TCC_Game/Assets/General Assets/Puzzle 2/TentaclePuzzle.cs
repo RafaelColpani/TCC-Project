@@ -26,6 +26,7 @@ public class TentaclePuzzle : MonoBehaviour
 
     [HeaderPlus(" ", "- FRUIT PUZZLE -", (int)HeaderPlusColor.cyan)]
     [SerializeField] private FruitPuzzle fruitPuzzle;
+
     #endregion
 
     #region Private VARs
