@@ -1,89 +1,94 @@
 using System.Collections;
 using System.Collections.Generic;
+using KevinCastejon.MoreAttributes;
 using UnityEngine;
 
 public class PuzzleLevel : MonoBehaviour
 {
-    [Header("Player Settings")]
-    [SerializeField] string tagDoPlayer = "Player";
-    [SerializeField] KeyCode teclaAtivacao = KeyCode.E;
-    [Space(10)]
-
-    [Header("Obj Settings")]
-    [SerializeField] Transform objetoParaBaixo;
-    [SerializeField] Transform objetoParaCima;
-    [SerializeField] float velocidadeMovimento = 5.0f;
+    #region Inspector VARS
+    [HeaderPlus(" ", "- OBJECTIVE -", (int)HeaderPlusColor.green)]
+    [Tooltip("The transform of the door that will open and its BELOW the other door.")]
+    [SerializeField] Transform upperDoor;
+    [Tooltip("The transform of the door that will open and its ABOVE the other door.")]
+    [SerializeField] Transform lowerDoor;
+    [Tooltip("The speed that the doors will open")]
+    [SerializeField] float openSpeed = 5.0f;
+    [Tooltip("The VFX that will reproduce when opened the door")]
     [SerializeField] GameObject vfxSmoke;
-    [Space(10)]
 
-    [Header("Active Bool")]
-    private bool ativado = false;
-    [SerializeField] bool _AtivacaoUnicaONOFF = true;
-    private int countAtivacaoONOFF = 0;
-    private bool ativacaoUnica = false;
+    [HeaderPlus(" ", "- AUX -", (int)HeaderPlusColor.yellow)]
+    [Tooltip("The timer of the cooldown to activate the totem again")]
+    [SerializeField] float cooldownTimer = 1.0f;
+    [SerializeField] bool singleActivationONOFF = true;
+    #endregion
 
-    [Header("Timer")]
-    [SerializeField] float cooldownTempo = 1.0f; // Tempo de cooldown em segundos
-    private bool emCooldown = false;
+    #region Private VARS
+    private readonly string playerTag = "Player";
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private bool activated = false;
+    private bool singleActivation = false;
+    private bool inCooldown = false;
+
+    private int countActivationONOFF = 0;
+    #endregion
+
+    #region Public Methods
+    public void ActivatedTotem()
     {
-        if (other.CompareTag(tagDoPlayer) && !ativacaoUnica)
+        if (!activated || singleActivation || inCooldown) return;
+
+        // moves the lower door to down
+        lowerDoor.Translate(Vector3.down * openSpeed * Time.deltaTime);
+        vfxSmoke.SetActive(true);
+
+        // moves the upper door to up
+        upperDoor.Translate(Vector3.up * openSpeed * Time.deltaTime);
+
+        if (singleActivationONOFF)
+            singleActivation = true;
+
+        else
         {
-            ativado = true;
+            countActivationONOFF++;
+            IniciarCooldown();
+        }
+
+        if (countActivationONOFF > 1)
+        {
+            singleActivation = true;
+            singleActivationONOFF = true;
         }
     }
+    #endregion
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag(tagDoPlayer))
-        {
-            ativado = false;
-            vfxSmoke.SetActive(false);
-        }
-    }
-
-    private void Update()
-    {
-        if (ativado && Input.GetKeyDown(teclaAtivacao) && !ativacaoUnica && !emCooldown)
-        {
-            // Move o objetoParaBaixo para baixo
-            objetoParaBaixo.Translate(Vector3.down * velocidadeMovimento * Time.deltaTime);
-            vfxSmoke.SetActive(true);
-
-            // Move o objetoParaCima para cima
-            objetoParaCima.Translate(Vector3.up * velocidadeMovimento * Time.deltaTime);
-
-            // Define ativacaoUnica como verdadeira para impedir ativação adicional
-            if (_AtivacaoUnicaONOFF == true)
-            {
-                ativacaoUnica = true;
-            }
-
-            if (_AtivacaoUnicaONOFF == false)
-            {
-                countAtivacaoONOFF++;
-                IniciarCooldown();
-            }
-
-            if (countAtivacaoONOFF > 1)
-            {
-                ativacaoUnica = true;
-                _AtivacaoUnicaONOFF = true;
-            }
-        }
-    }
-
+    #region Private Methods
     private void IniciarCooldown()
     {
-        emCooldown = true;
+        inCooldown = true;
         StartCoroutine(EncerrarCooldown());
     }
 
     private IEnumerator EncerrarCooldown()
     {
-        yield return new WaitForSeconds(cooldownTempo);
-        emCooldown = false;
+        yield return new WaitForSeconds(cooldownTimer);
+        inCooldown = false;
+    }
+    #endregion
+
+    #region Unity Events
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.CompareTag(playerTag) || singleActivation) return;
+
+        activated = true;
     }
 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (!other.CompareTag(playerTag)) return;
+
+        activated = false;
+        vfxSmoke.SetActive(false);
+    }
+    #endregion
 }

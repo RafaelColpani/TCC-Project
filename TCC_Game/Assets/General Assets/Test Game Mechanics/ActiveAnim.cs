@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ActiveAnim : MonoBehaviour
 {
-   [SerializeField]  string tagDoPlayer = "Player"; // A tag do objeto do jogador
-    [SerializeField]  KeyCode teclaAtivacao = KeyCode.E; // A tecla para ativar a variável
+    private readonly string tagDoPlayer = "Player"; // A tag do objeto do jogador
+
     [SerializeField]  MonoBehaviour scriptParaAtivar; // Arraste o script no Inspector que contém a variável booleana
 
     private bool ativado = false;
@@ -27,12 +27,12 @@ public class ActiveAnim : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void ActivatedTotem()
     {
-        if (ativado && Input.GetKeyDown(teclaAtivacao) && scriptParaAtivar != null)
-        {
-            // Ative a variável booleana no script
-            scriptParaAtivar.enabled = true;
-        }
+        print("ativado bergz");
+        if (!ativado || scriptParaAtivar == null) return;
+        print("ativado");
+
+        scriptParaAtivar.enabled = true;
     }
 }
