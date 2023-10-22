@@ -11,7 +11,6 @@ public enum EnemyBehaviour
     PACIFIC
 }
 
-[RequireComponent(typeof(EnemyCommands))]
 [RequireComponent(typeof(CharacterManager))]
 public class EnemyAIController : MonoBehaviour
 {

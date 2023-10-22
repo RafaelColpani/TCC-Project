@@ -55,6 +55,9 @@ public class SlopeController : MonoBehaviour
         if (moveByInputHandler)
             moveCommand = GetComponent<InputHandler>().GetMovementCommand();
 
+        else if (GetComponent<ChickenFruitFollow>() != null)
+            moveCommand = GetComponent<ChickenFruitFollow>().GetMoveCommand();
+
         else
             moveCommand = GetComponent<EnemyCommands>().MoveCommand;
 
