@@ -108,7 +108,7 @@ public class GoItens : MonoBehaviour
                 {
                     //fruitPuzzle.AtivarProximaAlavanca(); 
                     FruitPuzzle scriptA = objectWithScriptA.GetComponent<FruitPuzzle>();
-                    scriptA.AtivarProximaAlavanca();
+                    //scriptA.AtivarProximaAlavanca();
                     Destroy(target.gameObject);
                     destinoPredefinido.SetActive(false);
 

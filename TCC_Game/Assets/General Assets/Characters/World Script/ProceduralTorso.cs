@@ -53,7 +53,14 @@ public class ProceduralTorso : MonoBehaviour
     private bool idleIsMovingForward = true;
     private bool[] movingToIdle;
     private bool armsIsFollowing = true;
+    private bool canMoveTarget = true;
     #endregion
+
+    public bool CanMoveTarget
+    {
+        get { return canMoveTarget; }
+        set { canMoveTarget = value; }
+    }
 
     #region Unity Methods
     private void Start()
@@ -64,6 +71,8 @@ public class ProceduralTorso : MonoBehaviour
 
         if (characterManager.CommandsByInputHandler)
             moveCommand = GetComponent<InputHandler>().GetMovementCommand();
+        else if (GetComponent<ChickenFruitFollow>() != null)
+            moveCommand = GetComponent<ChickenFruitFollow>().GetMoveCommand();
 
         idleTargetLocalPosition = target.localPosition;
         idleHeadLocalRotation = headBone.localRotation;
@@ -89,7 +98,9 @@ public class ProceduralTorso : MonoBehaviour
         if (state == CharacterMovementState.MovementState.ASCENDING || state == CharacterMovementState.MovementState.DESCENDING)
         {
             isInIdle = true;
-            MoveTarget(idleTargetLocalPosition, targetMoveSpeed);
+            if (canMoveTarget)
+                MoveTarget(idleTargetLocalPosition, targetMoveSpeed);
+
             RotateHead(idleHeadLocalRotation);
             ResetIdleAnimationPosition();
         }
@@ -106,7 +117,9 @@ public class ProceduralTorso : MonoBehaviour
                 // is walking
                 default:
                     isInIdle = false;
-                    MoveTarget(walkingTargetLocalPosition, targetMoveSpeed, proceduralLegs.GetIsWalking());
+                    if (canMoveTarget)
+                        MoveTarget(walkingTargetLocalPosition, targetMoveSpeed, proceduralLegs.GetIsWalking());
+
                     RotateHead(walkingHeadLocalRotation, proceduralLegs.GetIsWalking());
                     ResetIdleAnimationPosition();
                     break;
@@ -115,7 +128,7 @@ public class ProceduralTorso : MonoBehaviour
     }
 
     #region BONES MOVEMENT
-    private void MoveTarget(Vector3 finalPosition, float speed, bool canMove = true)
+    public void MoveTarget(Vector3 finalPosition, float speed, bool canMove = true)
     {
         // is not moving any leg
         if (!canMove) return;
@@ -140,7 +153,8 @@ public class ProceduralTorso : MonoBehaviour
         // torso goes to initial position if was walking
         if (!isInIdle)
         {
-            MoveTarget(idleTargetLocalPosition, targetMoveSpeed);
+            if (canMoveTarget)
+                MoveTarget(idleTargetLocalPosition, targetMoveSpeed);
             var targetDistance = (target.localPosition - idleTargetLocalPosition).sqrMagnitude;
             if (targetDistance < 0.001f)
                 isInIdle = true;
@@ -153,7 +167,8 @@ public class ProceduralTorso : MonoBehaviour
             if (goToPositionIndex == -1) { Debug.LogError("GOT INDEX -1 IN TORSO IDLE ANIMATION"); return; }
 
             var targetsDistance = (target.localPosition - targetsIdleAnimation[goToPositionIndex]).sqrMagnitude;
-            MoveTarget(targetsIdleAnimation[goToPositionIndex], idleAnimationSpeed);
+            if (canMoveTarget)
+                MoveTarget(targetsIdleAnimation[goToPositionIndex], idleAnimationSpeed);
             if (targetsDistance < 0.0001f)
             {
                 SetNewIdleAnimationPosition();
@@ -219,6 +234,11 @@ public class ProceduralTorso : MonoBehaviour
     public void EnableArmsIsFollowingFlag()
     {
         armsIsFollowing = true;
+    }
+
+    public Transform GetTarget()
+    {
+        return this.target;
     }
     #endregion
 }

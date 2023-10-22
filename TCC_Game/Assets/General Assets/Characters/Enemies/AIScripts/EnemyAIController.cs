@@ -11,7 +11,6 @@ public enum EnemyBehaviour
     PACIFIC
 }
 
-[RequireComponent(typeof(EnemyCommands))]
 [RequireComponent(typeof(CharacterManager))]
 public class EnemyAIController : MonoBehaviour
 {
@@ -108,6 +107,7 @@ public class EnemyAIController : MonoBehaviour
         }
 
         currentState.Update();
+        print(currentState);
     }
     #endregion
 

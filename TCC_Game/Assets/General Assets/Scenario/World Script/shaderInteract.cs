@@ -5,7 +5,7 @@ using UnityEngine;
 public class shaderInteract : MonoBehaviour
 {
     [SerializeField] Material material;
-    private GameObject player;
+    [SerializeField] GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +16,7 @@ public class shaderInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.FindGameObjectWithTag("TargetPlayer");
+       // player = GameObject.FindGameObjectWithTag("Player");
         
         Vector3 playerPos = player.GetComponent<Transform>().position;
         material.SetVector("_Player", playerPos);

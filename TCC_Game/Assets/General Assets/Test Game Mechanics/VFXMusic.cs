@@ -35,4 +35,14 @@ public class VFXMusic : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Player")) return;
+        ativacaoIniciada = false;
+        momentoAtual = 0;
+        foreach (var vfx in objetosAtivaveis)
+        {
+            vfx.SetActive(false);
+        }
+    }
 }

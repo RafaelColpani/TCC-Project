@@ -1,48 +1,151 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using KevinCastejon.MoreAttributes;
+using System.Linq;
 
 public class FruitPuzzle : MonoBehaviour
 {
-    #region Variavel
-    [Header("Seq")]
-    public GameObject[] alavancas; // Array de GameObjects que representam as alavancas na cena
-    public string[] sequenciaCorreta; // Sequência correta das alavancas a serem ativadas
-    private int indiceSequencia = 0; // Índice atual na sequência
+    [System.Serializable]
+    public struct FruitDestination
+    {
+        [Tooltip("The fruit that is assigned with this destination")]
+        public GameObject fruit;
+        [Tooltip("The destination that is assigned with this fruit")]
+        public GameObject destination;
+        [Tooltip("The initial position of the correspondent fruit for restarting the challenge")]
+        public Vector3 initialFruitPosition;
+    }
 
-    [Header("GameObject")]
-    public GameObject objetoParaAtivar;
+    #region Inspector VARs
+    [HeaderPlus(" ", "- FRUIT DESTINATION -", (int)HeaderPlusColor.green)]
+    [Tooltip("The list of the fruit and its respesctive destination")]
+    [SerializeField] FruitDestination[] fruitDestinations;
+
+    [HeaderPlus(" ", "- CHALLENGE LOGIC -", (int)HeaderPlusColor.yellow)]
+    [Tooltip("The sequence to complete the puzzle, accordingly with the fruitDestinations indexes. " +
+        "Must start with 0 and successively until arrays length - 1.")]
+    [SerializeField] List<int> correctSequenceIndexes;
+
+    [HeaderPlus(" ", "- CHALLENGE LOGIC -", (int)HeaderPlusColor.blue)]
+    [SerializeField] bool _isActiveOnOff = false;
+    [SerializeField] GameObject vfxObject;
+    [SerializeField] GameObject activeObj;
+    [SerializeField] GameObject desactiveObj;
 
     #endregion
 
-    public  void AtivarProximaAlavanca() 
+    #region Private VARs
+    private List<int> catchedSequence = new List<int>();
+
+    private bool hasCompletedChallenge = false;
+
+    public bool HasCompletedChallenge
     {
-        if (indiceSequencia < sequenciaCorreta.Length)
+        get { return hasCompletedChallenge; }
+        set { hasCompletedChallenge = value; }
+    }
+    #endregion
+
+    #region Public Methods
+    public void FruitReachedDestination(GameObject fruit) 
+    {
+        int matchedIndex = -1;
+
+        for (int i = 0; i < fruitDestinations.Length; i++)
         {
-            if (alavancas[indiceSequencia].name == sequenciaCorreta[indiceSequencia])
+            if (fruitDestinations[i].fruit == fruit)
             {
-                alavancas[indiceSequencia].SetActive(true);
-                indiceSequencia++;
-
-                if (indiceSequencia == sequenciaCorreta.Length)
-                {
-                    Debug.Log("Quebra-cabeça resolvido! As alavancas corretas foram ativadas.");
-                    objetoParaAtivar.SetActive(!objetoParaAtivar.activeSelf);
-                }
+                matchedIndex = i;
+                break;
             }
 
-            else
+            if (i >= fruitDestinations.Length - 1)
             {
-                ReiniciarQuebraCabeca();
+                Debug.LogError("Cannot find the correct fruit for the puzzle.");
+                return;
             }
+        }
+
+        catchedSequence.Add(matchedIndex);
+        if (catchedSequence.Count() >= correctSequenceIndexes.Count())
+            VerifySequence();
+    }
+
+    public Transform GetCorrectDestination(GameObject fruit)
+    {
+        foreach (var fruitDestination in fruitDestinations)
+        {
+            if (fruitDestination.fruit == fruit)
+                return fruitDestination.destination.transform;
+        }
+
+        return null;
+    }
+
+    public FruitDestination GetUniqueFruitDestination(GameObject fruit)
+    {
+        foreach (var fruitDestination in fruitDestinations)
+        {
+            if (fruitDestination.fruit == fruit)
+                return fruitDestination;
+        }
+
+
+        return new FruitDestination();
+    }
+    #endregion
+
+    #region Private Methods
+    private void VerifySequence()
+    {
+        for (int i = 0; i < correctSequenceIndexes.Count(); i++)
+        {
+            if (catchedSequence[i] == correctSequenceIndexes[i]) continue;
+
+            RestartChallenge();
+            return;
+        }
+
+        CompletedChallenge();
+    }
+
+    /// <summary>Runs when player completes the puzzle succesfully</summary>
+    private void CompletedChallenge()
+    {
+        hasCompletedChallenge = true;
+
+        if(_isActiveOnOff == true)
+        {
+            vfxObject.SetActive(true);
+            activeObj.SetActive(true);
+        }
+
+        if(_isActiveOnOff == false)
+        {
+            vfxObject.SetActive(true);
+            desactiveObj.SetActive(false);
         }
     }
 
-    void ReiniciarQuebraCabeca()
+    void RestartChallenge()
     {
-        
-        indiceSequencia = 0;
-        Debug.Log("Sequência errada! Reiniciando o quebra-cabeça.");
+        catchedSequence.Clear();
+
+        foreach (var fruitDestination in fruitDestinations)
+        {
+            fruitDestination.fruit.transform.localPosition = fruitDestination.initialFruitPosition;
+            fruitDestination.destination.SetActive(true);
+            fruitDestination.fruit.SetActive(true);
+
+            var objectRb = fruitDestination.fruit.GetComponent<Rigidbody2D>();
+
+            objectRb.isKinematic = false;
+            objectRb.gravityScale = 1;
+            objectRb.mass = 1;
+        }
     }
+    #endregion
 
 }

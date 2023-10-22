@@ -7,7 +7,7 @@ public class WanderingState : IEnemyState
     EnemyCommands enemyCommands;
     EnemyBehaviour behaviour;
     List<IEnemyState> stateMachine;
-    IsDamagedAndDead isDamagedAndDead;
+    //IsDamagedAndDead isDamagedAndDead;
 
     Transform body;
     Transform player;
@@ -22,7 +22,7 @@ public class WanderingState : IEnemyState
         this.enemyCommands = enemyCommands;
         this.behaviour = behaviour;
         this.stateMachine = stateMachine;
-        this.isDamagedAndDead = isDamagedAndDead;
+        //this.isDamagedAndDead = isDamagedAndDead;
         this.body = body;
         this.player = player;
         this.minPlayerDistance = maxPlayerDistance;
@@ -47,10 +47,10 @@ public class WanderingState : IEnemyState
 
     public IEnemyState ChangeState()
     {
-        if (!isDamagedAndDead.IsAlive)
-            return GetState(deadStateName);
+        //if (!isDamagedAndDead.IsAlive)
+        //    return GetState(deadStateName);
 
-        else if ((this.body.position - this.player.position).sqrMagnitude <= this.minPlayerDistance)
+        if ((this.body.position - this.player.position).sqrMagnitude <= this.minPlayerDistance)
             return GetState(chasingStateName);
 
         return null;
