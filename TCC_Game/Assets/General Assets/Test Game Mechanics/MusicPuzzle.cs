@@ -1,87 +1,126 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using KevinCastejon.MoreAttributes;
+using System.Linq;
 
 public class MusicPuzzle : MonoBehaviour
 {
-    [Header("Obj to interact")]
-    [SerializeField] [Tooltip("Array de GameObjects que representam as alavancas na cena")] GameObject[] alavancas; 
-    [Space(10)]
+    #region Inspector VARs
+    [HeaderPlus(" ", "- TOTEMS -", (int)HeaderPlusColor.green)]
+    [Tooltip("Totems array in the puzzle")]
+    [SerializeField] GameObject[] totems;
 
-    [Header("Puzzle Settings")]
-    [SerializeField] [Tooltip("Sequência correta das alavancas a serem ativadas")] string[] sequenciaCorreta; //
-    private int indiceSequencia = 0; // Índice atual na sequência
-    [Space(10)]
+    [HeaderPlus(" ", "- PUZZLE LOGIC -", (int)HeaderPlusColor.yellow)]
+    [Tooltip("The correct sequence for resolve the puzzle, by the indexes of totems array")]
+    [SerializeField] List<int> correctSequence;
 
-    [Header("Final Events")]
+    [HeaderPlus(" ", "- COMPLETED PUZZLE -", (int)HeaderPlusColor.cyan)]
     [SerializeField] GameObject objetoParaAtivar;
     [SerializeField] GameObject objetoParaDesativar;
-
-    private AudioSource audioSource; // Componente AudioSource para tocar a música de vitória
     [SerializeField] bool _MusicVictOnOff = false;
-    [SerializeField] AudioClip musicaVitoria; // Música a ser tocada quando o quebra-cabeça for resolvido
+    [SerializeField] AudioClip victoryAudioClip; // Música a ser tocada quando o quebra-cabeça for resolvido
+    #endregion
 
+    #region Private VARs
+    private AudioSource victoryAudioSource;
+
+    private List<int> interactedSequence = new List<int>();
+
+    private bool hasCompletedChallenge = false;
+    #endregion
+
+    #region Getters
+    public bool HasCompletedChallenge
+    {
+        get { return hasCompletedChallenge; }
+        set { hasCompletedChallenge = value; }
+    }
+    #endregion
+
+    #region Unity Methods
     void Start()
     {
-        DesativarTodasAlavancas();
-        audioSource = GetComponent<AudioSource>();
-        audioSource.playOnAwake = false;
+        ResetAllTotems();
+        victoryAudioSource = GetComponent<AudioSource>();
+        victoryAudioSource.playOnAwake = false;
     }
+    #endregion
 
-    void Update()
+    #region Public Methods
+    public void TotemInteracted(GameObject totem)
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            AtivarProximaAlavanca();
-        }
-    }
+        int matchedIndex = -1;
 
-    void AtivarProximaAlavanca()
-    {
-        if (indiceSequencia < sequenciaCorreta.Length)
+        for (int i = 0; i < totems.Length; i++)
         {
-            if (alavancas[indiceSequencia].name == sequenciaCorreta[indiceSequencia])
+            if (totems[i] == totem)
             {
-                alavancas[indiceSequencia].SetActive(true);
-                indiceSequencia++;
-
-                if (indiceSequencia == sequenciaCorreta.Length)
-                {
-                    Debug.Log("Quebra-cabeça resolvido! As alavancas corretas foram ativadas.");
-                    objetoParaAtivar.SetActive(!objetoParaAtivar.activeSelf);
-                    objetoParaDesativar.SetActive(false);
-
-                    if(_MusicVictOnOff == true)
-                    {
-                        // Toca a música de vitória
-                        if (musicaVitoria != null)
-                        {
-                            audioSource.clip = musicaVitoria;
-                            audioSource.Play();
-                        }  
-                    }
-                }
+                matchedIndex = i;
+                break;
             }
-            
-            else
+
+            if (i >= totems.Length - 1)
             {
-                ReiniciarQuebraCabeca();
+                Debug.LogError("Cannot find the correct totem music for the puzzle.");
+                return;
             }
         }
+
+        interactedSequence.Add(matchedIndex);
+        if (interactedSequence.Count() >= correctSequence.Count())
+            VerifySequence();
+    }
+    #endregion
+
+    #region Private Methods
+    private void VerifySequence()
+    {
+        foreach (var i in interactedSequence)
+        {
+            print($"catchedSeq: {i}");
+        }
+
+        for (int i = 0; i < interactedSequence.Count(); i++)
+        {
+            if (interactedSequence[i] == correctSequence[i]) continue;
+
+            RestartChallenge();
+            return;
+        }
+
+        CompletedChallenge();
     }
 
-    void ReiniciarQuebraCabeca()
+    void RestartChallenge()
     {
-        DesativarTodasAlavancas();
-        indiceSequencia = 0;
+        ResetAllTotems();
+        interactedSequence.Clear();
         Debug.Log("Sequência errada! Reiniciando o quebra-cabeça.");
     }
 
-    void DesativarTodasAlavancas()
+    /// <summary>The logic after successfully completed the challenge</summary>
+    private void CompletedChallenge()
     {
-        foreach (GameObject alavanca in alavancas)
+        hasCompletedChallenge = true;
+
+        Debug.Log("Quebra-cabeça resolvido! As alavancas corretas foram ativadas.");
+        objetoParaAtivar.SetActive(!objetoParaAtivar.activeSelf);
+        objetoParaDesativar.SetActive(false);
+
+        if (!_MusicVictOnOff || victoryAudioClip != null) return;
+
+        victoryAudioSource.clip = victoryAudioClip;
+        victoryAudioSource.Play();
+    }
+
+    void ResetAllTotems()
+    {
+        foreach (GameObject totem in totems)
         {
-            alavanca.SetActive(true);
+            totem.SetActive(true);
+            totem.GetComponent<MusicTotemInteract>().ResetInteracted();
         }
     }
+    #endregion
 }

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public Transform pontoDeTiro; // O ponto de origem do disparo.
-    public GameObject projetilPrefab; // Prefab do projetil.
-    public float forcaDoTiro = 10f; // Força do disparo.
-    public float taxaDeTiro = 0.5f; // Taxa de disparo (intervalo entre os tiros).
-    public float tempoDeVidaDoTiro = 3f; // Tempo de vida do tiro em segundos.
+    [SerializeField] Transform pontoDeTiro; // O ponto de origem do disparo.
+    [SerializeField] GameObject projetilPrefab; // Prefab do projetil.
+    [SerializeField] float forcaDoTiro = 10f; // Força do disparo.
+    [SerializeField] float taxaDeTiro = 0.5f; // Taxa de disparo (intervalo entre os tiros).
+    [SerializeField] float tempoDeVidaDoTiro = 3f; // Tempo de vida do tiro em segundos.
 
     private float tempoUltimoTiro;
 

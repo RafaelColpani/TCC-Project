@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class TriggerActivator : MonoBehaviour
 {
-    public GameObject objectToActivate;
+    [Header("GameObjects")]
+    [SerializeField] GameObject objectToActivate;
+    [SerializeField] GameObject objectToDisable;
+    [Space(10)]
 
-    public bool _isBullet = false;
-    public bool _isKey = false;
+    [Header("Bools")]
+    [SerializeField] bool _isBullet = false;
+    [SerializeField] bool _isDisable = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -16,14 +20,13 @@ public class TriggerActivator : MonoBehaviour
             // Verifica se a tag da colisão é "Bullet".
             objectToActivate.SetActive(true); // Ativa o objeto quando a bala atinge o Trigger.
             gameObject.SetActive(false);
+
+            if(_isDisable == true)
+            {
+                objectToDisable.SetActive(false);
+            }
         }
 
-        if (other.CompareTag("Player") && _isKey == true)
-        {
-            
-            objectToActivate.SetActive(true);
-            gameObject.SetActive(false);
-          
-        }
+        
     }
 }
