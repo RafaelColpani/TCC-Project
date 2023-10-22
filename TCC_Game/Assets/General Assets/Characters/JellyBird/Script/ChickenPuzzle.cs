@@ -6,9 +6,11 @@ using KevinCastejon.MoreAttributes;
 public class ChickenPuzzle : MonoBehaviour
 {
     #region Inspector VARs
-    [HeaderPlus(" ", "- CHICKEN -", (int)HeaderPlusColor.green)]
+    [HeaderPlus(" ", "- EVENTS -", (int)HeaderPlusColor.green)]
     [Tooltip("the script located in the JellyBird")]
     [SerializeField] ChickenFruitFollow chickenFruitFollow;
+    [Tooltip("The script that controls the waterfall event")]
+    [SerializeField] DestroyEvent destroyEvent;
 
     [HeaderPlus(" ", "- FRUIT -", (int)HeaderPlusColor.yellow)]
     [Tooltip("The tag of the fruit game objects")]
@@ -19,6 +21,7 @@ public class ChickenPuzzle : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag(fruitTag)) return;
+        if (destroyEvent.IsActive) return;
 
         chickenFruitFollow.TriggerFruitFollow(collision.gameObject);
     }
