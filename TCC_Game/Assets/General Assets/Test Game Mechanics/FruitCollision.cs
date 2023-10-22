@@ -17,10 +17,16 @@ public class FruitCollision : MonoBehaviour
 
             fhc.CallAnimator();
 
-        Destroy(gameObject);
-
+            StartCoroutine(WaitAndDestroy(2.5f));
         }
     }
+
+    IEnumerator WaitAndDestroy(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Destroy(gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
