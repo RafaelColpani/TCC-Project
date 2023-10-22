@@ -14,7 +14,7 @@ public class ExplodeObj : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.CompareTag("Test"))
+        if (collision.transform.CompareTag("damage"))
         {
             _explodable.explode();
 		    ExplosionForce ef = GameObject.FindObjectOfType<ExplosionForce>();

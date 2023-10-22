@@ -23,6 +23,9 @@ public class ChickenFruitFollow : MonoBehaviour
     [HeaderPlus(" ", "- TORSO -", (int)HeaderPlusColor.yellow)]
     [Tooltip("The speed that the target of the torso will return to initial position when eated a fruit")]
     [SerializeField] private float returnFromEatSpeed;
+
+    [HeaderPlus(" ", "- VFX -", (int)HeaderPlusColor.blue)]
+    [SerializeField] private GameObject vfxGameObject;
     #endregion
 
     #region Private VARs
@@ -110,6 +113,7 @@ public class ChickenFruitFollow : MonoBehaviour
         {
             var relativePosition = transform.InverseTransformPoint(fruitObjs.Peek().transform.position);
             proceduralTorso.MoveTarget(relativePosition, eatFruitSpeed);
+            vfxGameObject.SetActive(true);
         }
 
         // fruit is eated here
@@ -118,6 +122,7 @@ public class ChickenFruitFollow : MonoBehaviour
             Destroy(fruitObjs.Dequeue());
             isEatingFruit = false;
             // TODO: VFX of eated fruit here //
+            vfxGameObject.SetActive(false);
 
             if (fruitObjs.Count() <= 0)
             {
