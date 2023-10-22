@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using KevinCastejon.MoreAttributes;
 using System.Linq;
+using System;
 
 [RequireComponent(typeof(ProceduralTorso))]
 public class ChickenFruitFollow : MonoBehaviour
@@ -20,9 +21,13 @@ public class ChickenFruitFollow : MonoBehaviour
     [Tooltip("The distance in sqrMagnitude to consider that chicken eated the fruit")]
     [SerializeField] private float eatFruitDistance;
 
-    [HeaderPlus(" ", "- TORSO -", (int)HeaderPlusColor.yellow)]
+    [HeaderPlus(" ", "- TORSO -", (int)HeaderPlusColor.red)]
     [Tooltip("The speed that the target of the torso will return to initial position when eated a fruit")]
     [SerializeField] private float returnFromEatSpeed;
+
+    [HeaderPlus(" ", "- PUZZLE -", (int)HeaderPlusColor.cyan)]
+    [Tooltip("The script of the fruit puzzle")]
+    [SerializeField] FruitPuzzle fruitPuzzle;
     #endregion
 
     #region Private VARs
@@ -116,8 +121,11 @@ public class ChickenFruitFollow : MonoBehaviour
         // fruit is eated here
         else
         {
-            Destroy(fruitObjs.Dequeue());
+            // eat fruit
+            var fruit = fruitObjs.Dequeue();
+            fruit.SetActive(false);
             isEatingFruit = false;
+
             // TODO: VFX of eated fruit here //
 
             if (fruitObjs.Count() <= 0)
@@ -130,6 +138,9 @@ public class ChickenFruitFollow : MonoBehaviour
             {
                 isGoingToFruit = true;
             }
+
+            //respawn fruit
+            RespawnFruit(fruitPuzzle.GetUniqueFruitDestination(fruit));
         }
     }
 
@@ -153,6 +164,19 @@ public class ChickenFruitFollow : MonoBehaviour
 
         else
             return 1;
+    }
+
+    private void RespawnFruit(FruitPuzzle.FruitDestination fruitDestination)
+    {
+        if (fruitDestination.fruit == null) { Debug.LogError("Fruit not found for respawn."); return; }
+
+        var fruitRb = fruitDestination.fruit.GetComponent<Rigidbody2D>();
+        fruitRb.gravityScale = 1;
+        fruitRb.mass = 1;
+        fruitRb.isKinematic = false;
+
+        fruitDestination.fruit.transform.position = fruitDestination.initialFruitPosition;
+        fruitDestination.fruit.SetActive(true);
     }
     #endregion
 
