@@ -88,6 +88,7 @@ public class ChickenFruitFollow : MonoBehaviour
 
     private void CatchFruit()
     {
+        isReturningHome = false;
         proceduralTorso.MoveTarget(initialTorsoTargetPosition, returnFromEatSpeed);
         var distance = (fruitObjs.Peek().transform.position - this.transform.position).sqrMagnitude;
         if (distance <= catchFruitDistance)

@@ -57,6 +57,10 @@ public class MusicPuzzle : MonoBehaviour
             if (totems[i] == totem)
             {
                 matchedIndex = i;
+
+                if (interactedSequence.Count() < totems.Length - 1)
+                    totem.GetComponent<MusicTotemInteract>().StartShine();
+
                 break;
             }
 
