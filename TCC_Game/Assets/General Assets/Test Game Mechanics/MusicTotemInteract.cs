@@ -13,6 +13,8 @@ public class MusicTotemInteract : MonoBehaviour, IInteractable
     [SerializeField] bool isPuzzleLevel = false;
     [Tooltip("Mark this if the totem is for active anim. If not, let it false")]
     [SerializeField] bool isActiveAnim = false;
+    [Tooltip("Assign number for the totem activation speed.")]
+    [SerializeField] float activationSpeed = 1;
 
     [HeaderPlus(" ", "- INTERACTION -", (int)HeaderPlusColor.yellow)]
     [Tooltip("Tells if the totem can be activated only one time before a hard reset, like in muic puzzle for example.")]
@@ -23,6 +25,8 @@ public class MusicTotemInteract : MonoBehaviour, IInteractable
     private PuzzleLevel puzzleLevel;
     private ActiveAnim activeAnim;
     private bool isInteracted = false;
+    private bool isActive = false;
+    private Renderer rend;
     #endregion
 
     #region Getters
@@ -40,12 +44,15 @@ public class MusicTotemInteract : MonoBehaviour, IInteractable
 
         if (isActiveAnim)
             activeAnim = GetComponent<ActiveAnim>();
+        if(rend == null)
+            rend = GetComponent<Renderer>();
     }
     #endregion
 
     #region INTERFACE
     public void Interact()
     {
+        print(isActive);
         if (isInteracted) return;
 
         if (interactOneTime)
@@ -60,6 +67,12 @@ public class MusicTotemInteract : MonoBehaviour, IInteractable
 
         else if (activeAnim != null)
             activeAnim.ActivatedTotem();
+
+        if (!isActive)
+        {
+            isActive = true;
+            StartCoroutine(Activation());
+        }
     }
     #endregion
 
@@ -67,6 +80,41 @@ public class MusicTotemInteract : MonoBehaviour, IInteractable
     public void ResetInteracted()
     {
         isInteracted = false;
+
+        if (isActive)
+        {
+            isActive = false;
+            StopAllCoroutines();
+            StartCoroutine(Activation());
+        }
+    }
+    #endregion
+    
+    #region Coroutines
+    IEnumerator Activation()
+    {
+
+        if (isActive == true)
+        {
+            print("ACTIVATING");
+            while (rend.material.GetFloat("_Floating") < 1)
+            {
+                rend.material.SetFloat("_Floating",
+                    rend.material.GetFloat("_Floating") + Time.deltaTime * activationSpeed);
+                yield return null;
+            }
+        }
+        else
+        {
+            print("DEACTIVATING");
+            while (rend.material.GetFloat("_Floating") > 0)
+            {
+                rend.material.SetFloat("_Floating",
+                    rend.material.GetFloat("_Floating") - Time.deltaTime * activationSpeed);
+                yield return null;
+            }
+        }
+
     }
     #endregion
 }

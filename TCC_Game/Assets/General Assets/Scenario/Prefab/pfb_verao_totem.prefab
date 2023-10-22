@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5164240608582638856}
   - component: {fileID: 9007599334911959884}
-  - component: {fileID: 2200265584683849734}
   - component: {fileID: 226562878}
   - component: {fileID: 5534410595953101124}
   m_Layer: 0
@@ -87,19 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2200265584683849734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5092234378672768861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f4c7de597bcf564a8e5ed4ec65496fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activationSpeed: 1
 --- !u!61 &226562878
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -138,3 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdbd4bb6a8864e44a6bf729f8d8bee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicPuzzle: {fileID: 0}
+  isPuzzleLevel: 0
+  isActiveAnim: 0
+  activationSpeed: 1
+  interactOneTime: 1
