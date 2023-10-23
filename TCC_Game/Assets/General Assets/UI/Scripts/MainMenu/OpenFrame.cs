@@ -14,8 +14,8 @@ public class OpenFrame : MonoBehaviour
    
    private void Start(){
 
-      image = this.gameObject.GetComponent<Image>();
-      imageRect = this.gameObject.GetComponent<RectTransform>();
+      image = gameObject.GetComponent<Image>();
+      imageRect = gameObject.GetComponent<RectTransform>();
       maxWidth = imageRect.sizeDelta.x;
 
       imageRect.sizeDelta = new Vector2(0, imageRect.sizeDelta.y);
@@ -35,7 +35,7 @@ public class OpenFrame : MonoBehaviour
          float t = timer / duration;
          
          /*AnimationCurve curve = w == 0 ? curve = invertedCurve : curve = this.curve;*/
-         
+
          float curveTime = curve.Evaluate(t);
 
          float auxWidth = open ? w * curveTime : maxWidth - w * curveTime;
