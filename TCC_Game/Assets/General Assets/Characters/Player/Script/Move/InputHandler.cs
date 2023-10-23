@@ -153,6 +153,11 @@ public class InputHandler : MonoBehaviour
     {
         return this.moveCommand;
     }
+
+    public PressJumpCommand GetJumpCommand()
+    {
+        return this.pressJumpCommand;
+    }
     #endregion
 
     #region Enable & Disable

@@ -32,6 +32,10 @@ public class VFXMusic : MonoBehaviour
     private bool completedPuzzle = false;
     #endregion
 
+    #region Getters
+    public bool CompletedPuzzle { get { return completedPuzzle; } }
+    #endregion
+
     #region Unity Methods
     private void Update()
     {
@@ -86,7 +90,10 @@ public class VFXMusic : MonoBehaviour
         if (playerVCam != null && puzzleVCam != null)
         {
             if (inputHandler != null)
+            {
                 inputHandler.canWalk = false;
+                inputHandler.GetJumpCommand().SetCanJump(false);
+            }
 
             playerVCam.SetActive(false);
             puzzleVCam.SetActive(true);
@@ -109,7 +116,10 @@ public class VFXMusic : MonoBehaviour
         playerVCam.SetActive(true);
         puzzleVCam.SetActive(false);
         if (inputHandler != null)
+        {
             inputHandler.canWalk = true;
+            inputHandler.GetJumpCommand().SetCanJump();
+        }
     }
     #endregion
 }

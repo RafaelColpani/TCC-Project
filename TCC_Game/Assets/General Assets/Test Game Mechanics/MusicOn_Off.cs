@@ -16,7 +16,7 @@ public class MusicOn_Off : MonoBehaviour
 
     [Header("VFX Config")]
     [SerializeField] bool _VFXOnOff = false;
-    [SerializeField] GameObject vfxMusic;
+    [SerializeField] GameObject vfxMusicObj;
 
     [Space(10)]
 
@@ -34,6 +34,8 @@ public class MusicOn_Off : MonoBehaviour
 
     #region Private Vars
     private AudioSource audioSource;
+
+    private VFXMusic vfxMusic;
     #endregion
 
     #region Unity Methods
@@ -41,6 +43,8 @@ public class MusicOn_Off : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         audioSource.playOnAwake = false;
+
+        vfxMusic = GetComponent<VFXMusic>();
 
         // Desative o texto TMP no início
         if (textoTMP != null)
@@ -52,6 +56,8 @@ public class MusicOn_Off : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
+        if (vfxMusic != null)
+            if (vfxMusic.CompletedPuzzle) return;
 
         if (audioSource == null || musica == null) return;
             
@@ -63,8 +69,8 @@ public class MusicOn_Off : MonoBehaviour
             textoTMP.gameObject.SetActive(true);
 
         // vfx activate
-        if(_VFXOnOff && vfxMusic != null)
-            vfxMusic.SetActive(true);
+        if(_VFXOnOff && vfxMusicObj != null)
+            vfxMusicObj.SetActive(true);
 
         if(_dicaOnOff)
         {   
@@ -76,12 +82,14 @@ public class MusicOn_Off : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
+        if (vfxMusic != null)
+            if (vfxMusic.CompletedPuzzle) return;
 
         if (textoTMP != null)
             textoTMP.gameObject.SetActive(false);
 
-        if(vfxMusic != null)
-            vfxMusic.SetActive(false);
+        if(vfxMusicObj != null)
+            vfxMusicObj.SetActive(false);
 
         if (stopMusicInExit)
             audioSource.Stop();

@@ -16,10 +16,19 @@ public class DestroyEvent : MonoBehaviour
     [SerializeField]  bool _ActiveOnOff;
     [Tooltip("The object that will be activated when the event occurs")]
     [SerializeField]  GameObject objectToActivate;
+
+    [Header("CineMachine")]
+    [SerializeField] bool isCinemachineEvent;
+    [SerializeField] bool activeOneTimeOnly;
+    [SerializeField] GameObject playerVCam;
+    [SerializeField] GameObject eventVCam;
+    [SerializeField] InputHandler inputHandler;
+    [SerializeField] float eventTime;
     #endregion
 
     #region Private VARs
     private bool isActive = false;
+    private bool activatedOneTime = false;
     #endregion
 
     #region Getters
@@ -34,9 +43,42 @@ public class DestroyEvent : MonoBehaviour
     }
     #endregion
 
+    #region Private Methods
+    private void ActivateCinemachineEvent()
+    {
+        playerVCam.SetActive(false);
+        eventVCam.SetActive(true);
+
+        if (inputHandler != null)
+        {
+            inputHandler.canWalk = false;
+            inputHandler.GetJumpCommand().SetCanJump(false);
+        }
+
+        StartCoroutine(DeactivateEvent());
+    }
+    #endregion
+
+    #region Coroutines
+    private IEnumerator DeactivateEvent()
+    {
+        yield return new WaitForSeconds(eventTime);
+
+        playerVCam.SetActive(true);
+        eventVCam.SetActive(false);
+
+        if (inputHandler != null)
+        {
+            inputHandler.canWalk = true;
+            inputHandler.GetJumpCommand().SetCanJump();
+        }
+    }
+    #endregion
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag(playerTag)) return;
+        if (activatedOneTime && activeOneTimeOnly) return;
 
         if (objectToDestroy != null)
         {
@@ -50,5 +92,9 @@ public class DestroyEvent : MonoBehaviour
         }
 
         isActive = true;
+        activatedOneTime = true;
+
+        if (isCinemachineEvent)
+            ActivateCinemachineEvent();
     }
 }
