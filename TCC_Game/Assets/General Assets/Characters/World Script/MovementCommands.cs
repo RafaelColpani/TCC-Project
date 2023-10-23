@@ -127,6 +127,7 @@ public class PressJumpCommand : ICommand
     private LayerMask groundLayer;
     private GravityController gc;
 
+    private bool canJump;
 
     public PressJumpCommand(float jumpForce, Transform[] groundChecks, float groundCheckRadius, LayerMask groundLayer, GravityController gc)
     {
@@ -135,13 +136,20 @@ public class PressJumpCommand : ICommand
         this.groundCheckRadius = groundCheckRadius;
         this.groundLayer = groundLayer;
         this.gc = gc;
+        this.canJump = true;
     }
 
     public void Execute(Transform actor, float value = 1, CharacterController characterController = null)
     {
         if (!JumpUtils.IsGrounded(groundChecks, groundCheckRadius, groundLayer)) return;
+        if (!canJump) return;
 
         gc.Velocity = new Vector3(gc.Velocity.x, jumpForce, gc.Velocity.z);
+    }
+
+    public void SetCanJump(bool value = true)
+    {
+        this.canJump = value;
     }
 }
 
