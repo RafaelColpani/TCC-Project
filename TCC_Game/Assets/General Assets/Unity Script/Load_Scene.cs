@@ -17,7 +17,7 @@ public class Load_Scene : MonoBehaviour
         }
     }
 
-    private void TrocarParasceneName()
+    public void TrocarParasceneName()
     {
         if (!string.IsNullOrEmpty(sceneName))
         {
