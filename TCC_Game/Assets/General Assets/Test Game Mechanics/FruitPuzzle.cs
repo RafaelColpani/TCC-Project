@@ -54,7 +54,11 @@ public class FruitPuzzle : MonoBehaviour
         set { hasCompletedChallenge = value; }
     }
     #endregion
-    
+    private void Start()
+    {
+        shaderVFX.transform.localScale = Vector3.zero;
+    }
+
     void Update()
     {
         if(_VFXLerp == true)
