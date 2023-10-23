@@ -42,6 +42,9 @@ public class ChickenFruitFollow : MonoBehaviour
     private bool isGoingToFruit = false;
     private bool isReturningHome = false;
     private bool isEatingFruit = false;
+
+    private float eatTimer = 2;
+    private float eatTimerCounter = 0;
     #endregion
 
     #region Unity Methods
@@ -66,10 +69,13 @@ public class ChickenFruitFollow : MonoBehaviour
 
         if (isGoingToFruit)
             CatchFruit();
-        else if (isEatingFruit)
-            EatFruit();
         else if (isReturningHome)
             ReturnHome();
+        else if (isEatingFruit)
+        {
+            EatFruit();
+            EatTimer();
+        }
     }
     #endregion
 
@@ -111,7 +117,7 @@ public class ChickenFruitFollow : MonoBehaviour
 
         var distance = (fruitObjs.Peek().transform.position - proceduralTorso.GetTarget().position).sqrMagnitude;
 
-        if (distance > eatFruitDistance)
+        if (distance > eatFruitDistance && eatTimerCounter < eatTimer)
         {
             var relativePosition = transform.InverseTransformPoint(fruitObjs.Peek().transform.position);
             proceduralTorso.MoveTarget(relativePosition, eatFruitSpeed);
@@ -123,6 +129,7 @@ public class ChickenFruitFollow : MonoBehaviour
             var fruit = fruitObjs.Dequeue();
             fruit.SetActive(false);
             isEatingFruit = false;
+
             // TODO: VFX of eated fruit here
 
             if (fruitObjs.Count() <= 0)
@@ -136,9 +143,15 @@ public class ChickenFruitFollow : MonoBehaviour
                 isGoingToFruit = true;
             }
 
+            eatTimerCounter = 0;
             //respawn fruit
             RespawnFruit(fruitPuzzle.GetUniqueFruitDestination(fruit));
         }
+    }
+
+    private void EatTimer()
+    {
+        eatTimerCounter += Time.fixedDeltaTime;
     }
 
     private void ReturnHome()
