@@ -53,8 +53,6 @@ public class MusicController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("porra "+ collision.name);
-
 
         for (int i = 0; i < scenesNames.Length; i++)
         {
@@ -68,12 +66,20 @@ public class MusicController : MonoBehaviour
             //    print($"--- currentMusicIndex: {currentMusicIndex}");
             //    ChangeMusic();
             //}
-            //else if (collision.transform.name.Contains("reverb")
-            //||       collision.transform.name.Contains("cave"))
-            //{
-            //    CaveReverbSnapshot();
-            //}
-             }
+            /*else*/
+
+                if (collision.transform.name.Contains("reverb")
+                || collision.transform.name.Contains("cave"))
+                {
+                    CaveReverbSnapshot();
+                }
+                else
+                {
+                    DefaultSnapshot();
+                }
+
+
+            }
          }
     }
 
