@@ -50,11 +50,22 @@ public class ChangeSliderLabel : MonoBehaviour, IPointerDownHandler, IPointerUpH
         //    sld.value = f;
         //}
 
+
+
         inputLabel = GetComponentInChildren<TextMeshProUGUI>();
 
         if(audioMixer != null)
         {
-            ChangeValue();
+            audioMixer.GetFloat("Master", out float val);
+            audioMixer.SetFloat("Master", val);
+            print("master float: " + val);
+
+            float labelValue = 100 * sld.value;
+            decimal decimalValue = System.Math.Round((decimal)labelValue, 0);
+
+            inputLabel.text = $"{decimalValue}{unit}";
+
+            //ChangeValue();
         }
     }
 
@@ -63,7 +74,11 @@ public class ChangeSliderLabel : MonoBehaviour, IPointerDownHandler, IPointerUpH
         switch (mixerType)
         {
             case MixerType.Master:
+                {
+                audioMixer.GetFloat("Master", out float val);
                 audioMixer.SetFloat("Master", Mathf.Log10(sld.value) * 20);
+                    print("master float: " + Mathf.Log10(sld.value) * 20);
+                }
                 break;
 
             case MixerType.Sound:
@@ -73,6 +88,7 @@ public class ChangeSliderLabel : MonoBehaviour, IPointerDownHandler, IPointerUpH
                 break;
 
             case MixerType.Music:
+
                 audioMixer.SetFloat("Music", Mathf.Log10(sld.value) * 20);
                 break;
 

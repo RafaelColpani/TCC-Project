@@ -42,6 +42,9 @@ public class MusicOn_Off : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+
+        musica = GetComponent<AudioSource>().clip;
+
         audioSource.playOnAwake = false;
 
         vfxMusic = GetComponent<VFXMusic>();
