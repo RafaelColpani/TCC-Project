@@ -5,6 +5,7 @@ using NaughtyAttributes;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class MusicController : MonoBehaviour
 {
@@ -29,6 +30,12 @@ public class MusicController : MonoBehaviour
     [SerializeField] bool reverb;
     void Start()
     {
+        GameObject[] gos = (GameObject[])FindObjectsOfType(typeof(GameObject));
+        for (int i = 0; i < gos.Length; i++)
+        {
+            if (gos[i].name.Contains("pause") && gos[i].GetComponent<Image>())
+                pauseMenu = gos[i];
+        }
 
         playerTransform = GameObject.FindGameObjectWithTag("TargetPlayer").transform;
         
@@ -37,6 +44,7 @@ public class MusicController : MonoBehaviour
             music[i].volume = 0f;
             music[i].Play();
         }
+
         music[currentMusicIndex].volume = 1f;
         ChangeMusic();
     }
@@ -60,24 +68,10 @@ public class MusicController : MonoBehaviour
             if (collision.gameObject.CompareTag("musicChange"))
             {
 
-            //if (collision.transform.name.Contains( i.ToString() ))
-            //{
-            //    currentMusicIndex = i;
-            //    print($"--- currentMusicIndex: {currentMusicIndex}");
-            //    ChangeMusic();
-            //}
-            /*else*/
-
-                if (collision.transform.name.Contains("reverb")
-                || collision.transform.name.Contains("cave"))
-                {
+                if (collision.transform.name.Contains("reverb") || collision.transform.name.Contains("cave"))
                     CaveReverbSnapshot();
-                }
                 else
-                {
                     DefaultSnapshot();
-                }
-
 
             }
          }
