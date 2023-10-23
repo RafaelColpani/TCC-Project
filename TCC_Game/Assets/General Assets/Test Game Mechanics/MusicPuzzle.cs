@@ -20,6 +20,10 @@ public class MusicPuzzle : MonoBehaviour
     [SerializeField] GameObject objetoParaDesativar;
     [SerializeField] bool _MusicVictOnOff = false;
     [SerializeField] AudioClip victoryAudioClip; // Música a ser tocada quando o quebra-cabeça for resolvido
+
+    [HeaderPlus(" ", "- VFX WIN -", (int)HeaderPlusColor.blue)]
+    [SerializeField] GameObject shaderVFX;
+
     #endregion
 
     #region Private VARs
@@ -105,6 +109,9 @@ public class MusicPuzzle : MonoBehaviour
         hasCompletedChallenge = true;
 
         Debug.Log("Quebra-cabeça resolvido! As alavancas corretas foram ativadas.");
+        var spriteRenderVFX = shaderVFX.GetComponent<SpriteRenderer>();
+            spriteRenderVFX.material.SetFloat("_ActiveOnOff", 1);
+        
         objetoParaAtivar.SetActive(!objetoParaAtivar.activeSelf);
         objetoParaDesativar.SetActive(false);
 
