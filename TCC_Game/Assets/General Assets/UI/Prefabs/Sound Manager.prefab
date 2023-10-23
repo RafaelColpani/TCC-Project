@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8876248117416099543}
   - component: {fileID: 6455670509640450473}
+  - component: {fileID: 7596329879297952022}
   m_Layer: 0
   m_Name: grp_bgm
   m_TagString: Untagged
@@ -48,19 +49,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aviso: "Por favor, mantenha a correspond\xEAncia entre a cena e as m\xFAsicas."
+  mixer: {fileID: 24100000, guid: 936050e5a22a3da4e869c6a81ef61be5, type: 2}
+  default: {fileID: 24500006, guid: 936050e5a22a3da4e869c6a81ef61be5, type: 2}
+  cave: {fileID: -7023384844291960618, guid: 936050e5a22a3da4e869c6a81ef61be5, type: 2}
+  paused: {fileID: -7215879446065544515, guid: 936050e5a22a3da4e869c6a81ef61be5, type: 2}
+  pauseMenu: {fileID: 0}
+  transitionTime: 2
   scenesNames:
   - Base
-  - Summer TopView
-  - Summer Cave
+  - Summer
+  - Winter
   - Winter
   - Winter Cave
   music:
   - {fileID: 28227308709696211}
   - {fileID: 7871378398690970789}
-  - {fileID: 7871378398690970789}
   - {fileID: 7349184176830145356}
-  - {fileID: 7349184176830145356}
-  currentSongIndex: 0
+  currentMusicIndex: 0
+  maxVolume: 0
+  reverb: 0
+--- !u!58 &7596329879297952022
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2706676274380376640}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &4404875737441479633
 GameObject:
   m_ObjectHideFlags: 0

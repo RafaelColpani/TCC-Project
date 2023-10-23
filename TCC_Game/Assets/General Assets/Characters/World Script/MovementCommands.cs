@@ -159,7 +159,7 @@ public class ReleaseJumpCommand : ICommand
     public void Execute(Transform actor, float value = 1, CharacterController characterController = null)
     {
         //TODO: Jump Released
-        Debug.Log($"Released Jump");
+        //Debug.Log($"Released Jump");
     }
 }
 
