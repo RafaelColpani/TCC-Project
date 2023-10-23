@@ -16,6 +16,8 @@ public class MusicPuzzle : MonoBehaviour
     [SerializeField] List<int> correctSequence;
 
     [HeaderPlus(" ", "- COMPLETED PUZZLE -", (int)HeaderPlusColor.cyan)]
+    [Tooltip("The script located in the object that starts the music for the puzzle")]
+    [SerializeField] VFXMusic vfxMusic;
     [SerializeField] GameObject objetoParaAtivar;
     [SerializeField] GameObject objetoParaDesativar;
     [SerializeField] bool _MusicVictOnOff = false;
@@ -108,6 +110,7 @@ public class MusicPuzzle : MonoBehaviour
     {
         hasCompletedChallenge = true;
 
+        vfxMusic.CompletedMusicPuzzle();
         Debug.Log("Quebra-cabeça resolvido! As alavancas corretas foram ativadas.");
         objetoParaAtivar.SetActive(!objetoParaAtivar.activeSelf);
         objetoParaDesativar.SetActive(false);

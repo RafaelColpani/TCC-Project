@@ -29,6 +29,7 @@ public class VFXMusic : MonoBehaviour
     #region Private VARs
     private int momentoAtual = 0;
     private bool ativacaoIniciada = false;
+    private bool completedPuzzle = false;
     #endregion
 
     #region Unity Methods
@@ -47,6 +48,7 @@ public class VFXMusic : MonoBehaviour
 
         // Verifica se a música está tocando e se ainda não começou a ativação
         float tempoAtual = audioSource.time;
+        
 
         if (momentoAtual < momentosDeAtivacao.Length && tempoAtual >= momentosDeAtivacao[momentoAtual])
         {
@@ -59,8 +61,6 @@ public class VFXMusic : MonoBehaviour
         {
             // Todos os momentos de ativação foram usados
             ativacaoIniciada = true;
-            if (inputHandler != null)
-            { inputHandler.canWalk = false; print("keke"); }
 
             if (playerVCam != null && puzzleVCam != null)
             {
@@ -70,13 +70,24 @@ public class VFXMusic : MonoBehaviour
     }
     #endregion
 
+    #region Public Methods
+    public void CompletedMusicPuzzle()
+    {
+        completedPuzzle = true;
+    }
+    #endregion
+
     #region Unity Events
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;
+        if (completedPuzzle) return;
 
         if (playerVCam != null && puzzleVCam != null)
         {
+            if (inputHandler != null)
+                inputHandler.canWalk = false;
+
             playerVCam.SetActive(false);
             puzzleVCam.SetActive(true);
         }
