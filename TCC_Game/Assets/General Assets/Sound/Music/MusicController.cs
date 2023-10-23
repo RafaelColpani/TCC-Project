@@ -25,8 +25,11 @@ public class MusicController : MonoBehaviour
     [SerializeField] float maxVolume;
 
     Transform playerTransform;
+
+    [SerializeField] bool reverb;
     void Start()
     {
+
         playerTransform = GameObject.FindGameObjectWithTag("TargetPlayer").transform;
         
         for (int i = 0; i < music.Length; i++)
@@ -49,19 +52,29 @@ public class MusicController : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
+    {
+        print("porra "+ collision.name);
+
+
+        for (int i = 0; i < scenesNames.Length; i++)
         {
-            for (int i = 0; i < scenesNames.Length; i++)
+                
+            if (collision.gameObject.CompareTag("musicChange"))
             {
-                if (collision.name.Contains("Music"))
-                {
-                    if (collision.transform.name.Contains( i.ToString() ))
-                    {
-                        currentMusicIndex = i;
-                        print($"--- currentMusicIndex: {currentMusicIndex}");
-                        ChangeMusic();
-                    }
-                }
-            }
+
+            //if (collision.transform.name.Contains( i.ToString() ))
+            //{
+            //    currentMusicIndex = i;
+            //    print($"--- currentMusicIndex: {currentMusicIndex}");
+            //    ChangeMusic();
+            //}
+            //else if (collision.transform.name.Contains("reverb")
+            //||       collision.transform.name.Contains("cave"))
+            //{
+            //    CaveReverbSnapshot();
+            //}
+             }
+         }
     }
 
     void ChangeMusic()
@@ -73,10 +86,11 @@ public class MusicController : MonoBehaviour
                 music[i].volume = 0f;
             }
             
-            if (currentMusicIndex == 2)
-                CaveReverbSnapshot();
-            else
-                DefaultSnapshot();
+            //TO CHANGE TO A BOOL COMPARASION
+            //if (reverb)
+            //    CaveReverbSnapshot();
+            //else
+            //    DefaultSnapshot();
 
             music[currentMusicIndex].volume = 1f;
         }
