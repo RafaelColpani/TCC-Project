@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using KevinCastejon.MoreAttributes;
 using System.Linq;
+using UnityEngine.PlayerLoop;
 
 public class FruitPuzzle : MonoBehaviour
 {
@@ -36,6 +37,9 @@ public class FruitPuzzle : MonoBehaviour
 
     [HeaderPlus(" ", "- VFX WIN -", (int)HeaderPlusColor.blue)]
     [SerializeField] GameObject shaderVFX;
+     [SerializeField] Vector3 VFXScale = new Vector3(32, 32, 0);
+    [SerializeField] float VFXTime = 15f;
+    private bool _VFXLerp = false;
 
     #endregion
 
@@ -50,6 +54,15 @@ public class FruitPuzzle : MonoBehaviour
         set { hasCompletedChallenge = value; }
     }
     #endregion
+    
+    void Update()
+    {
+        if(_VFXLerp == true)
+        {
+            var VFXLerp = new Vector3(1, 1, 0);
+            shaderVFX.transform.localScale = Vector3.Lerp(shaderVFX.transform.localScale, VFXScale, VFXTime * Time.deltaTime);
+        }
+    }
 
     #region Public Methods
     public void FruitReachedDestination(GameObject fruit) 
@@ -121,6 +134,8 @@ public class FruitPuzzle : MonoBehaviour
 
         if(_isActiveOnOff == true)
         {
+            _VFXLerp = true;
+
             var spriteRenderVFX = shaderVFX.GetComponent<SpriteRenderer>();
             spriteRenderVFX.material.SetFloat("_ActiveOnOff", 1);
             

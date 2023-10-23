@@ -25,6 +25,9 @@ public class MusicPuzzle : MonoBehaviour
 
     [HeaderPlus(" ", "- VFX WIN -", (int)HeaderPlusColor.blue)]
     [SerializeField] GameObject shaderVFX;
+    [SerializeField] Vector3 VFXScale = new Vector3(32, 32, 0);
+    [SerializeField] float VFXTime = 1f;
+    private bool _VFXLerp = false;
 
     #endregion
 
@@ -50,6 +53,17 @@ public class MusicPuzzle : MonoBehaviour
         ResetAllTotems();
         victoryAudioSource = GetComponent<AudioSource>();
         victoryAudioSource.playOnAwake = false;
+
+        shaderVFX.transform.localScale = Vector3.zero;
+    }
+
+    void Update()
+    {
+        if(_VFXLerp == true)
+        {
+            var VFXLerp = new Vector3(1, 1, 0);
+            shaderVFX.transform.localScale = Vector3.Lerp(shaderVFX.transform.localScale, VFXScale, VFXTime * Time.deltaTime);
+        }
     }
     #endregion
 
@@ -116,6 +130,9 @@ public class MusicPuzzle : MonoBehaviour
 
         vfxMusic.CompletedMusicPuzzle();
         Debug.Log("Quebra-cabeça resolvido! As alavancas corretas foram ativadas.");
+
+        _VFXLerp = true;
+
         var spriteRenderVFX = shaderVFX.GetComponent<SpriteRenderer>();
             spriteRenderVFX.material.SetFloat("_ActiveOnOff", 1);
         
