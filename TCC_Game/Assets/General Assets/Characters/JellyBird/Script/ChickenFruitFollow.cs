@@ -24,8 +24,9 @@ public class ChickenFruitFollow : MonoBehaviour
     [Tooltip("The speed that the target of the torso will return to initial position when eated a fruit")]
     [SerializeField] private float returnFromEatSpeed;
 
-    [HeaderPlus(" ", "- VFX -", (int)HeaderPlusColor.blue)]
-    [SerializeField] private GameObject vfxGameObject;
+    [HeaderPlus(" ", "- PUZZLE -", (int)HeaderPlusColor.cyan)]
+    [Tooltip("The script of the fruit puzzle")]
+    [SerializeField] FruitPuzzle fruitPuzzle;
     #endregion
 
     #region Private VARs
@@ -91,6 +92,7 @@ public class ChickenFruitFollow : MonoBehaviour
 
     private void CatchFruit()
     {
+        isReturningHome = false;
         proceduralTorso.MoveTarget(initialTorsoTargetPosition, returnFromEatSpeed);
         var distance = (fruitObjs.Peek().transform.position - this.transform.position).sqrMagnitude;
         if (distance <= catchFruitDistance)
@@ -113,16 +115,15 @@ public class ChickenFruitFollow : MonoBehaviour
         {
             var relativePosition = transform.InverseTransformPoint(fruitObjs.Peek().transform.position);
             proceduralTorso.MoveTarget(relativePosition, eatFruitSpeed);
-            vfxGameObject.SetActive(true);
         }
 
         // fruit is eated here
         else
         {
-            Destroy(fruitObjs.Dequeue());
+            var fruit = fruitObjs.Dequeue();
+            fruit.SetActive(false);
             isEatingFruit = false;
-            // TODO: VFX of eated fruit here //
-            vfxGameObject.SetActive(false);
+            // TODO: VFX of eated fruit here
 
             if (fruitObjs.Count() <= 0)
             {
@@ -134,6 +135,9 @@ public class ChickenFruitFollow : MonoBehaviour
             {
                 isGoingToFruit = true;
             }
+
+            //respawn fruit
+            RespawnFruit(fruitPuzzle.GetUniqueFruitDestination(fruit));
         }
     }
 
@@ -157,6 +161,19 @@ public class ChickenFruitFollow : MonoBehaviour
 
         else
             return 1;
+    }
+
+    private void RespawnFruit(FruitPuzzle.FruitDestination fruitDestination)
+    {
+        if (fruitDestination.fruit == null) { Debug.LogError("Fruit not found for respawn."); return; }
+
+        var fruitRb = fruitDestination.fruit.GetComponent<Rigidbody2D>();
+        fruitRb.gravityScale = 1;
+        fruitRb.mass = 1;
+        fruitRb.isKinematic = false;
+
+        fruitDestination.fruit.transform.position = fruitDestination.initialFruitPosition;
+        fruitDestination.fruit.SetActive(true);
     }
     #endregion
 

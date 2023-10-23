@@ -8,7 +8,7 @@ using System.Linq;
 public class FruitPuzzle : MonoBehaviour
 {
     [System.Serializable]
-    private struct FruitDestination
+    public struct FruitDestination
     {
         [Tooltip("The fruit that is assigned with this destination")]
         public GameObject fruit;
@@ -85,6 +85,18 @@ public class FruitPuzzle : MonoBehaviour
         }
 
         return null;
+    }
+
+    public FruitDestination GetUniqueFruitDestination(GameObject fruit)
+    {
+        foreach (var fruitDestination in fruitDestinations)
+        {
+            if (fruitDestination.fruit == fruit)
+                return fruitDestination;
+        }
+
+
+        return new FruitDestination();
     }
     #endregion
 

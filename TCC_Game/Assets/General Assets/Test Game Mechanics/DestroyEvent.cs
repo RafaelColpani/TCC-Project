@@ -4,35 +4,51 @@ using UnityEngine;
 
 public class DestroyEvent : MonoBehaviour
 {
-    [Header("Player Tag")]
-    [SerializeField] string playerTag = "Player";
+    private readonly string playerTag = "Player";
 
+    #region Inspector Vars
     [Header("Obj to Destroy")]
+    [Tooltip("The object that will be destroyed when the event occurs")]
     [SerializeField] GameObject objectToDestroy;
     [SerializeField] GameObject vfxToDestroy;
 
     [Header("Obj to Activate")]
     [SerializeField]  bool _ActiveOnOff;
-    [SerializeField]  GameObject objectToActivate; 
+    [Tooltip("The object that will be activated when the event occurs")]
+    [SerializeField]  GameObject objectToActivate;
+    #endregion
+
+    #region Private VARs
+    private bool isActive = false;
+    #endregion
+
+    #region Getters
+    public bool ActiveOnOff
+    {
+        get { return _ActiveOnOff; }
+    }
+
+    public bool IsActive
+    {
+        get { return isActive; }
+    }
+    #endregion
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag(playerTag))
+        if (!other.CompareTag(playerTag)) return;
+
+        if (objectToDestroy != null)
         {
-
-            if (objectToDestroy != null)
-            {
-                Destroy(objectToDestroy);
-                Destroy(vfxToDestroy);
-            }
-
-            if(_ActiveOnOff == true)
-            {
-                if (objectToActivate != null)
-                {
-                    objectToActivate.SetActive(true);
-                }
-            }
+            Destroy(objectToDestroy);
+            Destroy(vfxToDestroy);
         }
+
+        if(_ActiveOnOff && objectToActivate != null)
+        {
+            objectToActivate.SetActive(true);
+        }
+
+        isActive = true;
     }
 }
