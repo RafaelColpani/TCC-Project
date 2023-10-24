@@ -69,7 +69,6 @@ public class MusicController : MonoBehaviour
                 
             if (collision.gameObject.CompareTag("musicChange"))
             {
-
                 if (collision.transform.name.Contains("reverb") || collision.transform.name.Contains("cave"))
                     CaveReverbSnapshot();
                 else
@@ -78,8 +77,8 @@ public class MusicController : MonoBehaviour
 
             if (collision.gameObject.CompareTag("PuzzleMusic"))
             {
-                print("puzzlemusic enter");
                 PuzzleMusicSnapshot();
+
             }
         }
     }
@@ -89,7 +88,10 @@ public class MusicController : MonoBehaviour
         if (collision.gameObject.CompareTag("PuzzleMusic"))
         {
             print("puzzlemusic exit");
-            DefaultSnapshot();
+            if (!reverb)
+                DefaultSnapshot();
+            else
+                CaveReverbSnapshot();
         }
     }
 
