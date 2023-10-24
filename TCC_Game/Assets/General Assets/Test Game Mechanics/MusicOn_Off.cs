@@ -9,7 +9,6 @@ public class MusicOn_Off : MonoBehaviour
 {
     #region Inspector Vars
     [Header("Music Config")]
-    [SerializeField] AudioClip musica;
     [SerializeField] bool stopMusicInExit = true;
     
     [Space(10)]
@@ -43,7 +42,7 @@ public class MusicOn_Off : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        musica = GetComponent<AudioSource>().clip;
+        //musica = GetComponent<AudioSource>().clip;
 
         audioSource.playOnAwake = false;
 
@@ -62,9 +61,9 @@ public class MusicOn_Off : MonoBehaviour
         if (vfxMusic != null)
             if (vfxMusic.CompletedPuzzle) return;
 
-        if (audioSource == null || musica == null) return;
+        if (audioSource == null) return;
             
-        audioSource.clip = musica;
+        //audioSource.clip = musica;
         audioSource.Play();
 
         // text activate
