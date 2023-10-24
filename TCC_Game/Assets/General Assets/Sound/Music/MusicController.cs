@@ -16,6 +16,8 @@ public class MusicController : MonoBehaviour
     [SerializeField] AudioMixerSnapshot @default;
     [SerializeField] AudioMixerSnapshot cave;
     [SerializeField] AudioMixerSnapshot paused;
+    [SerializeField] AudioMixerSnapshot puzzleMusic;
+
     [SerializeField] GameObject pauseMenu;
 
     [SerializeField] float transitionTime = 5f;
@@ -67,14 +69,30 @@ public class MusicController : MonoBehaviour
                 
             if (collision.gameObject.CompareTag("musicChange"))
             {
-
                 if (collision.transform.name.Contains("reverb") || collision.transform.name.Contains("cave"))
                     CaveReverbSnapshot();
                 else
                     DefaultSnapshot();
+            }
+
+            if (collision.gameObject.CompareTag("PuzzleMusic"))
+            {
+                PuzzleMusicSnapshot();
 
             }
-         }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("PuzzleMusic"))
+        {
+            print("puzzlemusic exit");
+            if (!reverb)
+                DefaultSnapshot();
+            else
+                CaveReverbSnapshot();
+        }
     }
 
     void ChangeMusic()
@@ -114,6 +132,11 @@ public class MusicController : MonoBehaviour
             @default.TransitionTo(transitionTime);
         else
             paused.TransitionTo(transitionTime);
+    }
+
+    void PuzzleMusicSnapshot()
+    {
+        puzzleMusic.TransitionTo(transitionTime/2);
     }
 
     #endregion

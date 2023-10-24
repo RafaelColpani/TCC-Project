@@ -20,7 +20,7 @@ public class ButtonSound : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        print("pointer clicked" + name);
+        //print("pointer clicked" + name);
         if (!isExitButton)
             click.Play();
         else
