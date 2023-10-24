@@ -11,8 +11,10 @@ public class PuzzleLevel : MonoBehaviour
     [SerializeField] Transform upperDoor;
     [Tooltip("The transform of the door that will open and its ABOVE the other door.")]
     [SerializeField] Transform lowerDoor;
-    [Tooltip("The speed that the doors will open")]
-    [SerializeField] float openSpeed = 5.0f;
+    [Tooltip("The position that the upper door will be after activation")]
+    [SerializeField] Vector3 upperDoorPosition;
+    [Tooltip("The position that the lower door will be after activation")]
+    [SerializeField] Vector3 lowerDoorPosition;
     [Tooltip("The VFX that will reproduce when opened the door")]
     [SerializeField] GameObject vfxSmoke;
 
@@ -38,26 +40,26 @@ public class PuzzleLevel : MonoBehaviour
         if (!activated || singleActivation || inCooldown) return;
 
         // moves the lower door to down
-        lowerDoor.Translate(Vector3.down * openSpeed * Time.deltaTime);
+        lowerDoor.position = lowerDoorPosition; ;
         vfxSmoke.SetActive(true);
 
         // moves the upper door to up
-        upperDoor.Translate(Vector3.up * openSpeed * Time.deltaTime);
+        upperDoor.position = upperDoorPosition;
 
         if (singleActivationONOFF)
             singleActivation = true;
 
         else
         {
-            countActivationONOFF++;
+            //countActivationONOFF++;
             IniciarCooldown();
         }
 
-        if (countActivationONOFF > 1)
-        {
-            singleActivation = true;
-            singleActivationONOFF = true;
-        }
+        //if (countActivationONOFF > 1)
+        //{
+        //    singleActivation = true;
+        //    singleActivationONOFF = true;
+        //}
     }
     #endregion
 
