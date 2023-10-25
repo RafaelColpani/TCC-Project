@@ -10,6 +10,7 @@ public class DebugFunctions : MonoBehaviour
     {
         DebugController.AddCommand("next_scene", "Avança uma cena", "next_scene", D_NextScene);
         DebugController.AddCommand("restart", "Recomeca a cena", "restart", D_Restart);
+        DebugController.AddCommand("undo_scene", "Volta uma cena", "undo_scene", D_Undo);
     }
     #endregion
 
@@ -23,6 +24,12 @@ public class DebugFunctions : MonoBehaviour
     public void D_Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
+    }
+
+    public void D_Undo()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         
     }
     #endregion
