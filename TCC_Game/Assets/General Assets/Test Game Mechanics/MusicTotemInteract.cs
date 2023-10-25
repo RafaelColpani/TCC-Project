@@ -70,6 +70,10 @@ public class MusicTotemInteract : MonoBehaviour, IInteractable
 
         else if (activeAnim != null)
             activeAnim.ActivatedTotem();
+
+
+        if (musicPuzzle == null)
+            StartShine();
     }
     #endregion
 
