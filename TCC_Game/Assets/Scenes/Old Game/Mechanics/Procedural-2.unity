@@ -1216,7 +1216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &490692020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1243,6 +1243,13 @@ MonoBehaviour:
     destination: {fileID: 1492164833}
     initialFruitPosition: {x: -71.31, y: -12.42, z: 0}
   correctSequenceIndexes: 01000000000000000200000003000000
+  _isActiveOnOff: 0
+  vfxObject: {fileID: 0}
+  activeObj: {fileID: 0}
+  desactiveObj: {fileID: 0}
+  shaderVFX: {fileID: 0}
+  VFXScale: {x: 32, y: 32, z: 0}
+  VFXTime: 15
 --- !u!82 &490692021
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1418,7 +1425,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 11.207988
+  orthographic size: 5.8292437
   m_Depth: 10
   m_CullingMask:
     serializedVersion: 2
@@ -1442,7 +1449,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.12, y: 3.92, z: -0.5}
+  m_LocalPosition: {x: -0.2, y: -1, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2740,6 +2747,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fruitDestinations: []
   correctSequenceIndexes: 
+  _isActiveOnOff: 0
+  vfxObject: {fileID: 0}
+  activeObj: {fileID: 0}
+  desactiveObj: {fileID: 0}
+  shaderVFX: {fileID: 0}
+  VFXScale: {x: 32, y: 32, z: 0}
+  VFXTime: 15
 --- !u!212 &1406480409
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3372,6 +3386,8 @@ MonoBehaviour:
     _prefab: Assets/General Assets/Characters/Spider/Prefab/pfb_ShellSpider.prefab
   - _gameObject: {fileID: 8739475469839671212}
     _prefab: Assets/General Assets/Characters/Player/Prefab/pfb_playerEntregaFinal.prefab
+  - _gameObject: {fileID: 8739475469839671214}
+    _prefab: Assets/General Assets/UI/Prefabs/Sound Manager.prefab
   - _gameObject: {fileID: 8982356168448506454}
     _prefab: Assets/General Assets/Characters/Tentacle/Prefab/pfb_Noodle.prefab
 --- !u!4 &1590684881
@@ -4378,6 +4394,10 @@ MonoBehaviour:
   ascendingLegSpeed: 0
   descendingLegSpeed: 0
   bodyPositionOffset: -0.63
+  isChangeBodyOffset: 0
+  followTorsoAnimation: 0
+  idleBodySpeed: 0
+  idleBodyOffsetSubtraction: 0
   makeRotation: 1
   footstepGrass: []
   footstepSnow: []
@@ -6340,6 +6360,10 @@ MonoBehaviour:
   ascendingLegSpeed: 0
   descendingLegSpeed: 0
   bodyPositionOffset: -0.66
+  isChangeBodyOffset: 0
+  followTorsoAnimation: 0
+  idleBodySpeed: 0
+  idleBodyOffsetSubtraction: 0
   makeRotation: 0
   footstepGrass: []
   footstepSnow: []
@@ -9757,9 +9781,37 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 559702933, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 985348292, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1077793099, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1101965153, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1337563246, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1569753175, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1867422809, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144036276, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 484639353854635565, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10006,6 +10058,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7189412030926041651, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: idleBodySpeed
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189412030926041651, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: idleBodyOffset
+      value: 1.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189412030926041651, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: hoverRayDistance
       value: 0.03
       objectReference: {fileID: 0}
@@ -10020,6 +10080,18 @@ PrefabInstance:
     - target: {fileID: 7189412030926041651, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: descendingLegSpeed
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189412030926041651, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: isChangeBodyOffset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189412030926041651, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: followTorsoAnimation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189412030926041651, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: idleBodyOffsetSubtraction
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 7189412030926041651, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: targets.Array.data[0].groundCheck
@@ -10427,7 +10499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8739475469928245533, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8849899281261088806, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10483,6 +10555,11 @@ GameObject:
 --- !u!4 &8739475469839671213 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9064052783647607255, guid: afa823600646543da906c0da3b69ad57, type: 3}
+  m_PrefabInstance: {fileID: 8739475469839671211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8739475469839671214 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 631969791051427692, guid: afa823600646543da906c0da3b69ad57, type: 3}
   m_PrefabInstance: {fileID: 8739475469839671211}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8756978320779067254
@@ -10701,6 +10778,10 @@ PrefabInstance:
     - target: {fileID: 1783398407405763718, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
       propertyPath: m_Name
       value: pfb_Noodle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1783398407405763718, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1865624226137312112, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
       propertyPath: m_RootOrder

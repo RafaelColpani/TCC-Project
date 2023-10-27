@@ -53,6 +53,7 @@ public class ProceduralTorso : MonoBehaviour
     private bool idleIsMovingForward = true;
     private bool[] movingToIdle;
     private bool armsIsFollowing = true;
+    private bool bodyIsFollowing = true;
     private bool canMoveTarget = true;
     #endregion
 
@@ -195,6 +196,7 @@ public class ProceduralTorso : MonoBehaviour
         }
 
         armsIsFollowing = false;
+        bodyIsFollowing = false;
     }
 
     private void SwapIdleAnimationPosition(int index)
@@ -231,9 +233,19 @@ public class ProceduralTorso : MonoBehaviour
         return armsIsFollowing;
     }
 
+    public bool GetBodyIsFollowing()
+    {
+        return bodyIsFollowing;
+    }
+
     public void EnableArmsIsFollowingFlag()
     {
         armsIsFollowing = true;
+    }
+
+    public void EnableBodyFollowingFlag()
+    {
+        bodyIsFollowing = true;
     }
 
     public Transform GetTarget()

@@ -112,18 +112,30 @@ public class ProceduralLegs : MonoBehaviour
     [SerializeField] private float legArcSpeed;
     [Tooltip("The offset in the x axis that the finalTarget makes from the position of the bodyTarget.")]
     [SerializeField] private float xFinalTargetOffest;
+    [Tooltip("The speed that the legs will move in ascending state (jumping).")]
     [SerializeField] private float ascendingLegSpeed;
+    [Tooltip("The speed that the legs will move in descending state (falling).")]
     [SerializeField] private float descendingLegSpeed;
 
     [HeaderPlus(" ", "- BODY -", (int)HeaderPlusColor.magenta)]
     [Tooltip("The offset that the body makes in the y axis.")]
     [SerializeField] private float bodyPositionOffset;
+    [Tooltip("Tells if the body offset of the character will animate accordingly with its movement state.")]
+    [SerializeField] private bool isChangeBodyOffset;
 
-    [HeaderPlus(" ", "- ROTATION -", (int)HeaderPlusColor.red)]
+    [HeaderPlus(" ", "- BODY IDLE -", (int)HeaderPlusColor.red)]
+    [Tooltip("Tells if the body idle animation will follow the torso animation.")]
+    [SerializeField] private bool followTorsoAnimation;
+    [Tooltip("The speed that the bodyoffset will change in the idle animation")]
+    [SerializeField] private float idleBodySpeed;
+    [Tooltip("The subtraction of the standard offset that the body makes while in idle animation.")]
+    [SerializeField] private float idleBodyOffsetSubtraction;
+
+    [HeaderPlus(" ", "- ROTATION -", (int)HeaderPlusColor.green)]
     [Tooltip("Tells if the body will rotate accordingly to the position of the legs. Better used with a spider like animal for example.")]
     [SerializeField] private bool makeRotation;
 
-    [HeaderPlus(" ", "- SFX -", (int)HeaderPlusColor.green)]
+    [HeaderPlus(" ", "- SFX -", (int)HeaderPlusColor.yellow)]
     [SerializeField] private AudioSource[] footstepGrass;
     [SerializeField] private AudioSource[] footstepSnow;
     #endregion
@@ -132,6 +144,7 @@ public class ProceduralLegs : MonoBehaviour
     private GravityController gravityController;
     private CharacterManager characterManager;
     private CharacterMovementState characterMovementState;
+    private ProceduralTorso proceduralTorso;
 
     private Transform body;
     private Transform[] groundChecks;
@@ -142,10 +155,12 @@ public class ProceduralLegs : MonoBehaviour
     private bool oddIsWalking = false;
     private bool waitingNextWalk = false;
     private bool proceduralIsOn = true;
+    private bool isScalingBodyIdleUp = false;
 
     private float groundCheckDistance;
     private float previousXBodyPosition;
     private float lerpLeg = 0;
+    private float standardBodyOffset;
     #endregion
 
     #region Public VARs
@@ -173,10 +188,15 @@ public class ProceduralLegs : MonoBehaviour
         characterManager = GetComponent<CharacterManager>();
         characterMovementState = GetComponent<CharacterMovementState>();
 
+        if (followTorsoAnimation)
+            proceduralTorso = GetComponent<ProceduralTorso>();
+
         this.body = characterManager.Body;
         this.groundChecks = characterManager.GroundChecks;
         this.targetsDetections = characterManager.GroundLayers;
         this.groundCheckDistance = characterManager.GroundCheckDistance;
+
+        standardBodyOffset = bodyPositionOffset;
     }
 
     private void Start()
@@ -201,7 +221,8 @@ public class ProceduralLegs : MonoBehaviour
         MoveLegs();
         MoveFinalTargets();
 
-        //TODO: CHANGE BODYOFFSET WITH IDLE (STANDARD: 1.16 TO 1.13 / 97.414%)
+        BodyAnimationState();
+        
         CalculateBodyPosition();
 
         if (makeRotation)
@@ -210,8 +231,7 @@ public class ProceduralLegs : MonoBehaviour
     #endregion
 
     #region Private Methods
-
-    #region Procedural Flow
+    #region Procedural Walk Flow
     private void TargetsGroundHeight()
     {
         RaycastHit2D localHit;
@@ -396,29 +416,59 @@ public class ProceduralLegs : MonoBehaviour
 
         previousXBodyPosition = this.transform.position.x;
     }
+    #endregion
 
-    private void CalculateBodyPosition()
+    #region IDLE & ASCENDING
+    private void BodyAnimationState()
     {
-        Vector3 meanPosition = GetMeanLegsPosition();
+        if (!isChangeBodyOffset) return;
 
-        body.position = new Vector3(body.position.x, meanPosition.y + bodyPositionOffset, body.position.z);
+        switch (characterMovementState.MoveState)
+        {
+            case CharacterMovementState.MovementState.IDLE:
+                if (followTorsoAnimation)
+                {
+                    if (!proceduralTorso.GetBodyIsFollowing())
+                    {
+                        isScalingBodyIdleUp = !isScalingBodyIdleUp;
+                        proceduralTorso.EnableBodyFollowingFlag();
+                    }
+                    else if (bodyPositionOffset >= (standardBodyOffset - idleBodyOffsetSubtraction) && !isScalingBodyIdleUp)
+                        ChangeBodyOffset(false);
+                    else if (bodyPositionOffset <= standardBodyOffset && isScalingBodyIdleUp)
+                        ChangeBodyOffset(true);
+                }
+
+                else
+                {
+                    if (bodyPositionOffset >= (standardBodyOffset - idleBodyOffsetSubtraction) && !isScalingBodyIdleUp)
+                        ChangeBodyOffset(false);
+                    else if (bodyPositionOffset <= standardBodyOffset && isScalingBodyIdleUp)
+                        ChangeBodyOffset(true);
+                    else
+                        isScalingBodyIdleUp = !isScalingBodyIdleUp;
+                }
+                break;
+
+            case CharacterMovementState.MovementState.ASCENDING:
+                break;
+
+            default:
+                bodyPositionOffset = standardBodyOffset;
+                break;
+        }
     }
 
-    private void CalculateBodyRotation()
+    private void ChangeBodyOffset(bool isSum)
     {
-        Vector3 meanDirection = GetMeanLegsDirection();
-        float angle = (Mathf.Atan2(meanDirection.y, meanDirection.x) * Mathf.Rad2Deg) - 90;
-        body.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-    }
-
-    private void DisableWalkingFlags()
-    {
-        oddIsWalking = false;
-        evenIsWalking = false;
+        if (isSum)
+            bodyPositionOffset += idleBodySpeed * Time.fixedDeltaTime;
+        else
+            bodyPositionOffset -= idleBodySpeed * Time.fixedDeltaTime;
     }
     #endregion
 
-    #region Getters Aux
+    #region Aux
     private float TargetsDistance(ObjectTargets objectTarget, bool byFinalTarget = true)
     {
         if (byFinalTarget)
@@ -453,6 +503,26 @@ public class ProceduralLegs : MonoBehaviour
 
         Debug.DrawRay(centerPoint, new Vector3(-legVector.y, legVector.x, 0).normalized, Color.yellow);
         return new Vector3(-legVector.y, legVector.x, 0).normalized;
+    }
+
+    private void DisableWalkingFlags()
+    {
+        oddIsWalking = false;
+        evenIsWalking = false;
+    }
+
+    private void CalculateBodyRotation()
+    {
+        Vector3 meanDirection = GetMeanLegsDirection();
+        float angle = (Mathf.Atan2(meanDirection.y, meanDirection.x) * Mathf.Rad2Deg) - 90;
+        body.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    private void CalculateBodyPosition()
+    {
+        Vector3 meanPosition = GetMeanLegsPosition();
+
+        body.position = new Vector3(body.position.x, meanPosition.y + bodyPositionOffset, body.position.z);
     }
     #endregion
 
