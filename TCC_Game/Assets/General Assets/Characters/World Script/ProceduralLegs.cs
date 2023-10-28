@@ -22,6 +22,7 @@ public class ObjectTargets
     public bool isEven;
 
     private float stepTime;
+
     private bool isMoving;
     private bool wasOnFoot;
     private bool isOnGround;
@@ -76,8 +77,8 @@ public class ObjectTargets
     public void SetHeightFromOtherLeg(ObjectTargets leg)
     {
         this.bodyTarget.position = new Vector3(this.bodyTarget.position.x,
-                                                leg.bodyTarget.position.y,
-                                                this.bodyTarget.position.z);
+                                               leg.bodyTarget.position.y,
+                                               this.bodyTarget.position.z);
 
         this.effectorTarget.position = this.bodyTarget.position;
         this.finalTarget.position = this.bodyTarget.position;
@@ -216,13 +217,14 @@ public class ProceduralLegs : MonoBehaviour
         TargetsGroundHeight();
 
         if (!proceduralIsOn) return;
+
+        BodyAnimationState();
+
         if (!CanMoveLegs()) return;
 
         MoveLegs();
         MoveFinalTargets();
 
-        BodyAnimationState();
-        
         CalculateBodyPosition();
 
         if (makeRotation)
@@ -253,6 +255,7 @@ public class ProceduralLegs : MonoBehaviour
                 // jumping
                 if (characterMovementState.MoveState == CharacterMovementState.MovementState.ASCENDING)
                 {
+                    // TODO: Jump preparation
                     newPosition = Vector3.Lerp(target.effectorTarget.position, target.foot.position, ascendingLegSpeed * Time.fixedDeltaTime);
                     fromHeight = true;
                 }
@@ -264,7 +267,7 @@ public class ProceduralLegs : MonoBehaviour
                     fromHeight = true;
                 }
 
-                //target.effectorTarget.position = target.bodyTarget.position;
+                // move effector to base
                 if (fromHeight)
                     target.effectorTarget.position = newPosition;
 
@@ -451,6 +454,7 @@ public class ProceduralLegs : MonoBehaviour
                 break;
 
             case CharacterMovementState.MovementState.ASCENDING:
+                //bodyPositionOffset = 0.5f;
                 break;
 
             default:
