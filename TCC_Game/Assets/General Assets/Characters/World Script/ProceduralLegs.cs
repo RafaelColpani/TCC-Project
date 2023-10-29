@@ -255,7 +255,6 @@ public class ProceduralLegs : MonoBehaviour
                 // jumping
                 if (characterMovementState.MoveState == CharacterMovementState.MovementState.ASCENDING)
                 {
-                    // TODO: Jump preparation
                     newPosition = Vector3.Lerp(target.effectorTarget.position, target.foot.position, ascendingLegSpeed * Time.fixedDeltaTime);
                     fromHeight = true;
                 }
