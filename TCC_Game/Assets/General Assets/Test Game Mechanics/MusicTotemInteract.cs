@@ -27,7 +27,6 @@ public class MusicTotemInteract : MonoBehaviour, IInteractable
 
     private bool isInteracted = false;
     private bool isActive = false;
-    private bool lastTotem = false;
 
     private Renderer rend;
     #endregion
@@ -84,7 +83,6 @@ public class MusicTotemInteract : MonoBehaviour, IInteractable
 
         if (isActive)
         {
-            lastTotem = true;
             isActive = false;
             StopAllCoroutines();
             StartCoroutine(Activation());

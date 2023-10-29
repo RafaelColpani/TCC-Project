@@ -21,10 +21,16 @@ public class PuzzleGate : MonoBehaviour
         transform.Translate(Vector3.right * direcao * velocidade * Time.deltaTime);
 
         // Verifica se o objeto atingiu a distância máxima na direção atual
-        if (Mathf.Abs(transform.position.x - startPosition.x) >= distancia)
+        if (Mathf.Abs(transform.position.x - startPosition.x) >= distancia && direcao == 1)
         {
             // Inverte a direção e move o objeto de volta
-            direcao *= -1;
+            direcao = -1;
+        }
+
+        else if (transform.position.x - startPosition.x <= 0)
+        {
+            direcao = 1;
+            this.enabled = false;
         }
     }
 }

@@ -4,35 +4,45 @@ using UnityEngine;
 
 public class ActiveAnim : MonoBehaviour
 {
-    private readonly string tagDoPlayer = "Player"; // A tag do objeto do jogador
+    #region Inspector Vars
+    [Tooltip("The sscript that will be activated when executed the interaction.")]
+    [SerializeField] MonoBehaviour scriptParaAtivar;
+    [Tooltip("The time that will permit a reactivation.")]
+    [SerializeField] float waitReactivationTime = 1f;
+    #endregion
 
-    [SerializeField]  MonoBehaviour scriptParaAtivar; // Arraste o script no Inspector que contém a variável booleana
+    #region Private Vars
+    private float reactivationTimer;
+    #endregion
 
-    private bool ativado = false;
-
-    private void OnTriggerEnter2D(Collider2D other)
+    #region Unity Methods
+    private void Start()
     {
-        if (other.CompareTag(tagDoPlayer))
-        {
-            ativado = true;
-        }
+        reactivationTimer = waitReactivationTime;
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void Update()
     {
-        if (other.CompareTag(tagDoPlayer))
-        {
-            ativado = false;
-            scriptParaAtivar.enabled = false;
-        }
-    }
+        if (reactivationTimer >= waitReactivationTime) return;
 
+        ReactivationTime();
+    }
+    #endregion
+
+    #region Public Methods
     public void ActivatedTotem()
     {
-        print("ativado bergz");
-        if (!ativado || scriptParaAtivar == null) return;
-        print("ativado");
+        if (reactivationTimer < waitReactivationTime) return;
 
+        reactivationTimer = 0;
         scriptParaAtivar.enabled = true;
     }
+    #endregion
+
+    #region Private Methods
+    private void ReactivationTime()
+    {
+        reactivationTimer += Time.deltaTime;
+    }
+    #endregion
 }

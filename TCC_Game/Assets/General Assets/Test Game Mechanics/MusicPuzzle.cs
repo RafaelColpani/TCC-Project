@@ -74,24 +74,14 @@ public class MusicPuzzle : MonoBehaviour
 
         for (int i = 0; i < totems.Length; i++)
         {
-            if (totems[i] == totem)
-            {
-                matchedIndex = i;
+            if (totems[i] != totem) continue;
 
-                if (interactedSequence.Count() < totems.Length - 1)
-                    totem.GetComponent<MusicTotemInteract>().StartShine();
-
-                break;
-            }
-
-            if (i >= totems.Length - 1)
-            {
-                Debug.LogError("Cannot find the correct totem music for the puzzle.");
-                return;
-            }
+            matchedIndex = i;
+            break;
         }
 
         interactedSequence.Add(matchedIndex);
+
         if (interactedSequence.Count() >= correctSequence.Count())
             VerifySequence();
     }
@@ -100,11 +90,6 @@ public class MusicPuzzle : MonoBehaviour
     #region Private Methods
     private void VerifySequence()
     {
-        foreach (var i in interactedSequence)
-        {
-            print($"catchedSeq: {i}");
-        }
-
         for (int i = 0; i < interactedSequence.Count(); i++)
         {
             if (interactedSequence[i] == correctSequence[i]) continue;
@@ -150,7 +135,7 @@ public class MusicPuzzle : MonoBehaviour
         foreach (GameObject totem in totems)
         {
             totem.SetActive(true);
-            totem.GetComponent<MusicTotemInteract>().ResetInteracted();
+            totem.GetComponent<CustomActionInteraction>().ResetInteraction();
         }
     }
     #endregion
