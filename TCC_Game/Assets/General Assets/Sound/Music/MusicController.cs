@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using NaughtyAttributes;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -10,7 +5,7 @@ using UnityEngine.UI;
 public class MusicController : MonoBehaviour
 {
     [TextArea]
-    public string aviso = "Por favor, mantenha a correspondência entre a cena e as músicas.";
+    public string aviso = "Por favor, mantenha a correspondï¿½ncia entre a cena e as mï¿½sicas.";
 
     [SerializeField] AudioMixer mixer;
     [SerializeField] AudioMixerSnapshot @default;
@@ -55,10 +50,10 @@ public class MusicController : MonoBehaviour
     {   
         transform.parent.position = playerTransform.position;
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            PauseSnapshot();
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    PauseSnapshot();
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
