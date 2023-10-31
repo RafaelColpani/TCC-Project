@@ -1515,6 +1515,7 @@ GameObject:
   - component: {fileID: 4756836470096228339}
   - component: {fileID: 2201712814571621467}
   - component: {fileID: 2181957536451715101}
+  - component: {fileID: 5643800422294035397}
   m_Layer: 5
   m_Name: sld_uiScale
   m_TagString: Untagged
@@ -1642,6 +1643,35 @@ MonoBehaviour:
   hover: {fileID: 0}
   close: {fileID: 0}
   isExitButton: 0
+--- !u!114 &5643800422294035397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395981339922426010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1429791584714821531
 GameObject:
   m_ObjectHideFlags: 0
@@ -3830,6 +3860,7 @@ GameObject:
   - component: {fileID: 3096276859051564108}
   - component: {fileID: 5791105236692779849}
   - component: {fileID: 9089120386262191616}
+  - component: {fileID: 5916412213234364568}
   m_Layer: 5
   m_Name: sld_sfx
   m_TagString: Untagged
@@ -3957,6 +3988,35 @@ MonoBehaviour:
   hover: {fileID: 0}
   close: {fileID: 0}
   isExitButton: 0
+--- !u!114 &5916412213234364568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096276859051564114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3096276859088314402
 GameObject:
   m_ObjectHideFlags: 0
@@ -7231,6 +7291,7 @@ GameObject:
   - component: {fileID: 3096276860290248002}
   - component: {fileID: 3096276860290248003}
   - component: {fileID: 2018783652098466490}
+  - component: {fileID: 1124792214973979419}
   m_Layer: 5
   m_Name: tgg_fullscreen
   m_TagString: Untagged
@@ -7337,6 +7398,35 @@ MonoBehaviour:
   hover: {fileID: 0}
   close: {fileID: 0}
   isExitButton: 0
+--- !u!114 &1124792214973979419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096276860290248001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3096276860306376551
 GameObject:
   m_ObjectHideFlags: 0
@@ -7455,7 +7545,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92994f6b75e47874e88d1a58cf4a5753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tabButtons: []
+  tabButtons:
+  - {fileID: 5670968490817257560}
+  - {fileID: 3715397844839665645}
+  - {fileID: 8111754446470871482}
+  - {fileID: 5670781243788115565}
   selectedTab: {fileID: 0}
   tabContent:
   - {fileID: 3096276860527362544}
@@ -8745,6 +8839,7 @@ GameObject:
   - component: {fileID: 3096276860679453164}
   - component: {fileID: 5783168486887091129}
   - component: {fileID: 8896975746915457762}
+  - component: {fileID: 4075165373405550564}
   m_Layer: 5
   m_Name: sld_bgm
   m_TagString: Untagged
@@ -8872,6 +8967,35 @@ MonoBehaviour:
   hover: {fileID: 0}
   close: {fileID: 0}
   isExitButton: 0
+--- !u!114 &4075165373405550564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096276860679453170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3096276860699014747
 GameObject:
   m_ObjectHideFlags: 0
@@ -9230,6 +9354,7 @@ GameObject:
   - component: {fileID: 3096276860839034735}
   - component: {fileID: 7308059648269632342}
   - component: {fileID: 8157236135392724222}
+  - component: {fileID: 42254562467401105}
   m_Layer: 5
   m_Name: sld_master
   m_TagString: Untagged
@@ -9357,6 +9482,35 @@ MonoBehaviour:
   hover: {fileID: 0}
   close: {fileID: 0}
   isExitButton: 0
+--- !u!114 &42254562467401105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096276860839034733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3096276860851615531
 GameObject:
   m_ObjectHideFlags: 0
@@ -9915,6 +10069,7 @@ GameObject:
   - component: {fileID: 3096276860978267351}
   - component: {fileID: 3096276860978267344}
   - component: {fileID: 6856988954123956800}
+  - component: {fileID: 8712597231148312337}
   m_Layer: 5
   m_Name: tgg_showFPS
   m_TagString: Untagged
@@ -10021,6 +10176,35 @@ MonoBehaviour:
   hover: {fileID: 0}
   close: {fileID: 0}
   isExitButton: 0
+--- !u!114 &8712597231148312337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3096276860978267350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3096276860992450070
 GameObject:
   m_ObjectHideFlags: 0
@@ -11610,6 +11794,7 @@ GameObject:
   - component: {fileID: 1541093555744731627}
   - component: {fileID: 3343116562535953605}
   - component: {fileID: 5789356750326587497}
+  - component: {fileID: 4531684160295011829}
   m_Layer: 5
   m_Name: drp_resList
   m_TagString: Untagged
@@ -11788,6 +11973,35 @@ MonoBehaviour:
   hover: {fileID: 0}
   close: {fileID: 0}
   isExitButton: 0
+--- !u!114 &4531684160295011829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4198184441596485327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4202115767473564402
 GameObject:
   m_ObjectHideFlags: 0
@@ -16274,6 +16488,7 @@ GameObject:
   - component: {fileID: 3441228438510250976}
   - component: {fileID: 7526019931500781564}
   - component: {fileID: 8063322074675193219}
+  - component: {fileID: 7885000297419194304}
   m_Layer: 5
   m_Name: sld_sfxUI
   m_TagString: Untagged
@@ -16401,6 +16616,35 @@ MonoBehaviour:
   hover: {fileID: 0}
   close: {fileID: 0}
   isExitButton: 0
+--- !u!114 &7885000297419194304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7377195650371823439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 16
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &7572205888492381882
 GameObject:
   m_ObjectHideFlags: 0
