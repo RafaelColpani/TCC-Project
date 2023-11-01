@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class PauseController : MonoBehaviour
@@ -10,14 +10,22 @@ public class PauseController : MonoBehaviour
     [SerializeField] GameObject pause;
     [SerializeField] GameObject settings;
     [SerializeField] GameObject dimBackground;
-    private static bool wasPaused = false;
+    [SerializeField] GameObject firstSelected;
+    [SerializeField] GameObject settingsButton;
+    [SerializeField] GameObject firstSettingsSelected;
 
-    private void Update()
+    private static bool wasPaused = false;
+    private bool canResume = false;
+
+    private PlayerActions playerActions;
+
+    private void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Pause();
-        }
+        isPaused = false;
+        wasPaused = false;
+
+        playerActions = new PlayerActions();
+        playerActions.Movement.Pause.performed += ctx => Pause();
     }
 
     public void Pause()
@@ -25,17 +33,27 @@ public class PauseController : MonoBehaviour
         if (pause.activeSelf)
         {
             print("despausou");
+            if (settings.activeInHierarchy)
+            {
+                settings.GetComponentInChildren<TabGroup>().SelectFirstTab();
+                settings.SetActive(false);
+            }
             pause.SetActive(false);
             dimBackground.SetActive(false);
+            canResume = false;
             Time.timeScale = 1;
             if (wasPaused) return;
             PauseController.isPaused = false;
         }
+
         else
         {
             print("pausou");
+            EventSystem.current.SetSelectedGameObject(firstSelected);
             pause.SetActive(true);
             dimBackground.SetActive(true);
+            canResume = false;
+            StartCoroutine(EnableResume());
             Time.timeScale = 0;
             PauseController.isPaused = true;
         }
@@ -44,23 +62,43 @@ public class PauseController : MonoBehaviour
     public void Settings()
     {
         if (settings.activeSelf)
+        {
             settings.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(settingsButton);
+        }
+
         else
+        {
             settings.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(firstSettingsSelected);
+        }
     }
 
     public void MainMenu()
     {
         PauseController.isPaused = false;
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene("Main Menu");
     }
 
     public void Resume()
     {
-        settings.SetActive(false);
-        settings.GetComponentInChildren<TabGroup>().SelectFirstTab();
-        Pause();
+        if (!canResume)
+            return;
+
+        if (settings.activeInHierarchy)
+        {
+            settings.GetComponentInChildren<TabGroup>().SelectFirstTab();
+            settings.SetActive(false);
+        }
+        if (pause.activeSelf)
+            Pause();
+    }
+
+    private IEnumerator EnableResume()
+    {
+        yield return new WaitForSecondsRealtime(0.01f);
+        canResume = true;
     }
 
     public static bool GetIsPaused()
@@ -84,4 +122,16 @@ public class PauseController : MonoBehaviour
         isPaused = value;
         wasPaused = value;
     }
+
+    #region Enable & Disable
+    private void OnEnable()
+    {
+        playerActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerActions.Disable();
+    }
+    #endregion
 }

@@ -220,8 +220,6 @@ public class ProceduralArms : MonoBehaviour
     private CharacterMovementState characterMovementState;
     private ProceduralTorso proceduralTorso;
 
-    private Transform body;
-
     private float lerpArm = 0;
 
     private bool startIdleAnimation = true;
@@ -233,8 +231,6 @@ public class ProceduralArms : MonoBehaviour
         characterManager = GetComponent<CharacterManager>();
         proceduralLegs = GetComponent<ProceduralLegs>();
         characterMovementState = GetComponent<CharacterMovementState>();
-
-        body = characterManager.Body;
 
         foreach (var arm in armsTargets)
         {

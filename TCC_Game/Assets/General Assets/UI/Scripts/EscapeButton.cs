@@ -10,7 +10,7 @@ public class EscapeButton : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GetComponent<Button>().onClick.Invoke(); // invoke invoca tudo dentro do onclick
+            //GetComponent<Button>().onClick.Invoke(); // invoke invoca tudo dentro do onclick
         }
     }
 }
