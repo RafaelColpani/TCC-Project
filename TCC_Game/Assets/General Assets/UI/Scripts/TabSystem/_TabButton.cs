@@ -14,7 +14,7 @@ public class _TabButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
         tabGroup = transform.parent.GetComponent<TabGroup>();
         buttonBackground = this.GetComponent<Image>();
         buttonBackground.sprite = tabGroup._normalButton;
-        tabGroup.Subscribe(this);
+        //tabGroup.Subscribe(this);
     }
 
     public void OnPointerClick(PointerEventData eventData)

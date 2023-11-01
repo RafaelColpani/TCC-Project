@@ -63,7 +63,8 @@ public class PauseController : MonoBehaviour
     {
         if (settings.activeSelf)
         {
-            return;
+            settings.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(settingsButton);
         }
 
         else
@@ -71,12 +72,6 @@ public class PauseController : MonoBehaviour
             settings.SetActive(true);
             EventSystem.current.SetSelectedGameObject(firstSettingsSelected);
         }
-    }
-
-    public void QuitSettings()
-    {
-        settings.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(settingsButton);
     }
 
     public void MainMenu()
