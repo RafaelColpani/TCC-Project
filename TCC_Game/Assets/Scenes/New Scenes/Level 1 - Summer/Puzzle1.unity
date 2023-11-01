@@ -20844,7 +20844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2679587293519066558, guid: 983e0a1f8761518419aa89a2e155f121, type: 3}
       propertyPath: m_DynamicOccludee
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679587293519066558, guid: 983e0a1f8761518419aa89a2e155f121, type: 3}
       propertyPath: m_LocalAABB.m_Center.y
@@ -21487,7 +21487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2679587293519066558, guid: 983e0a1f8761518419aa89a2e155f121, type: 3}
       propertyPath: m_DynamicOccludee
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679587293519066558, guid: 983e0a1f8761518419aa89a2e155f121, type: 3}
       propertyPath: m_LocalAABB.m_Center.y
@@ -21823,9 +21823,41 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 1.5364915
       objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 397042492}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ActivatedTotem
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DestroyEvent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5092234378672768861, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
       propertyPath: m_Name
       value: Open Gate
+      objectReference: {fileID: 0}
+    - target: {fileID: 5154118828727075050, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5164240608582638856, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
       propertyPath: m_RootOrder
@@ -21833,23 +21865,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5164240608582638856, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2121
+      value: 0.8799846
       objectReference: {fileID: 0}
     - target: {fileID: 5164240608582638856, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2121
+      value: 0.8799846
       objectReference: {fileID: 0}
     - target: {fileID: 5164240608582638856, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.2121
+      value: 0.8799846
       objectReference: {fileID: 0}
     - target: {fileID: 5164240608582638856, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -50.06
+      value: -50.26
       objectReference: {fileID: 0}
     - target: {fileID: 5164240608582638856, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -19.7
+      value: -19.83
       objectReference: {fileID: 0}
     - target: {fileID: 5164240608582638856, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21896,11 +21928,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5092234378672768861, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
   m_PrefabInstance: {fileID: 397042487}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &397042491 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 226562878, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
-  m_PrefabInstance: {fileID: 397042487}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &397042492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21918,7 +21945,6 @@ MonoBehaviour:
   _ActiveOnOff: 1
   objectToActivate: {fileID: 537243094}
   isCinemachineEvent: 1
-  activeOneTimeOnly: 1
   playerVCam: {fileID: 730179525}
   eventVCam: {fileID: 1396721242}
   inputHandler: {fileID: 1897420529}
@@ -34151,7 +34177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2679587293519066558, guid: 983e0a1f8761518419aa89a2e155f121, type: 3}
       propertyPath: m_DynamicOccludee
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679587293519066558, guid: 983e0a1f8761518419aa89a2e155f121, type: 3}
       propertyPath: m_LocalAABB.m_Center.y
@@ -36209,7 +36235,7 @@ SpriteRenderer:
   m_Size: {x: 9.51, y: 3.31}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &577907061
@@ -37789,90 +37815,6 @@ Transform:
   m_Father: {fileID: 1189369998}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &700837366
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 700837367}
-  - component: {fileID: 700837368}
-  m_Layer: 0
-  m_Name: press-f
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &700837367
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 700837366}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.91, y: 2.94, z: 0}
-  m_LocalScale: {x: 0.13812041, y: 0.13812041, z: 0.13812041}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1622905709}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &700837368
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 700837366}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 300358617
-  m_SortingLayer: 5
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ba073df71cf4bfe45bd4f4aa511850f0, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 5.12, y: 5.12}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1001 &701374305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38048,7 +37990,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730179525}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -78.50603, y: 11.57, z: -26.87}
+  m_LocalPosition: {x: -78.524506, y: 10.676449, z: -26.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -38094,90 +38036,6 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 692725770}
---- !u!1 &734810702
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 734810704}
-  - component: {fileID: 734810703}
-  m_Layer: 0
-  m_Name: press-f
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!212 &734810703
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 734810702}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 300358617
-  m_SortingLayer: 5
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ba073df71cf4bfe45bd4f4aa511850f0, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 5.12, y: 5.12}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!4 &734810704
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 734810702}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.92, y: 3.22, z: 0}
-  m_LocalScale: {x: 0.13811901, y: 0.13811901, z: 0.13811901}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1354230332}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &737624133
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40028,90 +39886,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3719101051843552470, guid: b53fb2aeaf0f5c44ba4448cc8a7f398c, type: 3}
   m_PrefabInstance: {fileID: 765993725}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &767470471
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 767470473}
-  - component: {fileID: 767470472}
-  m_Layer: 0
-  m_Name: press-f
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!212 &767470472
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 767470471}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 300358617
-  m_SortingLayer: 5
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ba073df71cf4bfe45bd4f4aa511850f0, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 5.12, y: 5.12}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!4 &767470473
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 767470471}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.71, y: 2.96, z: 0}
-  m_LocalScale: {x: 0.13812041, y: 0.13812041, z: 0.13812041}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1933788765}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &771098745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40850,7 +40624,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2679587293519066558, guid: 983e0a1f8761518419aa89a2e155f121, type: 3}
       propertyPath: m_DynamicOccludee
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679587293519066558, guid: 983e0a1f8761518419aa89a2e155f121, type: 3}
       propertyPath: m_LocalAABB.m_Center.y
@@ -43831,439 +43605,439 @@ MonoBehaviour:
   - _gameObject: {fileID: 238386226}
     _prefab: Assets/_URP/Cave Volume.prefab
   - _gameObject: {fileID: 1059866789}
-    _prefab: Assets/General Assets/Scenario/Prefab/spr_verao_montanha_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/spr_verao_montanha_3.prefab
   - _gameObject: {fileID: 1059692497}
-    _prefab: Assets/General Assets/Scenario/Prefab/spr_verao_montanha_5.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/spr_verao_montanha_5.prefab
   - _gameObject: {fileID: 1717204108}
-    _prefab: Assets/General Assets/Scenario/Prefab/spr_verao_montanha_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/spr_verao_montanha_2.prefab
   - _gameObject: {fileID: 235425759}
-    _prefab: Assets/General Assets/Scenario/Prefab/spr_verao_montanha_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/spr_verao_montanha_3.prefab
   - _gameObject: {fileID: 2100274510}
-    _prefab: Assets/General Assets/Scenario/Prefab/spr_verao_montanha_5.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/spr_verao_montanha_5.prefab
   - _gameObject: {fileID: 2063881669}
-    _prefab: Assets/General Assets/Scenario/Prefab/spr_verao_montanha_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/spr_verao_montanha_1.prefab
   - _gameObject: {fileID: 759424761}
-    _prefab: Assets/General Assets/Scenario/Prefab/spr_verao_montanha_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/spr_verao_montanha_3.prefab
   - _gameObject: {fileID: 1354646378}
-    _prefab: Assets/General Assets/Scenario/Prefab/spr_verao_montanha_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/spr_verao_montanha_3.prefab
   - _gameObject: {fileID: 1682082945}
-    _prefab: Assets/General Assets/Scenario/Prefab/spr_verao_montanha_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/spr_verao_montanha_1.prefab
   - _gameObject: {fileID: 1650179336}
-    _prefab: Assets/General Assets/Scenario/Prefab/spr_verao_montanha_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/spr_verao_montanha_3.prefab
   - _gameObject: {fileID: 1035640840}
-    _prefab: Assets/General Assets/Scenario/Prefab/spr_verao_montanha_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/spr_verao_montanha_4.prefab
   - _gameObject: {fileID: 320608519}
-    _prefab: Assets/General Assets/Scenario/Prefab/spr_verao_montanha_5.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/spr_verao_montanha_5.prefab
   - _gameObject: {fileID: 1207446191}
-    _prefab: Assets/General Assets/Scenario/Prefab/spr_verao_montanha_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/spr_verao_montanha_3.prefab
   - _gameObject: {fileID: 119404661}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_montanhaCoral_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_montanhaCoral_3.prefab
   - _gameObject: {fileID: 84007110}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_montanhaCoral_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_montanhaCoral_1.prefab
   - _gameObject: {fileID: 606440777}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_montanhaCoral_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_montanhaCoral_4.prefab
   - _gameObject: {fileID: 1009732346}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_montanhaCoral_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_montanhaCoral_2.prefab
   - _gameObject: {fileID: 1003662165}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_montanhaCoral_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_montanhaCoral_4.prefab
   - _gameObject: {fileID: 615904109}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_primavera_tronco_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/primavera/pfb_primavera_tronco_3.prefab
   - _gameObject: {fileID: 963121380}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_primavera_tronco_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/primavera/pfb_primavera_tronco_1.prefab
   - _gameObject: {fileID: 2109736969}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_montanhaCoral_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_montanhaCoral_2.prefab
   - _gameObject: {fileID: 669936606}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_montanhaCoral_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_montanhaCoral_3.prefab
   - _gameObject: {fileID: 2066744205}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_montanhaCoral_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_montanhaCoral_3.prefab
   - _gameObject: {fileID: 1625089247}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_montanhaCoral_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_montanhaCoral_4.prefab
   - _gameObject: {fileID: 436261912}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_montanhaCoral_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_montanhaCoral_4.prefab
   - _gameObject: {fileID: 1504405179}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pilar_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pilar_2.prefab
   - _gameObject: {fileID: 1004752085}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pilar_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pilar_1.prefab
   - _gameObject: {fileID: 953877419}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pilar_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pilar_4.prefab
   - _gameObject: {fileID: 771098747}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pilar_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pilar_3.prefab
   - _gameObject: {fileID: 413364996}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pilar_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pilar_2.prefab
   - _gameObject: {fileID: 234679525}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pilar_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pilar_1.prefab
   - _gameObject: {fileID: 850138024}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_8.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_8.prefab
   - _gameObject: {fileID: 952567634}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_10.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_10.prefab
   - _gameObject: {fileID: 1858154926}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_12.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_12.prefab
   - _gameObject: {fileID: 460392709}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_5.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_5.prefab
   - _gameObject: {fileID: 888789616}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_1.prefab
   - _gameObject: {fileID: 619778429}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_2.prefab
   - _gameObject: {fileID: 339173906}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_13.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_13.prefab
   - _gameObject: {fileID: 86157134}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_7.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_7.prefab
   - _gameObject: {fileID: 846750085}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_8.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_8.prefab
   - _gameObject: {fileID: 2035091771}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_3.prefab
   - _gameObject: {fileID: 1290439528}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_9.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_9.prefab
   - _gameObject: {fileID: 142088101}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_12.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_12.prefab
   - _gameObject: {fileID: 1834759613}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_5.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_5.prefab
   - _gameObject: {fileID: 844022531}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_2.prefab
   - _gameObject: {fileID: 2037618255}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_6.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_6.prefab
   - _gameObject: {fileID: 1559761163}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_13.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_13.prefab
   - _gameObject: {fileID: 1292950736}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_8.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_8.prefab
   - _gameObject: {fileID: 683172013}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_3.prefab
   - _gameObject: {fileID: 511913279}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_10.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_10.prefab
   - _gameObject: {fileID: 1151651951}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_9.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_9.prefab
   - _gameObject: {fileID: 1955237437}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_5.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_5.prefab
   - _gameObject: {fileID: 624945230}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_1.prefab
   - _gameObject: {fileID: 1120776853}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_13.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_13.prefab
   - _gameObject: {fileID: 100235455}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_7.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_7.prefab
   - _gameObject: {fileID: 258017727}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_13.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_13.prefab
   - _gameObject: {fileID: 1488956906}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_1.prefab
   - _gameObject: {fileID: 1674089255}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_7.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_7.prefab
   - _gameObject: {fileID: 2005087639}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_8.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_8.prefab
   - _gameObject: {fileID: 954062159}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_13.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_13.prefab
   - _gameObject: {fileID: 1164738346}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_1.prefab
   - _gameObject: {fileID: 1097935535}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_7.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_7.prefab
   - _gameObject: {fileID: 44660188}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_8.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_8.prefab
   - _gameObject: {fileID: 499084662}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_13.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_13.prefab
   - _gameObject: {fileID: 2147085406}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_7.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_7.prefab
   - _gameObject: {fileID: 164880649}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_13.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_13.prefab
   - _gameObject: {fileID: 1324051771}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_8.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_8.prefab
   - _gameObject: {fileID: 1483342739}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_10.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_10.prefab
   - _gameObject: {fileID: 2051757369}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_12.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_12.prefab
   - _gameObject: {fileID: 1403762255}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_5.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_5.prefab
   - _gameObject: {fileID: 1019562585}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_1.prefab
   - _gameObject: {fileID: 898818599}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_2.prefab
   - _gameObject: {fileID: 1334630577}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_13.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_13.prefab
   - _gameObject: {fileID: 2127706746}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_12.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_12.prefab
   - _gameObject: {fileID: 1927245874}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_2.prefab
   - _gameObject: {fileID: 278100176}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_8.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_8.prefab
   - _gameObject: {fileID: 660098705}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_10.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_10.prefab
   - _gameObject: {fileID: 1506454946}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_12.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_12.prefab
   - _gameObject: {fileID: 1597677322}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_5.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_5.prefab
   - _gameObject: {fileID: 1276083830}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_1.prefab
   - _gameObject: {fileID: 516686852}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_5.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_5.prefab
   - _gameObject: {fileID: 1409965970}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_1.prefab
   - _gameObject: {fileID: 219403957}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_cogumelo_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_cogumelo_1.prefab
   - _gameObject: {fileID: 275125102}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_1.prefab
   - _gameObject: {fileID: 261735537}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_2.prefab
   - _gameObject: {fileID: 1450573017}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_3.prefab
   - _gameObject: {fileID: 85408036}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_4.prefab
   - _gameObject: {fileID: 802555592}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_1.prefab
   - _gameObject: {fileID: 701374307}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_2.prefab
   - _gameObject: {fileID: 1892973749}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_3.prefab
   - _gameObject: {fileID: 52771297}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_4.prefab
   - _gameObject: {fileID: 1435136654}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_1.prefab
   - _gameObject: {fileID: 2100596472}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_2.prefab
   - _gameObject: {fileID: 855129937}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_3.prefab
   - _gameObject: {fileID: 230385756}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_4.prefab
   - _gameObject: {fileID: 1442823467}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_1.prefab
   - _gameObject: {fileID: 1176577108}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_2.prefab
   - _gameObject: {fileID: 1546418714}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_3.prefab
   - _gameObject: {fileID: 1497381777}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_4.prefab
   - _gameObject: {fileID: 1643009141}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_1.prefab
   - _gameObject: {fileID: 130267807}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_2.prefab
   - _gameObject: {fileID: 804606862}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_3.prefab
   - _gameObject: {fileID: 1186972966}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_4.prefab
   - _gameObject: {fileID: 1931656501}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_1.prefab
   - _gameObject: {fileID: 2026506895}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_2.prefab
   - _gameObject: {fileID: 13450708}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_3.prefab
   - _gameObject: {fileID: 1553802943}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_estalactite_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_estalactite_4.prefab
   - _gameObject: {fileID: 913084570}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_3.prefab
   - _gameObject: {fileID: 738117313}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pedra_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pedra_1.prefab
   - _gameObject: {fileID: 1733464143}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pedra_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pedra_2.prefab
   - _gameObject: {fileID: 61548680}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pedra_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pedra_3.prefab
   - _gameObject: {fileID: 1280289696}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pedra_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pedra_4.prefab
   - _gameObject: {fileID: 1639295652}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pedra_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pedra_2.prefab
   - _gameObject: {fileID: 1802632605}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pedra_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pedra_4.prefab
   - _gameObject: {fileID: 2057740722}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pedra_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pedra_1.prefab
   - _gameObject: {fileID: 1432486942}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_brilhinho.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_brilhinho.prefab
   - _gameObject: {fileID: 373786828}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_brilhinho.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_brilhinho.prefab
   - _gameObject: {fileID: 292335186}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_brilhinho.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_brilhinho.prefab
   - _gameObject: {fileID: 808978922}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_brilhinho.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_brilhinho.prefab
   - _gameObject: {fileID: 1294059752}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_brilhinho.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_brilhinho.prefab
   - _gameObject: {fileID: 1277780145}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_brilhinho.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_brilhinho.prefab
   - _gameObject: {fileID: 831655149}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_brilhinho.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_brilhinho.prefab
   - _gameObject: {fileID: 1501862920}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_brilhinho.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_brilhinho.prefab
   - _gameObject: {fileID: 1430947942}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_brilhinho.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_brilhinho.prefab
   - _gameObject: {fileID: 2116058332}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_brilhinho.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_brilhinho.prefab
   - _gameObject: {fileID: 1364665658}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_brilhinho.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_brilhinho.prefab
   - _gameObject: {fileID: 534930457}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_brilhinho.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_brilhinho.prefab
   - _gameObject: {fileID: 1302182145}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_esponja_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_esponja_1.prefab
   - _gameObject: {fileID: 1577373914}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_esponja_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_esponja_2.prefab
   - _gameObject: {fileID: 978032436}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_esponja_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_esponja_3.prefab
   - _gameObject: {fileID: 336934936}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_esponja_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_esponja_1.prefab
   - _gameObject: {fileID: 1433285738}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_esponja_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_esponja_2.prefab
   - _gameObject: {fileID: 746907245}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_esponja_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_esponja_3.prefab
   - _gameObject: {fileID: 136268694}
-    _prefab: Assets/General Assets/Scenario/Prefab/sprGround.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/sprGround.prefab
   - _gameObject: {fileID: 893577724}
-    _prefab: Assets/General Assets/Scenario/Prefab/sprGround.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/sprGround.prefab
   - _gameObject: {fileID: 1714174203}
-    _prefab: Assets/General Assets/Scenario/Prefab/sprGround.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/sprGround.prefab
   - _gameObject: {fileID: 257301438}
-    _prefab: Assets/General Assets/Scenario/Prefab/sprGround.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/sprGround.prefab
   - _gameObject: {fileID: 1213386350}
-    _prefab: Assets/General Assets/Scenario/Prefab/sprGround.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/sprGround.prefab
   - _gameObject: {fileID: 937229756}
-    _prefab: Assets/General Assets/Scenario/Prefab/sprGround.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/sprGround.prefab
   - _gameObject: {fileID: 558564668}
-    _prefab: Assets/General Assets/Scenario/Prefab/sprGround.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/sprGround.prefab
   - _gameObject: {fileID: 241991902}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_4.prefab
   - _gameObject: {fileID: 1190800456}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_4.prefab
   - _gameObject: {fileID: 1924631558}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_5.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_5.prefab
   - _gameObject: {fileID: 425920428}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_5.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_5.prefab
   - _gameObject: {fileID: 1467639535}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_2.prefab
   - _gameObject: {fileID: 1697913989}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_3.prefab
   - _gameObject: {fileID: 1177459268}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_2.prefab
   - _gameObject: {fileID: 1048817105}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_3.prefab
   - _gameObject: {fileID: 168284101}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_4.prefab
   - _gameObject: {fileID: 892347298}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_5.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_5.prefab
   - _gameObject: {fileID: 494708026}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_4.prefab
   - _gameObject: {fileID: 1441541025}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_2.prefab
   - _gameObject: {fileID: 1910102569}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_2.prefab
   - _gameObject: {fileID: 2062176728}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_3.prefab
   - _gameObject: {fileID: 465202248}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_4.prefab
   - _gameObject: {fileID: 270964479}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_5.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_5.prefab
   - _gameObject: {fileID: 1851571346}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_2.prefab
   - _gameObject: {fileID: 860512122}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_3.prefab
   - _gameObject: {fileID: 1080655810}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_4.prefab
   - _gameObject: {fileID: 450661127}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_5.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_5.prefab
   - _gameObject: {fileID: 678818086}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_1.prefab
   - _gameObject: {fileID: 666843965}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_2.prefab
   - _gameObject: {fileID: 658068291}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_3.prefab
   - _gameObject: {fileID: 1246207662}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_1.prefab
   - _gameObject: {fileID: 2136867701}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_2.prefab
   - _gameObject: {fileID: 781566569}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_3.prefab
   - _gameObject: {fileID: 195872756}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_1.prefab
   - _gameObject: {fileID: 1918430860}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_2.prefab
   - _gameObject: {fileID: 90869258}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_3.prefab
   - _gameObject: {fileID: 1636897140}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_2.prefab
   - _gameObject: {fileID: 1599703366}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_3.prefab
   - _gameObject: {fileID: 1650049540}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_3.prefab
   - _gameObject: {fileID: 1023823034}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_3.prefab
   - _gameObject: {fileID: 1197417786}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_3.prefab
   - _gameObject: {fileID: 1261355641}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_2.prefab
   - _gameObject: {fileID: 529006853}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_1.prefab
   - _gameObject: {fileID: 1324780203}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_2.prefab
   - _gameObject: {fileID: 245390267}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_3.prefab
   - _gameObject: {fileID: 1218681385}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_3.prefab
   - _gameObject: {fileID: 2122704219}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_3.prefab
   - _gameObject: {fileID: 1990645252}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_3.prefab
   - _gameObject: {fileID: 391218371}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_montanhaCoral_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_montanhaCoral_2.prefab
   - _gameObject: {fileID: 1051477462}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_montanhaCoral_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_montanhaCoral_2.prefab
   - _gameObject: {fileID: 1819351900}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_esponja_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_esponja_2.prefab
   - _gameObject: {fileID: 23577834}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_esponja_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_esponja_3.prefab
   - _gameObject: {fileID: 1608087087}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_esponja_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_esponja_2.prefab
   - _gameObject: {fileID: 1728272630}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_esponja_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_esponja_1.prefab
   - _gameObject: {fileID: 1226175230}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pedra_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pedra_1.prefab
   - _gameObject: {fileID: 1394442229}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pedra_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pedra_2.prefab
   - _gameObject: {fileID: 1440134844}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pedra_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pedra_3.prefab
   - _gameObject: {fileID: 663369332}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pedra_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pedra_4.prefab
   - _gameObject: {fileID: 1375300973}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_pedra_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_pedra_1.prefab
   - _gameObject: {fileID: 1688356082}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_2.prefab
   - _gameObject: {fileID: 913722921}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_3.prefab
   - _gameObject: {fileID: 2069965435}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_4.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_4.prefab
   - _gameObject: {fileID: 1809121732}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_5.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_5.prefab
   - _gameObject: {fileID: 2136688874}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_1.prefab
   - _gameObject: {fileID: 907670155}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_2.prefab
   - _gameObject: {fileID: 409855260}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_3.prefab
   - _gameObject: {fileID: 10443419}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_1.prefab
   - _gameObject: {fileID: 1433636615}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_2.prefab
   - _gameObject: {fileID: 1822969426}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_3.prefab
   - _gameObject: {fileID: 453012823}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_1.prefab
   - _gameObject: {fileID: 252401222}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_2.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_2.prefab
   - _gameObject: {fileID: 395693824}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_suculenta_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_suculenta_3.prefab
   - _gameObject: {fileID: 1266238872}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_grama_3.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_grama_3.prefab
   - _gameObject: {fileID: 1890303265}
-    _prefab: Assets/General Assets/Test Game Mechanics/Area de morte_1.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/Event/Area de morte_1.prefab
   - _gameObject: {fileID: 1354230333}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_totem.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_totem.prefab
   - _gameObject: {fileID: 1933788766}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_totem.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_totem.prefab
   - _gameObject: {fileID: 1743560847}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_totem.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_totem.prefab
   - _gameObject: {fileID: 1622905710}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_totem.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_totem.prefab
   - _gameObject: {fileID: 1139729395}
     _prefab: Assets/General Assets/Characters/NPC_Lore/spr_LoreNpc.psb
   - _gameObject: {fileID: 782059569}
-    _prefab: Assets/General Assets/Test Game Mechanics/flower.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/Event/flower.prefab
   - _gameObject: {fileID: 397042489}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_totem.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_totem.prefab
   - _gameObject: {fileID: 737624135}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_portaoM.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_portaoM.prefab
   - _gameObject: {fileID: 537243094}
-    _prefab: Assets/General Assets/Scenario/Prefab/pfb_verao_portaoM.prefab
+    _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_portaoM.prefab
   - _gameObject: {fileID: 765993727}
-    _prefab: Assets/General Assets/Test Game Mechanics/Effect/vfx_Wave.prefab
+    _prefab: Assets/General Assets/Scenario/World Shader/Shock Wave/vfx_Wave.prefab
 --- !u!4 &820918122
 Transform:
   m_ObjectHideFlags: 11
@@ -51541,6 +51315,77 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1 &1009140226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1009140227}
+  - component: {fileID: 1009140228}
+  m_Layer: 0
+  m_Name: CM vcam4 - Unlock Puzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1009140227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009140226}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -97.3, y: 5.5, z: -26.87}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1020049230}
+  m_Father: {fileID: 2100132599}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1009140228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009140226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ExcludedPropertiesInInspector:
+  - m_Script
+  m_LockStageInInspector: 
+  m_StreamingVersion: 20170927
+  m_Priority: 10
+  m_StandbyUpdate: 2
+  m_LookAt: {fileID: 0}
+  m_Follow: {fileID: 0}
+  m_Lens:
+    FieldOfView: 18
+    OrthographicSize: 14.68
+    NearClipPlane: 0.3
+    FarClipPlane: 1000
+    Dutch: 0
+    ModeOverride: 0
+    LensShift: {x: 0, y: 0}
+    GateFit: 2
+    m_SensorSize: {x: 1, y: 1}
+  m_Transitions:
+    m_BlendHint: 0
+    m_InheritPosition: 0
+    m_OnCameraLive:
+      m_PersistentCalls:
+        m_Calls: []
+  m_LegacyBlendHint: 0
+  m_ComponentOwner: {fileID: 1020049230}
 --- !u!1001 &1009732344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51711,6 +51556,91 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1140034824353238730, guid: 6bc1b2afc77ec4e488f2aa87472f05bb, type: 3}
   m_PrefabInstance: {fileID: 1019562583}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1020049229
+GameObject:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1020049230}
+  - component: {fileID: 1020049233}
+  - component: {fileID: 1020049232}
+  - component: {fileID: 1020049231}
+  m_Layer: 0
+  m_Name: cm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1020049230
+Transform:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020049229}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.2892162, y: 0.13897046, z: 58.21047}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1009140227}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1020049231
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020049229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!114 &1020049232
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020049229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BindingMode: 1
+  m_FollowOffset: {x: -73.64398, y: 3.8736227, z: -26.87}
+  m_XDamping: 1
+  m_YDamping: 1
+  m_ZDamping: 1
+  m_AngularDampingMode: 0
+  m_PitchDamping: 0
+  m_YawDamping: 0
+  m_RollDamping: 0
+  m_AngularDamping: 0
+--- !u!114 &1020049233
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020049229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1023823032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52990,90 +52920,6 @@ Transform:
   - {fileID: 219403956}
   m_Father: {fileID: 279369054}
   m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1090558866
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1090558868}
-  - component: {fileID: 1090558867}
-  m_Layer: 0
-  m_Name: press-f
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!212 &1090558867
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1090558866}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 300358617
-  m_SortingLayer: 5
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ba073df71cf4bfe45bd4f4aa511850f0, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 5.12, y: 5.12}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!4 &1090558868
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1090558866}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.89, y: 2.99, z: 0}
-  m_LocalScale: {x: 0.13812041, y: 0.13812041, z: 0.13812041}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1280043190}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1093814305
 GameObject:
@@ -61717,6 +61563,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 244519468}
     m_Modifications:
+    - target: {fileID: 650671080, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.38537294
+      objectReference: {fileID: 0}
+    - target: {fileID: 650671080, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.92276096
+      objectReference: {fileID: 0}
     - target: {fileID: 1101965153, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.770035
@@ -61733,6 +61587,14 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.49259514
       objectReference: {fileID: 0}
+    - target: {fileID: 1734129799, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.22915103
+      objectReference: {fileID: 0}
+    - target: {fileID: 1734129799, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.97339094
+      objectReference: {fileID: 0}
     - target: {fileID: 2144036276, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.67304325
@@ -61741,21 +61603,37 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.73960316
       objectReference: {fileID: 0}
+    - target: {fileID: 402644179554398924, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.203737
+      objectReference: {fileID: 0}
+    - target: {fileID: 402644179554398924, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.97902566
+      objectReference: {fileID: 0}
     - target: {fileID: 484639353854635565, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0022670943
+      value: -0.0022720192
       objectReference: {fileID: 0}
     - target: {fileID: 484639353854635565, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.9999975
+      value: -0.99999744
       objectReference: {fileID: 0}
     - target: {fileID: 663673261706655776, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.048197642
+      value: -0.048186842
       objectReference: {fileID: 0}
     - target: {fileID: 663673261706655776, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.9988378
+      value: -0.99883837
+      objectReference: {fileID: 0}
+    - target: {fileID: 800083054147086619, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9979103
+      objectReference: {fileID: 0}
+    - target: {fileID: 800083054147086619, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.06461455
       objectReference: {fileID: 0}
     - target: {fileID: 1998810440879347988, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: pauseMenu
@@ -61763,23 +61641,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2540611774776381070, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000012819768
+      value: -0.000009596166
       objectReference: {fileID: 0}
     - target: {fileID: 3984772406416123123, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9835748
+      value: 0.9835724
       objectReference: {fileID: 0}
     - target: {fileID: 3984772406416123123, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.18050106
+      value: -0.18051414
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046796342174133875, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9976443
+      objectReference: {fileID: 0}
+    - target: {fileID: 4046796342174133875, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.06859991
       objectReference: {fileID: 0}
     - target: {fileID: 4060636491366387967, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.1899172
+      value: 0.18993518
       objectReference: {fileID: 0}
     - target: {fileID: 4060636491366387967, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.98180014
+      value: -0.9817967
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245724855889015791, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.7700298
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245724855889015791, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.638008
+      objectReference: {fileID: 0}
+    - target: {fileID: 4265110343784437860, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.98832256
+      objectReference: {fileID: 0}
+    - target: {fileID: 4265110343784437860, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.15237631
       objectReference: {fileID: 0}
     - target: {fileID: 4638355769759187520, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.w
@@ -61787,51 +61689,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4638355769759187520, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0010534464
+      value: 0.0010532883
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817327134158398061, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99574614
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817327134158398061, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.09213932
       objectReference: {fileID: 0}
     - target: {fileID: 6272081221381266369, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9480054
+      value: -0.9480007
       objectReference: {fileID: 0}
     - target: {fileID: 6272081221381266369, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.31825456
+      value: -0.31826824
       objectReference: {fileID: 0}
     - target: {fileID: 7189412030926041651, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: bodyPositionOffset
-      value: 1.99
+      value: 1.18
       objectReference: {fileID: 0}
     - target: {fileID: 7603912582474907006, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.03219353
+      value: 0.032194015
       objectReference: {fileID: 0}
     - target: {fileID: 7603912582474907006, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.9994816
+      value: 0.9994817
+      objectReference: {fileID: 0}
+    - target: {fileID: 8253364221339615858, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.8702595
+      objectReference: {fileID: 0}
+    - target: {fileID: 8253364221339615858, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.49259347
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508697806842156027, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6730489
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508697806842156027, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.73959804
       objectReference: {fileID: 0}
     - target: {fileID: 8523277553476074258, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99884003
+      value: 0.9988396
       objectReference: {fileID: 0}
     - target: {fileID: 8523277553476074258, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.048150823
+      value: -0.04816168
       objectReference: {fileID: 0}
     - target: {fileID: 8739475468757241706, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6341777
+      value: 0.63417745
       objectReference: {fileID: 0}
     - target: {fileID: 8739475468757241706, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.7731874
+      value: 0.7731875
       objectReference: {fileID: 0}
     - target: {fileID: 8739475468793612849, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.67700773
+      value: 0.67700344
       objectReference: {fileID: 0}
     - target: {fileID: 8739475468793612849, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.73597586
+      value: 0.7359798
       objectReference: {fileID: 0}
     - target: {fileID: 8739475469928245532, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_RootOrder
@@ -61880,6 +61806,14 @@ PrefabInstance:
     - target: {fileID: 8739475469928245533, guid: afa823600646543da906c0da3b69ad57, type: 3}
       propertyPath: m_Name
       value: pfb_playerEntregaFinal
+      objectReference: {fileID: 0}
+    - target: {fileID: 8969675773353723698, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.25480983
+      objectReference: {fileID: 0}
+    - target: {fileID: 8969675773353723698, guid: afa823600646543da906c0da3b69ad57, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.96699125
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afa823600646543da906c0da3b69ad57, type: 3}
@@ -62469,15 +62403,15 @@ GameObject:
   m_Component:
   - component: {fileID: 1253482212}
   - component: {fileID: 1253482215}
-  - component: {fileID: 1253482214}
   - component: {fileID: 1253482213}
+  - component: {fileID: 1253482216}
   m_Layer: 0
   m_Name: Open Camera_1
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1253482212
 Transform:
   m_ObjectHideFlags: 0
@@ -62486,7 +62420,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1253482211}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.04, y: 5.01, z: 0}
+  m_LocalPosition: {x: -4.103, y: 5.01, z: 0}
   m_LocalScale: {x: 3.525, y: 19.263, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -62519,22 +62453,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1253482214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1253482211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20416ea058987994d886cc2484ab011a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tagDoJogador: Player
-  virtualCamera: {fileID: 730179527}
-  novoOrthoSize: 19
-  velocidadeTransicao: 1.5
 --- !u!212 &1253482215
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -62587,6 +62505,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1253482216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253482211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20416ea058987994d886cc2484ab011a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagDoJogador: Player
+  virtualCamera: {fileID: 730179527}
+  novoOrthoSize: 19
+  velocidadeTransicao: 0.8
 --- !u!1001 &1257448140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63312,9 +63246,45 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 353807430}
     m_Modifications:
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1064332162}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TotemInteracted
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MusicPuzzle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1743560847}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5092234378672768861, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
       propertyPath: m_Name
       value: green_totem
+      objectReference: {fileID: 0}
+    - target: {fileID: 5154118828727075050, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5164240608582638856, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
       propertyPath: m_RootOrder
@@ -63657,7 +63627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2679587293519066558, guid: 983e0a1f8761518419aa89a2e155f121, type: 3}
       propertyPath: m_DynamicOccludee
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679587293519066558, guid: 983e0a1f8761518419aa89a2e155f121, type: 3}
       propertyPath: m_LocalAABB.m_Center.y
@@ -69410,9 +69380,45 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 353807430}
     m_Modifications:
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1064332162}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TotemInteracted
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MusicPuzzle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1354230333}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5092234378672768861, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
       propertyPath: m_Name
       value: pink_totem
+      objectReference: {fileID: 0}
+    - target: {fileID: 5154118828727075050, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5164240608582638856, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
       propertyPath: m_RootOrder
@@ -69614,7 +69620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96e6088f4091d454282ac5782a6adc1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiGuide: {fileID: 734810702}
+  uiGuide: {fileID: 0}
 --- !u!1001 &1354646376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70687,7 +70693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2679587293519066558, guid: 983e0a1f8761518419aa89a2e155f121, type: 3}
       propertyPath: m_DynamicOccludee
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2679587293519066558, guid: 983e0a1f8761518419aa89a2e155f121, type: 3}
       propertyPath: m_LocalAABB.m_Center.y
@@ -71944,7 +71950,7 @@ GameObject:
   - component: {fileID: 1480387072}
   - component: {fileID: 1480387075}
   - component: {fileID: 1480387074}
-  - component: {fileID: 1480387073}
+  - component: {fileID: 1480387076}
   m_Layer: 0
   m_Name: Event 2
   m_TagString: Untagged
@@ -71960,35 +71966,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1480387071}
   m_LocalRotation: {x: -0, y: -0, z: -0.70688087, w: 0.7073326}
-  m_LocalPosition: {x: -4.13, y: 5.05, z: 0}
+  m_LocalPosition: {x: -4.067, y: 5.05, z: 0}
   m_LocalScale: {x: 16.324467, y: 3.4262, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1160387373}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -89.963}
---- !u!114 &1480387073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1480387071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9ac342f156411c44867c843dcb8f372, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToDestroy: {fileID: 1721549149}
-  vfxToDestroy: {fileID: 1912737644}
-  _ActiveOnOff: 1
-  objectToActivate: {fileID: 1176108881}
-  isCinemachineEvent: 0
-  activeOneTimeOnly: 0
-  playerVCam: {fileID: 0}
-  eventVCam: {fileID: 0}
-  inputHandler: {fileID: 0}
-  eventTime: 0
 --- !u!61 &1480387074
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -72067,6 +72051,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1480387076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1480387071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96c1ff932291ab04494265034e968e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToDestroy: {fileID: 1721549149}
+  vfxToDestroy: {fileID: 0}
+  _ActiveOnOff: 0
+  objectToActivate: {fileID: 0}
+  isCinemachineEvent: 1
+  playerVCam: {fileID: 730179525}
+  eventVCam: {fileID: 1009140226}
+  inputHandler: {fileID: 1897420529}
+  eventTime: 3
 --- !u!1001 &1483342737
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82236,7 +82241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1611487923}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -78.50603, y: 11.57, z: -26.87}
+  m_LocalPosition: {x: -78.524506, y: 10.676449, z: -26.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -82479,9 +82484,45 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 353807430}
     m_Modifications:
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1064332162}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TotemInteracted
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MusicPuzzle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1622905710}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5092234378672768861, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
       propertyPath: m_Name
       value: white_totem
+      objectReference: {fileID: 0}
+    - target: {fileID: 5154118828727075050, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5164240608582638856, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
       propertyPath: m_RootOrder
@@ -82683,7 +82724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96e6088f4091d454282ac5782a6adc1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiGuide: {fileID: 700837366}
+  uiGuide: {fileID: 0}
 --- !u!1001 &1625089245
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83026,80 +83067,6 @@ Transform:
   m_Father: {fileID: 976044565}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1632449637
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1632449638}
-  - component: {fileID: 1632449640}
-  - component: {fileID: 1632449639}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1632449638
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1632449637}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 397042488}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1632449639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1632449637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bd644c52bbeb734490524edaa12fe5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objetoParaAtivar: {fileID: 537243094}
-  triggerCollider: {fileID: 397042491}
-  teclaParaAtivar: 101
---- !u!61 &1632449640
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1632449637}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!1001 &1636897138
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86598,7 +86565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96e6088f4091d454282ac5782a6adc1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiGuide: {fileID: 1090558866}
+  uiGuide: {fileID: 0}
 --- !u!1 &1779509357
 GameObject:
   m_ObjectHideFlags: 0
@@ -87511,7 +87478,6 @@ MonoBehaviour:
   _ActiveOnOff: 0
   objectToActivate: {fileID: 0}
   isCinemachineEvent: 0
-  activeOneTimeOnly: 0
   playerVCam: {fileID: 0}
   eventVCam: {fileID: 0}
   inputHandler: {fileID: 0}
@@ -87712,7 +87678,6 @@ MonoBehaviour:
   _ActiveOnOff: 0
   objectToActivate: {fileID: 0}
   isCinemachineEvent: 0
-  activeOneTimeOnly: 0
   playerVCam: {fileID: 0}
   eventVCam: {fileID: 0}
   inputHandler: {fileID: 0}
@@ -90873,9 +90838,45 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 353807430}
     m_Modifications:
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1064332162}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TotemInteracted
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MusicPuzzle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1933788766}
+    - target: {fileID: 963111552770377990, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5092234378672768861, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
       propertyPath: m_Name
       value: blue_totem
+      objectReference: {fileID: 0}
+    - target: {fileID: 5154118828727075050, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5164240608582638856, guid: c460d64e3fd843a40aa4d7c51700bb19, type: 3}
       propertyPath: m_RootOrder
@@ -91077,7 +91078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96e6088f4091d454282ac5782a6adc1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiGuide: {fileID: 767470471}
+  uiGuide: {fileID: 0}
 --- !u!1 &1938238623
 GameObject:
   m_ObjectHideFlags: 0
@@ -99415,6 +99416,7 @@ Transform:
   - {fileID: 730179526}
   - {fileID: 1228674735}
   - {fileID: 1396721244}
+  - {fileID: 1009140227}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
