@@ -131,7 +131,7 @@ public class MusicController : MonoBehaviour
 
     void PuzzleMusicSnapshot()
     {
-        puzzleMusic.TransitionTo(transitionTime/2);
+        puzzleMusic.TransitionTo(0.5f);
     }
 
     #endregion

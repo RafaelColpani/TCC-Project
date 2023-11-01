@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using KevinCastejon.MoreAttributes;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(GravityController))]
 [RequireComponent(typeof(CharacterController))]
@@ -28,6 +29,8 @@ public class InputHandler : MonoBehaviour
     private PlayerShooter playerShooter;
     private PlayerInteract playerInteract;
     private InventoryManager inventoryManager;
+
+    private readonly string rebindsKey = "playerRebinds";
 
     private Transform body;
     private Transform[] groundChecks;
@@ -75,12 +78,10 @@ public class InputHandler : MonoBehaviour
     /// <summary>Loads the binding keys personalizated by the player or not.</summary>
     public void LoadInputBindings()
     {
-        /* REBINDING --
-        string rebinds = PlayerPrefs.GetString("rebinds", string.Empty);
+        string rebinds = PlayerPrefs.GetString(rebindsKey, string.Empty);
 
         if (!string.IsNullOrEmpty(rebinds))
             playerActions.LoadBindingOverridesFromJson(rebinds);
-        */
     }
 
     private void InitializeInstantiations()

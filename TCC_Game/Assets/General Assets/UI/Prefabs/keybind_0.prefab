@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 2794428617920703808}
   - component: {fileID: 2794428617920703809}
   - component: {fileID: 2794428617920703810}
+  - component: {fileID: 1350822334003448776}
   m_Layer: 5
   m_Name: btn_key_gamepad
   m_TagString: Untagged
@@ -437,7 +438,35 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2794428617920703809}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1350822334003448776}
+        m_TargetAssemblyTypeName: RebindingButton, Assembly-CSharp
+        m_MethodName: OnClickedRebind
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1350822334003448776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2794428617920703804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b85fe5f704c345148999c6476369844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rebindAction: {fileID: 0}
+  bindingId: c646c3c4-ed0e-45b3-820a-92463303a6af
+  displayStringOptions: 0
+  buttonText: {fileID: 2794428617362946748}
 --- !u!1 &2794428618162313810
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,7 +533,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: lbl_action
+  m_text: lbl_KeyAction
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -648,6 +677,7 @@ GameObject:
   - component: {fileID: 2794428618898786239}
   - component: {fileID: 2794428618898786232}
   - component: {fileID: 2794428618898786233}
+  - component: {fileID: 2595743592690220739}
   m_Layer: 5
   m_Name: btn_key_keyboard
   m_TagString: Untagged
@@ -757,7 +787,35 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2794428618898786232}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2595743592690220739}
+        m_TargetAssemblyTypeName: RebindingButton, Assembly-CSharp
+        m_MethodName: OnClickedRebind
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2595743592690220739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2794428618898786235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b85fe5f704c345148999c6476369844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rebindAction: {fileID: 0}
+  bindingId: b636d1e0-d525-4fe1-9599-d98e08e517e5
+  displayStringOptions: 0
+  buttonText: {fileID: 2794428617818377268}
 --- !u!1 &2794428618952946993
 GameObject:
   m_ObjectHideFlags: 0
