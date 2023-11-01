@@ -23,6 +23,7 @@ public class RebindingManager : MonoBehaviour
 
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation; // to store a rebinding operation process
     private RebindingButton[] rebindingButtons;
+    private readonly string rebindsKey = "playerRebinds";
 
     #region Unity Methods
     private void Awake()
@@ -48,7 +49,8 @@ public class RebindingManager : MonoBehaviour
         }
 
         // UI action map disable here
-        waitingInputMenu.SetActive(true);
+        if (waitingInputMenu != null)
+            waitingInputMenu.SetActive(true);
 
         // needed to store the operation in an instance to avoid memory leak
         rebindingOperation = rebindingButton.rebindAction.action.PerformInteractiveRebinding(bindingIndex)
@@ -66,14 +68,19 @@ public class RebindingManager : MonoBehaviour
             InputControlPath.HumanReadableStringOptions.OmitDevice);
 
         rebindingOperation.Dispose(); // to finish the operation, avoiding memory leak, MUST HAVE
-        waitingInputMenu.SetActive(false);
+
+        if (waitingInputMenu != null)
+            waitingInputMenu.SetActive(false);
+
         SaveBindings();
     }
 
     private void RebindingCanceled()
     {
         rebindingOperation.Dispose(); // to finish the operation, avoiding memory leak
-        waitingInputMenu.SetActive(false);
+
+        if (waitingInputMenu != null)
+            waitingInputMenu.SetActive(false);
     }
 
     public void ResetBindings()
@@ -96,17 +103,24 @@ public class RebindingManager : MonoBehaviour
     {
         string rebinds = actions.SaveBindingOverridesAsJson();
 
-        PlayerPrefs.SetString("rebinds", rebinds);
+        PlayerPrefs.SetString(rebindsKey, rebinds);
+        SaveInputHandler();
     }
 
     public void LoadBindings()
     {
-        string rebinds = PlayerPrefs.GetString("rebinds", string.Empty);
+        string rebinds = PlayerPrefs.GetString(rebindsKey, string.Empty);
 
         if (!string.IsNullOrEmpty(rebinds))
         {
             actions.LoadBindingOverridesFromJson(rebinds);
         }
+    }
+
+    public void SaveInputHandler()
+    {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponentInChildren<InputHandler>().LoadInputBindings();
     }
 
     /// <summary>
