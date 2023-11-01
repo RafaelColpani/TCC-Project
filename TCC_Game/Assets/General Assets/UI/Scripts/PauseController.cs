@@ -43,7 +43,7 @@ public class PauseController : MonoBehaviour
             canResume = false;
             Time.timeScale = 1;
             if (wasPaused) return;
-            PauseController.isPaused = false;
+            isPaused = false;
         }
 
         else
@@ -55,7 +55,7 @@ public class PauseController : MonoBehaviour
             canResume = false;
             StartCoroutine(EnableResume());
             Time.timeScale = 0;
-            PauseController.isPaused = true;
+            isPaused = true;
         }
     }
 
@@ -76,7 +76,7 @@ public class PauseController : MonoBehaviour
 
     public void MainMenu()
     {
-        PauseController.isPaused = false;
+        isPaused = false;
         Time.timeScale = 1;
         SceneManager.LoadScene("Main Menu");
     }
