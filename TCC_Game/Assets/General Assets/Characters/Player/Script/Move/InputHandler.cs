@@ -11,11 +11,11 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     #region Inspector VARs
-    [HeaderPlus(" ", "- MOVE COMMAND -", (int)HeaderPlusColor.yellow)]
+    [HeaderPlus(" ", "- MOVE COMMAND -", (int)HeaderPlusColor.green)]
     [Tooltip("Controls the speed of player walk.")]
     [SerializeField] private float walkSpeed;
 
-    [HeaderPlus(" ", "- JUMP COMMAND -", (int)HeaderPlusColor.cyan)]
+    [HeaderPlus(" ", "- JUMP COMMAND -", (int)HeaderPlusColor.yellow)]
     [Tooltip("Controls the force (aka height) of player jump.")]
     [SerializeField] private float jumpForce;
     #endregion
@@ -82,6 +82,8 @@ public class InputHandler : MonoBehaviour
 
         if (!string.IsNullOrEmpty(rebinds))
             playerActions.LoadBindingOverridesFromJson(rebinds);
+        else
+            playerActions.RemoveAllBindingOverrides();
     }
 
     private void InitializeInstantiations()

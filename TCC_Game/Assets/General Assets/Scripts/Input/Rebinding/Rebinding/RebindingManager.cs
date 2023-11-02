@@ -2,28 +2,30 @@
 // Date: 27/12/2022
 
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using KevinCastejon.MoreAttributes;
 using TMPro;
 
 public class RebindingManager : MonoBehaviour
 {
-    [Header("Objects")]
+    #region Inspector Vars
+    [HeaderPlus(" ", "- OBJECTS -", (int)HeaderPlusColor.green)]
+    [Tooltip("The parent object that contains all buttons with the RebindingButton script attached.")]
     [SerializeField] GameObject buttonsContainer;
+    [Tooltip("The object that will pop up when it is waiting for the user to press an input.")]
     [SerializeField] GameObject waitingInputMenu;
 
-    [Header("UI")]
-    [SerializeField] TMP_Text waitingInputTxt;
-
-    [Header("Acions")]
+    [HeaderPlus(" ", "- ACTIONS -", (int)HeaderPlusColor.yellow)]
+    [Tooltip("The input actions that the rebinding will work with. MUST BE PlayerActions.")]
     [SerializeField] InputActionAsset actions;
+    #endregion
 
+    #region Private Vars
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation; // to store a rebinding operation process
     private RebindingButton[] rebindingButtons;
     private readonly string rebindsKey = "playerRebinds";
+    #endregion
 
     #region Unity Methods
     private void Awake()
@@ -56,7 +58,7 @@ public class RebindingManager : MonoBehaviour
         rebindingOperation = rebindingButton.rebindAction.action.PerformInteractiveRebinding(bindingIndex)
             .WithControlsExcluding("Mouse") // to exclude some control input
             .OnMatchWaitForAnother(0.1f) // a delay after rebinding, before finish the action. Reccomended by the documentation
-            .OnComplete(operation => RebindingCompleted(rebindingButton, action, bindingIndex)) // code to foloow when rebinding is completed
+            .OnComplete(operation => RebindingCompleted(rebindingButton, action, bindingIndex)) // code to folow when rebinding is completed
             .OnCancel(operation => RebindingCanceled()) // code to follow when rebinding is canceled
             .Start(); // to start the operation
     }
