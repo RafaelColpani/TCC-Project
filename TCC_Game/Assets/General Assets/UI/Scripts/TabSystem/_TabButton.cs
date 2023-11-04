@@ -9,7 +9,7 @@ public class _TabButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHand
     public TabGroup tabGroup;
     public Image buttonBackground;
 
-    void Start()
+    void Awake()
     {
         tabGroup = transform.parent.GetComponent<TabGroup>();
         buttonBackground = this.GetComponent<Image>();

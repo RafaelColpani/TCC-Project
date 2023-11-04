@@ -5,7 +5,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using KevinCastejon.MoreAttributes;
-using TMPro;
+using UnityEngine.EventSystems;
 
 public class RebindingManager : MonoBehaviour
 {
@@ -25,6 +25,8 @@ public class RebindingManager : MonoBehaviour
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation; // to store a rebinding operation process
     private RebindingButton[] rebindingButtons;
     private readonly string rebindsKey = "playerRebinds";
+
+    private GameObject selectedBindingButton;
     #endregion
 
     #region Unity Methods
@@ -50,6 +52,9 @@ public class RebindingManager : MonoBehaviour
             return;
         }
 
+        selectedBindingButton = rebindingButton.gameObject;
+        EventSystem.current.SetSelectedGameObject(null);
+
         // UI action map disable here
         if (waitingInputMenu != null)
             waitingInputMenu.SetActive(true);
@@ -57,6 +62,7 @@ public class RebindingManager : MonoBehaviour
         // needed to store the operation in an instance to avoid memory leak
         rebindingOperation = rebindingButton.rebindAction.action.PerformInteractiveRebinding(bindingIndex)
             .WithControlsExcluding("Mouse") // to exclude some control input
+            .WithCancelingThrough("<Keyboard>/escape") // calls the cancel with escape
             .OnMatchWaitForAnother(0.1f) // a delay after rebinding, before finish the action. Reccomended by the documentation
             .OnComplete(operation => RebindingCompleted(rebindingButton, action, bindingIndex)) // code to folow when rebinding is completed
             .OnCancel(operation => RebindingCanceled()) // code to follow when rebinding is canceled
@@ -74,12 +80,24 @@ public class RebindingManager : MonoBehaviour
         if (waitingInputMenu != null)
             waitingInputMenu.SetActive(false);
 
+        if (selectedBindingButton != null)
+        {
+            EventSystem.current.SetSelectedGameObject(selectedBindingButton);
+            selectedBindingButton = null;
+        }
+
         SaveBindings();
     }
 
     private void RebindingCanceled()
     {
         rebindingOperation.Dispose(); // to finish the operation, avoiding memory leak
+
+        if (selectedBindingButton != null)
+        {
+            EventSystem.current.SetSelectedGameObject(selectedBindingButton);
+            selectedBindingButton = null;
+        }
 
         if (waitingInputMenu != null)
             waitingInputMenu.SetActive(false);
