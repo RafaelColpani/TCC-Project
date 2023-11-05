@@ -54,104 +54,104 @@ public class BindingUtils
         {
             // D-PADS -----
             case "D-Pad/Left":
-                text = "<SPRITE=0>";
+                text = "<SPRITE=11>";
                 break;
 
             case "D-Pad/Right":
-                text = "<SPRITE=1>";
+                text = "<SPRITE=12>";
                 break;
 
             case "D-Pad/Up":
-                text = "<SPRITE=2>";
+                text = "<SPRITE=13>";
                 break;
 
             case "D-Pad/Down":
-                text = "<SPRITE=3>";
+                text = "<SPRITE=10>";
                 break;
 
             // ACTION BUTTONS -----
             case "Button South":
-                text = "<SPRITE=4>";
+                text = "<SPRITE=24>"; // 28 x, 27 n
                 break;
 
             case "Button West":
-                text = "<SPRITE=5>";
+                text = "<SPRITE=25>"; // 29 x, 26 n
                 break;
 
             case "Button North":
-                text = "<SPRITE=6>";
+                text = "<SPRITE=22>"; // 26 x, 29 n
                 break;
 
             case "Button East":
-                text = "<SPRITE=7>";
+                text = "<SPRITE=23>"; // 27 x, 28 n
                 break;
 
             // SHOULDERS & TRIGGERS -----
             case "Left Shoulder":
-                text = "<SPRITE=8>";
+                text = "<SPRITE=0>"; // 30 x
                 break;
 
             case "Left Trigger":
-                text = "<SPRITE=9>";
+                text = "<SPRITE=0>";
                 break;
 
             case "Right Shoulder":
-                text = "<SPRITE=10>";
+                text = "<SPRITE=1>"; // 31 x
                 break;
 
             case "Right Trigger":
-                text = "<SPRITE=11>";
+                text = "<SPRITE=1>";
                 break;
 
             // LEFT STICK -----
             case "Left Stick/Left":
-                text = "<SPRITE=12>";
+                text = "<SPRITE=3>";
                 break;
 
             case "Left Stick/Up":
-                text = "<SPRITE=13>";
+                text = "<SPRITE=5>";
                 break;
 
             case "Left Stick/Right":
-                text = "<SPRITE=14>";
+                text = "<SPRITE=4>";
                 break;
 
             case "Left Stick/Down":
-                text = "<SPRITE=15>";
+                text = "<SPRITE=2>";
                 break;
 
             case "Left Stick Press":
-                text = "<SPRITE=16>";
+                text = "<SPRITE=15>";
                 break;
 
             // RIGHT STICK -----
             case "Right Stick/Left":
-                text = "<SPRITE=17>";
+                text = "<SPRITE=7>";
                 break;
 
             case "Right Stick/Up":
-                text = "<SPRITE=18>";
+                text = "<SPRITE=9>";
                 break;
 
             case "Right Stick/Right":
-                text = "<SPRITE=19>";
+                text = "<SPRITE=8>";
                 break;
 
             case "Right Stick/Down":
-                text = "<SPRITE=20>";
+                text = "<SPRITE=6>";
                 break;
 
             case "Right Stick Press":
-                text = "<SPRITE=21>";
+                text = "<SPRITE=18>";
                 break;
 
             // OPTIONS -----
             case "Select":
-                text = "<SPRITE=22>";
+                text = "<SPRITE=19>"; // 20 x
                 break;
 
             case "Start":
-                text = "<SPRITE=23>";
+                text = "<SPRITE=16>"; // 21 x
                 break;
 
             default:
