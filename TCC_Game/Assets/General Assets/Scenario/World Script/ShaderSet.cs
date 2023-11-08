@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ShaderSet : MonoBehaviour
 {
-    [SerializeField] bool isAutumn;
+    enum Season {AUTUMN, WINTER};
+    [SerializeField] Season season;
     [SerializeField] Vector2 RandomMinMax;
     [SerializeField] float NoiseScale;
     [Range(0,1)]
@@ -12,20 +13,26 @@ public class ShaderSet : MonoBehaviour
 
     private Renderer rend;
 
-    void Start()
+    void Update()
     {
         if (rend == null)
             rend = GetComponent<Renderer>();
 
         if (rend.material.HasInt("_IsAutumn"))
         {
-            print("hasautumn");
-            int autumn;
-            autumn = isAutumn ? 1:0;
-            rend.material.SetInt("_IsAutumn", autumn);
+            switch(season){
+                case Season.AUTUMN:
+                    rend.material.SetInt("_IsAutumn", 1);
+                    break;
+                case Season.WINTER:
+                    rend.material.SetInt("_IsAutumn", 0);
+                    break;
+                default:
+                break;
+            }
         }
-        if (rend.material.HasFloat("_Random"))
-            rend.material.SetFloat("_Random", Random.Range(RandomMinMax.x, RandomMinMax.y));
+        /*if (rend.material.HasFloat("_Random"))
+            rend.material.SetFloat("_Random", Random.Range(RandomMinMax.x, RandomMinMax.y));*/
         if (rend.material.HasFloat("_NoiseScale"))
             rend.material.SetFloat("_NoiseScale", NoiseScale);
         if (rend.material.HasFloat("_TimeMultiplier"))
