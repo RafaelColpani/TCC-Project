@@ -194,6 +194,9 @@
         },
         {
             "m_Id": "330e77011c9f4a93a94826d3f0723271"
+        },
+        {
+            "m_Id": "a610a9e2526340b69d13fbe26bed2532"
         }
     ],
     "m_GroupDatas": [
@@ -669,6 +672,20 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
+                    "m_Id": "a610a9e2526340b69d13fbe26bed2532"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "aadd0da7b5a7486cac9f6cce5f6f8536"
+                },
+                "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
                     "m_Id": "a68bbd910e904a2cbba435f2f2980b9c"
                 },
                 "m_SlotId": 4
@@ -885,9 +902,9 @@
             },
             "m_InputSlot": {
                 "m_Node": {
-                    "m_Id": "aadd0da7b5a7486cac9f6cce5f6f8536"
+                    "m_Id": "a610a9e2526340b69d13fbe26bed2532"
                 },
-                "m_SlotId": 1
+                "m_SlotId": 0
             }
         },
         {
@@ -1171,8 +1188,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 1395.0,
-            "y": -816.9999389648438,
+            "x": 1404.0,
+            "y": -787.0000610351563,
             "width": 126.0,
             "height": 34.0
         }
@@ -3455,7 +3472,7 @@
     "m_Type": "UnityEditor.ShaderGraph.BooleanMaterialSlot",
     "m_ObjectId": "608f041c02664861b2259fcabb64db57",
     "m_Id": 0,
-    "m_DisplayName": "isAutumn",
+    "m_DisplayName": "IsAutumn",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -3681,10 +3698,10 @@
     "m_Guid": {
         "m_GuidSerialized": "3c509d10-7efb-4eaa-b6d1-42b8859b55cd"
     },
-    "m_Name": "isAutumn",
+    "m_Name": "IsAutumn",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "isAutumn",
-    "m_DefaultReferenceName": "_isAutumn",
+    "m_RefNameGeneratedByDisplayName": "IsAutumn",
+    "m_DefaultReferenceName": "_IsAutumn",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -4646,6 +4663,30 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "8d7569c3381b484595dd85fd1bc76e14",
+    "m_Id": 0,
+    "m_DisplayName": "",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "8dff22ea07ce4c4a8b73f25be0dc340a",
     "m_Id": 1,
@@ -5129,6 +5170,41 @@
 }
 
 {
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.RedirectNodeData",
+    "m_ObjectId": "a610a9e2526340b69d13fbe26bed2532",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Redirect Node",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 1404.0,
+            "y": -640.0,
+            "width": 56.0,
+            "height": 23.99993896484375
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "8d7569c3381b484595dd85fd1bc76e14"
+        },
+        {
+            "m_Id": "b68d46fe929c4fc698d739a2d1d3fcb7"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    }
+}
+
+{
     "m_SGVersion": 1,
     "m_Type": "UnityEditor.ShaderGraph.CustomFunctionNode",
     "m_ObjectId": "a68bbd910e904a2cbba435f2f2980b9c",
@@ -5501,6 +5577,30 @@
             "m_Id": "bdecb5c4ffd046838c6097f494889db7"
         }
     ]
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "b68d46fe929c4fc698d739a2d1d3fcb7",
+    "m_Id": 1,
+    "m_DisplayName": "",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
 }
 
 {
