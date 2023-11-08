@@ -101,6 +101,42 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -147,7 +183,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bt_Select
+      name: bt_1
       rect:
         serializedVersion: 2
         x: 256
@@ -168,7 +204,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bt_options
+      name: bt_R2
       rect:
         serializedVersion: 2
         x: 384
@@ -189,7 +225,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: buttons-sheet_4
+      name: bt_L
       rect:
         serializedVersion: 2
         x: 512
@@ -210,7 +246,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: buttons-sheet_5
+      name: bt_R
       rect:
         serializedVersion: 2
         x: 640
@@ -234,7 +270,7 @@ TextureImporter:
       name: bt_1_ps
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 256
         width: 128
         height: 128
@@ -735,7 +771,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bt_LB
+      name: bt_LT
       rect:
         serializedVersion: 2
         x: 768
@@ -743,7 +779,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -756,7 +792,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bt_RB
+      name: bt_RT
       rect:
         serializedVersion: 2
         x: 896
@@ -764,7 +800,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -788,26 +824,28 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       bt_L1: -269971264
-      bt_LB: 1860009628
-      bt_RB: -2006359868
+      bt_LT: 1860009628
       bt_1_xbox: -1968654910
       bt_1_ps: -1605982102
       bt_l: 1326515996
+      bt_R: 690295980
+      bt_1: -815804087
       bt_4_ps: -1081492998
       bt_analog-r-right: -1603679780
       bt_4_xbox: -219032255
       bt_analog-l-right: 1891866772
       bt_r: -235723051
       bt_analog-l-down: 1536744677
+      bt_RT: -2006359868
       bt_2_xbox: 849957767
+      bt_R2: 1133702975
+      bt_L: 560185452
       bt_3_ps: -1739542054
       bt_analog-r-left: 1917019068
       bt_analog-r-up: -1277793656
-      buttons-sheet_4: 560185452
       bt_l_pressed: -480141890
       bt_dpad-left: -95835043
       bt_analog-r-down: 800168674
-      buttons-sheet_5: 690295980
       bt_r_pressed: -1180359526
       bt_analog-l-left: -1102449111
       bt_3_xbox: 1318748629
@@ -816,8 +854,6 @@ TextureImporter:
       bt_dpad-up: 1834656449
       bt_dpad-down: -1856890815
       bt_analog-l-up: 1054173974
-      bt_options: -1605982102
-      bt_Select: 1133702975
       bt_R1: -815804087
   spritePackingTag: 
   pSDRemoveMatte: 0
