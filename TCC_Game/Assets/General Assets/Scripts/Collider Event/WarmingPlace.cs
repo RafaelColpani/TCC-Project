@@ -1,34 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using KevinCastejon.MoreAttributes;
 
 public class WarmingPlace : MonoBehaviour
 {
-    [Header("Collider Area")]
-    private CircleCollider2D _collider;
+    [HeaderPlus(" ", "- COLLIDER AREA -", (int)HeaderPlusColor.yellow)]
     [SerializeField] [Range(0, 15)] float radiusInspector = 5f;
+    private CircleCollider2D _collider;
     [Space(5)]
 
-    [Header("Timer")]
+    [HeaderPlus(" ", "- TIMER -", (int)HeaderPlusColor.cyan)]
     [SerializeField] float initTimer = 25f;
     [SerializeField] float currentTimer;
+    [SerializeField] float startVigTime = 35f;
     [Space(5)]
 
-    [Header("UI - Prov")]
-    [SerializeField] Volume _volume;
-    private Vignette m_Vignette;
+    [HeaderPlus(" ", "- VOLUME -", (int)HeaderPlusColor.magenta)]
+    [SerializeField] Volume volume; 
+    private Vignette vignette; 
+    [SerializeField] float intenVignette = 0.05f;
     [Space(5)]
 
-    [Header("Scene Change")]
+    [HeaderPlus(" ", "- SCENE CHANGE -", (int)HeaderPlusColor.green)]
     [SerializeField] GameObject uiAnimLoad;
     [SerializeField] float SecondsAnim = 2;
     [Space(5)]
 
-    [Header("Debug")]
+    [HeaderPlus(" ", "- DEBUG -", (int)HeaderPlusColor.red)]
     [SerializeField] bool _isDebugMode = false;
  
 
@@ -38,7 +40,9 @@ public class WarmingPlace : MonoBehaviour
         //Timer
         currentTimer = initTimer;
 
-        _volume = GetComponent<Volume>();
+        //Post Process
+        volume.profile.TryGet(out vignette);
+        vignette.intensity.Override(0f);
     }
 
     // Update is called once per frame
@@ -49,12 +53,17 @@ public class WarmingPlace : MonoBehaviour
         _collider.radius = radiusInspector;
 
         //Timer
-        if (currentTimer > 0)
+        if (currentTimer >= 0)
         {
             currentTimer -= Time.deltaTime;
 
-
-            m_Vignette.intensity.value = Mathf.Sin(currentTimer + Time.realtimeSinceStartup);
+            //Post Process
+            if(currentTimer <= startVigTime)
+            {
+                float intenVolume = vignette.intensity.value;
+                intenVolume += intenVignette * Time.deltaTime;
+                vignette.intensity.Override(intenVolume);
+            }
         }
 
         else
@@ -72,9 +81,14 @@ public class WarmingPlace : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.LogWarning("Player está na area de calor");
+            Debug.LogWarning("Player esta na area de calor");
             //Timer
             currentTimer = initTimer;
+
+            //Post Process
+            float intenVolume = vignette.intensity.value;
+            intenVolume = Mathf.Clamp(intenVolume - intenVignette * Time.deltaTime, 0f, 1f);
+            vignette.intensity.Override(intenVolume);
         }
     }
 
@@ -82,7 +96,7 @@ public class WarmingPlace : MonoBehaviour
     {
         if (other.CompareTag("Player")) 
         {
-            Debug.LogWarning("Player está fora da area de calor");
+            Debug.LogWarning("Player esta fora da area de calor");
         }
     }
 
