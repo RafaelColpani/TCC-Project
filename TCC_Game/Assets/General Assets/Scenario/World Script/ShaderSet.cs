@@ -13,7 +13,7 @@ public class ShaderSet : MonoBehaviour
 
     private Renderer rend;
 
-    void Update()
+    void Start()
     {
         if (rend == null)
             rend = GetComponent<Renderer>();
@@ -31,8 +31,8 @@ public class ShaderSet : MonoBehaviour
                 break;
             }
         }
-        /*if (rend.material.HasFloat("_Random"))
-            rend.material.SetFloat("_Random", Random.Range(RandomMinMax.x, RandomMinMax.y));*/
+        if (rend.material.HasFloat("_Random"))
+            rend.material.SetFloat("_Random", Random.Range(RandomMinMax.x, RandomMinMax.y));
         if (rend.material.HasFloat("_NoiseScale"))
             rend.material.SetFloat("_NoiseScale", NoiseScale);
         if (rend.material.HasFloat("_TimeMultiplier"))
