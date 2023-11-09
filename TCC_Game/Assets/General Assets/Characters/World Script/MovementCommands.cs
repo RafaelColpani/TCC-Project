@@ -115,6 +115,11 @@ public class MoveCommand : ICommand
     {
         this.walkSpeed = value;
     }
+
+    public void SetIsFacingRight(bool value)
+    {
+        this.isFacingRight = value;
+    }
     #endregion
 }
 

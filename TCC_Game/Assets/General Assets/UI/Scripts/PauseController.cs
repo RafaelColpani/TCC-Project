@@ -70,6 +70,8 @@ public class PauseController : MonoBehaviour
         else
         {
             settings.SetActive(true);
+            var tabGroup = GetComponentInChildren<TabGroup>();
+            tabGroup.OnTabSelected(tabGroup.firstTabSelected.GetComponent<_TabButton>());
             EventSystem.current.SetSelectedGameObject(firstSettingsSelected);
         }
     }

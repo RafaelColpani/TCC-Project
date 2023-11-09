@@ -1,8 +1,6 @@
 // Created by: Henrique Batista de Assis
 // Date: 27/12/2022
 
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,14 +10,14 @@ public class RebindingButton : MonoBehaviour
     #region Inspector
     [Header("Input System")]
     [Tooltip("The reference of the specified action in the action map.")]
-    [SerializeField] public InputActionReference rebindAction;
+    public InputActionReference rebindAction;
     [Tooltip("The id of the binding in string form")]
-    [SerializeField] public string bindingId;
+    public string bindingId;
     [Tooltip("The format that will be displayed the Binding ID in inspector")]
     [SerializeField] InputBinding.DisplayStringOptions displayStringOptions;
 
     [Header("UI")]
-    [SerializeField] public TMP_Text buttonText;
+    public TMP_Text buttonText;
     #endregion
 
     #region Non-Inpector
@@ -44,9 +42,7 @@ public class RebindingButton : MonoBehaviour
 
         Rm.LoadBindings();
 
-        buttonText.text = InputControlPath.ToHumanReadableString(
-            action.bindings[bindingIndex].effectivePath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        buttonText.text = BindingUtils.GetButtonImageTextByInputAction(action, bindingIndex);
     }
     #endregion
 
