@@ -22,7 +22,7 @@
     },
     {
       "character": "NPC",
-      "text": "Bom, já que acordou, sabe que seu dever deve ser cumprido. Temos muitas coisas a fazer, então vamos lá... Vou dar o meu melhor para te auxiliar.",
+      "text": "Bom, já que acordou, sabe que seu dever deve ser cumprido. Temos muitas coisas a fazer, então vamos lá...",
       "condition": [
         {
           "type": "firstTime",
@@ -66,25 +66,20 @@
         },
         {
           "choiceId": 3,
-          "text": "A situação do bioma.",
+          "text": "Me conte sobre você.",
           "nextId": 4
         },
         {
           "choiceId": 4,
-          "text": "Me conte sobre você.",
-          "nextId": 5
-        },
-        {
-          "choiceId": 5,
           "text": "Estou de saída.",
-          "nextId": 6
+          "nextId": 5
         }
       ]
     },
     {
       "id": 2,
       "character": "NPC",
-      "text": "A deusa está morrendo... Queria ajudá-la, mas não sou forte o bastante para trazer as sementes eu mesmo.",
+      "text": "A deusa está morrendo... Queria ajudá-la, mas não tenho o poder de trazer as sementes eu mesma.",
       "nextId": 1
     },
     {
@@ -125,7 +120,7 @@
     },
     {
       "character": "NPC",
-      "text": "Quando for sair, não se esqueça de olhar nos arredores. Sempre terá uma semente em cada bioma.",
+      "text": "Recupere uma semente e o próximo bioma naturalmente se mostrará para você. Esse é um dos ensinamentos da deusa.",
       "condition": [
         {
           "type": "hasSummer",
@@ -171,17 +166,7 @@
     },
     {
       "character": "NPC",
-      "text": "Ouvi falar que a semente de verão cria corais ao seu redor para se proteger e surge em locais úmidos. Talvez por não ficar exposta à luz do sol, sempre atrai luz de outros seres.",
-      "condition": [
-        {
-          "type": "hasSummer",
-          "boolValue": false
-        }
-      ]
-    },
-    {
-      "character": "NPC",
-      "text": "Falta a semente de outono. Ao leste do bioma de verão, você conseguirá encontrá-lo perto dos céus.",
+      "text": "Falta a semente de outono e inverno. Encontre a semente de outono e o inverno se mostrará para você.",
       "condition": [
         {
           "type": "hasAutumn",
@@ -191,7 +176,7 @@
     },
     {
       "character": "NPC",
-      "text": "Falta a semente do inverno, no oeste daqui. Cuidado, pois os perigos são muitos e extremos.",
+      "text": "Falta a semente do inverno... É a última, então se esforce.",
       "condition": [
         {
           "type": "hasWinter",
@@ -201,7 +186,7 @@
     },
     {
       "character": "NPC",
-      "text": "Muito obrigada por todo seu trabalho! Tô ansioso para as próximas sementes que conseguir.",
+      "text": "Muito obrigada por todo seu trabalho! Tô ansiosa para as próximas sementes que conseguir.",
       "nextId": 1
     },
     {
@@ -211,145 +196,22 @@
     },
     {
       "character": "NPC",
-      "text": "Eu mesmo não sei muito sobre como elas começaram a existir ou como exatamente funcionam para receber a energia ou como a deusa renova os biomas com elas... Ou como elas renovam a energia dela."
+      "text": "Eu mesma não sei muito sobre como elas começaram a existir ou como exatamente funcionam para receber a energia ou como a deusa renova os biomas com elas... Ou como elas renovam a energia dela."
     },
     {
       "character": "NPC",
       "text": "Haha, não foi muito útil, né? Mas pelo menos foi como consegui pensar em explicar... Só a deusa realmente sabe sobre os detalhes, creio eu.",
       "nextId": 1
     },
+  
     {
       "id": 4,
       "character": "NPC",
-      "text": "De qual em específico quer saber?",
-      "choices": [
-        {
-          "choiceId": 1,
-          "text": "Verão",
-          "nextId": 9
-        },
-        {
-          "choiceId": 2,
-          "text": "Outono",
-          "nextId": 10
-        },
-        {
-          "choiceId": 3,
-          "text": "Inverno",
-          "nextId": 11
-        }
-      ]
-    },
-    {
-      "id": 9,
-      "character": "NPC",
-      "text": "A região do verão está normal por agora.",
-      "condition": [
-        {
-          "type": "summerCondition",
-          "number": 1
-        }
-      ],
-      "nextId": 1
-    },
-    {
-      "character": "NPC",
-      "text": "A região do verão está sumindo... Tome cuidado.",
-      "condition": [
-        {
-          "type": "summerCondition",
-          "number": 2
-        }
-      ],
-      "nextId": 1
-    },
-    {
-      "character": "NPC",
-      "text": "O verão... Que tragédia. Tente ir para outro lugar, rápido!",
-      "condition": [
-        {
-          "type": "summerCondition",
-          "number": 3
-        }
-      ],
-      "nextId": 1
-    },
-    {
-      "id": 10,
-      "character": "NPC",
-      "text": "A região do outono tá normal.",
-      "condition": [
-        {
-          "type": "autumnCondition",
-          "number": 1
-        }
-      ],
-      "nextId": 1
-    },
-    {
-      "character": "NPC",
-      "text": "Região do outono tá sumindo.",
-      "condition": [
-        {
-          "type": "autumnCondition",
-          "number": 2
-        }
-      ],
-      "nextId": 1
-    },
-    {
-      "character": "NPC",
-      "text": "Região do outono ta podre.",
-      "condition": [
-        {
-          "type": "autumnCondition",
-          "number": 3
-        }
-      ],
-      "nextId": 1
-    },
-    {
-      "id": 11,
-      "character": "NPC",
-      "text": "Região do inverno tá ok.",
-      "condition": [
-        {
-          "type": "winterCondition",
-          "number": 1
-        }
-      ],
-      "nextId": 1
-    },
-    {
-      "character": "NPC",
-      "text": "Região do inverno tá sumindo.",
-      "condition": [
-        {
-          "type": "winterCondition",
-          "number": 2
-        }
-      ],
-      "nextId": 1
-    },
-    {
-      "character": "NPC",
-      "text": "Região do inverno tá podre.",
-      "condition": [
-        {
-          "type": "winterCondition",
-          "number": 3
-        }
-      ],
+      "text": "Sou apenas uma humilde emissária da deusa. Espero conseguir te ajudar da forma que puder.",
       "nextId": 1
     },
     {
       "id": 5,
-      "character": "NPC",
-      "text": "Sou apenas um humilde emissário da deusa. Espero conseguir te ajudar da forma que puder.",
-      "nextId": 1
-    },
-    {
-      "id": 6,
       "character": "NPC",
       "text": "Você já vai? Boa sorte na sua jornada!"
     },
