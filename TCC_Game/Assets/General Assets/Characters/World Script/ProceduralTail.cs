@@ -102,6 +102,8 @@ public class ProceduralTail : MonoBehaviour
     [HeaderPlus(" ", "- IDLE -", (int)HeaderPlusColor.yellow)]
     [Tooltip("The Speed that that targets of the tails will move in idle animation")]
     [SerializeField] private float idleAnimationSpeed;
+    [Tooltip("The distance to reach each target to complete an animation cycle")]
+    [SerializeField] private float idleAnimationDistance = 0.0001f;
 
     [HeaderPlus(" ", "- WALKING -", (int)HeaderPlusColor.cyan)]
     [Tooltip("The Speed that that targets of the tails will go to the walking position")]
@@ -176,7 +178,7 @@ public class ProceduralTail : MonoBehaviour
                     movingTo = tail.movingToIdle;
                     positions = tail.idleMovementPositions;
                     speed = idleAnimationSpeed;
-                    distance = 0.0001f;
+                    distance = idleAnimationDistance;
                     break;
 
                 default: // walking
