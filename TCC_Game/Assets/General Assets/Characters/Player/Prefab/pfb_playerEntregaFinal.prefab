@@ -5590,6 +5590,7 @@ MonoBehaviour:
     idleIsMovingForward: 0
     walkIsMovingForward: 0
   idleAnimationSpeed: 2
+  idleAnimationDistance: 0.0001
   walkingAnimationSpeed: 3
   ascendingAnimationSpeed: 7
   descendingAnimationSpeed: 7
@@ -6582,8 +6583,6 @@ GameObject:
   - component: {fileID: 8739475468521492953}
   - component: {fileID: 8739475468521492954}
   - component: {fileID: 8739475468521492955}
-  - component: {fileID: 8739475468521492932}
-  - component: {fileID: 8739475468521492933}
   - component: {fileID: 8739475468521492934}
   m_Layer: 3
   m_Name: Body
@@ -6685,48 +6684,6 @@ MonoBehaviour:
   belly: 0
   phyDefense: 0
   magDefense: 0
---- !u!114 &8739475468521492932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8739475468521492928}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595f6cdf4342e0044a1026965322a369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deathParticles: {fileID: 0}
-  deathIcon: {fileID: 0}
-  deathIconOffset: {x: 0, y: 0, z: 0}
-  iconFollowsThis: {fileID: 0}
-  invincibilityTime: 2
-  interactable: {fileID: 0}
-  parentObject: {fileID: 0}
-  droppableItem: []
-  dropRate: []
-  isAlive: 1
---- !u!114 &8739475468521492933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8739475468521492928}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b79c4a0b60b85342b12c0c58d043e67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bellyMaxTimer: 20
-  bellyTimer: 0
-  hpMaxTimer: 5
-  hpTimer: 0
-  hpRecoverMaxTimer: 2
-  hpRecoverTimer: 0
-  hpLossFromBelly: 2
-  hpGainFromBelly: 3
 --- !u!114 &8739475468521492934
 MonoBehaviour:
   m_ObjectHideFlags: 0
