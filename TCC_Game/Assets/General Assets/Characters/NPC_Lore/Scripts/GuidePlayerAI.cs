@@ -22,6 +22,8 @@ public class GuidePlayerAI : MonoBehaviour
     [HeaderPlus(" ", "- MOVEMENT -", (int)HeaderPlusColor.white)]
     [Tooltip("The speed that the AI will walk")]
     [SerializeField] float walkSpeed;
+    [Tooltip("Tells if this character will run away from player, instead of going to its destination")]
+    [SerializeField] bool runAwayFromPlayer;
 
     [HeaderPlus(" ", "- WAIT STATE -", (int)HeaderPlusColor.red)]
     [Tooltip("The minimum distance that the AI have to be away from player to wait for him")]
@@ -31,7 +33,6 @@ public class GuidePlayerAI : MonoBehaviour
     [Tooltip("The minimum distance that the AI have to be from player to guide him")]
     [SerializeField] float distanceToGuidePlayer;
     
-
     [HeaderPlus(" ", "- REACHED STATE -", (int)HeaderPlusColor.magenta)]
     [Tooltip("The position in the world where considered that the AI reached your destination")]
     [SerializeField] Vector3 reachedPosition;
@@ -114,8 +115,17 @@ public class GuidePlayerAI : MonoBehaviour
     {
         int value = 1;
 
-        if (body.position.x > reachedPosition.x)
-            value = -1;
+        if (!runAwayFromPlayer)
+        {
+            if (body.position.x > reachedPosition.x)
+                value = -1;
+        }
+
+        else
+        {
+            if (body.position.x < playerBody.position.x)
+                value = -1;
+        }
 
         moveCommand.Execute(this.transform, value);
     }
