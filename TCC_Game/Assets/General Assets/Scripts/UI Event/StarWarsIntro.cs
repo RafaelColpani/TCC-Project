@@ -25,15 +25,6 @@ public class StarWarsIntro : MonoBehaviour
         StartCoroutine(ScrollText());
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            // Pule a introdução quando a tecla Espaço for pressionada
-            SkipIntro();
-        }
-    }
-
     private IEnumerator ScrollText()
     {
         isScrolling = true;
