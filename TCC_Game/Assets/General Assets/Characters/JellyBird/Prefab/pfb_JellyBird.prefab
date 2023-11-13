@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8c47858045783d42ae077ef61452121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  life: {fileID: 1775972834}
+  life: {fileID: 0}
 --- !u!58 &232936764
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1727,6 +1727,8 @@ GameObject:
   - component: {fileID: 1816589084}
   - component: {fileID: 1816589085}
   - component: {fileID: 7558917096131285497}
+  - component: {fileID: 2399481368172785453}
+  - component: {fileID: 4778543480585394168}
   m_Layer: 6
   m_Name: spr_JellyBird
   m_TagString: Untagged
@@ -1867,6 +1869,10 @@ MonoBehaviour:
   ascendingLegSpeed: 0
   descendingLegSpeed: 0
   bodyPositionOffset: -0.19
+  isChangeBodyOffset: 0
+  followTorsoAnimation: 0
+  idleBodySpeed: 0
+  idleBodyOffsetSubtraction: 0
   makeRotation: 0
   footstepGrass: []
   footstepSnow: []
@@ -1961,6 +1967,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveState: 0
+--- !u!114 &2399481368172785453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2706118935982296959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8662b9913b3444ad9f50c57f4cfb4eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  headBone: {fileID: 1300033314783833502}
+  walkingTargetLocalPosition: {x: 0, y: 0, z: 0}
+  targetMoveSpeed: 0
+  targetsIdleAnimation:
+  - {x: -3.9, y: 8.17, z: 0}
+  - {x: -2.02, y: 9.05, z: 0}
+  idleAnimationSpeed: 4
+  walkingHeadLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+  headRotationSpeed: 0
+--- !u!114 &4778543480585394168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2706118935982296959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36b0863314314e6e803e7f352482fc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runSpeed: 20
+  catchFruitDistance: 7
+  eatFruitSpeed: 1
+  eatFruitDistance: 0
+  returnFromEatSpeed: 5
+  fruitPuzzle: {fileID: 0}
 --- !u!1 &2941781591025896726
 GameObject:
   m_ObjectHideFlags: 0
@@ -5990,10 +6036,6 @@ GameObject:
   - component: {fileID: 8858033237223302733}
   - component: {fileID: 8858033237223302739}
   - component: {fileID: 8858033237223302738}
-  - component: {fileID: 1775972834}
-  - component: {fileID: 1775972835}
-  - component: {fileID: 1775972836}
-  - component: {fileID: 1775972837}
   m_Layer: 6
   m_Name: Body
   m_TagString: damage
@@ -6106,81 +6148,6 @@ PolygonCollider2D:
       - {x: 0.4316681, y: 2.1543083}
       - {x: 0.103977025, y: 2.7511303}
       - {x: 0.10793373, y: 1.1815999}
---- !u!114 &1775972834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8858033237223302732}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595f6cdf4342e0044a1026965322a369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deathParticles: {fileID: 0}
-  deathIcon: {fileID: 4901086461453483306, guid: 396e2d38370dd4a98ad6330ec1914c58, type: 3}
-  deathIconOffset: {x: 0, y: 2.8, z: 0}
-  iconFollowsThis: {fileID: 8858033237223302733}
-  invincibilityTime: 0
-  interactable: {fileID: 232936762}
-  parentObject: {fileID: 8858033237283096176}
-  droppableItem:
-  - {fileID: 331157449500458617, guid: 37420ad60a960124196c19192c035bc3, type: 3}
-  dropRate:
-  - 100
-  isAlive: 1
---- !u!114 &1775972835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8858033237223302732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b597869efe1ac4f42a2b5cf00ef308eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxLife: 3
-  life: 1
-  maxHp: 8
-  hp: 0
-  maxBelly: 10
-  belly: 0
-  phyDefense: 0
-  magDefense: 0
---- !u!114 &1775972836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8858033237223302732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a61610c87f588e46b72f06ad6d3cf29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPlayer: 0
-  isBullet: 0
-  dmgType: 0
-  dmg: 2
-  lifeTime: 5
-  creator: []
---- !u!114 &1775972837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8858033237223302732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c1e2a18797b341af8a3ba4f7ba30483, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  regionCollider: {fileID: 8229613690799744170}
 --- !u!1 &8858033237245279419
 GameObject:
   m_ObjectHideFlags: 0

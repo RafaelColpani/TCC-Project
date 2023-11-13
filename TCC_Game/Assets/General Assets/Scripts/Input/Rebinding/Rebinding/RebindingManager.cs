@@ -71,9 +71,7 @@ public class RebindingManager : MonoBehaviour
 
     private void RebindingCompleted(RebindingButton rb, InputAction action, int bindingIndex)
     {
-        rb.buttonText.text = InputControlPath.ToHumanReadableString(
-            action.bindings[bindingIndex].effectivePath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        rb.buttonText.text = BindingUtils.GetButtonImageTextByInputAction(action, bindingIndex);
 
         rebindingOperation.Dispose(); // to finish the operation, avoiding memory leak, MUST HAVE
 
@@ -111,9 +109,7 @@ public class RebindingManager : MonoBehaviour
 
             action.RemoveBindingOverride(bindingIndex);
 
-            rb.buttonText.text = InputControlPath.ToHumanReadableString(
-                action.bindings[bindingIndex].effectivePath,
-                InputControlPath.HumanReadableStringOptions.OmitDevice);
+            rb.buttonText.text = BindingUtils.GetButtonImageTextByInputAction(action, bindingIndex);
         }
 
         SaveBindings();
