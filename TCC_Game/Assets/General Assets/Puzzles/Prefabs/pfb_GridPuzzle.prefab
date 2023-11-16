@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4813263609722240104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4813263609722240105}
+  - component: {fileID: 4813263609722240110}
+  m_Layer: 0
+  m_Name: pfb_GridPuzzle
+  m_TagString: GridPuzzle
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4813263609722240105
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813263609722240104}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4813263609722240110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813263609722240104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9bf7024969cd4947a3a240c980b84af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformPrefab: {fileID: 3213411393678411783, guid: 8251b7f15fb484d60a5d3aaa2b9973bd, type: 3}
+  rowsCount: 4
+  columnsCount: 4
+  firstPlatformPosition: {x: -4.51, y: 7.92, z: 0}
+  platformDistances: {x: 4.06, y: 3.45}
+  gridRespawnTime: 3
+  constructOnAwake: 1
+  initialPrefab: {fileID: 8153120582887201337, guid: 17a1660476af5485483b2e5f7d44d97e, type: 3}
+  finalPrefab: {fileID: 8402419136910305516, guid: a015dd91e372147a9b7b8215a3656f42, type: 3}
+  initialPositionInGrid:
+    x: 3
+    y: 0
+  finalPositionInGrid:
+    x: 3
+    y: 3
+  trapPrefab: {fileID: 1428897766572924926, guid: 752fafc88170646459fafff3c016a28d, type: 3}
+  trapEnemyPrefab: {fileID: 1658532984781544963, guid: 17d80bc8b9cff42cb9aa027dd2b713ec, type: 3}
+  trapEnemyLocalPosition: {x: 0, y: 1.9, z: 0}
+  trapsPositionInGrid:
+  - x: 1
+    y: 1
+  - x: 1
+    y: 2
+  collectiblePrefab: {fileID: 8441626083185345923, guid: 576ab921e0b3049339bc671229fa536e, type: 3}
+  stepIndicatorPrefab: {fileID: 6565350900929592338, guid: 38af4e3f1be944b47b217742c9fd3516, type: 3}
+  collectibleLocalPosition: {x: 0, y: 1.77, z: 0}
+  collectiblesGrid:
+  - collectibleObject: {fileID: 0}
+    gridPosition:
+      x: 2
+      y: 0
+    isEven: 0
+  - collectibleObject: {fileID: 0}
+    gridPosition:
+      x: 2
+      y: 2
+    isEven: 1
+  - collectibleObject: {fileID: 0}
+    gridPosition:
+      x: 0
+      y: 3
+    isEven: 0
+  swapCollectiblesLimit: 3
+  firstStepIndicatorPosition: {x: 10.91, y: -3.91, z: 0}
+  stepIndicatorDstances: {x: 1.8, y: 0}
