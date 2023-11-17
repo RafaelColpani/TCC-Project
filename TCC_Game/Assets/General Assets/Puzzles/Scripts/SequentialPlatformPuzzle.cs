@@ -4,6 +4,7 @@ using UnityEngine;
 using KevinCastejon.MoreAttributes;
 using System.Linq;
 using static UnityEditor.PlayerSettings;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 #region STRUCTS
 [System.Serializable]
@@ -118,6 +119,7 @@ public class SequentialPlatformPuzzle : MonoBehaviour
     private ProceduralLegs playerLegs;
 
     private bool gridConstructed = false;
+    private bool initiatedPuzzle = false;
 
     private int collectCollectiblesCount = 0;
     #endregion
@@ -144,6 +146,9 @@ public class SequentialPlatformPuzzle : MonoBehaviour
 
         // is making the puzzle -----
         var stepedPlatform = GetStepedPlatform();
+
+        if (initiatedPuzzle && !IsSteppingPlatform(playerLegs.GetGroundedObject()))
+            LostPuzzle();
 
         if (stepedPlatform == null) return;
 
@@ -183,6 +188,19 @@ public class SequentialPlatformPuzzle : MonoBehaviour
             }
 
         return null;
+    }
+
+    private bool IsSteppingPlatform(GameObject stepedObject)
+    {
+        if (stepedObject == null)
+            return true;
+
+        foreach(var row in platformsGrid)
+            foreach (var platform in row)
+                if (platform.platform == stepedObject)
+                    return true;
+
+        return false;
     }
 
     private bool IsInsideStepRules(PlatformGrid stepedPlatform)
@@ -253,6 +271,7 @@ public class SequentialPlatformPuzzle : MonoBehaviour
         gridConstructed = false;
         previousPlatformVisited = null;
         collectCollectiblesCount = 0;
+        initiatedPuzzle = false;
 
         foreach (var collectible in collectiblesGrid)
         {
@@ -359,8 +378,6 @@ public class SequentialPlatformPuzzle : MonoBehaviour
 
                         collectiblesGrid[index].StepIndicators.Add(stepIndicator);
                     }
-
-                    collectiblesGrid[index].collectibleObject.SetActive(false);
                 }
 
                 // PLATFORM POSITIONS CHECKERS -------
@@ -476,6 +493,12 @@ public class SequentialPlatformPuzzle : MonoBehaviour
         foreach (var collectible in collectiblesGrid)
         {
             if (collectible.StepIndicators.Count() <= 0) continue;
+
+            if (collectible.stepCount == -1)
+            {
+                SwapCollectiblesActive(collectible, false);
+                initiatedPuzzle = true;
+            }
 
             if (collectible.stepCount == 0)
             {
