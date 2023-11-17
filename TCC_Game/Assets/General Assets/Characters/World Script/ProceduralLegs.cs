@@ -136,6 +136,10 @@ public class ProceduralLegs : MonoBehaviour
     [Tooltip("Tells if the body will rotate accordingly to the position of the legs. Better used with a spider like animal for example.")]
     [SerializeField] private bool makeRotation;
 
+    [HeaderPlus(" ", "- FLOATING GROUND -", (int)HeaderPlusColor.green)]
+    [Tooltip("The layer of the floating grounds. Grounds that are considered ground for the legs, but ignored by the obstacle blocker")]
+    [SerializeField] LayerMask floatingGroundLayers;
+
     [HeaderPlus(" ", "- SFX -", (int)HeaderPlusColor.yellow)]
     [SerializeField] private AudioSource[] footstepGrass;
     [SerializeField] private AudioSource[] footstepSnow;
@@ -247,31 +251,7 @@ public class ProceduralLegs : MonoBehaviour
             // if the character itself if not on ground
             if (!JumpUtils.IsGrounded(groundChecks, groundCheckDistance, targetsDetections) && gravityController.GetIsOn())
             {
-                target.IsOnGround = false;
-                var fromHeight = false;
-                var newPosition = Vector3.zero;
-                target.AirLegs();
-
-                // jumping
-                if (characterMovementState.MoveState == CharacterMovementState.MovementState.ASCENDING)
-                {
-                    newPosition = Vector3.Lerp(target.effectorTarget.position, target.foot.position, ascendingLegSpeed * Time.fixedDeltaTime);
-                    fromHeight = true;
-                }
-
-                // falling
-                else if (characterMovementState.MoveState == CharacterMovementState.MovementState.DESCENDING)
-                {
-                    newPosition = Vector3.Lerp(target.effectorTarget.position, target.foot.position, descendingLegSpeed * Time.fixedDeltaTime);
-                    fromHeight = true;
-                }
-
-                // move effector to base
-                if (fromHeight)
-                    target.effectorTarget.position = newPosition;
-
-                target.WasOnFoot = true;
-
+                FloatingLegs(target);
                 continue;
             }
 
@@ -291,6 +271,13 @@ public class ProceduralLegs : MonoBehaviour
                     }
                 }
 
+                continue;
+            }
+
+            // if if the character is jumping through a floating ground
+            if (JumpUtils.IsGrounded(groundChecks, groundCheckDistance, floatingGroundLayers) && gravityController.Velocity.y > 0)
+            {
+                FloatingLegs(target);
                 continue;
             }
 
@@ -333,6 +320,14 @@ public class ProceduralLegs : MonoBehaviour
 
         if (gravityController.Jumped)
         {
+            DisableWalkingFlags();
+            return false;
+        }
+
+        if (JumpUtils.IsGrounded(groundChecks, groundCheckDistance, floatingGroundLayers) && gravityController.Velocity.y > 0)
+        {
+            gravityController.SetIsOn(true);
+            gravityController.Jumped = false;
             DisableWalkingFlags();
             return false;
         }
@@ -472,6 +467,36 @@ public class ProceduralLegs : MonoBehaviour
     #endregion
 
     #region Aux
+    private void FloatingLegs(ObjectTargets target)
+    {
+        target.IsOnGround = false;
+        var fromHeight = false;
+        var newPosition = Vector3.zero;
+        target.AirLegs();
+
+        // jumping
+        if (characterMovementState.MoveState == CharacterMovementState.MovementState.ASCENDING)
+        {
+            newPosition = Vector3.Lerp(target.effectorTarget.position, target.foot.position, ascendingLegSpeed * Time.fixedDeltaTime);
+            fromHeight = true;
+        }
+
+        // falling
+        else if (characterMovementState.MoveState == CharacterMovementState.MovementState.DESCENDING)
+        {
+            newPosition = Vector3.Lerp(target.effectorTarget.position, target.foot.position, descendingLegSpeed * Time.fixedDeltaTime);
+            fromHeight = true;
+        }
+
+        // move effector to base
+        if (fromHeight)
+            target.effectorTarget.position = newPosition;
+
+        target.WasOnFoot = true;
+
+        return;
+    }
+
     private float TargetsDistance(ObjectTargets objectTarget, bool byFinalTarget = true)
     {
         if (byFinalTarget)
@@ -535,6 +560,14 @@ public class ProceduralLegs : MonoBehaviour
     public bool GetIsWalking()
     {
         return evenIsWalking || oddIsWalking || waitingNextWalk;
+    }
+
+    public GameObject GetGroundedObject()
+    {
+        if (!JumpUtils.IsGrounded(groundChecks, groundCheckDistance, targetsDetections)) return null;
+        if (JumpUtils.IsGrounded(groundChecks, groundCheckDistance, floatingGroundLayers) && gravityController.Velocity.y > 0) return null;
+
+        return JumpUtils.GetGroundedObject(groundChecks, groundCheckDistance, targetsDetections);
     }
     #endregion
 }

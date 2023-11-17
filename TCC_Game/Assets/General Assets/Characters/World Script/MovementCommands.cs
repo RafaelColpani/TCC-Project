@@ -202,6 +202,19 @@ public class JumpUtils
         return false;
     }
 
+    public static GameObject GetGroundedObject(Transform[] groundChecks, float groundCheckDistance, LayerMask groundLayer)
+    {
+        foreach (var groundCheck in groundChecks)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
+
+            if (hit.collider != null && !hit.collider.isTrigger)
+                return hit.collider.gameObject;
+        }
+
+        return null;
+    }
+
     public static bool UniqueGroundCheckIsGrounded(Transform groundCheck, float groundCheckDistance, LayerMask groundLayer)
     {
         RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayer);
