@@ -222,12 +222,14 @@ public class SequentialPlatformPuzzle : MonoBehaviour
         return false;
     }
 
-    private void SwapCollectiblesActive(CollectibleGrid collectible)
+    private void SwapCollectiblesActive(CollectibleGrid collectible, bool isActive)
     {
         if (collectible.collectibleObject != null)
         {
-            collectible.stepCount = 0;
-            collectible.collectibleObject.SetActive(!collectible.collectibleObject.activeSelf);
+            if (collectible.stepCount >= collectible.fixedStepCount)
+                collectible.stepCount = 0;
+
+            collectible.collectibleObject.SetActive(isActive);
         }
     }
 
@@ -357,6 +359,8 @@ public class SequentialPlatformPuzzle : MonoBehaviour
 
                         collectiblesGrid[index].StepIndicators.Add(stepIndicator);
                     }
+
+                    collectiblesGrid[index].collectibleObject.SetActive(false);
                 }
 
                 // PLATFORM POSITIONS CHECKERS -------
@@ -474,12 +478,16 @@ public class SequentialPlatformPuzzle : MonoBehaviour
             if (collectible.StepIndicators.Count() <= 0) continue;
 
             if (collectible.stepCount == 0)
+            {
+                SwapCollectiblesActive(collectible, false);
+
                 foreach (var indicator in collectible.StepIndicators)
                 {
                     if (indicator == collectible.StepIndicators[0]) continue;
                     var indicatorSR = indicator.GetComponent<SpriteRenderer>();
                     indicatorSR.color = Color.white;
                 }
+            }
 
             if (collectible.stepCount >= 0)
             {
@@ -488,7 +496,7 @@ public class SequentialPlatformPuzzle : MonoBehaviour
             }
 
             if (++collectible.stepCount >= collectible.fixedStepCount)
-                SwapCollectiblesActive(collectible);
+                SwapCollectiblesActive(collectible, true);
 
         }
 
