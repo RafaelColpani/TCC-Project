@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using KevinCastejon.MoreAttributes;
 using System.Linq;
+using static UnityEditor.PlayerSettings;
 
 #region STRUCTS
 [System.Serializable]
@@ -221,14 +222,13 @@ public class SequentialPlatformPuzzle : MonoBehaviour
         return false;
     }
 
-    private void SwapCollectiblesActive()
+    private void SwapCollectiblesActive(CollectibleGrid collectible)
     {
-        foreach (var collectible in collectiblesGrid)
-            if (collectible.collectibleObject != null)
-            {
-                collectible.stepCount = 0;
-                collectible.collectibleObject.SetActive(!collectible.collectibleObject.activeSelf);
-            }
+        if (collectible.collectibleObject != null)
+        {
+            collectible.stepCount = 0;
+            collectible.collectibleObject.SetActive(!collectible.collectibleObject.activeSelf);
+        }
     }
 
     private bool IsFinishedPuzzle(bool excludeFinal = false)
@@ -253,7 +253,10 @@ public class SequentialPlatformPuzzle : MonoBehaviour
         collectCollectiblesCount = 0;
 
         foreach (var collectible in collectiblesGrid)
+        {
             collectible.stepCount = -1;
+            collectible.StepIndicators.RemoveRange(0, collectible.StepIndicators.Count());
+        }
     }
 
     private void LostPuzzle()
@@ -338,6 +341,7 @@ public class SequentialPlatformPuzzle : MonoBehaviour
                     collectiblesGrid[index].stepCount = -1;
 
                     collectiblesGrid[index].collectibleObject.AddComponent<GridCollectible>();
+                    collectiblesGrid[index].collectibleObject.GetComponent<GridCollectible>().AddCollectibleGrid(collectiblesGrid[index]);
                     collectiblesGrid[index].collectibleObject.AddComponent<BoxCollider2D>();
 
                     collectiblesGrid[index].collectibleObject.GetComponent<BoxCollider2D>().isTrigger = true;
@@ -345,22 +349,11 @@ public class SequentialPlatformPuzzle : MonoBehaviour
                     // spawn step indicators
                     for (int i = 0; i < collectiblesGrid[index].fixedStepCount; i++)
                     {
-                        var stepIndicator = Instantiate(stepIndicatorPrefab, collectiblesGrid[index].collectibleObject.transform);
-                        //stepIndicator.transform.localScale = SetChildScale(collectiblesGrid[index].collectibleObject.transform,
-                                                                           //stepIndicator.transform);
+                        var stepIndicator = Instantiate(stepIndicatorPrefab, platform.transform);
+                        stepIndicator.transform.localScale = SetChildScale(platform.transform, stepIndicator.transform);
 
-                        if (i == 0)
-                        {
-                            var pos = collectiblesGrid[index].collectibleObject.transform.position;
-                            stepIndicator.transform.position = new Vector3(pos.x, pos.y + stepIndicatorYOffset, pos.z);
-                        }
-                        else
-                        {
-                            var pos = collectiblesGrid[index].StepIndicators.Last().transform.position;
-                            stepIndicator.transform.position = new Vector3(pos.x + stepIndicatorSpacing,
-                                                                           pos.y,
-                                                                           pos.z);
-                        }
+                        var pos = collectiblesGrid[index].collectibleObject.transform.localPosition;
+                        stepIndicator.transform.localPosition = new Vector3(pos.x, pos.y + stepIndicatorYOffset, pos.z);
 
                         collectiblesGrid[index].StepIndicators.Add(stepIndicator);
                     }
@@ -398,6 +391,8 @@ public class SequentialPlatformPuzzle : MonoBehaviour
             platformsRow = new List<PlatformGrid>();
         }
 
+        AlignStepIndicatorsPosition();
+
         //foreach (var row in platformsGrid)
         //    foreach (var platform in row)
         //    {
@@ -407,9 +402,15 @@ public class SequentialPlatformPuzzle : MonoBehaviour
         gridConstructed = true;
     }
 
-    public void CollectedCollectible()
+    public void CollectedCollectible(CollectibleGrid collectableGrid)
     {
         collectCollectiblesCount++;
+
+        Destroy(collectableGrid.collectibleObject);
+        foreach (var indicator in collectableGrid.StepIndicators)
+            Destroy(indicator);
+
+        collectableGrid.StepIndicators.RemoveRange(0, collectableGrid.StepIndicators.Count());
     }
     #endregion
 
@@ -470,6 +471,8 @@ public class SequentialPlatformPuzzle : MonoBehaviour
         print("TROCA O SHADER DO CRISTAL AQUI");
         foreach (var collectible in collectiblesGrid)
         {
+            if (collectible.StepIndicators.Count() <= 0) continue;
+
             if (collectible.stepCount == 0)
                 foreach (var indicator in collectible.StepIndicators)
                 {
@@ -485,7 +488,7 @@ public class SequentialPlatformPuzzle : MonoBehaviour
             }
 
             if (++collectible.stepCount >= collectible.fixedStepCount)
-                SwapCollectiblesActive();
+                SwapCollectiblesActive(collectible);
 
         }
 
@@ -495,6 +498,26 @@ public class SequentialPlatformPuzzle : MonoBehaviour
     private Vector3 SetChildScale(Transform parent, Transform child)
     {
         return child.transform.localScale = new Vector3(child.localScale.x / parent.localScale.x, child.localScale.y / parent.localScale.y, 1);
+    }
+
+    private void AlignStepIndicatorsPosition()
+    {
+        foreach (var collectible in collectiblesGrid)
+        {
+            float midIndex = (collectible.StepIndicators.Count() - 1) / 2f;
+
+            for (int i = 0; i < collectible.StepIndicators.Count(); i++)
+            {
+                if (i == midIndex) continue;
+                
+                float spacing = (stepIndicatorSpacing * (midIndex - i));
+                var pos = collectible.StepIndicators[i].transform.localPosition;
+
+                collectible.StepIndicators[i].transform.localPosition = new Vector3(pos.x + spacing, pos.y, pos.z);
+            }
+
+            collectible.StepIndicators.Reverse();
+        }
     }
     #endregion
 
