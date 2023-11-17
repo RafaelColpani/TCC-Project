@@ -103,8 +103,8 @@ public class SequentialPlatformPuzzle : MonoBehaviour
     [SerializeField] List<CollectibleGrid> collectiblesGrid;
     [Tooltip("The number of player's grid steps that will swap the SetActives of collectibles isEven true and false")]
     [SerializeField] [Range(1, 10)]int swapCollectiblesLimit;
-    [Tooltip("The position of the first step indicator based on collectible parent. All others step indicators will guide its position based on this")]
-    [SerializeField] Vector3 firstStepIndicatorPosition;
+    [Tooltip("The offset in Y position that the step indicators will be relative to its collectible.")]
+    [SerializeField] float stepIndicatorYOffset;
     [Tooltip("The distance that the step indicators will have from each other")]
     [SerializeField] float stepIndicatorSpacing;
     #endregion
@@ -275,8 +275,8 @@ public class SequentialPlatformPuzzle : MonoBehaviour
             collectible.collectibleObject = null;
         }
 
-        foreach (var indicator in stepIndicators)
-            Destroy(indicator);
+        foreach (var collectible in collectiblesGrid)
+            Destroy(collectible.collectibleObject);
 
         ResetPuzzleParameters();
 
@@ -346,20 +346,23 @@ public class SequentialPlatformPuzzle : MonoBehaviour
                     for (int i = 0; i < collectiblesGrid[index].fixedStepCount; i++)
                     {
                         var stepIndicator = Instantiate(stepIndicatorPrefab, collectiblesGrid[index].collectibleObject.transform);
-                        stepIndicator.transform.localScale = SetChildScale(collectiblesGrid[index].collectibleObject.transform,
-                                                                           stepIndicator.transform);
+                        //stepIndicator.transform.localScale = SetChildScale(collectiblesGrid[index].collectibleObject.transform,
+                                                                           //stepIndicator.transform);
 
                         if (i == 0)
-                            stepIndicator.transform.position = firstStepIndicatorPosition;
+                        {
+                            var pos = collectiblesGrid[index].collectibleObject.transform.position;
+                            stepIndicator.transform.position = new Vector3(pos.x, pos.y + stepIndicatorYOffset, pos.z);
+                        }
                         else
                         {
-                            var pos = stepIndicators.Last().transform.position;
+                            var pos = collectiblesGrid[index].StepIndicators.Last().transform.position;
                             stepIndicator.transform.position = new Vector3(pos.x + stepIndicatorSpacing,
                                                                            pos.y,
                                                                            pos.z);
                         }
 
-                        stepIndicators.Add(stepIndicator);
+                        collectiblesGrid[index].StepIndicators.Add(stepIndicator);
                     }
                 }
 
@@ -468,17 +471,20 @@ public class SequentialPlatformPuzzle : MonoBehaviour
         foreach (var collectible in collectiblesGrid)
         {
             if (collectible.stepCount == 0)
-                foreach (var indicator in stepIndicators)
+                foreach (var indicator in collectible.StepIndicators)
                 {
-                    if (indicator == stepIndicators[0]) continue;
+                    if (indicator == collectible.StepIndicators[0]) continue;
                     var indicatorSR = indicator.GetComponent<SpriteRenderer>();
                     indicatorSR.color = Color.white;
                 }
 
-            var stepIndicatorSR = stepIndicators[swapCollectiblesCount].GetComponent<SpriteRenderer>();
-            stepIndicatorSR.color = Color.red;
+            if (collectible.stepCount >= 0)
+            {
+                var stepIndicatorSR = collectible.StepIndicators[collectible.stepCount].GetComponent<SpriteRenderer>();
+                stepIndicatorSR.color = Color.red;
+            }
 
-            if (++swapCollectiblesCount >= swapCollectiblesLimit)
+            if (++collectible.stepCount >= collectible.fixedStepCount)
                 SwapCollectiblesActive();
 
         }
