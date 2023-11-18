@@ -237,7 +237,7 @@ public class ProceduralArms : MonoBehaviour
             arm.SetIdlePositionByEffectorTarget();
             arm.SetDescendingPosition(descendingValue);
 
-            bool[] aux = new bool[armsTargets.Count()];
+            bool[] aux = new bool[arm.idleMovementPositions.Count()];
             for (var i = 0; i < aux.Count(); i++)
                 aux[i] = false;
             arm.SetMovingToIdle(aux);

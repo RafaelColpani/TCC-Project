@@ -30,6 +30,8 @@ public class ProceduralTorso : MonoBehaviour
     [SerializeField] private Vector3[] targetsIdleAnimation;
     [Tooltip("The speed that the target will move to the positions of the idle animation")]
     [SerializeField] private float idleAnimationSpeed;
+    [Tooltip("The distance that the torso target have to be to the animation destination to change destination")]
+    [SerializeField] private float distanceToAnimate = 0.0001f;
 
     [HeaderPlus(" ", "- HEAD -", (int)HeaderPlusColor.yellow)]
     [Tooltip("The z rotation value that the head will perform while walking")]
@@ -172,7 +174,7 @@ public class ProceduralTorso : MonoBehaviour
             var targetsDistance = (target.localPosition - targetsIdleAnimation[goToPositionIndex]).sqrMagnitude;
             if (canMoveTarget)
                 MoveTarget(targetsIdleAnimation[goToPositionIndex], idleAnimationSpeed);
-            if (targetsDistance < 0.0001f)
+            if (targetsDistance < distanceToAnimate)
             {
                 SetNewIdleAnimationPosition();
             }
