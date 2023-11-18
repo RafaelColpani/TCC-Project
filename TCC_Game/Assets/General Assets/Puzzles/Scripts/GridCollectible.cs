@@ -17,10 +17,22 @@ public class GridCollectible : MonoBehaviour
         this.cg = cg;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (!collision.CompareTag("Player")) return;
+        if (!cg.CanPickUp) return;
 
         spp.CollectedCollectible(cg);
+    }
+
+    private void OnEnable()
+    {
+        if (spp.IsInSamePlatform(cg.gridPosition))
+            cg.CanPickUp = true;
+    }
+
+    private void OnDisable()
+    {
+        cg.CanPickUp = false;
     }
 }
