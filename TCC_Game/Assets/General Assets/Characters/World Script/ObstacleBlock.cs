@@ -142,6 +142,8 @@ public class ObstacleBlock : MonoBehaviour
             moveCommand = GetComponent<InputHandler>().GetMovementCommand();
         else if (GetComponent<GuidePlayerAI>())
             moveCommand = GetComponent<GuidePlayerAI>().GetMoveCommand();
+        else if (GetComponent<EnemyCommands>())
+            moveCommand = GetComponent<EnemyCommands>().GetMovementCommand();
 
         gravityController = GetComponent<GravityController>();
     }

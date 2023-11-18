@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,10 @@ using UnityEngine;
 public class ChasingState : IEnemyState
 {
     #region Constructor VARs
+    CharacterManager characterManager;
     EnemyCommands enemyCommands;
     EnemyBehaviour behaviour;
     List<IEnemyState> stateMachine;
-    EnemyCollisionController enemyCollisionController;
-    IsDamagedAndDead isDamagedAndDead;
 
     Transform body;
     Transform player;
@@ -21,15 +21,17 @@ public class ChasingState : IEnemyState
     readonly string wanderingStateName = "Wandering";
     readonly string attackingStateName = "Attacking";
     readonly string deadStateName = "Dead";
+
+    private bool isLockedInLeft = false;
+    private bool isLockedInRight = false;
     #endregion
 
-    public ChasingState(EnemyCommands enemyCommands, EnemyBehaviour behaviour, List<IEnemyState> stateMachine, IsDamagedAndDead isDamagedAndDead, EnemyCollisionController enemyCollisionController, Transform body, Transform player, float maxPlayerDistance)
+    public ChasingState(CharacterManager characterManager, EnemyCommands enemyCommands, EnemyBehaviour behaviour, List<IEnemyState> stateMachine, Transform body, Transform player, float maxPlayerDistance)
     {
+        this.characterManager = characterManager;
         this.enemyCommands = enemyCommands;
         this.behaviour = behaviour;
         this.stateMachine = stateMachine;
-        this.isDamagedAndDead = isDamagedAndDead;
-        this.enemyCollisionController = enemyCollisionController;
         this.player = player;
         this.body = body;
         this.maxPlayerDistance = maxPlayerDistance;
@@ -54,11 +56,76 @@ public class ChasingState : IEnemyState
 
     public void Update()
     {
-        if (WalkValue() == 1)
-            enemyCommands.ContinueWalkRight();
+        Debug.Log($"left: {isLockedInLeft} || right: {isLockedInRight}");
 
-        else if (WalkValue() == -1)
+        //if (characterManager.IsFacingRight() && isLockedInLeft)
+        //{
+        //    isLockedInLeft = false;
+        //    isLockedInRight = false;
+        //}
+
+        //else if (!characterManager.IsFacingRight() && isLockedInRight)
+        //{
+        //    isLockedInRight = false;
+        //    isLockedInLeft = false;
+        //}
+
+        // travado olhando pra esquerda
+        if (!characterManager.IsFacingRight())
+        {
+            if (isLockedInRight)
+            {
+                if (!enemyCommands.IsInEdge())
+                {
+                    isLockedInRight = false;
+                }
+
+                return;
+            }
+
+            else if (enemyCommands.IsInEdge())
+                isLockedInLeft = true;
+        }
+
+        // travado olhando pra direita
+        else if (characterManager.IsFacingRight())
+        {
+            if (isLockedInLeft)
+            {
+                if (!enemyCommands.IsInEdge())
+                {
+                    isLockedInLeft = false;
+                }
+
+                return;
+            }
+
+            else if (enemyCommands.IsInEdge())
+                isLockedInRight = true;
+        }
+
+        if (!enemyCommands.IsInEdge())
+        {
+            isLockedInRight = false;
+            isLockedInLeft = false;
+        }
+
+        ////////////
+
+        if (Mathf.Abs(player.position.x - body.position.x) <= 0.1f)
+        {
+            enemyCommands.StopWalk();
+        }
+
+        else if (WalkValue() == 1 && !isLockedInRight)
+        {
+            enemyCommands.ContinueWalkRight();
+        }
+
+        else if (WalkValue() == -1 && !isLockedInLeft)
+        {
             enemyCommands.ContinueWalkLeft();
+        }
 
         else
             enemyCommands.StopWalk();
@@ -66,15 +133,6 @@ public class ChasingState : IEnemyState
 
     public IEnemyState ChangeState()
     {
-        if (!isDamagedAndDead.IsAlive)
-            return GetState(deadStateName);
-
-        else if (ReachedMaxDistance())
-            return GetState(wanderingStateName);
-
-        else if (enemyCollisionController.TouchedPlayer)
-            return GetState(attackingStateName);
-
         return null;
     }
     #endregion
@@ -97,7 +155,7 @@ public class ChasingState : IEnemyState
     private bool ReachedMaxDistance()
     {
         return enemyCommands.IsInEdge() ||
-               enemyCommands.GetExitPatrolRegion() ||
+               //enemyCommands.GetExitPatrolRegion() ||
                (body.position - player.position).sqrMagnitude >= maxPlayerDistance;
     }
 

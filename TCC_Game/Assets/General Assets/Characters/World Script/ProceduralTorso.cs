@@ -78,6 +78,8 @@ public class ProceduralTorso : MonoBehaviour
             moveCommand = GetComponent<ChickenFruitFollow>().GetMoveCommand();
         else if (GetComponent<GuidePlayerAI>() != null)
             moveCommand = GetComponent<GuidePlayerAI>().GetMoveCommand();
+        else if (GetComponent<EnemyCommands>() != null)
+            moveCommand = GetComponent<EnemyCommands>().GetMovementCommand();
 
         idleTargetLocalPosition = target.localPosition;
         idleHeadLocalRotation = headBone.localRotation;
