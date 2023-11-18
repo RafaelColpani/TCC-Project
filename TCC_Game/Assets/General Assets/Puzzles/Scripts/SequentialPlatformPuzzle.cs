@@ -110,6 +110,12 @@ public class SequentialPlatformPuzzle : MonoBehaviour
     [SerializeField] float stepIndicatorYOffset;
     [Tooltip("The distance that the step indicators will have from each other")]
     [SerializeField] float stepIndicatorSpacing;
+
+    [HeaderPlus(" ", "- VFX WIN -", (int)HeaderPlusColor.blue)]
+    [SerializeField] GameObject shaderVFX;
+    [SerializeField] Vector3 VFXScale = new Vector3(32, 32, 0);
+    [SerializeField] float VFXTime = 15f;
+    private bool _VFXLerp = false;
     #endregion
 
     #region Private Vars
@@ -133,6 +139,9 @@ public class SequentialPlatformPuzzle : MonoBehaviour
 
         if (constructOnAwake)
             ConstructGrid();
+
+        if(shaderVFX != null)
+            shaderVFX.transform.localScale = Vector3.zero;
     }
 
     private void Start()
@@ -311,7 +320,22 @@ public class SequentialPlatformPuzzle : MonoBehaviour
     private void WonPuzzle()
     {
         ResetPuzzleParameters();
-        print("EBA, VOCÊ VENCEU");
+        print("GANHOU. VFX COLOR MANAGER MUDA");
+         GameObject.Find("VFX Manager").GetComponent<VFXColorManager>().randomColorON = false;
+         
+         if(shaderVFX != null){
+            _VFXLerp = true;
+            StartCoroutine(VfxWin());
+            }
+    }
+
+    IEnumerator VfxWin(){
+        while(shaderVFX.transform.localScale.x < VFXScale.x){
+            print("lerp true");
+            var VFXLerp = new Vector3(1, 1, 0);
+            shaderVFX.transform.localScale = Vector3.Lerp(shaderVFX.transform.localScale, VFXScale, VFXTime * Time.deltaTime);
+        yield return null;  
+            }
     }
     #endregion
 
@@ -487,7 +511,7 @@ public class SequentialPlatformPuzzle : MonoBehaviour
         //TODO: Troca de shader na plataforma pisada, o GameObject esta armazenado em stepedPlatform.platform;
         print("TROCA O SHADER DA PLATAFORMA PISADA AQUI");
         var platformSR = stepedPlatform.platform.GetComponent<SpriteRenderer>();
-        platformSR.color = Color.gray;
+        platformSR.GetComponent<QuebraVidro>().Crack();
 
         //TODO: Troca de shader no cristal
         print("TROCA O SHADER DO CRISTAL AQUI");
@@ -509,14 +533,16 @@ public class SequentialPlatformPuzzle : MonoBehaviour
                 {
                     if (indicator == collectible.StepIndicators[0]) continue;
                     var indicatorSR = indicator.GetComponent<SpriteRenderer>();
-                    indicatorSR.color = Color.white;
+                    //indicatorSR.color = Color.white;
+                    indicatorSR.GetComponent<ChangeCrystal>().Activate(false);
                 }
             }
 
             if (collectible.stepCount >= 0)
             {
                 var stepIndicatorSR = collectible.StepIndicators[collectible.stepCount].GetComponent<SpriteRenderer>();
-                stepIndicatorSR.color = Color.red;
+                //stepIndicatorSR.color = Color.red;
+                stepIndicatorSR.GetComponent<ChangeCrystal>().Activate(true);
             }
 
             if (++collectible.stepCount >= collectible.fixedStepCount)
