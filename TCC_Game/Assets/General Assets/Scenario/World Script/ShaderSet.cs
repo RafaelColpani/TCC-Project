@@ -5,6 +5,8 @@ using UnityEngine;
 public class ShaderSet : MonoBehaviour
 {
     enum Season {AUTUMN, WINTER};
+
+    [SerializeField] bool isOozing;
     [SerializeField] Season season;
     [SerializeField] Vector2 RandomMinMax;
     [SerializeField] float NoiseScale;
@@ -31,6 +33,8 @@ public class ShaderSet : MonoBehaviour
                 break;
             }
         }
+        if (rend.material.HasInt("_IsOozing"))
+            rend.material.SetInt("_IsOozing", isOozing ? 1 : 0);
         if (rend.material.HasFloat("_Random"))
             rend.material.SetFloat("_Random", Random.Range(RandomMinMax.x, RandomMinMax.y));
         if (rend.material.HasFloat("_NoiseScale"))
