@@ -29,6 +29,7 @@ public class CollectibleGrid
 
     [HideInInspector] public List<GameObject> StepIndicators = new List<GameObject>();
     [HideInInspector] public int fixedStepCount;
+    [HideInInspector] public bool CanPickUp = false;
 }
 
 public class PlatformGrid
@@ -109,6 +110,12 @@ public class SequentialPlatformPuzzle : MonoBehaviour
     [SerializeField] float stepIndicatorYOffset;
     [Tooltip("The distance that the step indicators will have from each other")]
     [SerializeField] float stepIndicatorSpacing;
+
+    [HeaderPlus(" ", "- VFX WIN -", (int)HeaderPlusColor.blue)]
+    [SerializeField] GameObject shaderVFX;
+    [SerializeField] Vector3 VFXScale = new Vector3(32, 32, 0);
+    [SerializeField] float VFXTime = 15f;
+    private bool _VFXLerp = false;
     #endregion
 
     #region Private Vars
@@ -132,6 +139,9 @@ public class SequentialPlatformPuzzle : MonoBehaviour
 
         if (constructOnAwake)
             ConstructGrid();
+
+        if(shaderVFX != null)
+            shaderVFX.transform.localScale = Vector3.zero;
     }
 
     private void Start()
@@ -310,7 +320,22 @@ public class SequentialPlatformPuzzle : MonoBehaviour
     private void WonPuzzle()
     {
         ResetPuzzleParameters();
-        print("EBA, VOCÊ VENCEU");
+        print("GANHOU. VFX COLOR MANAGER MUDA");
+         GameObject.Find("VFX Manager").GetComponent<VFXColorManager>().randomColorON = false;
+         
+         if(shaderVFX != null){
+            _VFXLerp = true;
+            StartCoroutine(VfxWin());
+            }
+    }
+
+    IEnumerator VfxWin(){
+        while(shaderVFX.transform.localScale.x < VFXScale.x){
+            print("lerp true");
+            var VFXLerp = new Vector3(1, 1, 0);
+            shaderVFX.transform.localScale = Vector3.Lerp(shaderVFX.transform.localScale, VFXScale, VFXTime * Time.deltaTime);
+        yield return null;  
+            }
     }
     #endregion
 
@@ -521,7 +546,9 @@ public class SequentialPlatformPuzzle : MonoBehaviour
             }
 
             if (++collectible.stepCount >= collectible.fixedStepCount)
+            {
                 SwapCollectiblesActive(collectible, true);
+            }
 
         }
 
@@ -551,6 +578,15 @@ public class SequentialPlatformPuzzle : MonoBehaviour
 
             collectible.StepIndicators.Reverse();
         }
+    }
+
+    public bool IsInSamePlatform(IntegerPoint gridPosition)
+    {
+        if (GetStepedPlatform() == null)
+            return false;
+
+        return gridPosition.x == GetStepedPlatform().gridPosition.x &&
+               gridPosition.y == GetStepedPlatform().gridPosition.y;
     }
     #endregion
 
