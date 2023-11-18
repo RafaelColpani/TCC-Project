@@ -29,6 +29,7 @@ public class CollectibleGrid
 
     [HideInInspector] public List<GameObject> StepIndicators = new List<GameObject>();
     [HideInInspector] public int fixedStepCount;
+    [HideInInspector] public bool CanPickUp = false;
 }
 
 public class PlatformGrid
@@ -521,7 +522,9 @@ public class SequentialPlatformPuzzle : MonoBehaviour
             }
 
             if (++collectible.stepCount >= collectible.fixedStepCount)
+            {
                 SwapCollectiblesActive(collectible, true);
+            }
 
         }
 
@@ -551,6 +554,15 @@ public class SequentialPlatformPuzzle : MonoBehaviour
 
             collectible.StepIndicators.Reverse();
         }
+    }
+
+    public bool IsInSamePlatform(IntegerPoint gridPosition)
+    {
+        if (GetStepedPlatform() == null)
+            return false;
+
+        return gridPosition.x == GetStepedPlatform().gridPosition.x &&
+               gridPosition.y == GetStepedPlatform().gridPosition.y;
     }
     #endregion
 
