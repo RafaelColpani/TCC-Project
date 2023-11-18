@@ -486,7 +486,7 @@ public class SequentialPlatformPuzzle : MonoBehaviour
         //TODO: Troca de shader na plataforma pisada, o GameObject esta armazenado em stepedPlatform.platform;
         print("TROCA O SHADER DA PLATAFORMA PISADA AQUI");
         var platformSR = stepedPlatform.platform.GetComponent<SpriteRenderer>();
-        platformSR.color = Color.gray;
+        platformSR.GetComponent<QuebraVidro>().Crack();
 
         //TODO: Troca de shader no cristal
         print("TROCA O SHADER DO CRISTAL AQUI");
@@ -508,14 +508,16 @@ public class SequentialPlatformPuzzle : MonoBehaviour
                 {
                     if (indicator == collectible.StepIndicators[0]) continue;
                     var indicatorSR = indicator.GetComponent<SpriteRenderer>();
-                    indicatorSR.color = Color.white;
+                    //indicatorSR.color = Color.white;
+                    indicatorSR.GetComponent<ChangeCrystal>().Activate(false);
                 }
             }
 
             if (collectible.stepCount >= 0)
             {
                 var stepIndicatorSR = collectible.StepIndicators[collectible.stepCount].GetComponent<SpriteRenderer>();
-                stepIndicatorSR.color = Color.red;
+                //stepIndicatorSR.color = Color.red;
+                stepIndicatorSR.GetComponent<ChangeCrystal>().Activate(true);
             }
 
             if (++collectible.stepCount >= collectible.fixedStepCount)
