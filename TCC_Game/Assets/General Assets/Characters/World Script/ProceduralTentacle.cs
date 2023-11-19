@@ -5,6 +5,18 @@ using System.Linq;
 using KevinCastejon.MoreAttributes;
 using System;
 
+[System.Serializable]
+public class Tentacle
+{
+    [Tooltip("The transform of the target of the IK")]
+    public Transform target;
+    [Tooltip("The positions that the target will move in idle animation")]
+    public Vector3[] targetsIdleAnimation;
+
+    [HideInInspector] public bool[] movingToIdle;
+    [HideInInspector] public bool idleIsMovingForward;
+}
+
 public class ProceduralTentacle : MonoBehaviour
 {
     enum TentacleState
@@ -14,17 +26,17 @@ public class ProceduralTentacle : MonoBehaviour
 
     #region Inspector Vars
     [HeaderPlus(" ", "- TARGETS -", (int)HeaderPlusColor.green)]
-    [Tooltip("The transform of the target of the IK")]
-    [SerializeField] Transform target;
+    [Tooltip("The list of targets and its idle animation positions")]
+    [SerializeField] Tentacle[] tentacles;
     [Tooltip("The list of the object TAGs that the tentacle will try to reach in the follow state of the animation. Basically, the objects that" +
         "will trigger the tentacle follow when entered the collider.")]
     [SerializeField] string[] objectToFollowTags;
 
     [HeaderPlus(" ", "- IDLE -", (int)HeaderPlusColor.yellow)]
-    [Tooltip("The positions that the target will move in idle animation")]
-    [SerializeField] private Vector3[] targetsIdleAnimation;
     [Tooltip("The speed that the target will move to the positions of the idle animation")]
     [SerializeField] private float idleAnimationSpeed;
+    [Tooltip("Tells the distance that the target have to be from idle anim destination to change its destination")]
+    [SerializeField] private float idleDistance = 0.2f;
 
     [HeaderPlus(" ", "- FOLLOW -", (int)HeaderPlusColor.yellow)]
     [Tooltip("The speed that the target will move to the position of the object to follow")]
@@ -36,8 +48,6 @@ public class ProceduralTentacle : MonoBehaviour
 
     private List<Transform> objectsInRange = new List<Transform>();
 
-    private bool[] movingToIdle;
-    private bool idleIsMovingForward = true;
     private bool proceduralIsOn = true;
     #endregion
 
@@ -52,6 +62,9 @@ public class ProceduralTentacle : MonoBehaviour
     #region Unity Methods
     private void Start()
     {
+        for (int i = 0; i < tentacles.Length; i++)
+            tentacles[i].idleIsMovingForward = true;
+
         ResetIdleAnimationPosition();
     }
 
@@ -77,59 +90,66 @@ public class ProceduralTentacle : MonoBehaviour
     #region IDLE
     private void IdleAnimation()
     {
-        var goToPositionIndex = Array.IndexOf(movingToIdle, true);
-        if (goToPositionIndex == -1) { Debug.LogError($"GOT INDEX -1 IN TENTACLE IDLE ANIMATION OF {this.gameObject.name}"); return; }
-
-        var targetsDistance = (target.localPosition - targetsIdleAnimation[goToPositionIndex]).sqrMagnitude;
-        var time = idleAnimationSpeed;
-        MoveTarget(targetsIdleAnimation[goToPositionIndex], time);
-        if (targetsDistance < 0.2f)
+        foreach (var tentacle in tentacles)
         {
-            SetNewIdleAnimationPosition();
+            var goToPositionIndex = Array.IndexOf(tentacle.movingToIdle, true);
+            if (goToPositionIndex == -1) { Debug.LogError($"GOT INDEX -1 IN TENTACLE IDLE ANIMATION OF {this.gameObject.name}"); return; }
+
+            var targetsDistance = (tentacle.target.localPosition - tentacle.targetsIdleAnimation[goToPositionIndex]).sqrMagnitude;
+            var time = idleAnimationSpeed;
+            MoveTarget(tentacle.target, tentacle.targetsIdleAnimation[goToPositionIndex], time);
+            if (targetsDistance < idleDistance)
+            {
+                SetNewIdleAnimationPosition(tentacle);
+            }
         }
     }
 
     private void ResetIdleAnimationPosition()
     {
-        bool[] aux = new bool[targetsIdleAnimation.Length];
-        for (var i = 0; i < aux.Length; i++)
+        for (int i = 0; i < tentacles.Length; i++)
         {
-            if (i == aux.Length - 1)
-            { aux[i] = true; break; }
+            bool[] aux = new bool[tentacles[i].targetsIdleAnimation.Length];
+            for (var j = 0; j < aux.Length; j++)
+            {
+                if (j == aux.Length - 1)
+                    { aux[j] = true; break; }
 
-            else
-                aux[i] = false;
+                else
+                    aux[j] = false;
+            }
+
+            tentacles[i].movingToIdle = aux;
         }
-
-        movingToIdle = aux;
     }
 
-    private void SetNewIdleAnimationPosition()
+    private void SetNewIdleAnimationPosition(Tentacle tentacle)
     {
-        for (var i = 0; i < movingToIdle.Length; i++)
+        for (var i = 0; i < tentacle.movingToIdle.Length; i++)
         {
-            if (!movingToIdle[i]) continue;
+            if (!tentacle.movingToIdle[i]) continue;
 
-            if (i == movingToIdle.Length - 1)
-                idleIsMovingForward = false;
+            if (i == tentacle.movingToIdle.Length - 1)
+                tentacle.idleIsMovingForward = false;
 
             else if (i == 0)
-                idleIsMovingForward = true;
+                tentacle.idleIsMovingForward = true;
 
-            SwapIdleAnimationPosition(i);
+            SwapIdleAnimationPosition(tentacle, i);
+
             break;
         }
     }
 
-    private void SwapIdleAnimationPosition(int index)
+    private void SwapIdleAnimationPosition(Tentacle tentacle, int index)
     {
-        movingToIdle[index] = false;
+        tentacle.movingToIdle[index] = false;
 
-        if (idleIsMovingForward)
-            movingToIdle[index + 1] = true;
+        if (tentacle.idleIsMovingForward)
+            tentacle.movingToIdle[index + 1] = true;
 
         else
-            movingToIdle[index - 1] = true;
+             tentacle.movingToIdle[index - 1] = true;
     }
     #endregion
 
@@ -150,12 +170,14 @@ public class ProceduralTentacle : MonoBehaviour
         }
 
         if (closerObject == this.transform) return;
-        MoveTarget(closerObject.position, followSpeed, true);
+
+        foreach (var tentacle in tentacles)
+            MoveTarget(tentacle.target, closerObject.position, followSpeed, true);
     }
     #endregion
 
     #region AUX
-    private void MoveTarget(Vector3 finalPosition, float speed, bool invertPoint = false)
+    private void MoveTarget(Transform target, Vector3 finalPosition, float speed, bool invertPoint = false)
     {
         var relativePosition = Vector3.zero;
 
@@ -163,8 +185,8 @@ public class ProceduralTentacle : MonoBehaviour
             relativePosition = transform.InverseTransformPoint(finalPosition);
 
         var newPosition = Vector3.Slerp(target.localPosition,
-                                        invertPoint ? relativePosition : finalPosition,
-                                        speed * Time.fixedDeltaTime);
+                                            invertPoint ? relativePosition : finalPosition,
+                                            speed * Time.fixedDeltaTime);
 
         target.localPosition = newPosition;
     }

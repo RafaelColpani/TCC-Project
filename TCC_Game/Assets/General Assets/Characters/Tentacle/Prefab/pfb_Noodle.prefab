@@ -152,14 +152,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15fd6365734154bcab3c4397aa282db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 2291573062316428088}
+  tentacles:
+  - target: {fileID: 2291573062316428088}
+    targetsIdleAnimation:
+    - {x: -2.2, y: 6.68, z: 0}
+    - {x: 0.03, y: 7.74, z: 0}
+    - {x: 2.2, y: 6.68, z: 0}
+    movingToIdle: 
+    idleIsMovingForward: 0
   objectToFollowTags:
   - Test
-  targetsIdleAnimation:
-  - {x: -2.2, y: 6.68, z: 0}
-  - {x: 0.03, y: 7.74, z: 0}
-  - {x: 2.2, y: 6.68, z: 0}
   idleAnimationSpeed: 1
+  idleDistance: 0.2
   followSpeed: 3
 --- !u!114 &2023877032
 MonoBehaviour:
