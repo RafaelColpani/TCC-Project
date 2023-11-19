@@ -1431,6 +1431,7 @@ Transform:
   - {fileID: 4146423276613003786}
   - {fileID: 4146423276200591259}
   - {fileID: 4146423276981518464}
+  - {fileID: 891951106429162272}
   m_Father: {fileID: 3361048765503218227}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3201,6 +3202,8 @@ GameObject:
   - component: {fileID: 3361048765503218185}
   - component: {fileID: 3361048765503218184}
   - component: {fileID: 3361048765503218191}
+  - component: {fileID: 1751699934534573827}
+  - component: {fileID: 8531533602625234232}
   m_Layer: 0
   m_Name: spr_Dragon
   m_TagString: Untagged
@@ -3244,8 +3247,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 134218240
   groundChecks:
-  - {fileID: 4146423276022752058}
-  - {fileID: 4146423275534211972}
+  - {fileID: 891951106429162272}
   groundCheckDistance: 0.55
   commandsByInputHandler: 0
 --- !u!114 &3361048765503218231
@@ -3255,7 +3257,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4498183294447188560}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0dfe019a91576448db3ef0b25d8b7814, type: 3}
   m_Name: 
@@ -3597,6 +3599,36 @@ MonoBehaviour:
   slopeMaxAngle: 60
   slopeState: 0
   showGizmos: 1
+--- !u!114 &1751699934534573827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4498183294447188560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b03651ba24f74ca5af6ca1f2b1ff367, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyBehaviour: 3
+  minSqrPlayerDistance: 0
+  maxSqrPlayerDistance: 10000
+  attackedWaitTime: 0
+--- !u!114 &8531533602625234232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4498183294447188560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d2d4c659a8f542e784ab6040aedd035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wanderingWalkSpeed: 0
+  chasingWalkSpeed: 1
 --- !u!1 &4523301391562354399
 GameObject:
   m_ObjectHideFlags: 0
@@ -4354,6 +4386,37 @@ Transform:
   - {fileID: 4146423276962159292}
   m_Father: {fileID: 1248365182521942801}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5551241640624530909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 891951106429162272}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &891951106429162272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5551241640624530909}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.95, y: 0.12, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4146423275801131739}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5912561030525256014
 GameObject:

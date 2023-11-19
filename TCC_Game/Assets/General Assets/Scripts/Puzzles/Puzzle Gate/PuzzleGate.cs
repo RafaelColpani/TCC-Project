@@ -26,5 +26,14 @@ public class PuzzleGate : MonoBehaviour
             // Inverte a direção e move o objeto de volta
             direcao *= -1;
         }
+
+        if (this.transform.position.x <= startPosition.x && direcao == -1)
+            this.enabled = false;
+    }
+
+    private void OnDisable()
+    {
+        transform.position = startPosition;
+        direcao = 1;
     }
 }

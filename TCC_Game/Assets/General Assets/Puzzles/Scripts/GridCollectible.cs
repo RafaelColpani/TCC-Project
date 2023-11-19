@@ -27,6 +27,7 @@ public class GridCollectible : MonoBehaviour
 
     private void OnEnable()
     {
+        if (cg == null) return;
         if (spp.IsInSamePlatform(cg.gridPosition))
             cg.CanPickUp = true;
     }
