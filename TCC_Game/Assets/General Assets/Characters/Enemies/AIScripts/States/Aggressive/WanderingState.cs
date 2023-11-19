@@ -17,7 +17,7 @@ public class WanderingState : IEnemyState
     readonly string chasingStateName = "Chasing";
     readonly string deadStateName = "Dead";
 
-    public WanderingState(EnemyCommands enemyCommands, EnemyBehaviour behaviour, List<IEnemyState> stateMachine, IsDamagedAndDead isDamagedAndDead, Transform body, Transform player, float maxPlayerDistance)
+    public WanderingState(EnemyCommands enemyCommands, EnemyBehaviour behaviour, List<IEnemyState> stateMachine, Transform body, Transform player, float maxPlayerDistance)
     {
         this.enemyCommands = enemyCommands;
         this.behaviour = behaviour;

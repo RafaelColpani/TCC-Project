@@ -561,5 +561,13 @@ public class ProceduralLegs : MonoBehaviour
     {
         return evenIsWalking || oddIsWalking || waitingNextWalk;
     }
+
+    public GameObject GetGroundedObject()
+    {
+        if (!JumpUtils.IsGrounded(groundChecks, groundCheckDistance, targetsDetections)) return null;
+        if (JumpUtils.IsGrounded(groundChecks, groundCheckDistance, floatingGroundLayers) && gravityController.Velocity.y > 0) return null;
+
+        return JumpUtils.GetGroundedObject(groundChecks, groundCheckDistance, targetsDetections);
+    }
     #endregion
 }

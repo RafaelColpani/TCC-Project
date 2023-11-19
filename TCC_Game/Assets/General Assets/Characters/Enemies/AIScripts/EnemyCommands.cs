@@ -27,7 +27,7 @@ public class EnemyCommands : MonoBehaviour
     private CharacterManager characterManager;
     private EnemyAIController enemyAIController;
     private ObstacleBlock obstacleBlock;
-    private EnemyCollisionController enemyCollisionController;
+    //private EnemyCollisionController enemyCollisionController;
 
     private float walkSpeed;
     private float walkValue;
@@ -89,7 +89,7 @@ public class EnemyCommands : MonoBehaviour
         characterManager = GetComponent<CharacterManager>();
         enemyAIController = GetComponent<EnemyAIController>();
         obstacleBlock = GetComponent<ObstacleBlock>();
-        enemyCollisionController = GetComponentInChildren<EnemyCollisionController>();
+        //enemyCollisionController = GetComponentInChildren<EnemyCollisionController>();
 
         walkSpeed = wanderingWalkSpeed;
         walkValue = 1;
@@ -110,11 +110,11 @@ public class EnemyCommands : MonoBehaviour
             cameToEdge = true;
         }
 
-        if (enemyCollisionController.ExitPatrolRegion)
-        {
-            enemyCollisionController.OffExitPatrolRegion();
-            walkValue *= -1;
-        }
+        //if (enemyCollisionController.ExitPatrolRegion)
+        //{
+        //    enemyCollisionController.OffExitPatrolRegion();
+        //    walkValue *= -1;
+        //}
     }
     #endregion
 
@@ -162,10 +162,10 @@ public class EnemyCommands : MonoBehaviour
         return this.moveCommand;
     }
 
-    public bool GetExitPatrolRegion()
-    {
-        return this.enemyCollisionController.ExitPatrolRegion;
-    }
+    //public bool GetExitPatrolRegion()
+    //{
+    //    //return this.enemyCollisionController.ExitPatrolRegion;
+    //}
 
     /// <summary>Gets if the enemy is in a platform edge.</summary>
     public bool IsInEdge()

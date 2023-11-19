@@ -8,7 +8,8 @@ public enum EnemyBehaviour
 {
     AGGRESSIVE,
     COWARD,
-    PACIFIC
+    PACIFIC,
+    CHASER
 }
 
 [RequireComponent(typeof(CharacterManager))]
@@ -31,8 +32,6 @@ public class EnemyAIController : MonoBehaviour
     #region Private VARs
     CharacterManager characterManager;
     EnemyCommands enemyCommands;
-    EnemyCollisionController enemyCollisionController;
-    IsDamagedAndDead isDamagedAndDead;
 
     Transform playerBody;
 
@@ -53,8 +52,6 @@ public class EnemyAIController : MonoBehaviour
     {
         characterManager = GetComponent<CharacterManager>();
         enemyCommands = GetComponent<EnemyCommands>();
-        enemyCollisionController = GetComponentInChildren<EnemyCollisionController>();
-        isDamagedAndDead = GetComponentInChildren<IsDamagedAndDead>();
         var player = GameObject.Find("pfb_playerEntregaFinal");
         var playerRb = player.GetComponentInChildren<Rigidbody2D>();
         playerBody = playerRb.GetComponent<Transform>();
@@ -79,12 +76,12 @@ public class EnemyAIController : MonoBehaviour
         switch (enemyBehaviour)
         {
             case EnemyBehaviour.AGGRESSIVE:
-                var wanderingState = new WanderingState(enemyCommands, enemyBehaviour, stateMachine, isDamagedAndDead, characterManager.Body, playerBody, minSqrPlayerDistance);
+                var wanderingState = new WanderingState(enemyCommands, enemyBehaviour, stateMachine, characterManager.Body, playerBody, minSqrPlayerDistance);
                 currentState = wanderingState;
 
                 stateMachine.Add(wanderingState);
-                stateMachine.Add(new ChasingState(enemyCommands, enemyBehaviour, stateMachine, isDamagedAndDead, enemyCollisionController, characterManager.Body, playerBody, maxSqrPlayerDistance));
-                stateMachine.Add(new AttackingState(enemyCommands, stateMachine, isDamagedAndDead, attackedWaitTime));
+                stateMachine.Add(new ChasingState(characterManager, enemyCommands, enemyBehaviour, stateMachine, characterManager.Body, playerBody, maxSqrPlayerDistance));
+                stateMachine.Add(new AttackingState(enemyCommands, stateMachine, attackedWaitTime));
                 stateMachine.Add(new DeadState(enemyCommands));
                 break;
 
@@ -95,11 +92,20 @@ public class EnemyAIController : MonoBehaviour
             case EnemyBehaviour.PACIFIC:
                 Debug.LogWarning($"Only AGGRESSIVE enemy behaviour is supported at the moment. Please, change it in the EnemyAIController in {this.gameObject.name} game object.");
                 break;
+
+            case EnemyBehaviour.CHASER:
+                var chasingState = new ChasingState(characterManager, enemyCommands, enemyBehaviour, stateMachine, characterManager.Body, playerBody, maxSqrPlayerDistance);
+                currentState = chasingState;
+
+                stateMachine.Add(chasingState);
+                break;
+
         }
     }
 
     private void StatesFlow()
     {
+        //print(currentState);
         if (currentState.ChangeState() != null)
         {
             currentState = currentState.ChangeState();
@@ -107,7 +113,6 @@ public class EnemyAIController : MonoBehaviour
         }
 
         currentState.Update();
-        print(currentState);
     }
     #endregion
 
