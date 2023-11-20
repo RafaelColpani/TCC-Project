@@ -17,7 +17,7 @@ public class EnemyAIController : MonoBehaviour
 {
     #region Inspector
     [HeaderPlus(" ", "- AI BEHAVIOUR -", (int)HeaderPlusColor.green)]
-    [Tooltip("The behaviour that the enemy will have with the player. At the moment, only AGGRESSIVE is supported atm.")]
+    [Tooltip("The behaviour that the enemy will have with the player.")]
     [SerializeField] private EnemyBehaviour enemyBehaviour;
 
     [HeaderPlus(" ", "- AGGRESSIVE -", (int)HeaderPlusColor.yellow)]
@@ -73,10 +73,11 @@ public class EnemyAIController : MonoBehaviour
     {
         stateMachine = new List<IEnemyState>();
 
+        var wanderingState = new WanderingState(enemyCommands, enemyBehaviour, stateMachine, characterManager.Body, playerBody, minSqrPlayerDistance);
+
         switch (enemyBehaviour)
         {
             case EnemyBehaviour.AGGRESSIVE:
-                var wanderingState = new WanderingState(enemyCommands, enemyBehaviour, stateMachine, characterManager.Body, playerBody, minSqrPlayerDistance);
                 currentState = wanderingState;
 
                 stateMachine.Add(wanderingState);
@@ -86,11 +87,11 @@ public class EnemyAIController : MonoBehaviour
                 break;
 
             case EnemyBehaviour.COWARD:
-                Debug.LogWarning($"Only AGGRESSIVE enemy behaviour is supported at the moment. Please, change it in the EnemyAIController in {this.gameObject.name} game object.");
+                Debug.LogError($"COWARD is not available at the moment. Please, change it in the EnemyAIController in {this.gameObject.name} game object.");
                 break;
 
             case EnemyBehaviour.PACIFIC:
-                Debug.LogWarning($"Only AGGRESSIVE enemy behaviour is supported at the moment. Please, change it in the EnemyAIController in {this.gameObject.name} game object.");
+                currentState = wanderingState;
                 break;
 
             case EnemyBehaviour.CHASER:

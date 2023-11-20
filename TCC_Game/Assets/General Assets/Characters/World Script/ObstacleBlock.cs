@@ -213,6 +213,8 @@ public class ObstacleBlock : MonoBehaviour
 
     public bool HaveHitedObstacle()
     {
+        if (frontRaycastPositions == null) return false;
+
         foreach (Vector3 raycastPosition in frontRaycastPositions)
         {
             RaycastHit2D hit = Physics2D.Raycast(raycastPosition, Vector2.right * DirectionMultiplier(), frontRaycastsDistance, obstacleLayers);
