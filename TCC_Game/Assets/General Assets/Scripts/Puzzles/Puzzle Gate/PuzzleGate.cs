@@ -42,6 +42,10 @@ public class PuzzleGate : MonoBehaviour
     private void OnDisable()
     {
         transform.position = startPosition;
-        direcao = 1;
+
+        if (goToRight)
+            direcao = 1;
+        else
+            direcao = -1;
     }
 }
