@@ -1390,7 +1390,7 @@ GameObject:
   - component: {fileID: 42149711}
   m_Layer: 0
   m_Name: spr_outono_bola
-  m_TagString: Untagged
+  m_TagString: Test
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1564,7 +1564,7 @@ GameObject:
   - component: {fileID: 50691523}
   m_Layer: 0
   m_Name: spr_outono_bola_3
-  m_TagString: Untagged
+  m_TagString: Test
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2870,7 +2870,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidade: 10
-  distancia: 10
+  distancia: 2
+  goToRight: 1
 --- !u!1001 &106683353
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5087,6 +5088,18 @@ PrefabInstance:
     - target: {fileID: 8992784702499926092, guid: 5e789813612e84145ae631a6f5a3ee67, type: 3}
       propertyPath: m_SortingLayerID
       value: 1599621045
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037880752576926244, guid: 5e789813612e84145ae631a6f5a3ee67, type: 3}
+      propertyPath: followSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037880752576926244, guid: 5e789813612e84145ae631a6f5a3ee67, type: 3}
+      propertyPath: objectToFollowTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037880752576926244, guid: 5e789813612e84145ae631a6f5a3ee67, type: 3}
+      propertyPath: objectToFollowTags.Array.data[0]
+      value: Test
       objectReference: {fileID: 0}
     - target: {fileID: 9048555279847600971, guid: 5e789813612e84145ae631a6f5a3ee67, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9248,7 +9261,7 @@ PrefabInstance:
     - target: {fileID: 7947743174261487036, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: scriptParaAtivar
       value: 
-      objectReference: {fileID: 103283604}
+      objectReference: {fileID: 1704427996}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
 --- !u!4 &403999446 stripped
@@ -10190,8 +10203,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4207cda14777c4f9ccb192096005f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  objectToActivate: {fileID: 1611487923}
+  animator:
+  - {fileID: 1632037778}
+  objectToActivate: []
 --- !u!61 &480289546
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17233,7 +17247,7 @@ PrefabInstance:
     - target: {fileID: 7947743174261487036, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: scriptParaAtivar
       value: 
-      objectReference: {fileID: 775271488}
+      objectReference: {fileID: 103283604}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
 --- !u!4 &634088684 stripped
@@ -21481,7 +21495,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidade: 10
-  distancia: -10
+  distancia: 2
+  goToRight: 0
 --- !u!1 &790196569
 GameObject:
   m_ObjectHideFlags: 0
@@ -39324,7 +39339,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidade: 10
-  distancia: -10
+  distancia: 2
+  goToRight: 0
 --- !u!1 &1156634976
 GameObject:
   m_ObjectHideFlags: 0
@@ -44255,7 +44271,7 @@ GameObject:
   - component: {fileID: 1177854932}
   m_Layer: 0
   m_Name: spr_outono_bola_2
-  m_TagString: Untagged
+  m_TagString: Test
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45062,7 +45078,7 @@ PrefabInstance:
     - target: {fileID: 7947743174261487036, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: scriptParaAtivar
       value: 
-      objectReference: {fileID: 1151833753}
+      objectReference: {fileID: 775271488}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
 --- !u!4 &1220566678 stripped
@@ -49361,6 +49377,11 @@ Transform:
   m_Father: {fileID: 1612413863}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1330895032 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7656918315647714060, guid: 5e789813612e84145ae631a6f5a3ee67, type: 3}
+  m_PrefabInstance: {fileID: 132121324}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1347257498
 GameObject:
   m_ObjectHideFlags: 0
@@ -65691,6 +65712,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3529102399006055936, guid: febe07589e9c73a4f8c5750f77ee623e, type: 3}
   m_PrefabInstance: {fileID: 1320337493}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1632037778
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632037776}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ef01b0e8b58d5ed489046374c025d433, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1001 &1644654691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75678,7 +75719,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidade: 10
-  distancia: 10
+  distancia: 2
+  goToRight: 1
 --- !u!1001 &1708108365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78763,7 +78805,7 @@ GameObject:
   - component: {fileID: 1817985694}
   m_Layer: 0
   m_Name: spr_outono_bola_1
-  m_TagString: Untagged
+  m_TagString: Test
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85688,6 +85730,30 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5332696143321102040, guid: c287940055d44304fb5c14114d1a3814, type: 3}
   m_PrefabInstance: {fileID: 1949948366}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1951680404 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7900749142584674905, guid: 5e789813612e84145ae631a6f5a3ee67, type: 3}
+  m_PrefabInstance: {fileID: 132121324}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1951680409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951680404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bbda29b400874df8aa225861a3fc765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToCatchTags:
+  - Test
+  moveSpeed: 2
+  minimumDestinationDistance: 0.5
+  objectCatcher: {fileID: 1330895032}
+  minimumCatchDistance: 1.1
+  fruitPuzzle: {fileID: 1957151455}
 --- !u!1001 &1953144211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85840,16 +85906,16 @@ MonoBehaviour:
   fruitDestinations:
   - fruit: {fileID: 42149706}
     destination: {fileID: 902497725}
-    initialFruitPosition: {x: -95.88, y: -11.68, z: 0}
+    initialFruitPosition: {x: 4.01, y: 23.4, z: 0}
   - fruit: {fileID: 1817985692}
     destination: {fileID: 912055059}
-    initialFruitPosition: {x: -120.11, y: -25.8, z: 0}
+    initialFruitPosition: {x: 8.67, y: 23.39, z: 0}
   - fruit: {fileID: 50691521}
     destination: {fileID: 1312290665}
-    initialFruitPosition: {x: -55.27, y: -13.25, z: 0}
+    initialFruitPosition: {x: 4.05, y: 18.36, z: 0}
   - fruit: {fileID: 1177854930}
     destination: {fileID: 2004185453}
-    initialFruitPosition: {x: -47.4, y: -12.06, z: 0}
+    initialFruitPosition: {x: 8.72, y: 18.39, z: 0}
   correctSequenceIndexes: 00000000010000000200000003000000
   _isActiveOnOff: 1
   vfxObject: {fileID: 0}
@@ -85964,7 +86030,7 @@ PrefabInstance:
     - target: {fileID: 7947743174261487036, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: scriptParaAtivar
       value: 
-      objectReference: {fileID: 1704427996}
+      objectReference: {fileID: 1151833753}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
 --- !u!1 &1961505432
