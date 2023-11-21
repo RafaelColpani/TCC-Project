@@ -12,12 +12,16 @@ public class CharacterMovementState : MonoBehaviour
         IDLE, WALKING, ASCENDING, DESCENDING
     }
 
+    [Tooltip("Tells if will say its wslking if legs is moving, if not, will get move commando velocity.")]
+    [SerializeField] bool getWalkingByLegs = true;
+
     #region Vars
     [ReadOnly] [SerializeField]
     private MovementState moveState = MovementState.IDLE;
 
     private ProceduralLegs proceduralLegs;
     private GravityController gravityController;
+    private MoveCommand moveCommand;
     #endregion
 
     #region Getters
@@ -29,6 +33,15 @@ public class CharacterMovementState : MonoBehaviour
     {
         proceduralLegs = GetComponent<ProceduralLegs>();
         gravityController = GetComponent<GravityController>();
+
+        if (GetComponent<InputHandler>())
+            moveCommand = GetComponent<InputHandler>().GetMovementCommand();
+        else if (GetComponent<ChickenFruitFollow>() != null)
+            moveCommand = GetComponent<ChickenFruitFollow>().GetMoveCommand();
+        else if (GetComponent<GuidePlayerAI>() != null)
+            moveCommand = GetComponent<GuidePlayerAI>().GetMoveCommand();
+        else if (GetComponent<EnemyCommands>() != null)
+            moveCommand = GetComponent<EnemyCommands>().GetMovementCommand();
     }
 
     private void Update()
@@ -41,7 +54,10 @@ public class CharacterMovementState : MonoBehaviour
     #region Private Methods
     private MovementState SetMovementState()
     {
-        if (proceduralLegs.GetIsWalking())
+        if (proceduralLegs.GetIsWalking() && getWalkingByLegs)
+            return MovementState.WALKING;
+
+        else if (!getWalkingByLegs && Mathf.Abs(moveCommand.CurrentSpeed) > 0)
             return MovementState.WALKING;
 
         else if (gravityController.Velocity.y > 0)

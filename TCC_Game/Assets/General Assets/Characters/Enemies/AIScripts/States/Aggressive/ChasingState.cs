@@ -56,8 +56,6 @@ public class ChasingState : IEnemyState
 
     public void Update()
     {
-        Debug.Log($"left: {isLockedInLeft} || right: {isLockedInRight}");
-
         //if (characterManager.IsFacingRight() && isLockedInLeft)
         //{
         //    isLockedInLeft = false;

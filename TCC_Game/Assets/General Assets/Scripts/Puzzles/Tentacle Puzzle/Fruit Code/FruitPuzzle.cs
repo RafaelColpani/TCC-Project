@@ -34,10 +34,11 @@ public class FruitPuzzle : MonoBehaviour
     [SerializeField] GameObject vfxObject;
     [SerializeField] GameObject activeObj;
     [SerializeField] GameObject desactiveObj;
+    [SerializeField] GameObject[] desaticvateObjs;
 
     [HeaderPlus(" ", "- VFX WIN -", (int)HeaderPlusColor.blue)]
     [SerializeField] GameObject shaderVFX;
-     [SerializeField] Vector3 VFXScale = new Vector3(32, 32, 0);
+    [SerializeField] Vector3 VFXScale = new Vector3(32, 32, 0);
     [SerializeField] float VFXTime = 15f;
     private bool _VFXLerp = false;
 
@@ -61,7 +62,7 @@ public class FruitPuzzle : MonoBehaviour
 
     void Update()
     {
-        if(_VFXLerp == true)
+        if (_VFXLerp == true)
         {
             var VFXLerp = new Vector3(1, 1, 0);
             shaderVFX.transform.localScale = Vector3.Lerp(shaderVFX.transform.localScale, VFXScale, VFXTime * Time.deltaTime);
@@ -69,7 +70,7 @@ public class FruitPuzzle : MonoBehaviour
     }
 
     #region Public Methods
-    public void FruitReachedDestination(GameObject fruit) 
+    public void FruitReachedDestination(GameObject fruit)
     {
         int matchedIndex = -1;
 
@@ -136,19 +137,24 @@ public class FruitPuzzle : MonoBehaviour
     {
         hasCompletedChallenge = true;
 
-        if(_isActiveOnOff == true)
+        foreach (GameObject obj in desaticvateObjs)
+        {
+            obj.SetActive(false);
+        }
+
+        if (_isActiveOnOff == true)
         {
             _VFXLerp = true;
 
             var spriteRenderVFX = shaderVFX.GetComponent<SpriteRenderer>();
             spriteRenderVFX.material.SetFloat("_ActiveOnOff", 1);
-            
+
             vfxObject.SetActive(true);
             activeObj.SetActive(true);
 
         }
 
-        if(_isActiveOnOff == false)
+        if (_isActiveOnOff == false)
         {
             vfxObject.SetActive(true);
             desactiveObj.SetActive(false);

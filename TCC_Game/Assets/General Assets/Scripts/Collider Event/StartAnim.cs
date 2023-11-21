@@ -5,11 +5,11 @@ using UnityEngine;
 public class StartAnim : MonoBehaviour
 {
     [Header("Obj Anim")]
-    [SerializeField]  Animator animator; 
+    [SerializeField]  Animator[] animator; 
     [Space(5)]
 
     [Header("Obj Activate")]
-    [SerializeField]  GameObject objectToActivate; 
+    [SerializeField]  GameObject[] objectToActivate; 
     private bool hasActivated = false; 
 
 
@@ -21,12 +21,17 @@ public class StartAnim : MonoBehaviour
 
             if (animator != null)
             {
-                animator.enabled = true;
+                foreach(Animator anim in animator){
+                anim.enabled = true;
+                }
             }
 
             if (objectToActivate != null)
             {
-                objectToActivate.SetActive(true);
+                foreach(GameObject obj in objectToActivate)
+                {
+                  obj.SetActive(true);
+                }
             }
         }
     }
