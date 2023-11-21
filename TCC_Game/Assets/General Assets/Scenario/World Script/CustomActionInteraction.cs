@@ -13,6 +13,9 @@ public class CustomActionInteraction : MonoBehaviour, IInteractable
     [Tooltip("Tells if the object has a UI element to pop up when player steps in this object." +
         " The script will get the child object marked with 'UIPopUp' tag.")]
     [SerializeField] bool hasUIPopUp = true;
+    [Tooltip("Tells if the interaction will make the object change camera")]
+    [SerializeField] bool canChangeCam = false;
+    [SerializeField] ChangeCam changeCam;
 
     [HeaderPlus(" ", "- SHADER -", (int)HeaderPlusColor.cyan)]
     [Tooltip("Tells if the object has a shader to reproduce when interacted.")]
@@ -32,6 +35,7 @@ public class CustomActionInteraction : MonoBehaviour, IInteractable
     private GameObject uiPopUp;
 
     private bool isInteracted = false;
+
     #endregion
 
     #region Unity Methods
@@ -72,6 +76,9 @@ public class CustomActionInteraction : MonoBehaviour, IInteractable
     public void Interact()
     {
         if (singleActivation && isInteracted) return;
+
+        if (canChangeCam)
+            changeCam.changeCam(ChangeCam.CamType.TEMP, false);
 
         // deactivate ui pop up
         if (singleActivation && hasUIPopUp)
