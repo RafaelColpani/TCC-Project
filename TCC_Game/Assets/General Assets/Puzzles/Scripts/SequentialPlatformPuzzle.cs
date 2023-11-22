@@ -182,8 +182,12 @@ public class SequentialPlatformPuzzle : MonoBehaviour
     {
         playerLegs = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ProceduralLegs>();
 
+        Debug.Log("Bug acusado aqui.");
+        Debug.Log($"playerLegs: {playerLegs} | groundedObject: {playerLegs.GetGroundedObject()}");
         if (playerLegs.GetGroundedObject() == null)
             return null;
+        Debug.Log("Pós acusação de bug.");
+        Debug.Log($"playerLegs: {playerLegs} | groundedObject: {playerLegs.GetGroundedObject()}");
 
         var groundedObject = playerLegs.GetGroundedObject();
 
