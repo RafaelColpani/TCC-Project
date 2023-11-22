@@ -22002,6 +22002,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1928998591}
   - {fileID: 1730771846}
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -53070,7 +53071,7 @@ MonoBehaviour:
   correctSequenceIndexes: 00000000010000000200000003000000
   _isActiveOnOff: 1
   vfxObject: {fileID: 0}
-  activeObj: {fileID: 0}
+  activeObj: {fileID: 1825500676}
   desactiveObj: {fileID: 0}
   desaticvateObjs:
   - {fileID: 1877448561}
@@ -60217,7 +60218,7 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.64
   m_Points:
-  - {x: -3.4226317, y: -0.10152989}
+  - {x: -21.42995, y: 0.08036242}
   - {x: 0.44493717, y: -0.010699924}
   - {x: 1.1447784, y: -0.009409359}
   - {x: 3.1397882, y: -0.045065943}
@@ -60274,19 +60275,9 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 1
     m_ControlPoints:
-    - position: {x: -0.2883807, y: -0.02621655, z: 0}
-      leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 1.7574816, y: 0.06312933, z: 0}
-      mode: 2
-      height: 1
-      bevelCutoff: 0
-      bevelSize: 0
-      spriteIndex: 0
-      corner: 1
-      m_CornerMode: 1
-    - position: {x: 4.4786167, y: -0.044016954, z: 0}
-      leftTangent: {x: -1.6033523, y: -0.031821635, z: 0}
-      rightTangent: {x: 7.0008087, y: 0.13915084, z: 0}
+    - position: {x: -20.986282, y: -0.16527848, z: 0}
+      leftTangent: {x: -1.6033459, y: -0.031821623, z: 0}
+      rightTangent: {x: 7.0008154, y: 0.13915084, z: 0}
       mode: 1
       height: 1
       bevelCutoff: 0
@@ -60408,8 +60399,8 @@ SpriteShapeRenderer:
   m_Sprites:
   - {fileID: 21300000, guid: d16537a27e61294499d96d37ce431de6, type: 3}
   m_LocalAABB:
-    m_Center: {x: 22.632633, y: 0.7450497, z: 0}
-    m_Extent: {x: 26.085928, y: 1.6968262, z: 0}
+    m_Center: {x: 12.290226, y: 0.69085133, z: 0}
+    m_Extent: {x: 36.428337, y: 1.7510245, z: 0}
 --- !u!1 &1316027564
 GameObject:
   m_ObjectHideFlags: 0
@@ -72521,6 +72512,8 @@ MonoBehaviour:
     _prefab: Assets/General Assets/Scenario/Prefab/outono/pfb_outono_wall.prefab
   - _gameObject: {fileID: 2839396}
     _prefab: Assets/General Assets/Scenario/Prefab/outono/pfb_outono_wall.prefab
+  - _gameObject: {fileID: 1928998592}
+    _prefab: Assets/General Assets/Scenario/Prefab/Event/Area de morte_1.prefab
   - _gameObject: {fileID: 1770343519}
     _prefab: Assets/General Assets/Scenario/Prefab/verao/pfb_verao_fruit.prefab
   - _gameObject: {fileID: 1835949910}
@@ -73729,7 +73722,7 @@ Transform:
   - {fileID: 345063019}
   - {fileID: 870847586}
   m_Father: {fileID: 234373223}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!210 &1730771847
 SortingGroup:
@@ -90090,6 +90083,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896316352}
   m_CullTransparentMesh: 1
+--- !u!1001 &1928998590
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 234373223}
+    m_Modifications:
+    - target: {fileID: 486341949120326538, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486341949120326540, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486341949120326540, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 14.095965
+      objectReference: {fileID: 0}
+    - target: {fileID: 486341949120326540, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.175
+      objectReference: {fileID: 0}
+    - target: {fileID: 486341949120326540, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 486341949120326540, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -11.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 486341949120326540, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486341949120326540, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 486341949120326540, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486341949120326540, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486341949120326540, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486341949120326540, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486341949120326540, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486341949120326540, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 486341949120326543, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+      propertyPath: m_Name
+      value: Area de morte_1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+--- !u!4 &1928998591 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 486341949120326540, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+  m_PrefabInstance: {fileID: 1928998590}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1928998592 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 486341949120326543, guid: 92dfe8ec919cd84488de9a6e9731274a, type: 3}
+  m_PrefabInstance: {fileID: 1928998590}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1998743949
 GameObject:
   m_ObjectHideFlags: 0
