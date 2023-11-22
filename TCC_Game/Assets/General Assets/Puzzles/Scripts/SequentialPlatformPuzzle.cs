@@ -180,6 +180,8 @@ public class SequentialPlatformPuzzle : MonoBehaviour
     #region Private Methods
     private PlatformGrid GetStepedPlatform()
     {
+        playerLegs = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ProceduralLegs>();
+
         if (playerLegs.GetGroundedObject() == null)
             return null;
 
