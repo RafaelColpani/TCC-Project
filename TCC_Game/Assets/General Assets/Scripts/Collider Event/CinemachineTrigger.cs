@@ -8,6 +8,7 @@ public class CinemachineTrigger : MonoBehaviour
     [Tooltip("The object that will be destroyed when the event occurs")]
     [SerializeField] GameObject objectToDestroy;
     [SerializeField] GameObject vfxToDestroy;
+    [SerializeField] bool destroySelf = false;
 
     [Header("Obj to Activate")]
     [SerializeField] bool _ActiveOnOff;
@@ -64,6 +65,9 @@ public class CinemachineTrigger : MonoBehaviour
             inputHandler.canWalk = true;
             inputHandler.GetJumpCommand().SetCanJump();
         }
+
+        if (destroySelf)
+            Destroy(this.gameObject);
     }
     #endregion
 }

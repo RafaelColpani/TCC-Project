@@ -10,6 +10,7 @@ public class CameraShake : MonoBehaviour
 
     [Header("Vm Cam Obj")]
     [SerializeField] CinemachineVirtualCamera virtualCamera;
+    [SerializeField] bool destroySelf = false;
     [Space(5)]
 
     [Header("Camera Shake Configuration")]
@@ -39,5 +40,8 @@ public class CameraShake : MonoBehaviour
         noiseSettings.m_AmplitudeGain = 0;
         noiseSettings.m_FrequencyGain = 0;
         isShaking = false;
+
+        if (destroySelf)
+            Destroy(this.gameObject);
     }
 }
