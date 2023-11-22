@@ -1763,8 +1763,9 @@ Transform:
   - {fileID: 826371175}
   - {fileID: 863099065}
   - {fileID: 1631050535}
+  - {fileID: 1223034086}
   m_Father: {fileID: 1189369998}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &727567178
 MonoBehaviour:
@@ -1983,12 +1984,12 @@ MonoBehaviour:
     _prefab: Assets/General Assets/UI/Prefabs/keybind_0.prefab
   - _gameObject: {fileID: 1126018859}
     _prefab: Assets/General Assets/UI/Fades/Prefabs/FadeOut.prefab
-  - _gameObject: {fileID: 1223034085}
-    _prefab: Assets/General Assets/Scenario/Prefab/inverno/pfb_aurora.prefab
   - _gameObject: {fileID: 863099066}
     _prefab: Assets/General Assets/Scenario/Prefab/inverno/pfb_aurora.prefab
   - _gameObject: {fileID: 1631050536}
     _prefab: Assets/General Assets/Scenario/Prefab/pfb_sky_clouds.prefab
+  - _gameObject: {fileID: 1223034085}
+    _prefab: Assets/General Assets/Scenario/Prefab/inverno/pfb_aurora.prefab
   - _gameObject: {fileID: 1725053872}
     _prefab: Assets/General Assets/Scenario/Prefab/inverno/pfb_inverno_pedra_1.prefab
   - _gameObject: {fileID: 959505797}
@@ -2731,7 +2732,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1223034086}
   - {fileID: 727567177}
   m_Father: {fileID: 587815139}
   m_RootOrder: 0
@@ -3210,7 +3210,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1189369998}
+    m_TransformParent: {fileID: 727567177}
     m_Modifications:
     - target: {fileID: 588754523692971067, guid: 0546b9ae684f25d4984d4cb5c076b393, type: 3}
       propertyPath: m_Name
@@ -3226,7 +3226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692798156843450829, guid: 0546b9ae684f25d4984d4cb5c076b393, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8692798156843450829, guid: 0546b9ae684f25d4984d4cb5c076b393, type: 3}
       propertyPath: m_LocalScale.x
@@ -3242,11 +3242,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8692798156843450829, guid: 0546b9ae684f25d4984d4cb5c076b393, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -39.1
+      value: -30.3
       objectReference: {fileID: 0}
     - target: {fileID: 8692798156843450829, guid: 0546b9ae684f25d4984d4cb5c076b393, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.2
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 8692798156843450829, guid: 0546b9ae684f25d4984d4cb5c076b393, type: 3}
       propertyPath: m_LocalPosition.z
