@@ -18,7 +18,8 @@ public class WarmingManager : MonoBehaviour
     [HeaderPlus(" ", "- VOLUME -", (int)HeaderPlusColor.magenta)]
     [SerializeField] Volume volume;
     private Vignette vignette;
-    [SerializeField] float intenVignette = 0.05f;
+    [SerializeField] float intenVignetteIN = 0.05f;
+    [SerializeField] float intenVignetteON = 0.035f;
     [Space(5)]
 
     [HeaderPlus(" ", "- SCENE CHANGE -", (int)HeaderPlusColor.green)]
@@ -70,7 +71,7 @@ public class WarmingManager : MonoBehaviour
                 print("diminuindo vinhetinha");
                 print($"current: {currentTimer} | init: {initTimer}");
                 float intenVolume = vignette.intensity.value;
-                intenVolume += intenVignette * Time.deltaTime;
+                intenVolume += intenVignetteIN * Time.deltaTime;
                 vignette.intensity.Override(intenVolume);
             }
         }
@@ -94,7 +95,7 @@ public class WarmingManager : MonoBehaviour
 
         //Post Process
         float intenVolume = vignette.intensity.value;
-        intenVolume = Mathf.Clamp(intenVolume - 10 * Time.deltaTime, 0f, 1f);
+        intenVolume = Mathf.Clamp(intenVolume - intenVignetteON * Time.deltaTime, 0f, 1f);
         vignette.intensity.Override(intenVolume);
 
         isOnFire = true;
