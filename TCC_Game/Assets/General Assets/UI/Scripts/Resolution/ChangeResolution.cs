@@ -58,5 +58,11 @@ public class ChangeResolution : MonoBehaviour
     {
         Screen.fullScreen = f;
         f = !f;
+
+        int fInt;
+        if (f == true) fInt = 1; 
+        else fInt = 0;
+
+        PlayerPrefs.SetFloat("fullscreen", fInt);
     }
 }
