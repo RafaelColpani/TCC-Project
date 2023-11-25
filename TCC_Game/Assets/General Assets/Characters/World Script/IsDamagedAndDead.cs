@@ -76,7 +76,7 @@ public class IsDamagedAndDead : MonoBehaviour
         //if(stats.maxHp > 0) stats.hp = stats.maxHp;
         if (this.gameObject.CompareTag("Player"))
         {
-            if (PlayerPrefs.GetInt("maxHP") > 0) stats.hp = PlayerPrefs.GetInt("maxHP");
+            //if (PlayerPrefs.GetInt("maxHP") > 0) stats.hp = PlayerPrefs.GetInt("maxHP");
         }
 
         List<float> ordenedDropRates = new List<float>(dropRate);
@@ -165,7 +165,7 @@ public class IsDamagedAndDead : MonoBehaviour
 
         if (this.gameObject.CompareTag("Player"))
         {
-            PlayerPrefs.SetInt("Player_HP", PlayerPrefs.GetInt("Player_HP") - lifeLoss);
+            //PlayerPrefs.SetInt("Player_HP", PlayerPrefs.GetInt("Player_HP") - lifeLoss);
         }
 
         stats.hp -= lifeLoss;
