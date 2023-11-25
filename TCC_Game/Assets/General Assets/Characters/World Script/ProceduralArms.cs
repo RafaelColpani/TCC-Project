@@ -1,10 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.U2D.IK;
 using KevinCastejon.MoreAttributes;
 using System.Linq;
+using Unity.Burst.Intrinsics;
 
 [System.Serializable]
 public class ArmsTargets
@@ -212,6 +211,12 @@ public class ProceduralArms : MonoBehaviour
     [SerializeField] private float descendingValue;
     [Tooltip("The speed that arms will go to the descending position.")]
     [SerializeField] private float descendingSpeed;
+
+    [HeaderPlus(" ", "- CARRYING -", (int)HeaderPlusColor.white)]
+    [Tooltip("The position that both targets and carrying object will be when carrying something")]
+    [SerializeField] private Vector3 carryingPosition;
+    [Tooltip("The speed that both targets and carrying object will go to the carrying position")]
+    [SerializeField] private float carrySpeed;
     #endregion
 
     #region Private VARs
@@ -219,10 +224,17 @@ public class ProceduralArms : MonoBehaviour
     private ProceduralLegs proceduralLegs;
     private CharacterMovementState characterMovementState;
     private ProceduralTorso proceduralTorso;
+    private GameObject carryingObject;
+    private Transform carryingObjectParent;
 
     private float lerpArm = 0;
 
     private bool startIdleAnimation = true;
+    private bool isCarryingObject = false;
+    #endregion
+
+    #region Getters
+    public bool IsCarryingObject { get { return isCarryingObject; } }
     #endregion
 
     #region Unity Methods
@@ -259,31 +271,39 @@ public class ProceduralArms : MonoBehaviour
     #region Private Methods
     private void SetArmsState()
     {
-        var moveState = characterMovementState.MoveState;
-
-        switch (moveState)
+        if (!isCarryingObject)
         {
-            case CharacterMovementState.MovementState.IDLE:
-                if (!startIdleAnimation)
-                    ArmsIdlePosition();
-                else
-                    IdleAnimation();
-                break;
+            var moveState = characterMovementState.MoveState;
 
-            case CharacterMovementState.MovementState.WALKING:
-                ResetIdleAnimation();
-                MoveWalkingArms();
-                break;
+            switch (moveState)
+            {
+                case CharacterMovementState.MovementState.IDLE:
+                    if (!startIdleAnimation)
+                        ArmsIdlePosition();
+                    else
+                        IdleAnimation();
+                    break;
 
-            case CharacterMovementState.MovementState.ASCENDING:
-                ResetIdleAnimation();
-                ArmsAscendingPosition();
-                break;
+                case CharacterMovementState.MovementState.WALKING:
+                    ResetIdleAnimation();
+                    MoveWalkingArms();
+                    break;
 
-            case CharacterMovementState.MovementState.DESCENDING:
-                ResetIdleAnimation();
-                ArmsDescendingPosition();
-                break;
+                case CharacterMovementState.MovementState.ASCENDING:
+                    ResetIdleAnimation();
+                    ArmsAscendingPosition();
+                    break;
+
+                case CharacterMovementState.MovementState.DESCENDING:
+                    ResetIdleAnimation();
+                    ArmsDescendingPosition();
+                    break;
+            }
+        }
+
+        else
+        {
+            CarryingObjectPosition();
         }
     }
 
@@ -446,6 +466,20 @@ public class ProceduralArms : MonoBehaviour
     }
     #endregion
 
+    #region CARRYING
+    private void CarryingObjectPosition()
+    {
+        foreach (var arm in armsTargets)
+        {
+            var newPosition = Vector3.Lerp(arm.effectorTarget.localPosition, carryingPosition, carrySpeed * Time.deltaTime);
+            arm.effectorTarget.localPosition = newPosition;
+        }
+
+        var newCarriedObjectPosition = Vector3.Lerp(carryingObject.transform.localPosition, carryingPosition, carrySpeed * Time.deltaTime);
+        carryingObject.transform.localPosition = newCarriedObjectPosition;
+    }
+    #endregion
+
     #region AUX
     private bool ArmIsMovingInRightDirection(ArmsTargets arm, bool moveAhead)
     {
@@ -466,5 +500,32 @@ public class ProceduralArms : MonoBehaviour
         }
     }
     #endregion
+    #endregion
+
+    #region Public Methods
+    public void CarryObject(GameObject carriedObject)
+    {
+        isCarryingObject = true;
+        carryingObject = carriedObject;
+        carryingObjectParent = carryingObject.transform.parent;
+        carryingObject.transform.SetParent(characterManager.Body);
+
+        if (carriedObject.GetComponent<Rigidbody2D>())
+            carriedObject.GetComponent<Rigidbody2D>().isKinematic = true;
+    }
+
+    public void DropObject()
+    {
+        if (!isCarryingObject) return;
+
+        isCarryingObject = false;
+        carryingObject.transform.parent = carryingObjectParent;
+
+        if (carryingObject.GetComponent<Rigidbody2D>())
+            carryingObject.GetComponent<Rigidbody2D>().isKinematic = false;
+
+        carryingObject = null;
+        carryingObjectParent = null;
+    }
     #endregion
 }

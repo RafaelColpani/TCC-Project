@@ -26,6 +26,7 @@ public class InputHandler : MonoBehaviour
     private GravityController gravityController;
     private CharacterManager characterManager;
     private ProceduralLegs proceduralLegs;
+    private ProceduralArms proceduralArms;
     private PlayerShooter playerShooter;
     private PlayerInteract playerInteract;
     private InventoryManager inventoryManager;
@@ -94,6 +95,7 @@ public class InputHandler : MonoBehaviour
         gravityController = GetComponent<GravityController>();
         characterManager = GetComponent<CharacterManager>();
         proceduralLegs = GetComponent<ProceduralLegs>();
+        proceduralArms = GetComponent<ProceduralArms>();
         playerShooter = GetComponentInChildren<PlayerShooter>();
         playerInteract = GetComponentInChildren<PlayerInteract>();
 
@@ -130,8 +132,7 @@ public class InputHandler : MonoBehaviour
 
         playerActions.Movement.SkipDialogue.performed += ctx => skipDialogueCommand.Execute(body);
 
-        if (hasInventoryManager)
-            playerActions.Movement.DropItem.performed += ctx => dropItemCommand.Execute(body);
+        playerActions.Movement.Drop.performed += ctx => proceduralArms.DropObject();
     }
     public void SetCanWalk(bool value = false)
     {

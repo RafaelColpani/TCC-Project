@@ -26,11 +26,15 @@ public class TentaclePuzzle : MonoBehaviour
 
     [HeaderPlus(" ", "- FRUIT PUZZLE -", (int)HeaderPlusColor.cyan)]
     [SerializeField] private FruitPuzzle fruitPuzzle;
+    [Tooltip("The chicken puzzle presented in the scene. Keep it null if theres no chicken")]
+    [SerializeField] private ChickenPuzzle chickenPuzzle;
 
     #endregion
 
     #region Private VARs
     private List<Transform> objectsInRange = new List<Transform>();
+
+    private ProceduralArms playerArms;
 
     private Transform objectCatched;
     private Transform destination;
@@ -39,9 +43,15 @@ public class TentaclePuzzle : MonoBehaviour
     #endregion
 
     #region Unity Methods
+    private void Start()
+    {
+        playerArms = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ProceduralArms>();
+    }
+
     private void Update()
     {
         if (PauseController.GetIsPaused()) return;
+        if (chickenPuzzle != null && !chickenPuzzle.IsStopedChicken) return;
         if (!ObjectIsCatched()) return;
 
         ChallengeFlow();
@@ -59,6 +69,13 @@ public class TentaclePuzzle : MonoBehaviour
             if (distance <= minimumCatchDistance)
             {
                 objectCatched = objectInRange;
+
+                if (objectCatched.GetComponent<FruitCollector>())
+                    objectCatched.GetComponent<FruitCollector>().DisableIsInteractable();
+
+                if (playerArms.IsCarryingObject)
+                    playerArms.DropObject();
+
                 return true;
             }
         }
@@ -68,7 +85,7 @@ public class TentaclePuzzle : MonoBehaviour
 
     private void ChallengeFlow()
     {
-        // to run only 1 time
+        // to run once
         if (!objectHasBeenCatched)
         {
             objectHasBeenCatched = true;
