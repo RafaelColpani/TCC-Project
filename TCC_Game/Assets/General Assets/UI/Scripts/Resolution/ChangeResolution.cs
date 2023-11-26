@@ -56,7 +56,18 @@ public class ChangeResolution : MonoBehaviour
 
     public void ToggleFullscreen(bool f)
     {
+        int fInt;
+
+        if (toggle.isOn)
+            fInt = 1; 
+        else
+            fInt = 0;
+        print("toggle.isOn: " + toggle.isOn);
+        print("fInt: " + fInt);
+        PlayerPrefs.SetFloat("fullscreen", fInt);
+
         Screen.fullScreen = f;
-        f = !f;
+        //f = !f;
+
     }
 }

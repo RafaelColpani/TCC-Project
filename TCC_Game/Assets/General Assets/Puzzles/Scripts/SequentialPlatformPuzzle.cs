@@ -57,6 +57,8 @@ public class PlatformGrid
 public class SequentialPlatformPuzzle : MonoBehaviour
 {
     #region Inspector Vars
+    [SerializeField] ProceduralLegs playerLegs;
+
     [HeaderPlus(" ", "- GRID CONSTRUCTOR -", (int)HeaderPlusColor.green)]
     [Tooltip("The prefab of each platform that will compose the grid")]
     [SerializeField] GameObject platformPrefab;
@@ -121,8 +123,6 @@ public class SequentialPlatformPuzzle : MonoBehaviour
     private List<GameObject> enemyTraps;
     private PlatformGrid previousPlatformVisited = null;
 
-    private ProceduralLegs playerLegs;
-
     private bool gridConstructed = false;
     private bool initiatedPuzzle = false;
 
@@ -142,10 +142,10 @@ public class SequentialPlatformPuzzle : MonoBehaviour
             shaderVFX.transform.localScale = Vector3.zero;
     }
 
-    private void Start()
-    {
-        playerLegs = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ProceduralLegs>();
-    }
+    //private void Start()
+    //{
+    //    playerLegs = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ProceduralLegs>();
+    //}
 
     private void Update()
     {

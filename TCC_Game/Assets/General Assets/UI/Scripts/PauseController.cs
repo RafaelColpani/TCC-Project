@@ -10,6 +10,7 @@ public class PauseController : MonoBehaviour
     [SerializeField] GameObject pause;
     [SerializeField] GameObject settings;
     [SerializeField] GameObject dimBackground;
+    [SerializeField] GameObject pretinhoSuave2;
     [SerializeField] GameObject firstSelected;
     [SerializeField] GameObject settingsButton;
     [SerializeField] GameObject firstSettingsSelected;
@@ -63,12 +64,14 @@ public class PauseController : MonoBehaviour
     {
         if (settings.activeSelf)
         {
+            
             settings.SetActive(false);
             EventSystem.current.SetSelectedGameObject(settingsButton);
         }
 
         else
         {
+
             settings.SetActive(true);
             var tabGroup = GetComponentInChildren<TabGroup>();
             tabGroup.OnTabSelected(tabGroup.firstTabSelected.GetComponent<_TabButton>());
@@ -86,12 +89,16 @@ public class PauseController : MonoBehaviour
     public void Resume()
     {
         if (!canResume)
+        {
+            pretinhoSuave2.SetActive(false);
             return;
+        }
 
         if (settings.activeInHierarchy)
         {
             settings.GetComponentInChildren<TabGroup>().SelectFirstTab();
             settings.SetActive(false);
+            pretinhoSuave2.SetActive(false);
         }
         if (pause.activeSelf)
             Pause();

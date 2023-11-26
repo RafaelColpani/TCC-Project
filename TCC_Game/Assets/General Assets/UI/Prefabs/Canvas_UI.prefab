@@ -6567,6 +6567,7 @@ MonoBehaviour:
   pause: {fileID: 5538189913527450605}
   settings: {fileID: 7359925245122705409}
   dimBackground: {fileID: 7677462275844350882}
+  pretinhoSuave2: {fileID: 2314195592796889248}
   firstSelected: {fileID: 5538189913071907754}
   settingsButton: {fileID: 5538189912766763413}
   firstSettingsSelected: {fileID: 8545977094326262918}
@@ -13053,6 +13054,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3476226069312038199, guid: 116fc4ea0fa9f004f96d2f3250117bc9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476226069312038199, guid: 116fc4ea0fa9f004f96d2f3250117bc9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
@@ -13069,8 +13074,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2314195592796889248}
     - target: {fileID: 3476226069312038199, guid: 116fc4ea0fa9f004f96d2f3250117bc9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476226069312038199, guid: 116fc4ea0fa9f004f96d2f3250117bc9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476226069312038199, guid: 116fc4ea0fa9f004f96d2f3250117bc9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 3476226069312038199, guid: 116fc4ea0fa9f004f96d2f3250117bc9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
