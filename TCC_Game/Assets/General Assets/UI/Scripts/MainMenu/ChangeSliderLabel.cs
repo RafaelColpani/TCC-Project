@@ -39,10 +39,7 @@ public class ChangeSliderLabel : MonoBehaviour, IPointerDownHandler, IPointerUpH
         Music,
         UI
     }
-    private void Awake()
-    {
-        print("awakeeeeeee");
-    }
+
     private void Start()
     {
         sld = GetComponent<Slider>();
@@ -100,11 +97,6 @@ public class ChangeSliderLabel : MonoBehaviour, IPointerDownHandler, IPointerUpH
             decimal decimalValue = System.Math.Round((decimal)labelValue, 0);
             inputLabel.text = $"{decimalValue}{unit}";
 
-            print($"labelvalue: {labelValue}; decimalvalue {decimalValue}");
-
-            //PlayerPrefs.SetFloat("volMaster", val);
-            //Debug.Log("val: " + val);
-
             ChangeValue();
         }
     }
@@ -121,7 +113,7 @@ public class ChangeSliderLabel : MonoBehaviour, IPointerDownHandler, IPointerUpH
                     audioMixer.GetFloat("Master", out float val);
                     PlayerPrefs.SetFloat("volMaster", val);
                     PlayerPrefs.SetFloat("sldMaster", sld.value);
-                    print("sldvalue:" + sld.value);
+                    //print("sldvalue:" + sld.value);
                 }
                 break;
 
@@ -170,7 +162,6 @@ public class ChangeSliderLabel : MonoBehaviour, IPointerDownHandler, IPointerUpH
         ChangeAudioVolume();
 
         // modifica a visualizacao do valor na UI
-        print("CHANGE SLIDER VALUE: SLD.VALUE = " + sld.value);
         float labelValue = 100 * sld.value;
         decimal decimalValue = System.Math.Round((decimal)labelValue, 0);
 
@@ -189,7 +180,7 @@ public class ChangeSliderLabel : MonoBehaviour, IPointerDownHandler, IPointerUpH
         canvasScaleValue = newValue;
 
         PlayerPrefs.SetFloat("canvasScale", canvasScaleValue);
-        print("canvasScaleValue: " + canvasScaleValue);
+        //print("canvasScaleValue: " + canvasScaleValue);
     }
 
     void SetCanvasScaleValue()

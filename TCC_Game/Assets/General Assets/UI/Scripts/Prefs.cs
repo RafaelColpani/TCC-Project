@@ -75,7 +75,15 @@ public class Prefs : MonoBehaviour
     }
     bool IntToBool(int i)
     {
-        if (i == 1) return true;
-        else return false;
+        if (i == 1)
+        {
+            print("inttobool: " + "1 true");
+            return true;
+        }
+        else
+        {
+            print("inttobool: " + "0 false");
+            return false;
+        }
     }
 }
