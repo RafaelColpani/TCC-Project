@@ -1,5 +1,7 @@
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MusicController : MonoBehaviour
@@ -18,15 +20,35 @@ public class MusicController : MonoBehaviour
     [SerializeField] float transitionTime = 5f;
 
     [SerializeField] string[] scenesNames;
+    [SerializeField] int[] buildSceneIndexes;
+    [SerializeField] int lastSceneReached; // serves to know where in the buildSceneIndex vector is the current or the next
     [SerializeField] AudioSource[] music;
+
+
     [SerializeField] int currentMusicIndex = 0;
     [SerializeField] float maxVolume;
 
     Transform playerTransform;
 
     [SerializeField] bool reverb;
+
+    private void Awake()
+    {
+        
+        SceneManager.sceneLoaded += HandleSceneLoaded;
+    }
+
+    void HandleSceneLoaded(Scene scene, LoadSceneMode loadMode)
+    {
+        print("HANDLE SCENE LOADED ()");
+        ChangeMusic();
+    }
+
+
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
+
         GameObject[] gos = (GameObject[])FindObjectsOfType(typeof(GameObject));
         for (int i = 0; i < gos.Length; i++)
         {
@@ -35,25 +57,13 @@ public class MusicController : MonoBehaviour
         }
 
         playerTransform = GameObject.FindGameObjectWithTag("TargetPlayer").transform;
-        
-        for (int i = 0; i < music.Length; i++)
-        {
-            music[i].volume = 0f;
-            music[i].Play();
-        }
 
-        music[currentMusicIndex].volume = 1f;
-        ChangeMusic();
+        //ChangeMusic();
     }
 
     void Update()
     {   
         transform.parent.position = playerTransform.position;
-
-        //if (Input.GetKeyDown(KeyCode.Escape))
-        //{
-        //    PauseSnapshot();
-        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -73,7 +83,6 @@ public class MusicController : MonoBehaviour
             if (collision.gameObject.CompareTag("PuzzleMusic"))
             {
                 PuzzleMusicSnapshot();
-
             }
         }
     }
@@ -90,22 +99,21 @@ public class MusicController : MonoBehaviour
         }
     }
 
+    //onsceneload
+
     void ChangeMusic()
     {
-        for (int i = 0; i < music.Length; i++)
+        for (int i = 0; i < buildSceneIndexes.Length; i++)
         {
-            if (i != currentMusicIndex)
+            if(SceneManager.GetActiveScene().buildIndex == buildSceneIndexes[i])
             {
-                music[i].volume = 0f;
+                music[currentMusicIndex].Stop();
+                currentMusicIndex = SceneManager.GetActiveScene().buildIndex; //replaces old currentmusicindex with the new one
+                music[i].Play();
+                print($"builsceneindex: {SceneManager.GetActiveScene().buildIndex}, " +
+                    $"current music: {music[i].gameObject}");
+                break;
             }
-            
-            //TO CHANGE TO A BOOL COMPARASION
-            //if (reverb)
-            //    CaveReverbSnapshot();
-            //else
-            //    DefaultSnapshot();
-
-            music[currentMusicIndex].volume = 1f;
         }
     }
 
