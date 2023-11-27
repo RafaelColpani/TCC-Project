@@ -35,6 +35,7 @@ public class TentaclePuzzle : MonoBehaviour
     private List<Transform> objectsInRange = new List<Transform>();
 
     private ProceduralArms playerArms;
+    private ProceduralTentacle proceduralTentacle;
 
     private Transform objectCatched;
     private Transform destination;
@@ -42,17 +43,22 @@ public class TentaclePuzzle : MonoBehaviour
     private bool objectHasBeenCatched = false;
     #endregion
 
+    #region Public Vars
+    public bool ObjectHasBeenCatched { get { return this.objectHasBeenCatched; } }
+    #endregion
+
     #region Unity Methods
     private void Start()
     {
         playerArms = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ProceduralArms>();
+        proceduralTentacle = GetComponent<ProceduralTentacle>();
     }
 
     private void Update()
     {
         if (PauseController.GetIsPaused()) return;
         if (chickenPuzzle != null && !chickenPuzzle.IsStopedChicken) return;
-        if (!ObjectIsCatched()) return;
+        if (!ObjectIsCatched() && !objectHasBeenCatched) return;
 
         ChallengeFlow();
     }
@@ -61,6 +67,7 @@ public class TentaclePuzzle : MonoBehaviour
     #region Private Methods
     private bool ObjectIsCatched()
     {
+        if (objectHasBeenCatched) return false;
         if (objectsInRange.Count() <= 0) return false;
 
         foreach (var objectInRange in objectsInRange)
@@ -74,7 +81,9 @@ public class TentaclePuzzle : MonoBehaviour
                     objectCatched.GetComponent<FruitCollector>().DisableIsInteractable();
 
                 if (playerArms.IsCarryingObject)
-                    playerArms.DropObject();
+                    playerArms.DropObject(objectCatched.gameObject);
+
+                proceduralTentacle.SetFixedObjectToFollow(objectCatched);
 
                 return true;
             }
@@ -126,6 +135,7 @@ public class TentaclePuzzle : MonoBehaviour
         objectHasBeenCatched = false;
         objectCatched.gameObject.SetActive(false);
         destination.gameObject.SetActive(false);
+        proceduralTentacle.SetFixedObjectToFollow();
         fruitPuzzle.FruitReachedDestination(objectCatched.gameObject);
     }
 

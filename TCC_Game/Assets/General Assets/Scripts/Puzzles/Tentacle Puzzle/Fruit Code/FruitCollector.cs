@@ -8,7 +8,6 @@ public class FruitCollector : MonoBehaviour, IInteractable
     #region Private Vars
     private readonly string popUpTag = "UIPopUp";
     private ProceduralArms playerArms;
-    private Vector3 uiPopUpStartLocation;
     private bool isInteractable = true;
     #endregion
 
@@ -20,12 +19,11 @@ public class FruitCollector : MonoBehaviour, IInteractable
 
     private void Update()
     {
+        print($"{isInteractable} - {this.gameObject.name}");
         if (PauseController.GetIsPaused()) return;
         if (uiPopUp == null || !uiPopUp.gameObject.activeSelf) return;
 
-        //var thisRotation = this.transform.localRotation;
-        //uiPopUp.transform.rotation = Quaternion.Euler(thisRotation.x * -1, thisRotation.y * -1, thisRotation.z * -1);
-        //uiPopUp.transform.localPosition = uiPopUpStartLocation;
+        
     }
     #endregion
 
@@ -55,9 +53,10 @@ public class FruitCollector : MonoBehaviour, IInteractable
         if (!other.CompareTag("Player")) return;
         if (uiPopUp == null) return;
 
-        if (playerArms.IsCarryingObject && uiPopUp.gameObject.activeSelf)
+        if ((playerArms.IsCarryingObject && uiPopUp.gameObject.activeSelf) || (uiPopUp.gameObject.activeSelf && !isInteractable))
             uiPopUp.gameObject.SetActive(false);
 
+        if (!isInteractable) return;
         if (playerArms.IsCarryingObject) return;
 
         uiPopUp.gameObject.SetActive(true);

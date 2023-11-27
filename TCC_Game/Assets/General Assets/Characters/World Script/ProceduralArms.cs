@@ -514,9 +514,10 @@ public class ProceduralArms : MonoBehaviour
             carriedObject.GetComponent<Rigidbody2D>().isKinematic = true;
     }
 
-    public void DropObject()
+    public void DropObject(GameObject carriedObject = null)
     {
         if (!isCarryingObject) return;
+        if (carryingObject != carriedObject && carriedObject != null) return;
 
         isCarryingObject = false;
         carryingObject.transform.parent = carryingObjectParent;
