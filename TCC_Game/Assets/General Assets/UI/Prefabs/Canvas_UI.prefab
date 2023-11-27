@@ -6449,6 +6449,7 @@ GameObject:
   - component: {fileID: 5538189913169589430}
   - component: {fileID: 8398292813350100710}
   - component: {fileID: 2046019308}
+  - component: {fileID: 966013511785939685}
   m_Layer: 5
   m_Name: Canvas_UI
   m_TagString: Untagged
@@ -6584,6 +6585,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMeshPro: {fileID: 1404735922}
+--- !u!114 &966013511785939685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5538189913169589432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d347cf3dc0971df4ebee990a85363e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 936050e5a22a3da4e869c6a81ef61be5, type: 2}
+  tggFullscreen: {fileID: 7359925246931218186}
+  sldMaster: {fileID: 0}
+  sldMusic: {fileID: 0}
+  sldSound: {fileID: 0}
+  sldUI: {fileID: 0}
+  sldUiScale: {fileID: 0}
+  soundKeys:
+  - sldMaster
+  - sldMusic
+  - sldSound
+  - sldUI
+  defaultSoundValues:
+  - 1
+  - 1
+  - 1
+  - 1
+  canvasScaleValue: 1
 --- !u!1 &5538189913279145284
 GameObject:
   m_ObjectHideFlags: 0
@@ -14130,6 +14161,17 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &7359925246931218186 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3096276860290248003, guid: 116fc4ea0fa9f004f96d2f3250117bc9, type: 3}
+  m_PrefabInstance: {fileID: 5538189913337299529}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7832768626038808011 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2335133943038287746, guid: 116fc4ea0fa9f004f96d2f3250117bc9, type: 3}

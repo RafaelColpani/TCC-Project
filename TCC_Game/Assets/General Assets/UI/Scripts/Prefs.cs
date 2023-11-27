@@ -27,15 +27,10 @@ public class Prefs : MonoBehaviour
     //[SerializeField] Slider resolution;
     [SerializeField] Toggle tggFullscreen;
 
-    [SerializeField] Slider sldMaster;
-    [SerializeField] Slider sldMusic;
-    [SerializeField] Slider sldSound;
-    [SerializeField] Slider sldUI;
-
     [SerializeField] Slider sldUiScale;
     [Space(10)]
-    public string[] soundKeys = {"sldMaster", "sldSound", "sldMusic", "sldUI" };
-    public float[] defaultSoundValues = {1, 1, 0.8f, 0.95f };
+    public string[] soundKeys = {"sldMaster", "sldMusic", "sldSound", "sldUI" };
+    public float[] defaultSoundValues = {1, 1, 1, 1};
     [Space(10)]
     public float canvasScaleValue = 1;
 
@@ -52,7 +47,7 @@ public class Prefs : MonoBehaviour
         if (!PlayerPrefs.HasKey("canvasScaleValue"))
             PlayerPrefs.SetFloat("canvasScaleValue", 1);
 
-        tggFullscreen.GetComponent<ChangeResolution>().ToggleFullscreen( IntToBool(PlayerPrefs.GetInt("fullscreen")) );
+        //tggFullscreen.GetComponent<ChangeResolution>().ToggleFullscreen( IntToBool(PlayerPrefs.GetInt("fullscreen")) );
     }
 
     private void Start()
@@ -61,11 +56,10 @@ public class Prefs : MonoBehaviour
         audioMixer.SetFloat("Music", PlayerPrefs.GetFloat("volMusic"));
         audioMixer.SetFloat("Sound", PlayerPrefs.GetFloat("volSound"));
         audioMixer.SetFloat("UI", PlayerPrefs.GetFloat("volUI"));
-    }
 
-    public int LoadPrefs(string key, int i)
-    {
-        return 0;
+        print("setfloat music volmusic: " + PlayerPrefs.GetFloat("volMusic"));
+        audioMixer.SetFloat("Music", PlayerPrefs.GetFloat("volMusic"));
+        audioMixer.SetFloat("Master", Mathf.Log10(PlayerPrefs.GetFloat("sldMusic")));
     }
 
     int BoolToInt(bool b)

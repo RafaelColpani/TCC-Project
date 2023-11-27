@@ -75,17 +75,17 @@ public class ChangeSliderLabel : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
             //float labelValue = 100 * sld.value;
             //decimal decimalValue = System.Math.Round((decimal)labelValue, 0);
-            float labelValue = 100 * sld.value; ;
+            float labelValue = 100 * sld.value;
             switch (mixerType)
             {
                 case MixerType.Master:
                     labelValue = PlayerPrefs.GetFloat("sldMaster");
                     break;
-                case MixerType.Sound:
-                    labelValue = PlayerPrefs.GetFloat("sldSound");
-                    break;
                 case MixerType.Music:
                     labelValue = PlayerPrefs.GetFloat("sldMusic");
+                    break;
+                case MixerType.Sound:
+                    labelValue = PlayerPrefs.GetFloat("sldSound");
                     break;
                 case MixerType.UI:
                     labelValue = PlayerPrefs.GetFloat("sldUI");
@@ -108,12 +108,9 @@ public class ChangeSliderLabel : MonoBehaviour, IPointerDownHandler, IPointerUpH
             case MixerType.Master:
                 {
                     audioMixer.SetFloat("Master", Mathf.Log10(sld.value) * 20);
-
-                    //print("master float: " + Mathf.Log10(sld.value) * 20);
                     audioMixer.GetFloat("Master", out float val);
                     PlayerPrefs.SetFloat("volMaster", val);
                     PlayerPrefs.SetFloat("sldMaster", sld.value);
-                    //print("sldvalue:" + sld.value);
                 }
                 break;
 
@@ -133,7 +130,7 @@ public class ChangeSliderLabel : MonoBehaviour, IPointerDownHandler, IPointerUpH
             case MixerType.Music:
                 {
                     audioMixer.SetFloat("Music", Mathf.Log10(sld.value) * 20);
-                    audioMixer.GetFloat("Sound", out float val);
+                    audioMixer.GetFloat("Music", out float val);
                     PlayerPrefs.SetFloat("volMusic", val);
                     PlayerPrefs.SetFloat("sldMusic", sld.value);
                 }
