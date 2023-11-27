@@ -29,7 +29,7 @@ public class ButtonSound : MonoBehaviour, IPointerEnterHandler, IPointerClickHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        print("pointer entered" + name);
+        //print("pointer entered" + name);
         hover.Play();
     }
 

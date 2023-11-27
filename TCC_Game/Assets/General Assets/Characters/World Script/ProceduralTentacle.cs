@@ -49,6 +49,7 @@ public class ProceduralTentacle : MonoBehaviour
     private List<Transform> objectsInRange = new List<Transform>();
 
     private bool proceduralIsOn = true;
+    private Transform fixedObject;
     #endregion
 
     #region Public VARS
@@ -156,6 +157,14 @@ public class ProceduralTentacle : MonoBehaviour
     #region FOLLOW
     private void FollowAnimation()
     {
+        if (fixedObject != null)
+        {
+            foreach (var tentacle in tentacles)
+                MoveTarget(tentacle.target, fixedObject.position, followSpeed, true);
+
+            return;
+        }
+
         Transform closerObject = this.transform;
         float closerDistance = Mathf.Infinity;
 
@@ -207,6 +216,13 @@ public class ProceduralTentacle : MonoBehaviour
         return true;
     }
     #endregion
+    #endregion
+
+    #region Public Methods
+    public void SetFixedObjectToFollow(Transform fixedObject = null)
+    {
+        this.fixedObject = fixedObject;
+    }
     #endregion
 
     #region Unity Events

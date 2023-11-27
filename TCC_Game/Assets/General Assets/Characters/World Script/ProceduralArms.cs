@@ -1,10 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.U2D.IK;
 using KevinCastejon.MoreAttributes;
 using System.Linq;
+using Unity.Burst.Intrinsics;
 
 [System.Serializable]
 public class ArmsTargets
@@ -22,8 +21,6 @@ public class ArmsTargets
     public Vector3[] idleMovementPositions;
     [Tooltip("The position that the target will reach when ascending (jumping).")]
     public Vector3 ascendingLocalPosition;
-    [Tooltip("The height that the target will be, based on body position")]
-    public float targetHeightOffset;
     [Tooltip("Each arm will move in a different direction, problably accordingly to the oposite leg, so it's " +
         "recommended to mark this as oposite to the same side leg (Example: if right leg is true, the right arm must be false)")]
     public bool isEven;
@@ -212,6 +209,12 @@ public class ProceduralArms : MonoBehaviour
     [SerializeField] private float descendingValue;
     [Tooltip("The speed that arms will go to the descending position.")]
     [SerializeField] private float descendingSpeed;
+
+    [HeaderPlus(" ", "- CARRYING -", (int)HeaderPlusColor.white)]
+    [Tooltip("The position that both targets and carrying object will be when carrying something")]
+    [SerializeField] private Vector3 carryingPosition;
+    [Tooltip("The speed that both targets and carrying object will go to the carrying position")]
+    [SerializeField] private float carrySpeed;
     #endregion
 
     #region Private VARs
@@ -219,10 +222,17 @@ public class ProceduralArms : MonoBehaviour
     private ProceduralLegs proceduralLegs;
     private CharacterMovementState characterMovementState;
     private ProceduralTorso proceduralTorso;
+    private GameObject carryingObject;
+    private Transform carryingObjectParent;
 
     private float lerpArm = 0;
 
     private bool startIdleAnimation = true;
+    private bool isCarryingObject = false;
+    #endregion
+
+    #region Getters
+    public bool IsCarryingObject { get { return isCarryingObject; } }
     #endregion
 
     #region Unity Methods
@@ -259,31 +269,39 @@ public class ProceduralArms : MonoBehaviour
     #region Private Methods
     private void SetArmsState()
     {
-        var moveState = characterMovementState.MoveState;
-
-        switch (moveState)
+        if (!isCarryingObject)
         {
-            case CharacterMovementState.MovementState.IDLE:
-                if (!startIdleAnimation)
-                    ArmsIdlePosition();
-                else
-                    IdleAnimation();
-                break;
+            var moveState = characterMovementState.MoveState;
 
-            case CharacterMovementState.MovementState.WALKING:
-                ResetIdleAnimation();
-                MoveWalkingArms();
-                break;
+            switch (moveState)
+            {
+                case CharacterMovementState.MovementState.IDLE:
+                    if (!startIdleAnimation)
+                        ArmsIdlePosition();
+                    else
+                        IdleAnimation();
+                    break;
 
-            case CharacterMovementState.MovementState.ASCENDING:
-                ResetIdleAnimation();
-                ArmsAscendingPosition();
-                break;
+                case CharacterMovementState.MovementState.WALKING:
+                    ResetIdleAnimation();
+                    MoveWalkingArms();
+                    break;
 
-            case CharacterMovementState.MovementState.DESCENDING:
-                ResetIdleAnimation();
-                ArmsDescendingPosition();
-                break;
+                case CharacterMovementState.MovementState.ASCENDING:
+                    ResetIdleAnimation();
+                    ArmsAscendingPosition();
+                    break;
+
+                case CharacterMovementState.MovementState.DESCENDING:
+                    ResetIdleAnimation();
+                    ArmsDescendingPosition();
+                    break;
+            }
+        }
+
+        else
+        {
+            CarryingObjectPosition();
         }
     }
 
@@ -446,6 +464,20 @@ public class ProceduralArms : MonoBehaviour
     }
     #endregion
 
+    #region CARRYING
+    private void CarryingObjectPosition()
+    {
+        foreach (var arm in armsTargets)
+        {
+            var newPosition = Vector3.Lerp(arm.effectorTarget.localPosition, carryingPosition, carrySpeed * Time.deltaTime);
+            arm.effectorTarget.localPosition = newPosition;
+        }
+
+        var newCarriedObjectPosition = Vector3.Lerp(carryingObject.transform.localPosition, carryingPosition, carrySpeed * Time.deltaTime);
+        carryingObject.transform.localPosition = newCarriedObjectPosition;
+    }
+    #endregion
+
     #region AUX
     private bool ArmIsMovingInRightDirection(ArmsTargets arm, bool moveAhead)
     {
@@ -459,6 +491,7 @@ public class ProceduralArms : MonoBehaviour
     private void ResetIdleAnimation()
     {
         startIdleAnimation = false;
+
         foreach (var arm in armsTargets)
         {
             arm.SetReachedMaxPosIdleAnim(false);
@@ -466,5 +499,34 @@ public class ProceduralArms : MonoBehaviour
         }
     }
     #endregion
+    #endregion
+
+    #region Public Methods
+    public void CarryObject(GameObject carriedObject)
+    {
+        isCarryingObject = true;
+        startIdleAnimation = false;
+        carryingObject = carriedObject;
+        carryingObjectParent = carryingObject.transform.parent;
+        carryingObject.transform.SetParent(characterManager.Body);
+
+        if (carriedObject.GetComponent<Rigidbody2D>())
+            carriedObject.GetComponent<Rigidbody2D>().isKinematic = true;
+    }
+
+    public void DropObject(GameObject carriedObject = null)
+    {
+        if (!isCarryingObject) return;
+        if (carryingObject != carriedObject && carriedObject != null) return;
+
+        isCarryingObject = false;
+        carryingObject.transform.parent = carryingObjectParent;
+
+        if (carryingObject.GetComponent<Rigidbody2D>())
+            carryingObject.GetComponent<Rigidbody2D>().isKinematic = false;
+
+        carryingObject = null;
+        carryingObjectParent = null;
+    }
     #endregion
 }

@@ -18,14 +18,14 @@ public class Status : MonoBehaviour
 
     private void Awake()
     {
-        if (PlayerPrefs.HasKey("Player_Life"))
-        {
-            PlayerPrefs.SetInt("PlayerLife", maxLife);
-            PlayerPrefs.SetInt("PlayerHP", maxHp);
-            PlayerPrefs.SetFloat("PlayerBelly", maxBelly);
-            PlayerPrefs.SetInt("Player_PhyDefense", phyDefense);
-            PlayerPrefs.SetInt("Player_MagDefense", magDefense);
-        }
+        //if (PlayerPrefs.HasKey("Player_Life"))
+        //{
+        //    PlayerPrefs.SetInt("PlayerLife", maxLife);
+        //    PlayerPrefs.SetInt("PlayerHP", maxHp);
+        //    PlayerPrefs.SetFloat("PlayerBelly", maxBelly);
+        //    PlayerPrefs.SetInt("Player_PhyDefense", phyDefense);
+        //    PlayerPrefs.SetInt("Player_MagDefense", magDefense);
+        //}
 
         life = maxLife;
         hp = maxHp;
