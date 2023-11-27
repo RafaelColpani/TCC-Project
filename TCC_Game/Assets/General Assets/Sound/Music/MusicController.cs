@@ -40,8 +40,12 @@ public class MusicController : MonoBehaviour
 
     void HandleSceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
-        print("HANDLE SCENE LOADED ()");
-        ChangeMusic();
+        print("HANDLE SCENE LOADED: "+ SceneManager.GetActiveScene().buildIndex);
+
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+            music[currentMusicIndex].Stop();
+        else
+            ChangeMusic();
     }
 
 
