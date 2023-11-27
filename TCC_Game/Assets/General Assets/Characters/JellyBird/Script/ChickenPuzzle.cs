@@ -17,11 +17,17 @@ public class ChickenPuzzle : MonoBehaviour
     [SerializeField] string fruitTag;
     #endregion
 
+    public bool IsStopedChicken = false;
+
     #region Unity Events
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag(fruitTag)) return;
-        if (destroyEvent.IsActive) return;
+        if (destroyEvent.IsActive)
+        {
+            IsStopedChicken = true;
+            return;
+        }
 
         chickenFruitFollow.TriggerFruitFollow(collision.gameObject);
     }

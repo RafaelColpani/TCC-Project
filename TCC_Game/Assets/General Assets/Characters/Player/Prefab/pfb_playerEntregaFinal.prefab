@@ -5527,6 +5527,8 @@ MonoBehaviour:
   ascendingSpeed: 9
   descendingValue: 1.7
   descendingSpeed: 3
+  carryingPosition: {x: 0.376, y: 0.675, z: 0}
+  carrySpeed: 4
 --- !u!114 &2963959933435352539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5547,6 +5549,7 @@ MonoBehaviour:
   - {x: -0.001, y: 0.539, z: 0}
   - {x: 0.092, y: 0.527, z: 0}
   idleAnimationSpeed: 1
+  distanceToAnimate: 0.0001
   walkingHeadLocalRotation: {x: 0, y: 0, z: 0.06104854, w: 0.9981348}
   headRotationSpeed: 9
 --- !u!114 &3739611730463113574
@@ -5709,6 +5712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 269deadabc8bf6a4bb6743ebae28f6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  getWalkingByLegs: 1
   moveState: 0
 --- !u!143 &7189412030926041656
 CharacterController:

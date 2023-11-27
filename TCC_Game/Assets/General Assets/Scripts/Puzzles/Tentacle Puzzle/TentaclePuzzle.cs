@@ -26,11 +26,16 @@ public class TentaclePuzzle : MonoBehaviour
 
     [HeaderPlus(" ", "- FRUIT PUZZLE -", (int)HeaderPlusColor.cyan)]
     [SerializeField] private FruitPuzzle fruitPuzzle;
+    [Tooltip("The chicken puzzle presented in the scene. Keep it null if theres no chicken")]
+    [SerializeField] private ChickenPuzzle chickenPuzzle;
 
     #endregion
 
     #region Private VARs
     private List<Transform> objectsInRange = new List<Transform>();
+
+    private ProceduralArms playerArms;
+    private ProceduralTentacle proceduralTentacle;
 
     private Transform objectCatched;
     private Transform destination;
@@ -38,11 +43,22 @@ public class TentaclePuzzle : MonoBehaviour
     private bool objectHasBeenCatched = false;
     #endregion
 
+    #region Public Vars
+    public bool ObjectHasBeenCatched { get { return this.objectHasBeenCatched; } }
+    #endregion
+
     #region Unity Methods
+    private void Start()
+    {
+        playerArms = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ProceduralArms>();
+        proceduralTentacle = GetComponent<ProceduralTentacle>();
+    }
+
     private void Update()
     {
         if (PauseController.GetIsPaused()) return;
-        if (!ObjectIsCatched()) return;
+        if (chickenPuzzle != null && !chickenPuzzle.IsStopedChicken) return;
+        if (!ObjectIsCatched() && !objectHasBeenCatched) return;
 
         ChallengeFlow();
     }
@@ -51,6 +67,7 @@ public class TentaclePuzzle : MonoBehaviour
     #region Private Methods
     private bool ObjectIsCatched()
     {
+        if (objectHasBeenCatched) return false;
         if (objectsInRange.Count() <= 0) return false;
 
         foreach (var objectInRange in objectsInRange)
@@ -59,6 +76,15 @@ public class TentaclePuzzle : MonoBehaviour
             if (distance <= minimumCatchDistance)
             {
                 objectCatched = objectInRange;
+
+                if (objectCatched.GetComponent<FruitCollector>())
+                    objectCatched.GetComponent<FruitCollector>().DisableIsInteractable();
+
+                if (playerArms.IsCarryingObject)
+                    playerArms.DropObject(objectCatched.gameObject);
+
+                proceduralTentacle.SetFixedObjectToFollow(objectCatched);
+
                 return true;
             }
         }
@@ -68,7 +94,7 @@ public class TentaclePuzzle : MonoBehaviour
 
     private void ChallengeFlow()
     {
-        // to run only 1 time
+        // to run once
         if (!objectHasBeenCatched)
         {
             objectHasBeenCatched = true;
@@ -109,6 +135,7 @@ public class TentaclePuzzle : MonoBehaviour
         objectHasBeenCatched = false;
         objectCatched.gameObject.SetActive(false);
         destination.gameObject.SetActive(false);
+        proceduralTentacle.SetFixedObjectToFollow();
         fruitPuzzle.FruitReachedDestination(objectCatched.gameObject);
     }
 

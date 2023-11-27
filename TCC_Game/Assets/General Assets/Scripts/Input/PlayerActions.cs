@@ -73,7 +73,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""DropItem"",
+                    ""name"": ""Drop"",
                     ""type"": ""Button"",
                     ""id"": ""9d133e0a-26d9-4887-a56c-7ad5bb212099"",
                     ""expectedControlType"": ""Button"",
@@ -346,7 +346,18 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""DropItem"",
+                    ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84f8d67c-2b5f-494d-afee-cf20c2272d42"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Drop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -528,7 +539,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_Movement_Shoot = m_Movement.FindAction("Shoot", throwIfNotFound: true);
         m_Movement_Interaction = m_Movement.FindAction("Interaction", throwIfNotFound: true);
         m_Movement_SkipDialogue = m_Movement.FindAction("SkipDialogue", throwIfNotFound: true);
-        m_Movement_DropItem = m_Movement.FindAction("DropItem", throwIfNotFound: true);
+        m_Movement_Drop = m_Movement.FindAction("Drop", throwIfNotFound: true);
         m_Movement_InventorySlot_1 = m_Movement.FindAction("InventorySlot_1", throwIfNotFound: true);
         m_Movement_InventorySlot_2 = m_Movement.FindAction("InventorySlot_2", throwIfNotFound: true);
         m_Movement_InventorySlot_3 = m_Movement.FindAction("InventorySlot_3", throwIfNotFound: true);
@@ -600,7 +611,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Movement_Shoot;
     private readonly InputAction m_Movement_Interaction;
     private readonly InputAction m_Movement_SkipDialogue;
-    private readonly InputAction m_Movement_DropItem;
+    private readonly InputAction m_Movement_Drop;
     private readonly InputAction m_Movement_InventorySlot_1;
     private readonly InputAction m_Movement_InventorySlot_2;
     private readonly InputAction m_Movement_InventorySlot_3;
@@ -614,7 +625,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Movement_Shoot;
         public InputAction @Interaction => m_Wrapper.m_Movement_Interaction;
         public InputAction @SkipDialogue => m_Wrapper.m_Movement_SkipDialogue;
-        public InputAction @DropItem => m_Wrapper.m_Movement_DropItem;
+        public InputAction @Drop => m_Wrapper.m_Movement_Drop;
         public InputAction @InventorySlot_1 => m_Wrapper.m_Movement_InventorySlot_1;
         public InputAction @InventorySlot_2 => m_Wrapper.m_Movement_InventorySlot_2;
         public InputAction @InventorySlot_3 => m_Wrapper.m_Movement_InventorySlot_3;
@@ -643,9 +654,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @SkipDialogue.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnSkipDialogue;
                 @SkipDialogue.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnSkipDialogue;
                 @SkipDialogue.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnSkipDialogue;
-                @DropItem.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnDropItem;
-                @DropItem.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnDropItem;
-                @DropItem.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnDropItem;
+                @Drop.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnDrop;
+                @Drop.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnDrop;
+                @Drop.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnDrop;
                 @InventorySlot_1.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnInventorySlot_1;
                 @InventorySlot_1.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnInventorySlot_1;
                 @InventorySlot_1.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnInventorySlot_1;
@@ -677,9 +688,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @SkipDialogue.started += instance.OnSkipDialogue;
                 @SkipDialogue.performed += instance.OnSkipDialogue;
                 @SkipDialogue.canceled += instance.OnSkipDialogue;
-                @DropItem.started += instance.OnDropItem;
-                @DropItem.performed += instance.OnDropItem;
-                @DropItem.canceled += instance.OnDropItem;
+                @Drop.started += instance.OnDrop;
+                @Drop.performed += instance.OnDrop;
+                @Drop.canceled += instance.OnDrop;
                 @InventorySlot_1.started += instance.OnInventorySlot_1;
                 @InventorySlot_1.performed += instance.OnInventorySlot_1;
                 @InventorySlot_1.canceled += instance.OnInventorySlot_1;
@@ -754,7 +765,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
         void OnSkipDialogue(InputAction.CallbackContext context);
-        void OnDropItem(InputAction.CallbackContext context);
+        void OnDrop(InputAction.CallbackContext context);
         void OnInventorySlot_1(InputAction.CallbackContext context);
         void OnInventorySlot_2(InputAction.CallbackContext context);
         void OnInventorySlot_3(InputAction.CallbackContext context);

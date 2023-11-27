@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using KevinCastejon.MoreAttributes;
 using System.Linq;
+using static Cinemachine.CinemachineFreeLook;
 
 [RequireComponent(typeof(ProceduralTorso))]
 public class ChickenFruitFollow : MonoBehaviour
@@ -27,13 +28,19 @@ public class ChickenFruitFollow : MonoBehaviour
     [HeaderPlus(" ", "- PUZZLE -", (int)HeaderPlusColor.cyan)]
     [Tooltip("The script of the fruit puzzle")]
     [SerializeField] FruitPuzzle fruitPuzzle;
+
+    [HeaderPlus(" ", "- PLAYER -", (int)HeaderPlusColor.cyan)]
+    [Tooltip("The Transform of the player that contains the procedural scriots, also named with the prefix 'spr'")]
+    [SerializeField] Transform sprPlayer;
     #endregion
 
     #region Private VARs
     private MoveCommand moveCommand;
     private ProceduralLegs proceduralLegs;
+    private ProceduralArms playerArms;
     private CharacterManager characterManager;
     private ProceduralTorso proceduralTorso;
+    private Transform playerBody;
 
     private Vector3 homePosition;
     private Vector3 initialTorsoTargetPosition;
@@ -53,6 +60,8 @@ public class ChickenFruitFollow : MonoBehaviour
         proceduralLegs = GetComponent<ProceduralLegs>();
         characterManager = GetComponent<CharacterManager>();
         proceduralTorso = GetComponent<ProceduralTorso>();
+        playerArms = sprPlayer.GetComponent<ProceduralArms>();
+        playerBody = sprPlayer.GetComponent<CharacterManager>().Body;
         moveCommand = new MoveCommand(proceduralLegs, runSpeed * characterManager.DirectionMultiplier());
 
         homePosition = this.transform.position;
@@ -65,6 +74,7 @@ public class ChickenFruitFollow : MonoBehaviour
 
     private void FixedUpdate()
     {
+        print(fruitObjs.Count());
         MoveFlow();
 
         if (isGoingToFruit)
@@ -100,7 +110,13 @@ public class ChickenFruitFollow : MonoBehaviour
     {
         isReturningHome = false;
         proceduralTorso.MoveTarget(initialTorsoTargetPosition, returnFromEatSpeed);
-        var distance = (fruitObjs.Peek().transform.position - this.transform.position).sqrMagnitude;
+        float distance = 0;
+
+        if (!playerArms.IsCarryingObject)
+            distance = (fruitObjs.Peek().transform.position - this.transform.position).sqrMagnitude;
+        else
+            distance = (playerBody.position - this.transform.position).sqrMagnitude;
+
         if (distance <= catchFruitDistance)
         {
             isGoingToFruit = false;
@@ -110,6 +126,12 @@ public class ChickenFruitFollow : MonoBehaviour
 
     private void EatFruit()
     {
+        if (playerArms.IsCarryingObject)
+            playerArms.DropObject();
+
+        if (fruitObjs.Peek().GetComponent<FruitCollector>())
+            fruitObjs.Peek().GetComponent<FruitCollector>().DisableIsInteractable();
+
         proceduralTorso.CanMoveTarget = false;
         var fruitRb = fruitObjs.Peek().GetComponent<Rigidbody2D>();
         fruitRb.isKinematic = true;
@@ -127,6 +149,7 @@ public class ChickenFruitFollow : MonoBehaviour
         else
         {
             var fruit = fruitObjs.Dequeue();
+
             fruit.SetActive(false);
             isEatingFruit = false;
 
@@ -193,6 +216,8 @@ public class ChickenFruitFollow : MonoBehaviour
     #region Public Methods
     public void TriggerFruitFollow(GameObject fruit)
     {
+        if (fruitObjs.Contains(fruit)) return;
+
         isGoingToFruit = true;
         fruitObjs.Enqueue(fruit);
     }
