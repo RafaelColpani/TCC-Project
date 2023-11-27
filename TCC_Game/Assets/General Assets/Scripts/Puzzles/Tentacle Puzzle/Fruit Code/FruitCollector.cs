@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class FruitCollector : MonoBehaviour, IInteractable
 {
+    [SerializeField] Transform uiPopUp;
+
     #region Private Vars
     private readonly string popUpTag = "UIPopUp";
-    private GameObject uiPopUp;
     private ProceduralArms playerArms;
+    private Vector3 uiPopUpStartLocation;
     private bool isInteractable = true;
     #endregion
 
@@ -14,14 +16,16 @@ public class FruitCollector : MonoBehaviour, IInteractable
     private void Start()
     {
         playerArms = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ProceduralArms>();
+    }
 
-        foreach (Transform child in this.transform)
-        {
-            if (!child.gameObject.CompareTag(popUpTag)) continue;
+    private void Update()
+    {
+        if (PauseController.GetIsPaused()) return;
+        if (uiPopUp == null || !uiPopUp.gameObject.activeSelf) return;
 
-            uiPopUp = child.gameObject;
-            break;
-        }
+        //var thisRotation = this.transform.localRotation;
+        //uiPopUp.transform.rotation = Quaternion.Euler(thisRotation.x * -1, thisRotation.y * -1, thisRotation.z * -1);
+        //uiPopUp.transform.localPosition = uiPopUpStartLocation;
     }
     #endregion
 
@@ -38,6 +42,9 @@ public class FruitCollector : MonoBehaviour, IInteractable
         if (!isInteractable) return;
         if (playerArms.IsCarryingObject) return;
 
+        if (uiPopUp != null)
+            uiPopUp.gameObject.SetActive(false);
+
         playerArms.CarryObject(this.gameObject);
     }
     #endregion
@@ -47,9 +54,13 @@ public class FruitCollector : MonoBehaviour, IInteractable
     {
         if (!other.CompareTag("Player")) return;
         if (uiPopUp == null) return;
+
+        if (playerArms.IsCarryingObject && uiPopUp.gameObject.activeSelf)
+            uiPopUp.gameObject.SetActive(false);
+
         if (playerArms.IsCarryingObject) return;
 
-        uiPopUp.SetActive(true);
+        uiPopUp.gameObject.SetActive(true);
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -58,7 +69,7 @@ public class FruitCollector : MonoBehaviour, IInteractable
         if (uiPopUp == null) return;
         if (playerArms.IsCarryingObject) return;
 
-        uiPopUp.SetActive(false);
+        uiPopUp.gameObject.SetActive(false);
     }
 
     private void OnEnable()

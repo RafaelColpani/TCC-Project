@@ -21,8 +21,6 @@ public class ArmsTargets
     public Vector3[] idleMovementPositions;
     [Tooltip("The position that the target will reach when ascending (jumping).")]
     public Vector3 ascendingLocalPosition;
-    [Tooltip("The height that the target will be, based on body position")]
-    public float targetHeightOffset;
     [Tooltip("Each arm will move in a different direction, problably accordingly to the oposite leg, so it's " +
         "recommended to mark this as oposite to the same side leg (Example: if right leg is true, the right arm must be false)")]
     public bool isEven;
@@ -493,6 +491,7 @@ public class ProceduralArms : MonoBehaviour
     private void ResetIdleAnimation()
     {
         startIdleAnimation = false;
+
         foreach (var arm in armsTargets)
         {
             arm.SetReachedMaxPosIdleAnim(false);
@@ -506,6 +505,7 @@ public class ProceduralArms : MonoBehaviour
     public void CarryObject(GameObject carriedObject)
     {
         isCarryingObject = true;
+        startIdleAnimation = false;
         carryingObject = carriedObject;
         carryingObjectParent = carryingObject.transform.parent;
         carryingObject.transform.SetParent(characterManager.Body);
