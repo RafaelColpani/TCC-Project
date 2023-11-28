@@ -68,8 +68,6 @@ public class WarmingManager : MonoBehaviour
             //Post Process
             if (currentTimer <= startVigTime)
             {
-                print("diminuindo vinhetinha");
-                print($"current: {currentTimer} | init: {initTimer}");
                 float intenVolume = vignette.intensity.value;
                 intenVolume += intenVignetteIN * Time.deltaTime;
                 vignette.intensity.Override(intenVolume);

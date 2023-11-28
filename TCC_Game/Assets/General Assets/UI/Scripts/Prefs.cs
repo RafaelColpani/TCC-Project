@@ -57,7 +57,6 @@ public class Prefs : MonoBehaviour
         audioMixer.SetFloat("Sound", PlayerPrefs.GetFloat("volSound"));
         audioMixer.SetFloat("UI", PlayerPrefs.GetFloat("volUI"));
 
-        print("setfloat music volmusic: " + PlayerPrefs.GetFloat("volMusic"));
         audioMixer.SetFloat("Music", PlayerPrefs.GetFloat("volMusic"));
         audioMixer.SetFloat("Master", Mathf.Log10(PlayerPrefs.GetFloat("sldMusic")));
     }

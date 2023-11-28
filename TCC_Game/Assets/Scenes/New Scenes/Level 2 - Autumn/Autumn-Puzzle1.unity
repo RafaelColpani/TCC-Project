@@ -10052,6 +10052,7 @@ MonoBehaviour:
   fixedCam: {fileID: 761903047}
   tempCam: {fileID: 824970266}
   changeTime: 6
+  inputHandler: {fileID: 2088115695}
 --- !u!1 &185768023 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6611901853790284445, guid: 14a2b1aa4b8afe94388fef3e25a34ce0, type: 3}
@@ -13129,6 +13130,10 @@ PrefabInstance:
       value: 5.5572615
       objectReference: {fileID: 0}
     - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[0].m_Value.z
+      value: 2.4019923
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.x
       value: -20.282284
       objectReference: {fileID: 0}
@@ -13137,12 +13142,20 @@ PrefabInstance:
       value: 6.379862
       objectReference: {fileID: 0}
     - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.z
+      value: 1.6452001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Value.x
       value: -25.448214
       objectReference: {fileID: 0}
     - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Value.y
       value: 1.8884654
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Value.z
+      value: -17.323957
       objectReference: {fileID: 0}
     - target: {fileID: 7947743174261487036, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: scriptParaAtivar
@@ -16389,7 +16402,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.26666668, g: 0.81960785, b: 0.2901961, a: 1}
+      maxColor: {r: 0, g: 1, b: 0.042553186, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 2.2427642, g: 48.252174, b: 141.83438, a: 0}
@@ -21303,6 +21316,10 @@ PrefabInstance:
       value: 5.917262
       objectReference: {fileID: 0}
     - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[0].m_Value.z
+      value: 2.4019923
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.x
       value: -32.882286
       objectReference: {fileID: 0}
@@ -21311,12 +21328,20 @@ PrefabInstance:
       value: 6.7398624
       objectReference: {fileID: 0}
     - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.z
+      value: 1.6452001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Value.x
       value: -38.048214
       objectReference: {fileID: 0}
     - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Value.y
       value: 2.2484655
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Value.z
+      value: -17.323957
       objectReference: {fileID: 0}
     - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Overridden
@@ -27571,6 +27596,8 @@ MonoBehaviour:
     _prefab: Assets/General Assets/UI/Prefabs/keybind_0.prefab
   - _gameObject: {fileID: 1038103795}
     _prefab: Assets/General Assets/UI/Prefabs/keybind_0.prefab
+  - _gameObject: {fileID: 853174625}
+    _prefab: Assets/General Assets/UI/Prefabs/keybind_0.prefab
   - _gameObject: {fileID: 1126018859}
     _prefab: Assets/General Assets/UI/Fades/Prefabs/FadeOut.prefab
   - _gameObject: {fileID: 1899551500}
@@ -27983,6 +28010,11 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 889212404}
+--- !u!1 &853174625 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2021432901066988840, guid: 14a2b1aa4b8afe94388fef3e25a34ce0, type: 3}
+  m_PrefabInstance: {fileID: 1881346318}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &862757608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31871,7 +31903,7 @@ GameObject:
   - component: {fileID: 952221918}
   - component: {fileID: 952221917}
   m_Layer: 0
-  m_Name: vfx_Light_2
+  m_Name: vfx_Roza - Preto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32158,7 +32190,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0.3915094, b: 0.9890361, a: 1}
+        key0: {r: 0, g: 0, b: 0, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -43213,7 +43245,7 @@ GameObject:
   - component: {fileID: 1143859800}
   - component: {fileID: 1143859799}
   m_Layer: 0
-  m_Name: vfx_Light_3
+  m_Name: vfx_Verde
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43500,7 +43532,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.26713243, g: 0.8207547, b: 0.28842553, a: 1}
+        key0: {r: 0, g: 1, b: 0.042553186, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -54143,6 +54175,10 @@ PrefabInstance:
       value: 5.597262
       objectReference: {fileID: 0}
     - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[0].m_Value.z
+      value: 2.4019923
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.x
       value: -26.912285
       objectReference: {fileID: 0}
@@ -54151,12 +54187,20 @@ PrefabInstance:
       value: 6.4198623
       objectReference: {fileID: 0}
     - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.z
+      value: 1.6452001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Value.x
       value: -32.078213
       objectReference: {fileID: 0}
     - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Value.y
       value: 1.9284656
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Value.z
+      value: -17.323957
       objectReference: {fileID: 0}
     - target: {fileID: 7947743174261487036, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: scriptParaAtivar
@@ -57841,7 +57885,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 2.2427642, g: 48.252174, b: 141.83438, a: 0}
@@ -66157,7 +66201,7 @@ GameObject:
   - component: {fileID: 1581499931}
   - component: {fileID: 1581499930}
   m_Layer: 0
-  m_Name: vfx_Light_1
+  m_Name: vfx_Vermelho - Branco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66444,7 +66488,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0, b: 0, a: 1}
+        key0: {r: 1, g: 1, b: 1, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -74385,7 +74429,7 @@ GameObject:
   - component: {fileID: 1656350743}
   - component: {fileID: 1656350742}
   m_Layer: 0
-  m_Name: vfx_Light
+  m_Name: vfx_Azul
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74672,7 +74716,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0, g: 0.060089044, b: 0.49056602, a: 1}
+        key0: {r: 0, g: 0.119999886, b: 1, a: 1}
         key1: {r: 1, g: 1, b: 1, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -79491,7 +79535,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.39215687, b: 0.9882353, a: 1}
+      maxColor: {r: 0, g: 0, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 2.2427642, g: 48.252174, b: 141.83438, a: 0}
@@ -87987,6 +88031,7 @@ MonoBehaviour:
   objectCatcher: {fileID: 1330895032}
   minimumCatchDistance: 1.1
   fruitPuzzle: {fileID: 1957151455}
+  chickenPuzzle: {fileID: 0}
 --- !u!1001 &1953144211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -88342,6 +88387,10 @@ PrefabInstance:
       value: 6.087262
       objectReference: {fileID: 0}
     - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[0].m_Value.z
+      value: 2.4019923
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.x
       value: -14.282285
       objectReference: {fileID: 0}
@@ -88350,12 +88399,20 @@ PrefabInstance:
       value: 6.9098625
       objectReference: {fileID: 0}
     - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.z
+      value: 1.6452001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Value.x
       value: -19.448214
       objectReference: {fileID: 0}
     - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Value.y
       value: 2.4184656
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595748185078483368, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
+      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[2].m_Value.z
+      value: -17.323957
       objectReference: {fileID: 0}
     - target: {fileID: 7947743174261487036, guid: 3a0dbb63c76b7a940a3a60a9851ca1b7, type: 3}
       propertyPath: scriptParaAtivar
@@ -91790,6 +91847,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcd47754f8e1d5148a39e397c756fde8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2088115695 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7189412030926041663, guid: afa823600646543da906c0da3b69ad57, type: 3}
+  m_PrefabInstance: {fileID: 1219146658}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 265f6b23e36578e45bd7cbef62def373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2100132598

@@ -146,6 +146,8 @@ public class ProceduralLegs : MonoBehaviour
     #endregion
 
     #region private VARs
+    private readonly string snowTag = "GroundSnow";
+
     private GravityController gravityController;
     private CharacterManager characterManager;
     private CharacterMovementState characterMovementState;
@@ -380,7 +382,10 @@ public class ProceduralLegs : MonoBehaviour
                 //Footstep Sound
                 if (footstepGrass != null && footstepGrass.Length <= 4 && footstepGrass.Length > 0)
                 {
-                    footstepGrass[Random.Range(0, 3)].Play();
+                    if (GetGroundedObject().CompareTag(snowTag))
+                        footstepSnow[Random.Range(0, 3)].Play();
+                    else
+                        footstepGrass[Random.Range(0, 3)].Play();
                 }
 
                 if (this.evenIsWalking)

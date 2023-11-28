@@ -4,19 +4,14 @@ using UnityEngine;
 public class FruitCollector : MonoBehaviour, IInteractable
 {
     [SerializeField] Transform uiPopUp;
+    [SerializeField] ProceduralArms playerArms;
 
     #region Private Vars
     private readonly string popUpTag = "UIPopUp";
-    private ProceduralArms playerArms;
     private bool isInteractable = true;
     #endregion
 
     #region Unity Methods
-    private void Start()
-    {
-        playerArms = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ProceduralArms>();
-    }
-
     private void Update()
     {
         if (PauseController.GetIsPaused()) return;
