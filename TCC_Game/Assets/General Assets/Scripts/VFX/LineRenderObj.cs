@@ -34,7 +34,7 @@ public class LineRenderObj : MonoBehaviour
             lineRenderer.SetPosition(0, StartPoint.position);
             lineRenderer.SetPosition(1, FinalPoint.position + offSetY);
 
-            Debug.Log("Dist: " + distance.ToString("F2"));
+            //Debug.Log("Dist: " + distance.ToString("F2"));
         }
 
         else
