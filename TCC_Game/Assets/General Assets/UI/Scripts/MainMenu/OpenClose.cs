@@ -1,38 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class OpenClose : MonoBehaviour
 {
     public GameObject panel;
     [SerializeField] GameObject dimBG;
+    [SerializeField] GameObject firstSelected;
     public void Switch()
     {
         if (panel.activeSelf)
         {
+            print("sai");
             panel.SetActive(false);
             if (dimBG) dimBG.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(this.gameObject);
         }
         else
         {
+            print("sai2");
             panel.SetActive(true);
             if (dimBG) dimBG.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(firstSelected);
         }
-        //KeepThisActive();
     }
-
-    //public bool KeepThisActive()
-    //{
-    //    for (int i = 0; i < transform.root.childCount; i++)
-    //    {
-    //        if (panel.activeSelf &&
-    //            transform.root.GetChild(i).TryGetComponent<OpenClose>(out OpenClose oc)  &&
-    //            transform.root.GetChild(i).GetComponent<OpenClose>().panel.gameObject.activeSelf &&
-    //            transform.root.GetChild(i).GetComponent<OpenClose>().panel.gameObject != this)
-    //        {
-    //            transform.root.GetChild(i).GetComponent<OpenClose>().panel.gameObject.SetActive(false);
-    //        }
-    //    }
-    //    return false;
-    //}
 }

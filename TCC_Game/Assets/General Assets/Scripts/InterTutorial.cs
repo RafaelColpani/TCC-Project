@@ -25,11 +25,7 @@ public class InterTutorial : MonoBehaviour
     private void Awake()
     {
         playerActions = new PlayerActions();
-        playerActions.Movement.Interaction.performed += _ => PassScene();
-    }
 
-    void Start()
-    {
         string rebinds = PlayerPrefs.GetString(rebindsKey, string.Empty);
 
         if (!string.IsNullOrEmpty(rebinds))
@@ -37,11 +33,16 @@ public class InterTutorial : MonoBehaviour
         else
             playerActions.RemoveAllBindingOverrides();
 
+        playerActions.Movement.Interaction.performed += _ => PassScene();
+    }
+
+    void Start()
+    {
         var inputText = InputControlPath.ToHumanReadableString(
-            rebindAction.action.bindings[0].effectivePath,
+            playerActions.Movement.Interaction.bindings[0].effectivePath,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
 
-        TMP.text = $"< Tecla {inputText} | {BindingUtils.GetButtonImageTextByInputAction(rebindAction.action, 1)} >";
+        TMP.text = $"< Tecla {inputText} | {BindingUtils.GetButtonImageTextByInputAction(playerActions.Movement.Interaction, 1)} >";
     }
 
     private void PassScene()

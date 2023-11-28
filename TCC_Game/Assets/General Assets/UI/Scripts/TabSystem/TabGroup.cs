@@ -173,6 +173,7 @@ public class TabGroup : MonoBehaviour
     private void OnEnable()
     {
         playerActions.Enable();
+        OnTabSelected(firstTabSelected.GetComponent<_TabButton>());
     }
 
     private void OnDisable()
