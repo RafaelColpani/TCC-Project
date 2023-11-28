@@ -74,7 +74,6 @@ public class ChickenFruitFollow : MonoBehaviour
 
     private void FixedUpdate()
     {
-        print(fruitObjs.Count());
         MoveFlow();
 
         if (isGoingToFruit)
@@ -208,7 +207,7 @@ public class ChickenFruitFollow : MonoBehaviour
         fruitRb.mass = 1;
         fruitRb.isKinematic = false;
 
-        fruitDestination.fruit.transform.position = fruitDestination.initialFruitPosition;
+        fruitDestination.fruit.transform.localPosition = fruitDestination.initialFruitPosition;
         fruitDestination.fruit.SetActive(true);
     }
     #endregion

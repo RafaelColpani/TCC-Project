@@ -5434,6 +5434,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &341770579 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5587619944354910155, guid: 34f05afe21dc64699b115ef1413d0315, type: 3}
+  m_PrefabInstance: {fileID: 5587619944695500440}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &392099561
 GameObject:
   m_ObjectHideFlags: 0
@@ -11654,7 +11659,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1026337307
 Transform:
   m_ObjectHideFlags: 0
@@ -11838,7 +11843,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.01, y: 2.86}
+    oldSize: {x: 2.51, y: 2.52}
     newSize: {x: 3.01, y: 2.86}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -12861,6 +12866,8 @@ MonoBehaviour:
     _prefab: Assets/General Assets/Characters/Tentacle/Prefab/pfb_Noodle.prefab
   - _gameObject: {fileID: 77582298}
     _prefab: Assets/General Assets/Puzzles/Prefabs/pfb_GridPuzzle.prefab
+  - _gameObject: {fileID: 341770579}
+    _prefab: Assets/General Assets/Puzzles/Prefabs/pfb_collectableFruit.prefab
 --- !u!4 &1590684881
 Transform:
   m_ObjectHideFlags: 11
@@ -13846,7 +13853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2038321671
 Transform:
   m_ObjectHideFlags: 0
@@ -18066,6 +18073,63 @@ Transform:
   m_Father: {fileID: 1124871789735040892}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &5587619944695500440
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5587619944354910155, guid: 34f05afe21dc64699b115ef1413d0315, type: 3}
+      propertyPath: m_Name
+      value: pfb_collectableFruit
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587619944354910156, guid: 34f05afe21dc64699b115ef1413d0315, type: 3}
+      propertyPath: m_RootOrder
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587619944354910156, guid: 34f05afe21dc64699b115ef1413d0315, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587619944354910156, guid: 34f05afe21dc64699b115ef1413d0315, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587619944354910156, guid: 34f05afe21dc64699b115ef1413d0315, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587619944354910156, guid: 34f05afe21dc64699b115ef1413d0315, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587619944354910156, guid: 34f05afe21dc64699b115ef1413d0315, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587619944354910156, guid: 34f05afe21dc64699b115ef1413d0315, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587619944354910156, guid: 34f05afe21dc64699b115ef1413d0315, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587619944354910156, guid: 34f05afe21dc64699b115ef1413d0315, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587619944354910156, guid: 34f05afe21dc64699b115ef1413d0315, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587619944354910156, guid: 34f05afe21dc64699b115ef1413d0315, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 34f05afe21dc64699b115ef1413d0315, type: 3}
 --- !u!1 &5589133366059673063
 GameObject:
   m_ObjectHideFlags: 0
@@ -19227,7 +19291,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.01, y: 2.86}
+    oldSize: {x: 2.51, y: 2.52}
     newSize: {x: 3.01, y: 2.86}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -20458,7 +20522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1783398407405763718, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1865624226137312112, guid: fdf6a0b53a70c4b51aacae44215885b0, type: 3}
       propertyPath: m_RootOrder

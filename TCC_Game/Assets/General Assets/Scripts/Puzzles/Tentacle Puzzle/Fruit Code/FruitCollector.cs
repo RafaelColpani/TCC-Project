@@ -19,7 +19,6 @@ public class FruitCollector : MonoBehaviour, IInteractable
 
     private void Update()
     {
-        print($"{isInteractable} - {this.gameObject.name}");
         if (PauseController.GetIsPaused()) return;
         if (uiPopUp == null || !uiPopUp.gameObject.activeSelf) return;
 
