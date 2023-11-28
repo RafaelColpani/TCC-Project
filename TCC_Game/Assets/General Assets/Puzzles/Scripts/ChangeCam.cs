@@ -10,10 +10,10 @@ public class ChangeCam : MonoBehaviour
     [SerializeField] GameObject fixedCam;
     [SerializeField] GameObject tempCam;
     [SerializeField] float changeTime = 5;
+    [SerializeField] InputHandler inputHandler;
 
     public void changeCam(CamType camtype, bool isIn)
     {
-
         switch (camtype)
         {
             case CamType.TEMP:
@@ -41,9 +41,20 @@ public class ChangeCam : MonoBehaviour
 
     IEnumerator Change(GameObject cam)
     {
+        if (inputHandler != null)
+        {
+            inputHandler.canWalk = false;
+            inputHandler.GetJumpCommand().SetCanJump(false);
+        }
+
         yield return new WaitForSeconds(changeTime);
+
         cam.SetActive(false);
         playerCam.SetActive(true);
-        yield return null;
+        if (inputHandler != null)
+        {
+            inputHandler.canWalk = true;
+            inputHandler.GetJumpCommand().SetCanJump();
+        }
     }
 }
