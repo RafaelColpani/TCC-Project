@@ -15,6 +15,7 @@ public class Dialogue
     public int id;
     public string character;
     public string text;
+    public string seed;
     public List<Condition> condition;
     public List<Choice> choices;
     public int nextId;
