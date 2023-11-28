@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using UnityEngine.UI;
 using TMPro;
 using RotaryHeart.Lib.SerializableDictionary;
-using Microsoft.Unity.VisualStudio.Editor;
 
 [System.Serializable]
 public class NameColor : SerializableDictionaryBase<string, Color> { }
