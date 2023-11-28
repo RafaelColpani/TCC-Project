@@ -16,8 +16,9 @@ public class WarmingManager : MonoBehaviour
     [Space(5)]
 
     [HeaderPlus(" ", "- VOLUME -", (int)HeaderPlusColor.magenta)]
-    [SerializeField] Volume volume;
-    private Vignette vignette;
+    [SerializeField] GameObject gameObjectMaterial;
+    private Material material;
+    [SerializeField] GameObject bodyPlayer;
     [SerializeField] float intenVignetteIN = 0.05f;
     [SerializeField] float intenVignetteON = 0.035f;
     [Space(5)]
@@ -50,9 +51,11 @@ public class WarmingManager : MonoBehaviour
         //Timer
         currentTimer = initTimer;
 
-        //Post Process
-        volume.profile.TryGet(out vignette);
-        vignette.intensity.Override(0f);
+        //Get MAterial
+        material = gameObjectMaterial.GetComponent<Renderer>().material;
+
+        //Shader
+        material = GetComponent<Renderer>().material;
     }
 
     // Update is called once per frame
@@ -70,9 +73,12 @@ public class WarmingManager : MonoBehaviour
             {
                 print("diminuindo vinhetinha");
                 print($"current: {currentTimer} | init: {initTimer}");
+                material.SetFloat("_Alpha", intenVignetteIN * Time.deltaTime);
+                /*
                 float intenVolume = vignette.intensity.value;
                 intenVolume += intenVignetteIN * Time.deltaTime;
                 vignette.intensity.Override(intenVolume);
+                */
             }
         }
 
@@ -94,9 +100,11 @@ public class WarmingManager : MonoBehaviour
         currentTimer = initTimer;
 
         //Post Process
+        /*
         float intenVolume = vignette.intensity.value;
         intenVolume = Mathf.Clamp(intenVolume - intenVignetteON * Time.deltaTime, 0f, 1f);
         vignette.intensity.Override(intenVolume);
+        */
 
         isOnFire = true;
     }
