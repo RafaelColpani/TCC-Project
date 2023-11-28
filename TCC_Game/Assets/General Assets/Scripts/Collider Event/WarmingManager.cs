@@ -16,7 +16,7 @@ public class WarmingManager : MonoBehaviour
     [Space(5)]
 
     [HeaderPlus(" ", "- VOLUME -", (int)HeaderPlusColor.magenta)]
-    [SerializeField] GameObject gameObjectMaterial;
+    [SerializeField] GameObject FakeVinObj;
     private Material material;
     [SerializeField] GameObject bodyPlayer;
     [SerializeField] float intenVignetteIN = 0.05f;
@@ -51,11 +51,14 @@ public class WarmingManager : MonoBehaviour
         //Timer
         currentTimer = initTimer;
 
-        //Get MAterial
-        material = gameObjectMaterial.GetComponent<Renderer>().material;
+        //Get Material
+        material = FakeVinObj.GetComponent<SpriteRenderer>().material;
 
         //Shader
-        material = GetComponent<Renderer>().material;
+        material = GetComponent<SpriteRenderer>().material;
+
+        //
+        material.SetFloat("_Alpha", 25f);
     }
 
     // Update is called once per frame
@@ -71,9 +74,15 @@ public class WarmingManager : MonoBehaviour
             //Post Process
             if (currentTimer <= startVigTime)
             {
-                print("diminuindo vinhetinha");
-                print($"current: {currentTimer} | init: {initTimer}");
-                material.SetFloat("_Alpha", intenVignetteIN * Time.deltaTime);
+                //print("diminuindo vinhetinha");
+                //print($"current: {currentTimer} | init: {initTimer}");
+
+                float calc = (intenVignetteIN * Time.deltaTime);
+                print($"current Time DeltaTime: {Time.deltaTime}");
+                print($"current Calc: {calc}");
+
+                material.SetFloat("_Alpha", 25f - calc);
+                
                 /*
                 float intenVolume = vignette.intensity.value;
                 intenVolume += intenVignetteIN * Time.deltaTime;
