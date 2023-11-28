@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 using TMPro;
 using RotaryHeart.Lib.SerializableDictionary;
+using Microsoft.Unity.VisualStudio.Editor;
 
 [System.Serializable]
 public class NameColor : SerializableDictionaryBase<string, Color> { }
+[System.Serializable]
+public class SeedType : SerializableDictionaryBase<string, Sprite> { }
 
 public class DialogueReader : MonoBehaviour
 {
@@ -15,6 +19,8 @@ public class DialogueReader : MonoBehaviour
 
     [SerializeField]
     GameObject dialogueGrp, nameGrp, gameOverGrp;
+    [SerializeField]
+    GameObject seedImg;
     public string fileName = "dialogue.json";
 
     [SerializeField]
@@ -28,6 +34,7 @@ public class DialogueReader : MonoBehaviour
 
     [SerializeField] NameColor nameBoxTextColor;
     [SerializeField] NameColor dialogueBoxTextColor;
+    [SerializeField] SeedType seedType;
     #endregion
 
     #region internal variables
@@ -198,6 +205,18 @@ public class DialogueReader : MonoBehaviour
             dialogue.color = dialogueBoxTextColor[name.text];
             if (nameGrp.activeSelf)
                 this.name.color = nameBoxTextColor[name.text];
+
+            //show seed
+            seedImg.SetActive(false);
+            if (!string.IsNullOrEmpty(dialogueData.dialogue[id].seed))
+            {
+                foreach (string key in seedType.Keys){
+                    if(dialogueData.dialogue[id].seed.Equals(key)){
+                        seedImg.SetActive(true);
+                        seedImg.GetComponent<UnityEngine.UI.Image>().sprite = seedType[key];
+                    }
+                }
+            }
 
             StartCoroutine(TypeLine(dialogueData.dialogue[id].text)); //types the text of the id's line}
         }
