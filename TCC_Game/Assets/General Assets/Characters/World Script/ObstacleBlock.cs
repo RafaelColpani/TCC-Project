@@ -41,7 +41,7 @@ public class ObstacleBlock : MonoBehaviour
     [SerializeField] int numberOfFrontMidRaycasts;
 
     [Tooltip("The distance of each front raycasts.")]
-    [MinValue(0)] [Foldout("Front Block")]
+     [Foldout("Front Block")]
     [SerializeField] float frontRaycastsDistance;
 
     [Foldout("Front Block")]

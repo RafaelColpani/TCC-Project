@@ -8,9 +8,12 @@ using System.Linq;
 public class TentaclePuzzle : MonoBehaviour
 {
     #region Inspector VARS
+
+
     [HeaderPlus(" ", "- OBJECTS TO CATCH -", (int)HeaderPlusColor.green)]
     [Tooltip("The list of the object TAGs that the tentacle will try to get for the puzzle.")]
     [SerializeField] string[] objectToCatchTags;
+    [SerializeField] ProceduralArms playerArms;
 
     [HeaderPlus(" ", "- CATCHED OBJECT -", (int)HeaderPlusColor.red)]
     [Tooltip("The speed that the catched object will go to the destination")]
@@ -34,7 +37,6 @@ public class TentaclePuzzle : MonoBehaviour
     #region Private VARs
     private List<Transform> objectsInRange = new List<Transform>();
 
-    private ProceduralArms playerArms;
     private ProceduralTentacle proceduralTentacle;
 
     private Transform objectCatched;
@@ -50,7 +52,6 @@ public class TentaclePuzzle : MonoBehaviour
     #region Unity Methods
     private void Start()
     {
-        playerArms = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<ProceduralArms>();
         proceduralTentacle = GetComponent<ProceduralTentacle>();
     }
 
