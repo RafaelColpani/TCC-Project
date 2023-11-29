@@ -123,8 +123,6 @@ public class MusicController : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().buildIndex == buildSceneIndexes[i])
             {
-                print($"i: {i}");
-                print($"currentIndex: {currentMusicIndex}");
                 if (i > 0)
                     music[i-1].Stop();
 
