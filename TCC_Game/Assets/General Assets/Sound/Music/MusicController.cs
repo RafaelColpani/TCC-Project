@@ -20,6 +20,7 @@ public class MusicController : MonoBehaviour
 
     [SerializeField] string[] scenesNames;
     [SerializeField] int[] buildSceneIndexes;
+    [SerializeField] int[] stopMusicBuildIndexes;
     [SerializeField] int lastSceneReached; // serves to know where in the buildSceneIndex vector is the current or the next
     [SerializeField] AudioSource[] music;
 
@@ -59,13 +60,16 @@ public class MusicController : MonoBehaviour
                 pauseMenu = gos[i];
         }
 
-        playerTransform = GameObject.FindGameObjectWithTag("TargetPlayer").transform;
+        playerTransform = GameObject.FindWithTag("TargetPlayer").transform;
 
         //ChangeMusic();
     }
 
     void Update()
-    {   
+    {
+        if (GameObject.FindWithTag("TargetPlayer"))
+            playerTransform = GameObject.FindWithTag("TargetPlayer").transform;
+
         transform.parent.position = playerTransform.position;
     }
 
@@ -106,15 +110,32 @@ public class MusicController : MonoBehaviour
 
     void ChangeMusic()
     {
-        for (int i = 0; i < buildSceneIndexes.Length; i++)
+        foreach (var i in stopMusicBuildIndexes)
         {
-            if(SceneManager.GetActiveScene().buildIndex == buildSceneIndexes[i])
+            if (SceneManager.GetActiveScene().buildIndex == i)
             {
                 music[currentMusicIndex].Stop();
-                currentMusicIndex = SceneManager.GetActiveScene().buildIndex; //replaces old currentmusicindex with the new one
-                music[i].Play();
-                print($"builsceneindex: {SceneManager.GetActiveScene().buildIndex}, " +
-                    $"current music: {music[i].gameObject}");
+                return;
+            }
+        }
+
+        for (int i = 0; i < buildSceneIndexes.Length; i++)
+        {
+            if (SceneManager.GetActiveScene().buildIndex == buildSceneIndexes[i])
+            {
+                print($"i: {i}");
+                print($"currentIndex: {currentMusicIndex}");
+                if (i > 0)
+                    music[i-1].Stop();
+
+                currentMusicIndex = i; //replaces old currentmusicindex with the new one
+                if (music[currentMusicIndex])
+                {
+                    music[currentMusicIndex].Play();
+                    print($"builsceneindex: {SceneManager.GetActiveScene().buildIndex}, " +
+                        $"current music: {music[currentMusicIndex].gameObject}");
+                }
+
                 break;
             }
         }
