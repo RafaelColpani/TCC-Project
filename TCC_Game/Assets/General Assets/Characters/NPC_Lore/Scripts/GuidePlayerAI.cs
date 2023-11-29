@@ -11,6 +11,8 @@ public class GuidePlayerAI : MonoBehaviour
     }
 
     #region Inspector Vars
+    [SerializeField] private bool ignoreMovement = true;
+
     [HeaderPlus(" ", "- STATE -", (int)HeaderPlusColor.green)]
     [Tooltip("The actual state of the AI")]
     [SerializeField][ReadOnly] private GuidePlayerState state;
@@ -60,6 +62,7 @@ public class GuidePlayerAI : MonoBehaviour
     private void FixedUpdate()
     {
         if (PauseController.GetIsPaused()) return;
+        if (ignoreMovement) return;
 
         state = SetState();
         ExecuteState();

@@ -116,6 +116,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SecondFinal"",
+                    ""type"": ""Button"",
+                    ""id"": ""523d0e4f-1f58-47f9-9f8c-9257a547d3b3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -415,6 +424,28 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a6560160-e4eb-457f-b0b8-7324ca42bcc1"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SecondFinal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d9ec23ba-0063-49d7-89d0-e47f2b7eabf8"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SecondFinal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -544,6 +575,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_Movement_InventorySlot_2 = m_Movement.FindAction("InventorySlot_2", throwIfNotFound: true);
         m_Movement_InventorySlot_3 = m_Movement.FindAction("InventorySlot_3", throwIfNotFound: true);
         m_Movement_Pause = m_Movement.FindAction("Pause", throwIfNotFound: true);
+        m_Movement_SecondFinal = m_Movement.FindAction("SecondFinal", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_TabChange = m_UI.FindAction("TabChange", throwIfNotFound: true);
@@ -616,6 +648,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Movement_InventorySlot_2;
     private readonly InputAction m_Movement_InventorySlot_3;
     private readonly InputAction m_Movement_Pause;
+    private readonly InputAction m_Movement_SecondFinal;
     public struct MovementActions
     {
         private @PlayerActions m_Wrapper;
@@ -630,6 +663,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         public InputAction @InventorySlot_2 => m_Wrapper.m_Movement_InventorySlot_2;
         public InputAction @InventorySlot_3 => m_Wrapper.m_Movement_InventorySlot_3;
         public InputAction @Pause => m_Wrapper.m_Movement_Pause;
+        public InputAction @SecondFinal => m_Wrapper.m_Movement_SecondFinal;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -669,6 +703,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnPause;
+                @SecondFinal.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnSecondFinal;
+                @SecondFinal.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnSecondFinal;
+                @SecondFinal.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnSecondFinal;
             }
             m_Wrapper.m_MovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -703,6 +740,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @SecondFinal.started += instance.OnSecondFinal;
+                @SecondFinal.performed += instance.OnSecondFinal;
+                @SecondFinal.canceled += instance.OnSecondFinal;
             }
         }
     }
@@ -770,6 +810,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         void OnInventorySlot_2(InputAction.CallbackContext context);
         void OnInventorySlot_3(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnSecondFinal(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
