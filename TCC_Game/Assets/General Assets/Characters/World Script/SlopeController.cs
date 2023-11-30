@@ -62,7 +62,10 @@ public class SlopeController : MonoBehaviour
             moveCommand = GetComponent<GuidePlayerAI>().GetMoveCommand();
 
         else
-            moveCommand = GetComponent<EnemyCommands>().GetMovementCommand();
+        {
+            if (GetComponent<EnemyCommands>())
+                moveCommand = GetComponent<EnemyCommands>().GetMovementCommand();
+        }
 
         gravityController = GetComponent<GravityController>();
     }

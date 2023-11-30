@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 #region COMMANDS
@@ -27,8 +25,13 @@ public class SkipDialogueCommand : ICommand
 
     public void Execute(Transform actor, float value = 1, CharacterController characterController = null)
     {
+        if (!GameObject.FindGameObjectWithTag("dialogueManager"))
+            return;
+
         if (dialogueReader == null)
+        {
             dialogueReader = GameObject.FindGameObjectWithTag("dialogueManager").GetComponent<DialogueReader>();
+        }
 
         if (npcInteractable == null)
             npcInteractable = GameObject.Find("NPC").GetComponent<NpcInteractable>();

@@ -655,6 +655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 269deadabc8bf6a4bb6743ebae28f6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  getWalkingByLegs: 1
   moveState: 0
 --- !u!114 &14341738480622392
 MonoBehaviour:
@@ -696,6 +697,9 @@ MonoBehaviour:
   idleBodySpeed: 0.02
   idleBodyOffsetSubtraction: 0.03
   makeRotation: 0
+  floatingGroundLayers:
+    serializedVersion: 2
+    m_Bits: 0
   footstepGrass: []
   footstepSnow: []
 --- !u!114 &14341738480622385
@@ -832,6 +836,7 @@ MonoBehaviour:
   - {x: -0.38, y: 3.83, z: 0}
   - {x: -0.22, y: 3.86, z: 0}
   idleAnimationSpeed: 2
+  distanceToAnimate: 0.0001
   walkingHeadLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   headRotationSpeed: 0
 --- !u!114 &14341738480622384
@@ -855,7 +860,6 @@ MonoBehaviour:
     - {x: -0.891, y: 2.355, z: 0}
     - {x: -0.486, y: 1.902, z: 0}
     ascendingLocalPosition: {x: 0, y: 0, z: 0}
-    targetHeightOffset: 0
     isEven: 0
   - effectorTarget: {fileID: 1665528905694918533}
     effector: {fileID: 1665528905551590818}
@@ -865,7 +869,6 @@ MonoBehaviour:
     - {x: -1.151, y: 2.106, z: 0}
     - {x: -1.556, y: 2.599, z: 0}
     ascendingLocalPosition: {x: 0, y: 0, z: 0}
-    targetHeightOffset: 0
     isEven: 1
   backToIdleSpeed: 3
   idleAnimationSpeed: 1.5
@@ -901,6 +904,8 @@ MonoBehaviour:
   ascendingSpeed: 0
   descendingValue: 0
   descendingSpeed: 0
+  carryingPosition: {x: 0, y: 0, z: 0}
+  carrySpeed: 0
 --- !u!114 &14341738480622393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -931,6 +936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb37cb18c80d7f46b810ab4bbba89f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreMovement: 1
   state: 0
   playerBody: {fileID: 0}
   walkSpeed: 5

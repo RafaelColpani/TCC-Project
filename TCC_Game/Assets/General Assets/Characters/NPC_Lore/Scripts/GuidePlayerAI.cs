@@ -38,6 +38,7 @@ public class GuidePlayerAI : MonoBehaviour
     [HeaderPlus(" ", "- REACHED STATE -", (int)HeaderPlusColor.magenta)]
     [Tooltip("The position in the world where considered that the AI reached your destination")]
     [SerializeField] Vector3 reachedPosition;
+    [SerializeField] float minReachedDistance = 0.1f;
     #endregion
 
     #region Private Vars
@@ -77,7 +78,7 @@ public class GuidePlayerAI : MonoBehaviour
         var distanceToFinalDestination = (body.transform.position - reachedPosition).sqrMagnitude;
 
         // reached destination
-        if (distanceToFinalDestination <= 0.1f || state == GuidePlayerState.reached)
+        if (distanceToFinalDestination <= minReachedDistance || state == GuidePlayerState.reached)
             return GuidePlayerState.reached;
 
         // waiting player to approach
