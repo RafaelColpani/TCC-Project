@@ -1,19 +1,20 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using KevinCastejon.MoreAttributes;
-
 
 public class TutorialTrigger : MonoBehaviour
 {
     [HeaderPlus(" ", "- Tutorial GameObject -", (int)HeaderPlusColor.yellow)]
-    [SerializeField] GameObject tutorialObject; 
+    [SerializeField] GameObject[] objectsToAppear;
+    [SerializeField] float timeBetweenAppearances = 0.35f;
+    private bool coroutineRunning = false;
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !coroutineRunning)
         {
-            tutorialObject.SetActive(true);
+            StartCoroutine(AppearObjectsSequentially());
         }
     }
 
@@ -21,8 +22,44 @@ public class TutorialTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            tutorialObject.SetActive(false);
+            DeactivateAllObjects();
+            StopCoroutine(AppearObjectsSequentially());
+            coroutineRunning = false;
         }
     }
-   
+
+    IEnumerator AppearObjectsSequentially()
+    {
+        coroutineRunning = true;
+
+        if (objectsToAppear != null && objectsToAppear.Length > 0)
+        {
+            foreach (GameObject obj in objectsToAppear)
+            {
+                if (obj != null)
+                {
+                    obj.SetActive(true);
+                    yield return new WaitForSeconds(timeBetweenAppearances);
+                }
+            }
+        }
+
+        coroutineRunning = false;
+    }
+
+    void DeactivateAllObjects()
+    {
+        if (objectsToAppear != null && objectsToAppear.Length > 0)
+        {
+            for (int i = 0; i < objectsToAppear.Length; i++)
+            {
+                GameObject obj = objectsToAppear[i];
+
+                if (obj != null)
+                {
+                    obj.SetActive(false);
+                }
+            }
+        }
+    }
 }
