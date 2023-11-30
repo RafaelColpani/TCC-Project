@@ -229,10 +229,13 @@ public class ProceduralArms : MonoBehaviour
 
     private bool startIdleAnimation = true;
     private bool isCarryingObject = false;
+    private bool armsIsCarrying = false;
     #endregion
 
     #region Getters
     public bool IsCarryingObject { get { return isCarryingObject; } }
+
+    public bool ArmsIsCarrying { get { return armsIsCarrying; } set { armsIsCarrying = value; } }
     #endregion
 
     #region Unity Methods
@@ -506,6 +509,7 @@ public class ProceduralArms : MonoBehaviour
     {
         isCarryingObject = true;
         startIdleAnimation = false;
+        armsIsCarrying = true;
         carryingObject = carriedObject;
         carryingObjectParent = carryingObject.transform.parent;
         carryingObject.transform.SetParent(characterManager.Body);
@@ -518,6 +522,11 @@ public class ProceduralArms : MonoBehaviour
     {
         if (!isCarryingObject) return;
         if (carryingObject != carriedObject && carriedObject != null) return;
+        if (armsIsCarrying)
+        {
+            armsIsCarrying = false;
+            return;
+        }
 
         isCarryingObject = false;
         carryingObject.transform.parent = carryingObjectParent;

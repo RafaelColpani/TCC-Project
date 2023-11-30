@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using TMPro;
 using RotaryHeart.Lib.SerializableDictionary;
+using UnityEngine.EventSystems;
 
 [System.Serializable]
 public class NameColor : SerializableDictionaryBase<string, Color> { }
@@ -278,6 +279,8 @@ public class DialogueReader : MonoBehaviour
         foreach (var choice in dialogueData.dialogue[id].choices)
         {
             GameObject ch = Instantiate(choicesButton, choicesBox.transform);
+            if (EventSystem.current.currentSelectedGameObject == null)
+                EventSystem.current.SetSelectedGameObject(ch);
             buttons.Add(ch);
             ch.GetComponentInChildren<TextMeshProUGUI>().text = choice.text;
             ch.GetComponent<DialogueChoice>().nextId = choice.nextId;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class NpcInteractable : MonoBehaviour, IInteractable
 {
@@ -33,6 +34,7 @@ public class NpcInteractable : MonoBehaviour, IInteractable
             dialogueReader.npcInteract = this;
 
             dialogueGrp.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(null);
 
             dialogueReader.StartAll();
             canTalk = false;

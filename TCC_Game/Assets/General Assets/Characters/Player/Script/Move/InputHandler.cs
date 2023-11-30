@@ -127,12 +127,11 @@ public class InputHandler : MonoBehaviour
         playerActions.Movement.Jump.performed += ctx => pressJumpCommand.Execute(body);
         playerActions.Movement.Jump.canceled += ctx => releaseJumpCommand.Execute(body);
 
-        playerActions.Movement.Shoot.performed += ctx => shootCommand.Execute(body);
         playerActions.Movement.Interaction.performed += ctx => interactionCommand.Execute(body);
+        playerActions.Movement.Interaction.performed += ctx => proceduralArms.DropObject();
 
         playerActions.Movement.SkipDialogue.performed += ctx => skipDialogueCommand.Execute(body);
 
-        playerActions.Movement.Drop.performed += ctx => proceduralArms.DropObject();
     }
     public void SetCanWalk(bool value = false)
     {
