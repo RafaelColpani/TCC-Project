@@ -172,8 +172,17 @@
       "seed":"autumn",
       "condition": [
         {
-          "type": "hasAutumn",
-          "boolValue": false
+            "type": "hasSummer",
+            "boolValue": true
+          },
+          {
+            "type": "hasAutumn",
+            "boolValue": false
+          },
+          {
+            "type": "hasWinter",
+            "boolValue": false
+          }
         }
       ]
     },
@@ -182,6 +191,13 @@
       "text": "Falta a semente da grande nevada... É a última, então se esforce.",
       "seed":"winter",
       "condition": [
+          "type": "hasSummer",
+          "boolValue": true
+        },
+        {
+          "type": "hasAutumn",
+          "boolValue": true
+        },
         {
           "type": "hasWinter",
           "boolValue": false
