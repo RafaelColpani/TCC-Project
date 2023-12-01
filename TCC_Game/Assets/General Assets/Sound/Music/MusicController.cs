@@ -67,9 +67,9 @@ public class MusicController : MonoBehaviour
 
     void Update()
     {
-        if (GameObject.FindWithTag("TargetPlayer"))
-            playerTransform = GameObject.FindWithTag("TargetPlayer").transform;
+        if (!GameObject.Find("TargetTagMusicController")) return;
 
+        playerTransform = GameObject.Find("TargetTagMusicController").transform;
         transform.parent.position = playerTransform.position;
     }
 
