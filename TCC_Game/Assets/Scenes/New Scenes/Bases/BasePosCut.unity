@@ -4587,7 +4587,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa16792b827c9494fa91e9254019855b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToAppear: []
+  objectsToAppear:
+  - {fileID: 2066302995}
   timeBetweenAppearances: 0.35
 --- !u!1001 &84612765
 PrefabInstance:
@@ -34004,6 +34005,8 @@ MonoBehaviour:
     _prefab: Assets/General Assets/UI/Prefabs/keybind_0.prefab
   - _gameObject: {fileID: 104838069}
     _prefab: Assets/General Assets/UI/Prefabs/keybind_0.prefab
+  - _gameObject: {fileID: 1498040609}
+    _prefab: Assets/General Assets/UI/Prefabs/Circular Reset Slider.prefab
   - _gameObject: {fileID: 2971067}
     _prefab: Assets/General Assets/Characters/NPC_Lore/spr_LoreNpc.psb
   - _gameObject: {fileID: 858636184}
@@ -47668,6 +47671,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -10, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1498040609 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2477255871990579231, guid: 14a2b1aa4b8afe94388fef3e25a34ce0, type: 3}
+  m_PrefabInstance: {fileID: 1602364346}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1500024906
 GameObject:
   m_ObjectHideFlags: 0
@@ -49721,6 +49729,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0.33333334
       objectReference: {fileID: 0}
+    - target: {fileID: 2477255871990579228, guid: 14a2b1aa4b8afe94388fef3e25a34ce0, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 2747899948584228521, guid: 14a2b1aa4b8afe94388fef3e25a34ce0, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -50039,6 +50051,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5609697692564352207, guid: 14a2b1aa4b8afe94388fef3e25a34ce0, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057614400618167235, guid: 14a2b1aa4b8afe94388fef3e25a34ce0, type: 3}
+      propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6317807316808833663, guid: 14a2b1aa4b8afe94388fef3e25a34ce0, type: 3}
