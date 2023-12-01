@@ -9,8 +9,6 @@
  <a href="https://skillicons.dev">
    <img src="https://skillicons.dev/icons?i=unity"/>
    <img src="https://skillicons.dev/icons?i=cs"/>
-   <img src="https://skillicons.dev/icons?i=vscode"/>  
-   <img src="https://skillicons.dev/icons?i=ps"/>
   </a>
 </p>
 
