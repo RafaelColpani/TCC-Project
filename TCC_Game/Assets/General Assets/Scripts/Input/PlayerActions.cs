@@ -125,6 +125,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reset"",
+                    ""type"": ""Button"",
+                    ""id"": ""6702a1c3-ad08-4728-9edb-4ec260822b6c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -446,6 +455,28 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""SecondFinal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""267949d2-efc3-4aa8-93b7-b33e001c6058"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Reset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37d74255-e78e-4636-8321-6b99d300ee65"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Reset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -576,6 +607,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_Movement_InventorySlot_3 = m_Movement.FindAction("InventorySlot_3", throwIfNotFound: true);
         m_Movement_Pause = m_Movement.FindAction("Pause", throwIfNotFound: true);
         m_Movement_SecondFinal = m_Movement.FindAction("SecondFinal", throwIfNotFound: true);
+        m_Movement_Reset = m_Movement.FindAction("Reset", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_TabChange = m_UI.FindAction("TabChange", throwIfNotFound: true);
@@ -649,6 +681,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Movement_InventorySlot_3;
     private readonly InputAction m_Movement_Pause;
     private readonly InputAction m_Movement_SecondFinal;
+    private readonly InputAction m_Movement_Reset;
     public struct MovementActions
     {
         private @PlayerActions m_Wrapper;
@@ -664,6 +697,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         public InputAction @InventorySlot_3 => m_Wrapper.m_Movement_InventorySlot_3;
         public InputAction @Pause => m_Wrapper.m_Movement_Pause;
         public InputAction @SecondFinal => m_Wrapper.m_Movement_SecondFinal;
+        public InputAction @Reset => m_Wrapper.m_Movement_Reset;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -706,6 +740,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @SecondFinal.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnSecondFinal;
                 @SecondFinal.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnSecondFinal;
                 @SecondFinal.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnSecondFinal;
+                @Reset.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnReset;
+                @Reset.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnReset;
+                @Reset.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnReset;
             }
             m_Wrapper.m_MovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -743,6 +780,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @SecondFinal.started += instance.OnSecondFinal;
                 @SecondFinal.performed += instance.OnSecondFinal;
                 @SecondFinal.canceled += instance.OnSecondFinal;
+                @Reset.started += instance.OnReset;
+                @Reset.performed += instance.OnReset;
+                @Reset.canceled += instance.OnReset;
             }
         }
     }
@@ -811,6 +851,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         void OnInventorySlot_3(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnSecondFinal(InputAction.CallbackContext context);
+        void OnReset(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
