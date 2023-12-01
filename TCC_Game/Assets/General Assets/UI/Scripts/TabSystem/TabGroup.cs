@@ -48,7 +48,6 @@ public class TabGroup : MonoBehaviour
             if (transform.GetChild(i).gameObject.activeSelf)
             tabsQuantity++;
         }
-        print(tabsQuantity);
     }
 
     private void Update()
