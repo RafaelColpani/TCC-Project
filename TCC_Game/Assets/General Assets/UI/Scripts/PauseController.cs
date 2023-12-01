@@ -16,6 +16,7 @@ public class PauseController : MonoBehaviour
     [SerializeField] GameObject firstSettingsSelected;
 
     private static bool wasPaused = false;
+    private static bool canPause = true;
     private bool canResume = false;
 
     private PlayerActions playerActions;
@@ -31,6 +32,8 @@ public class PauseController : MonoBehaviour
 
     public void Pause()
     {
+        if (!canPause) return;
+
         if (pause.activeSelf)
         {
             print("despausou");
@@ -120,16 +123,23 @@ public class PauseController : MonoBehaviour
         isPaused = pause;
 
         if (pause)
+        {
+            canPause = false;
             Time.timeScale = 0;
+        }
 
         else
+        {
+            canPause = true;
             Time.timeScale = 1;
+        }
     }
 
     public static void SetPause(bool value = true)
     {
         isPaused = value;
         wasPaused = value;
+        canPause = !value;
     }
 
     #region Enable & Disable

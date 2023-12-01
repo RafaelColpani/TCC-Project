@@ -21,6 +21,8 @@ public class NpcInteractable : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        if (PauseController.GetIsPaused()) return;
+
         Debug.Log("Into Interact void");
         PauseController.SetPause();
 
