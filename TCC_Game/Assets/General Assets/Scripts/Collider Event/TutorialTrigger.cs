@@ -23,8 +23,8 @@ public class TutorialTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             DeactivateAllObjects();
-            StopCoroutine(AppearObjectsSequentially());
             coroutineRunning = false;
+            StopCoroutine(AppearObjectsSequentially());
         }
     }
 
@@ -36,6 +36,7 @@ public class TutorialTrigger : MonoBehaviour
         {
             foreach (GameObject obj in objectsToAppear)
             {
+                if (!coroutineRunning) break;
                 if (obj != null)
                 {
                     obj.SetActive(true);
@@ -45,6 +46,7 @@ public class TutorialTrigger : MonoBehaviour
         }
 
         coroutineRunning = false;
+        yield return null;
     }
 
     void DeactivateAllObjects()
