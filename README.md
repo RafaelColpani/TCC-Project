@@ -72,7 +72,7 @@ Download all files in option ".zip files" and open Unity Hub, click in:
 > open project
 ```
 
-<h3 align="left"> Extract the folder and click open </h3>
+<h4 align="left"> Extract the folder and click open </h4>
 <p align="left">
 With the project open, go to the following folder:
 </p>
@@ -81,7 +81,7 @@ With the project open, go to the following folder:
 > Scenes/New Scenes/Main Menu.unity
 ```
 
-<h3 align="left"> Just enjoy the game </h3>
+<h4 align="left"> Just enjoy the game </h4>
 
 <br/>
 <h2 align="left"> Creators: </h2>
