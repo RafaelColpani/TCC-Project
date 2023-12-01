@@ -57,7 +57,7 @@ Goddess Journey is a challenge game that takes the Player on an adventure in sea
 - Songs
 
 <br/>
-<h2 align="left"> Itch.io </h2>
+<h2 align="left"> Itch.io: </h2>
 <p align="left">
 In this link is the playable build of the game: https://tiolen.itch.io/goddess-journey
 </p>
@@ -72,7 +72,7 @@ Download all files in option ".zip files" and open Unity Hub, click in:
 > open project
 ```
 
-<h4 align="left"> Extract the folder and click open </h4>
+<h3 align="left"> Extract the folder and click open </h3>
 <p align="left">
 With the project open, go to the following folder:
 </p>
@@ -81,7 +81,7 @@ With the project open, go to the following folder:
 > Scenes/New Scenes/Main Menu.unity
 ```
 
-<h4 align="left"> Just enjoy the game </h4>
+<h3 align="left"> Just enjoy the game </h3>
 
 <br/>
 <h2 align="left"> Creators: </h2>
