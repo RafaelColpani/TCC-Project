@@ -30,6 +30,7 @@ public class InputHandler : MonoBehaviour
     private PlayerShooter playerShooter;
     private PlayerInteract playerInteract;
     private InventoryManager inventoryManager;
+    private UIResetLevel uiResetLevel;
 
     private readonly string rebindsKey = "playerRebinds";
 
@@ -99,6 +100,9 @@ public class InputHandler : MonoBehaviour
         playerShooter = GetComponentInChildren<PlayerShooter>();
         playerInteract = GetComponentInChildren<PlayerInteract>();
 
+        if (GameObject.Find("Canvas_UI").GetComponent<UIResetLevel>())
+            uiResetLevel = GameObject.Find("Canvas_UI").GetComponent<UIResetLevel>();
+
         hasInventoryManager = GameObject.Find("_InventoryManager");
         if (hasInventoryManager)
             inventoryManager = GameObject.Find("_InventoryManager").GetComponent<InventoryManager>();
@@ -131,6 +135,12 @@ public class InputHandler : MonoBehaviour
         playerActions.Movement.Interaction.performed += ctx => proceduralArms.DropObject();
 
         playerActions.Movement.SkipDialogue.performed += ctx => skipDialogueCommand.Execute(body);
+
+        if (uiResetLevel != null)
+        {
+            playerActions.Movement.Reset.performed += ctx => uiResetLevel.FillresetSlider();
+            playerActions.Movement.Reset.canceled += ctx => uiResetLevel.EmptyresetSlider();
+        }
 
     }
     public void SetCanWalk(bool value = false)

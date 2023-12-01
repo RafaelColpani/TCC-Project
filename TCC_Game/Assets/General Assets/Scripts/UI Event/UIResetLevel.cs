@@ -16,6 +16,8 @@ public class UIResetLevel : MonoBehaviour
     [HeaderPlus(" ", "- SLIDER -", (int)HeaderPlusColor.cyan)]
     [SerializeField] float fillSpeed = 0.5f;
 
+    private bool fillSlider;
+
     void Start()
     {
         resetSlider.value = 0;
@@ -24,19 +26,22 @@ public class UIResetLevel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (fillSlider)
         {
             FillresetSlider();
         }
 
-        else
+        else if (!fillSlider && resetSlider.value > 0)
         {
             EmptyresetSlider();
         }
     }
 
-    void FillresetSlider()
+    public void FillresetSlider()
     {
+        if (!fillSlider)
+            fillSlider = true;
+
         if (resetSlider.value < 1f)
         {
             resetSlider.value += fillSpeed * Time.deltaTime;
@@ -48,8 +53,10 @@ public class UIResetLevel : MonoBehaviour
         }
     }
 
-    void EmptyresetSlider()
+    public void EmptyresetSlider()
     {
+        fillSlider = false;
+
         if (resetSlider.value > 0f)
         {
             resetSlider.value -= fillSpeed * Time.deltaTime;
