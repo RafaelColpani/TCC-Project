@@ -1,7 +1,7 @@
 <h1 align="center"> Goddess Journey </h1>
 
 <h5 align="center">
-  Video game created to complete the SENAC university bachelor major "Digital Games"
+  Video game created to complete university bachelor major "Digital Games"
 </h5>
 
 <br/>
